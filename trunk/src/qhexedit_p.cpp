@@ -15,7 +15,6 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setAddressArea(true);
     setAsciiArea(true);
 
-    setBackgroundRole(QPalette::Base);
     setFont(QFont("Mono", 10));
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
 
