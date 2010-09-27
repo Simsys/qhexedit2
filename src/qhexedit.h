@@ -4,19 +4,29 @@
 #include <QtGui>
 #include "qhexedit_p.h"
 
-/*!  QHexEdit is a binary editor widget.
-QHexEdit is a editor for binary data, just like QPlainTextEdit is for text data.
-QHexEdit takes the data of a QByteArray (setData()) and shows you the content.
-You can use the mouse or the keyboard to navigate inside the widget. If you hit
-the keys (0..9, a..f) you change the data. Changed Bytes are shown in an different
-color an can accessed via data().
+/** \mainpage
+QHexEdit is a binary editor widget for Qt.
 
-Only overwriting is supported (no inserting). The size of data has to be below
-10 megabytes, otherwise the scroll sliders ar not shown. Copy and Paste
-functionality is also a subject of a later release.
+\version Version 0.3.1
+\image html hexedit.png
 */
 
-        class QHexEdit : public QWidget
+
+/*!  QHexEdit is a binary editor widget.
+QHexEdit is a hex editor widget written in C++ for the Qt (Qt4) framework.
+It is a simple editor for binary data, just like QPlainTextEdit is for text data.
+QHexEdit inherits the functionality of QScrollArea.
+
+QHexEdit takes the data of a QByteArray (setData()) and shows it to you.
+You can use the mouse or the keyboard to navigate inside the widget. If you hit
+the keys (0..9, a..f) you will change the data. Changed data is highlighted and
+can be accessed via data().
+
+There are some limitations: no inserting, only overwriting is supported. The size
+of data has to be below 10 megabytes, otherwise the scroll sliders ard not shown.
+Copy and paste functionality is also a subject of a later release.
+*/
+        class QHexEdit : public QScrollArea
 {
     Q_OBJECT
     Q_PROPERTY(QByteArray data READ data WRITE setData)
@@ -81,18 +91,11 @@ signals:
 
     /** \cond docNever */
 private:
-    QHexEditPrivate *qhexedit_p;
-    QHBoxLayout *widgetLayout;
+    QHexEditPrivate *qHexEdit_p;
+    QHBoxLayout *layout;
     QScrollArea *scrollArea;
     /** \endcond docNever */
 };
 
 #endif
 
-/** \mainpage
-
-QHexEdit is a binary editor widget for Qt.
-
-\version Version 0.3
-\image html hexedit.png
-*/
