@@ -52,6 +52,7 @@ private:
     QSpinBox *sbAddressWidth;
     QCheckBox *cbAddressArea;
     QCheckBox *cbAsciiArea;
+    QCheckBox *cbOverwriteMode;
 
     QMenu *fileMenu;
     QMenu *helpMenu;

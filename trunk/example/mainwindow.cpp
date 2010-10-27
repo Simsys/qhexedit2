@@ -173,6 +173,13 @@ void MainWindow::createToolBars()
 
 void MainWindow::createStatusBar()
 {
+    // Overwrite Mode
+    cbOverwriteMode = new QCheckBox();
+    cbOverwriteMode->setText(tr("Overwrite Mode"));
+    cbOverwriteMode->setChecked(Qt::Checked);
+    statusBar()->addPermanentWidget(cbOverwriteMode);
+    connect(cbOverwriteMode, SIGNAL(stateChanged(int)), hexEdit, SLOT(setOverwriteMode(int)));
+
     // Address Area
     cbAddressArea = new QCheckBox();
     cbAddressArea->setText(tr("Address Area"));
