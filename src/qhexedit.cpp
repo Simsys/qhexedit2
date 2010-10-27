@@ -62,3 +62,13 @@ void QHexEdit::setAsciiArea(int asciiArea)
 {
     qHexEdit_p->setAsciiArea(asciiArea != 0);
 }
+
+void QHexEdit::setOverwriteMode(bool overwriteMode)
+{
+    qHexEdit_p->setOverwriteMode(overwriteMode);
+}
+
+void QHexEdit::setOverwriteMode(int overwriteMode)
+{
+    qHexEdit_p->setOverwriteMode(overwriteMode != 0);
+}

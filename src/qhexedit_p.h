@@ -23,6 +23,7 @@ public:
     void setAddressArea(bool addressArea);
     void setAsciiArea(bool asciiArea);
     void setAddressWidth(int addressWidth);
+    void setOverwriteMode(bool overwriteMode);
 
 signals:
     void currentAddress(int address);
@@ -42,13 +43,14 @@ private:
     void adjust();
 
     QByteArray _data;
+    QByteArray _originalData;
     QTimer _cursorTimer;
     QScrollArea *_scrollArea;
-    QSet<int> _selections;
 
     bool _blink;
     bool _addressArea;
     bool _asciiArea;
+    bool _overwriteMode;
 
     int _addressNumbers, _realAddressNumbers;
     int _addressOffset;
