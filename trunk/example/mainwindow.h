@@ -30,10 +30,6 @@ private slots:
     void about();
     void setAddress(int address);
 
-    void setOverwriteMode(int mode);
-    void setAddressArea(int area);
-    void setAsciiArea(int area);
-
 private:
     void init();
     void createActions();
@@ -57,6 +53,7 @@ private:
     QCheckBox *cbAddressArea;
     QCheckBox *cbAsciiArea;
     QCheckBox *cbOverwriteMode;
+    QCheckBox *cbHighlighting;
 
     QMenu *fileMenu;
     QMenu *helpMenu;

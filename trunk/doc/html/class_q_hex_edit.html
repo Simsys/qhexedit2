@@ -64,6 +64,7 @@ Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a74c55755571de39917151bba7e74e0ad">setAddressWidth</a> (int addressWidth)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a> (bool addressArea)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a> (bool asciiArea)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#af10f1fb0005904d40af5508a40399415">setHighlighting</a> (bool mode)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a> (bool overwriteMode)</td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
@@ -80,6 +81,7 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QByteArray&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9e8ed54e47fec94cfd64b14ea1f7cee8">highlightingColor</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a binary editor widget. <a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a hex editor widget written in C++ for the Qt (Qt4) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data.</p>
@@ -350,6 +352,31 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af10f1fb0005904d40af5508a40399415"></a><!-- doxytag: member="QHexEdit::setHighlighting" ref="af10f1fb0005904d40af5508a40399415" args="(bool mode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::setHighlighting </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>mode</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [slot]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Switch the highlighting feature on or of. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>mode</em>&nbsp;</td><td>true (show it), false (hide it). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="a5b0f4ff156071d00f20c219d7abe6920"></a><!-- doxytag: member="QHexEdit::setOverwriteMode" ref="a5b0f4ff156071d00f20c219d7abe6920" args="(bool overwriteMode)" -->
 <div class="memitem">
 <div class="memproto">
@@ -368,7 +395,7 @@ Properties</h2></td></tr>
 <p>Switch the ascii area on or off. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>overwriteMode</em>&nbsp;</td><td>true (show it), false (hide it). </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>overwriteMode</em>&nbsp;</td><td>true (overwrite mode), false (insert mode). </td></tr>
   </table>
   </dd>
 </dl>
@@ -404,6 +431,20 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9e8ed54e47fec94cfd64b14ea1f7cee8"></a><!-- doxytag: member="QHexEdit::highlightingColor" ref="a9e8ed54e47fec94cfd64b14ea1f7cee8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QColor QHexEdit::highlightingColor<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Property highlighting color sets (setHighlightingColor()) the backgorund color of highlighted text areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#a9e8ed54e47fec94cfd64b14ea1f7cee8">highlightingColor()</a>). </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/media/wdc500/part6/winfried/tmp/qt/hexedit/QHexEdit2_google/qhexedit2/src/<a class="el" href="qhexedit_8h_source.html">qhexedit.h</a></li>
 </ul>
@@ -422,7 +463,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:14:48 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 21:55:05 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

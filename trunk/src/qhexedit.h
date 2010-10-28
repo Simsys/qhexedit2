@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.3.4
+\version Version 0.3.5
 \image html hexedit.png
 */
 
@@ -43,6 +43,12 @@ paste functionality is perhaps a subject of a later release.
     */
     Q_PROPERTY(int addressOffset READ addressOffset WRITE setAddressOffset)
 
+    /*! Property highlighting color sets (setHighlightingColor()) the backgorund
+    color of highlighted text areas. You can also read the color
+    (highlightingColor()).
+    */
+    Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -71,10 +77,12 @@ public:
     void setFont(const QFont &);
 
     /*! \cond docNever */
-    void setData(QByteArray const &data);
-    QByteArray data();
     void setAddressOffset(int offset);
     int addressOffset();
+    void setData(QByteArray const &data);
+    QByteArray data();
+    void setHighlightingColor(QColor const &color);
+    QColor highlightingColor();
     /*! \endcond docNever */
 
 public slots:
@@ -94,8 +102,13 @@ public slots:
       */
     void setAsciiArea(bool asciiArea);
 
+    /*! Switch the highlighting feature on or of.
+      \param mode true (show it), false (hide it).
+      */
+    void setHighlighting(bool mode);
+
     /*! Switch the ascii area on or off.
-      \param overwriteMode true (show it), false (hide it).
+      \param overwriteMode true (overwrite mode), false (insert mode).
       */
     void setOverwriteMode(bool overwriteMode);
 

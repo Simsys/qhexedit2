@@ -14,7 +14,9 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setAddressOffset(0);
     setAddressArea(true);
     setAsciiArea(true);
+    setHighlighting(true);
     setOverwriteMode(true);
+    setHighlightingColor(QColor(Qt::yellow).lighter(160));
 
     setFont(QFont("Mono", 10));
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
@@ -48,6 +50,17 @@ void QHexEditPrivate::setData(const QByteArray &data)
 QByteArray QHexEditPrivate::data()
 {
     return _data;
+}
+
+void QHexEditPrivate::setHighlightingColor(const QColor &color)
+{
+    _highlightingColor = color;
+    update();
+}
+
+QColor QHexEditPrivate::highlightingColor()
+{
+    return _highlightingColor;
 }
 
 void QHexEditPrivate::insert(int i, const QByteArray & ba)
@@ -95,6 +108,12 @@ void QHexEditPrivate::setFont(const QFont &font)
 {
     QWidget::setFont(font);
     adjust();
+}
+
+void QHexEditPrivate::setHighlighting(bool mode)
+{
+    _highlighting = mode;
+    update();
 }
 
 void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
@@ -230,8 +249,9 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
 
     // paint hex area
     QByteArray hexBa(_data.mid(firstLineIdx, lastLineIdx - firstLineIdx + 1).toHex());
-    QBrush highLighted = QBrush(QColor(Qt::yellow).lighter(160));
+    QBrush highLighted = QBrush(_highlightingColor);
     painter.setBackground(highLighted);
+    painter.setBackgroundMode(Qt::TransparentMode);
     for (int lineIdx = firstLineIdx, yPos = yPosStart; lineIdx < lastLineIdx; lineIdx += BYTES_PER_LINE, yPos +=_charHeight)
     {
         QByteArray hex;
@@ -239,14 +259,17 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
         for (int colIdx = 0; ((lineIdx + colIdx) < _data.size() and (colIdx < BYTES_PER_LINE)); colIdx++)
         {
             // hilight diff bytes
-            int posBa = lineIdx + colIdx;
-            if (posBa >= _originalData.size())
-                painter.setBackgroundMode(Qt::TransparentMode);
-            else
-                if (_data[posBa] == _originalData[posBa])
+            if (_highlighting)
+            {
+                int posBa = lineIdx + colIdx;
+                if (posBa >= _originalData.size())
                     painter.setBackgroundMode(Qt::TransparentMode);
                 else
-                    painter.setBackgroundMode(Qt::OpaqueMode);
+                    if (_data[posBa] == _originalData[posBa])
+                        painter.setBackgroundMode(Qt::TransparentMode);
+                    else
+                        painter.setBackgroundMode(Qt::OpaqueMode);
+            }
 
             // render hex value
             if (colIdx == 0)
