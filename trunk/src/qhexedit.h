@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.3.3
+\version Version 0.3.4
 \image html hexedit.png
 */
 
@@ -31,13 +31,15 @@ paste functionality is perhaps a subject of a later release.
         class QHexEdit : public QScrollArea
 {
     Q_OBJECT
-    /*! Property data holds the content of QHexEdit.
+    /*! Property data holds the content of QHexEdit. Call setData() to set the
+    content of QHexEdit, data() returns the actual content.
     */
     Q_PROPERTY(QByteArray data READ data WRITE setData)
 
     /*! Property addressOffset is added to the Numbers of the Address Area.
     A offset in the address area (left side) is sometimes usefull, whe you show
-    only a segment of a complete memory picture.
+    only a segment of a complete memory picture. With setAddressOffset() you set
+    this property - with addressOffset() you get the actual value.
     */
     Q_PROPERTY(int addressOffset READ addressOffset WRITE setAddressOffset)
 
@@ -47,23 +49,33 @@ public:
     */
     QHexEdit(QWidget *parent = 0);
 
-    /*! Loads the data into the widget.
-    \param data A QByteArray containing the data to edit.
+    /*! Inserts a byte array.
+    \param i Index position, where to insert
+    \param ba byte array, which is to insert
     */
-    void setData(QByteArray const &data);
-    /*! Givs the (edited) data back. */
-    QByteArray data();
+    void insert(int i, const QByteArray & ba);
+
+    /*! Inserts a char.
+    \param i Index position, where to insert
+    \param ch Char, which is to insert
+    */
+    void insert(int i, char ch);
+
+    /*! Removes len bytes from the content.
+    \param pos Index position, where to remove
+    \param len Amount of bytes to remove
+    */
+    void remove(int pos, int len=1);
 
     /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
     void setFont(const QFont &);
 
-    /*! Set the offset of address area.
-    \param offset The offset to add to addresses.
-    */
+    /*! \cond docNever */
+    void setData(QByteArray const &data);
+    QByteArray data();
     void setAddressOffset(int offset);
-
-    /*! Read the offset back. */
     int addressOffset();
+    /*! \endcond docNever */
 
 public slots:
 
@@ -77,30 +89,15 @@ public slots:
       */
     void setAddressArea(bool addressArea);
 
-    /*! Switch the address area on or off.
-      \param addressArea 0 (hide), all other values show it.
-      */
-    void setAddressArea(int addressArea);
-
     /*! Switch the ascii area on or off.
       \param asciiArea true (show it), false (hide it).
       */
     void setAsciiArea(bool asciiArea);
 
     /*! Switch the ascii area on or off.
-      \param asciiArea 0 (hide), all other values show it.
-      */
-    void setAsciiArea(int asciiArea);
-
-    /*! Switch the ascii area on or off.
       \param overwriteMode true (show it), false (hide it).
       */
     void setOverwriteMode(bool overwriteMode);
-
-    /*! Switch the ascii area on or off.
-      \param overwriteMode 0 (hide), all other values show it.
-      */
-    void setOverwriteMode(int overwriteMode);
 
 signals:
 
@@ -110,12 +107,12 @@ signals:
     /*! The signal is emited every time, the data is changed. */
     void dataChanged();
 
-    /** \cond docNever */
 private:
+    /*! \cond docNever */
     QHexEditPrivate *qHexEdit_p;
     QHBoxLayout *layout;
     QScrollArea *scrollArea;
-    /** \endcond docNever */
+    /*! \endcond docNever */
 };
 
 #endif

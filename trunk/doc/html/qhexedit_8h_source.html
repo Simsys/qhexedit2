@@ -56,53 +56,50 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a><a class="code" href="class_q_hex_edit.html">00031</a>         <span class="keyword">class </span><a class="code" href="class_q_hex_edit.html">QHexEdit</a> : <span class="keyword">public</span> QScrollArea
 <a name="l00032"></a>00032 {
 <a name="l00033"></a>00033     Q_OBJECT
-<a name="l00036"></a><a class="code" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">00036</a>     Q_PROPERTY(QByteArray <a class="code" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data</a> READ <a class="code" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data</a> WRITE <a class="code" href="class_q_hex_edit.html#abb1cb89f7e7227ed99f44808b28b1c31">setData</a>)
-<a name="l00037"></a>00037 
-<a name="l00038"></a>00038     
-<a name="l00042"></a><a class="code" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">00042</a>     Q_PROPERTY(<span class="keywordtype">int</span> <a class="code" href="class_q_hex_edit.html#a1bfd455296da36162036e695b1839922">addressOffset</a> READ <a class="code" href="class_q_hex_edit.html#a1bfd455296da36162036e695b1839922">addressOffset</a> WRITE <a class="code" href="class_q_hex_edit.html#af3a5038718c35d256fefa86b6cc30e41">setAddressOffset</a>)
-<a name="l00043"></a>00043 
-<a name="l00044"></a>00044 public:
-<a name="l00048"></a>00048     <a class="code" href="class_q_hex_edit.html">QHexEdit</a>(QWidget *parent = 0);
-<a name="l00049"></a>00049 
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> setData(QByteArray const &amp;<a class="code" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data</a>);
-<a name="l00055"></a>00055     QByteArray data();
-<a name="l00056"></a>00056 
-<a name="l00058"></a>00058     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a1d3c52d8f96d1c6c2350d5a39ae04efc">setFont</a>(const QFont &amp;);
-<a name="l00059"></a>00059 
-<a name="l00063"></a>00063     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#af3a5038718c35d256fefa86b6cc30e41">setAddressOffset</a>(<span class="keywordtype">int</span> offset);
-<a name="l00064"></a>00064 
-<a name="l00066"></a>00066     <span class="keywordtype">int</span> <a class="code" href="class_q_hex_edit.html#a1bfd455296da36162036e695b1839922">addressOffset</a>();
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 public slots:
+<a name="l00037"></a><a class="code" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">00037</a>     Q_PROPERTY(QByteArray <a class="code" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a> READ <a class="code" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a> WRITE setData)
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039     
+<a name="l00044"></a><a class="code" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">00044</a>     Q_PROPERTY(<span class="keywordtype">int</span> <a class="code" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a> READ <a class="code" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a> WRITE setAddressOffset)
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 public:
+<a name="l00050"></a>00050     <a class="code" href="class_q_hex_edit.html">QHexEdit</a>(QWidget *parent = 0);
+<a name="l00051"></a>00051 
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a990a5188800f295f1d15f51b857fd7b9">insert</a>(<span class="keywordtype">int</span> i, const QByteArray &amp; ba);
+<a name="l00057"></a>00057 
+<a name="l00062"></a>00062     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a990a5188800f295f1d15f51b857fd7b9">insert</a>(<span class="keywordtype">int</span> i, <span class="keywordtype">char</span> ch);
+<a name="l00063"></a>00063 
+<a name="l00068"></a>00068     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a66dcc5787c347a6ff28e78dc13fe1439">remove</a>(<span class="keywordtype">int</span> pos, <span class="keywordtype">int</span> len=1);
 <a name="l00069"></a>00069 
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a74c55755571de39917151bba7e74e0ad">setAddressWidth</a>(<span class="keywordtype">int</span> addressWidth);
-<a name="l00074"></a>00074 
-<a name="l00078"></a>00078     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a>(<span class="keywordtype">bool</span> addressArea);
-<a name="l00079"></a>00079 
-<a name="l00083"></a>00083     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a>(<span class="keywordtype">int</span> addressArea);
-<a name="l00084"></a>00084 
-<a name="l00088"></a>00088     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a>(<span class="keywordtype">bool</span> asciiArea);
-<a name="l00089"></a>00089 
-<a name="l00093"></a>00093     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a>(<span class="keywordtype">int</span> asciiArea);
-<a name="l00094"></a>00094 
-<a name="l00098"></a>00098     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a>(<span class="keywordtype">bool</span> overwriteMode);
-<a name="l00099"></a>00099 
-<a name="l00103"></a>00103     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a>(<span class="keywordtype">int</span> overwriteMode);
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105 signals:
+<a name="l00071"></a>00071     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a1d3c52d8f96d1c6c2350d5a39ae04efc">setFont</a>(const QFont &amp;);
+<a name="l00072"></a>00072 
+<a name="l00074"></a>00074     <span class="keywordtype">void</span> setData(QByteArray const &amp;<a class="code" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a>);
+<a name="l00075"></a>00075     QByteArray data();
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> setAddressOffset(<span class="keywordtype">int</span> offset);
+<a name="l00077"></a>00077     <span class="keywordtype">int</span> <a class="code" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a>();
+<a name="l00080"></a>00080 public slots:
+<a name="l00081"></a>00081 
+<a name="l00085"></a>00085     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a74c55755571de39917151bba7e74e0ad">setAddressWidth</a>(<span class="keywordtype">int</span> addressWidth);
+<a name="l00086"></a>00086 
+<a name="l00090"></a>00090     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a>(<span class="keywordtype">bool</span> addressArea);
+<a name="l00091"></a>00091 
+<a name="l00095"></a>00095     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a>(<span class="keywordtype">bool</span> asciiArea);
+<a name="l00096"></a>00096 
+<a name="l00100"></a>00100     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a>(<span class="keywordtype">bool</span> overwriteMode);
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 signals:
+<a name="l00103"></a>00103 
+<a name="l00105"></a>00105     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a>(<span class="keywordtype">int</span> address);
 <a name="l00106"></a>00106 
-<a name="l00108"></a>00108     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a>(<span class="keywordtype">int</span> address);
+<a name="l00108"></a>00108     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d">dataChanged</a>();
 <a name="l00109"></a>00109 
-<a name="l00111"></a>00111     <span class="keywordtype">void</span> <a class="code" href="class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d">dataChanged</a>();
-<a name="l00112"></a>00112 
-<a name="l00114"></a>00114 private:
-<a name="l00115"></a>00115     QHexEditPrivate *qHexEdit_p;
-<a name="l00116"></a>00116     QHBoxLayout *layout;
-<a name="l00117"></a>00117     QScrollArea *scrollArea;
-<a name="l00119"></a>00119 };
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121 <span class="preprocessor">#endif</span>
-<a name="l00122"></a>00122 <span class="preprocessor"></span>
+<a name="l00110"></a>00110 private:
+<a name="l00112"></a>00112     QHexEditPrivate *qHexEdit_p;
+<a name="l00113"></a>00113     QHBoxLayout *layout;
+<a name="l00114"></a>00114     QScrollArea *scrollArea;
+<a name="l00116"></a>00116 };
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="preprocessor">#endif</span>
+<a name="l00119"></a>00119 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -119,7 +116,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 27 2010 23:51:58 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:14:48 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

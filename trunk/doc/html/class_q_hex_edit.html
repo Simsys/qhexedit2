@@ -63,11 +63,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a74c55755571de39917151bba7e74e0ad">setAddressWidth</a> (int addressWidth)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a> (bool addressArea)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a0949df37195bc8778f77ddfc25edc3c9">setAddressArea</a> (int addressArea)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a> (bool asciiArea)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a23f8bac0b309a984fd0bbd236e03662d">setAsciiArea</a> (int asciiArea)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a> (bool overwriteMode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a016a014fb90157f293849db9bd19fc8f">setOverwriteMode</a> (int overwriteMode)</td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a> (int address)</td></tr>
@@ -75,11 +72,10 @@ Signals</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aec1f1e5b7652e7e39a8ca5e73ed63373">QHexEdit</a> (QWidget *parent=0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#abb1cb89f7e7227ed99f44808b28b1c31">setData</a> (QByteArray const &amp;data)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">QByteArray&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a990a5188800f295f1d15f51b857fd7b9">insert</a> (int i, const QByteArray &amp;ba)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aae1006e9ebf9233e782bedeb70b722c7">insert</a> (int i, char ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a66dcc5787c347a6ff28e78dc13fe1439">remove</a> (int pos, int len=1)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a1d3c52d8f96d1c6c2350d5a39ae04efc">setFont</a> (const QFont &amp;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#af3a5038718c35d256fefa86b6cc30e41">setAddressOffset</a> (int offset)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a1bfd455296da36162036e695b1839922">addressOffset</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="properties"></a>
 Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QByteArray&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a></td></tr>
@@ -87,8 +83,8 @@ Properties</h2></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a binary editor widget. <a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a hex editor widget written in C++ for the Qt (Qt4) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data.</p>
-<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> takes the data of a QByteArray (<a class="el" href="class_q_hex_edit.html#abb1cb89f7e7227ed99f44808b28b1c31">setData()</a>) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via <a class="el" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data()</a>.</p>
-<p>Normaly <a class="el" href="class_q_hex_edit.html">QHexEdit</a> works in the overwrite Mode. You can set overwriteMode() to false and insert data. In this case the size of <a class="el" href="class_q_hex_edit.html#a93a49c46ccec49d274ed07147099564c">data()</a> increases. It is also possible to delete the byte under the cursor, her the size of data decreases.</p>
+<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a>.</p>
+<p>Normaly <a class="el" href="class_q_hex_edit.html">QHexEdit</a> works in the overwrite Mode. You can set overwriteMode() to false and insert data. In this case the size of <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a> increases. It is also possible to delete the byte under the cursor, her the size of data decreases.</p>
 <p>There are some limitations: The size of data has in general to be below 10 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any more. Copy and paste functionality is perhaps a subject of a later release. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aec1f1e5b7652e7e39a8ca5e73ed63373"></a><!-- doxytag: member="QHexEdit::QHexEdit" ref="aec1f1e5b7652e7e39a8ca5e73ed63373" args="(QWidget *parent=0)" -->
@@ -117,24 +113,6 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a1bfd455296da36162036e695b1839922"></a><!-- doxytag: member="QHexEdit::addressOffset" ref="a1bfd455296da36162036e695b1839922" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int QHexEdit::addressOffset </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Read the offset back. </p>
-
-</div>
-</div>
 <a class="anchor" id="a19601944073270107de5266c3f0313be"></a><!-- doxytag: member="QHexEdit::currentAddress" ref="a19601944073270107de5266c3f0313be" args="(int address)" -->
 <div class="memitem">
 <div class="memproto">
@@ -151,24 +129,6 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Contains the address, where the cursor is located. </p>
-
-</div>
-</div>
-<a class="anchor" id="a93a49c46ccec49d274ed07147099564c"></a><!-- doxytag: member="QHexEdit::data" ref="a93a49c46ccec49d274ed07147099564c" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QByteArray QHexEdit::data </td>
-          <td>(</td>
-          <td class="paramname"></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Givs the (edited) data back. </p>
 
 </div>
 </div>
@@ -190,25 +150,105 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0949df37195bc8778f77ddfc25edc3c9"></a><!-- doxytag: member="QHexEdit::setAddressArea" ref="a0949df37195bc8778f77ddfc25edc3c9" args="(int addressArea)" -->
+<a class="anchor" id="aae1006e9ebf9233e782bedeb70b722c7"></a><!-- doxytag: member="QHexEdit::insert" ref="aae1006e9ebf9233e782bedeb70b722c7" args="(int i, char ch)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void QHexEdit::setAddressArea </td>
+          <td class="memname">void QHexEdit::insert </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>addressArea</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [slot]</code></td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&nbsp;</td>
+          <td class="paramname"> <em>ch</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Switch the address area on or off. </p>
+<p>Inserts a char. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>addressArea</em>&nbsp;</td><td>0 (hide), all other values show it. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ch</em>&nbsp;</td><td>Char, which is to insert </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a990a5188800f295f1d15f51b857fd7b9"></a><!-- doxytag: member="QHexEdit::insert" ref="a990a5188800f295f1d15f51b857fd7b9" args="(int i, const QByteArray &amp;ba)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::insert </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&nbsp;</td>
+          <td class="paramname"> <em>ba</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Inserts a byte array. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ba</em>&nbsp;</td><td>byte array, which is to insert </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a66dcc5787c347a6ff28e78dc13fe1439"></a><!-- doxytag: member="QHexEdit::remove" ref="a66dcc5787c347a6ff28e78dc13fe1439" args="(int pos, int len=1)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::remove </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>len</em> = <code>1</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Removes len bytes from the content. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>pos</em>&nbsp;</td><td>Index position, where to remove </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>len</em>&nbsp;</td><td>Amount of bytes to remove </td></tr>
   </table>
   </dd>
 </dl>
@@ -240,31 +280,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af3a5038718c35d256fefa86b6cc30e41"></a><!-- doxytag: member="QHexEdit::setAddressOffset" ref="af3a5038718c35d256fefa86b6cc30e41" args="(int offset)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void QHexEdit::setAddressOffset </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>offset</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Set the offset of address area. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>offset</em>&nbsp;</td><td>The offset to add to addresses. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="a74c55755571de39917151bba7e74e0ad"></a><!-- doxytag: member="QHexEdit::setAddressWidth" ref="a74c55755571de39917151bba7e74e0ad" args="(int addressWidth)" -->
 <div class="memitem">
 <div class="memproto">
@@ -280,6 +295,7 @@ Properties</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+<p>docNever</p>
 <p>Set the minimum width of the address area. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
@@ -315,56 +331,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a23f8bac0b309a984fd0bbd236e03662d"></a><!-- doxytag: member="QHexEdit::setAsciiArea" ref="a23f8bac0b309a984fd0bbd236e03662d" args="(int asciiArea)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void QHexEdit::setAsciiArea </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>asciiArea</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Switch the ascii area on or off. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>asciiArea</em>&nbsp;</td><td>0 (hide), all other values show it. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="abb1cb89f7e7227ed99f44808b28b1c31"></a><!-- doxytag: member="QHexEdit::setData" ref="abb1cb89f7e7227ed99f44808b28b1c31" args="(QByteArray const &amp;data)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void QHexEdit::setData </td>
-          <td>(</td>
-          <td class="paramtype">QByteArray const &amp;&nbsp;</td>
-          <td class="paramname"> <em>data</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Loads the data into the widget. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>data</em>&nbsp;</td><td>A QByteArray containing the data to edit. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="a1d3c52d8f96d1c6c2350d5a39ae04efc"></a><!-- doxytag: member="QHexEdit::setFont" ref="a1d3c52d8f96d1c6c2350d5a39ae04efc" args="(const QFont &amp;)" -->
 <div class="memitem">
 <div class="memproto">
@@ -381,31 +347,6 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Set the font of the widget. Please use fixed width fonts like Mono or Courier. </p>
-
-</div>
-</div>
-<a class="anchor" id="a016a014fb90157f293849db9bd19fc8f"></a><!-- doxytag: member="QHexEdit::setOverwriteMode" ref="a016a014fb90157f293849db9bd19fc8f" args="(int overwriteMode)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void QHexEdit::setOverwriteMode </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>overwriteMode</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [slot]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Switch the ascii area on or off. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>overwriteMode</em>&nbsp;</td><td>0 (hide), all other values show it. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -445,7 +386,7 @@ Properties</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Property addressOffset is added to the Numbers of the Address Area. A offset in the address area (left side) is sometimes usefull, whe you show only a segment of a complete memory picture. </p>
+<p>Property addressOffset is added to the Numbers of the Address Area. A offset in the address area (left side) is sometimes usefull, whe you show only a segment of a complete memory picture. With setAddressOffset() you set this property - with <a class="el" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset()</a> you get the actual value. </p>
 
 </div>
 </div>
@@ -459,7 +400,7 @@ Properties</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Property data holds the content of <a class="el" href="class_q_hex_edit.html">QHexEdit</a>. </p>
+<p>Property data holds the content of <a class="el" href="class_q_hex_edit.html">QHexEdit</a>. Call setData() to set the content of <a class="el" href="class_q_hex_edit.html">QHexEdit</a>, <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a> returns the actual content. </p>
 
 </div>
 </div>
@@ -481,7 +422,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Wed Oct 27 2010 23:51:58 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 20:14:48 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
