@@ -13,6 +13,21 @@ QHexEdit::QHexEdit(QWidget *parent) : QScrollArea(parent)
     connect(qHexEdit_p, SIGNAL(currentAddress(int)), this, SIGNAL(currentAddress(int)));
 }
 
+void QHexEdit::insert(int i, const QByteArray & ba)
+{
+    qHexEdit_p->insert(i, ba);
+}
+
+void QHexEdit::insert(int i, char ch)
+{
+    qHexEdit_p->insert(i, ch);
+}
+
+void QHexEdit::remove(int pos, int len)
+{
+    qHexEdit_p->remove(pos, len);
+}
+
 void QHexEdit::setAddressOffset(int offset)
 {
     qHexEdit_p->setAddressOffset(offset);
@@ -43,11 +58,6 @@ void QHexEdit::setAddressArea(bool addressArea)
     qHexEdit_p->setAddressArea(addressArea);
 }
 
-void QHexEdit::setAddressArea(int addressArea)
-{
-    qHexEdit_p->setAddressArea(addressArea != 0);
-}
-
 void QHexEdit::setAddressWidth(int addressWidth)
 {
     qHexEdit_p->setAddressWidth(addressWidth);
@@ -58,17 +68,7 @@ void QHexEdit::setAsciiArea(bool asciiArea)
     qHexEdit_p->setAsciiArea(asciiArea);
 }
 
-void QHexEdit::setAsciiArea(int asciiArea)
-{
-    qHexEdit_p->setAsciiArea(asciiArea != 0);
-}
-
 void QHexEdit::setOverwriteMode(bool overwriteMode)
 {
     qHexEdit_p->setOverwriteMode(overwriteMode);
-}
-
-void QHexEdit::setOverwriteMode(int overwriteMode)
-{
-    qHexEdit_p->setOverwriteMode(overwriteMode != 0);
 }

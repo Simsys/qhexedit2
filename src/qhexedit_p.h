@@ -12,7 +12,6 @@ Q_OBJECT
 
 public:
     QHexEditPrivate(QScrollArea *parent);
-    virtual void setFont(const QFont &font);
 
     void setAddressOffset(int offset);
     int addressOffset();
@@ -20,9 +19,14 @@ public:
     void setData(QByteArray const &data);
     QByteArray data();
 
+    void insert(int i, const QByteArray & ba);
+    void insert(int i, char ch);
+    void remove(int index, int len=1);
+
     void setAddressArea(bool addressArea);
-    void setAsciiArea(bool asciiArea);
     void setAddressWidth(int addressWidth);
+    void setAsciiArea(bool asciiArea);
+    virtual void setFont(const QFont &font);
     void setOverwriteMode(bool overwriteMode);
 
 signals:

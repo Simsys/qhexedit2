@@ -25,34 +25,82 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setFocusPolicy(Qt::StrongFocus);
 }
 
-void QHexEditPrivate::adjust()
+void QHexEditPrivate::setAddressOffset(int offset)
 {
-    _charWidth = fontMetrics().width(QLatin1Char('9'));
-    _charHeight = fontMetrics().height();
+    _addressOffset = offset;
+    adjust();
+}
 
-    // is addressNumbers wide enought?
-    QString test = QString("%1")
-                  .arg(_data.size() + _addressOffset, _addressNumbers, 16, QChar('0'));
-    _realAddressNumbers = test.size();
+int QHexEditPrivate::addressOffset()
+{
+    return _addressOffset;
+}
 
-    _xPosAdr = 0;
-    if (_addressArea)
-        _xPosHex = _realAddressNumbers *_charWidth + GAP_ADR_HEX;
-    else
-        _xPosHex = 0;
-    _xPosAscii = _xPosHex + HEXCHARS_IN_LINE * _charWidth + GAP_HEX_ASCII;
+void QHexEditPrivate::setData(const QByteArray &data)
+{
+    _data = data;
+    _originalData = data;
+    adjust();
+    setCursorPos(0);
+    setFocus();
+}
 
-    if (_overwriteMode)
-        _cursorWidth = _charWidth;
-    else
-        _cursorWidth = 2;
-    _cursorHeight = _charHeight - 3;
+QByteArray QHexEditPrivate::data()
+{
+    return _data;
+}
 
-    // tell QAbstractScollbar, how big we are
-    setMinimumHeight(((_data.size()/16 + 1) * _charHeight) + 3);
-    setMinimumWidth(_xPosAscii + (BYTES_PER_LINE * _charWidth));
+void QHexEditPrivate::insert(int i, const QByteArray & ba)
+{
+    _data.insert(i, ba);
+    _originalData.insert(i, ba);
+}
 
-    update();
+void QHexEditPrivate::insert(int i, char ch)
+{
+    _data.insert(i, ch);
+    _originalData.insert(i, ch);
+}
+
+void QHexEditPrivate::remove(int index, int len)
+{
+    _data.remove(index, len);
+    _originalData.remove(index, len);
+}
+
+void QHexEditPrivate::setAddressArea(bool addressArea)
+{
+    _addressArea = addressArea;
+    adjust();
+    setCursorPos(_cursorPosition);
+}
+
+void QHexEditPrivate::setAddressWidth(int addressWidth)
+{
+    if ((addressWidth >= 0) and (addressWidth<=6))
+    {
+        _addressNumbers = addressWidth;
+        adjust();
+        setCursorPos(_cursorPosition);
+    }
+}
+
+void QHexEditPrivate::setAsciiArea(bool asciiArea)
+{
+    _asciiArea = asciiArea;
+    adjust();
+}
+
+void QHexEditPrivate::setFont(const QFont &font)
+{
+    QWidget::setFont(font);
+    adjust();
+}
+
+void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
+{
+    _overwriteMode = overwriteMode;
+    adjust();
 }
 
 void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
@@ -72,7 +120,7 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
         if (_overwriteMode == false)
             if ((charX % 3) == 0)
             {
-                _data.insert(posBa, char(0));
+                insert(posBa, char(0));
                 adjust();
             }
         QByteArray hexValue = _data.mid(posBa, 1).toHex();
@@ -87,9 +135,14 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
         down = true;
     }
 
+    // delete char
     if (event->matches(QKeySequence::Delete))
-        // delete char
-        _data.remove(posBa, 1);
+        remove(posBa);
+    if (event->key() == Qt::Key_Backspace)
+        {
+            remove(posBa - 1);
+            setCursorPos(_cursorPosition - 2);
+        }
 
     // handle other function keys
     if (event->matches(QKeySequence::MoveToNextChar))
@@ -274,66 +327,6 @@ void QHexEditPrivate::setCursorPos(QPoint pos)
     }
 }
 
-void QHexEditPrivate::setData(const QByteArray &data)
-{
-    _data = data;
-    _originalData = data;
-    adjust();
-    setCursorPos(0);
-    setFocus();
-}
-
-QByteArray QHexEditPrivate::data()
-{
-    return _data;
-}
-
-void QHexEditPrivate::setAddressOffset(int offset)
-{
-    _addressOffset = offset;
-    adjust();
-}
-
-int QHexEditPrivate::addressOffset()
-{
-    return _addressOffset;
-}
-
-void QHexEditPrivate::setAddressArea(bool addressArea)
-{
-    _addressArea = addressArea;
-    adjust();
-    setCursorPos(_cursorPosition);
-}
-
-void QHexEditPrivate::setAsciiArea(bool asciiArea)
-{
-    _asciiArea = asciiArea;
-    adjust();
-}
-
-void QHexEditPrivate::setAddressWidth(int addressWidth)
-{
-    if ((addressWidth >= 0) and (addressWidth<=6))
-    {
-        _addressNumbers = addressWidth;
-        adjust();
-        setCursorPos(_cursorPosition);
-    }
-}
-
-void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
-{
-    _overwriteMode = overwriteMode;
-    adjust();
-}
-
-void QHexEditPrivate::setFont(const QFont &font)
-{
-    QWidget::setFont(font);
-    adjust();
-}
-
 void QHexEditPrivate::updateCursor()
 {
     if (_blink)
@@ -341,4 +334,34 @@ void QHexEditPrivate::updateCursor()
     else
         _blink = true;
     update(_cursorX, _cursorY, _charWidth, _charHeight);
+}
+
+void QHexEditPrivate::adjust()
+{
+    _charWidth = fontMetrics().width(QLatin1Char('9'));
+    _charHeight = fontMetrics().height();
+
+    // is addressNumbers wide enought?
+    QString test = QString("%1")
+                  .arg(_data.size() + _addressOffset, _addressNumbers, 16, QChar('0'));
+    _realAddressNumbers = test.size();
+
+    _xPosAdr = 0;
+    if (_addressArea)
+        _xPosHex = _realAddressNumbers *_charWidth + GAP_ADR_HEX;
+    else
+        _xPosHex = 0;
+    _xPosAscii = _xPosHex + HEXCHARS_IN_LINE * _charWidth + GAP_HEX_ASCII;
+
+    if (_overwriteMode)
+        _cursorWidth = _charWidth;
+    else
+        _cursorWidth = 2;
+    _cursorHeight = _charHeight - 3;
+
+    // tell QAbstractScollbar, how big we are
+    setMinimumHeight(((_data.size()/16 + 1) * _charHeight) + 3);
+    setMinimumWidth(_xPosAscii + (BYTES_PER_LINE * _charWidth));
+
+    update();
 }

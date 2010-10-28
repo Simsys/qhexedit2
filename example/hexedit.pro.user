@@ -43,83 +43,15 @@
     <value key="ProjectExplorer.BuildConfiguration.CleanStepsCount" type="int">1</value>
     <value key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment" type="bool">false</value>
     <valuelist key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges" type="QVariantList"/>
-    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Qt aus PATH Debug</value>
+    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">4.7.0 Debug</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/media/wdc500/part6/winfried/tmp/qt/hexedit/QHexEdit2/hexedit-build-desktop</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString"></value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">0</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
    </valuemap>
    <valuemap key="ProjectExplorer.Target.BuildConfiguration.1" type="QVariantMap">
-    <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">qmake</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">QtProjectManager.QMakeBuildStep</value>
-     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList"/>
-    </valuemap>
-    <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.1" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MakeStep</value>
-     <value key="Qt4ProjectManager.MakeStep.Clean" type="bool">false</value>
-     <valuelist key="Qt4ProjectManager.MakeStep.MakeArguments" type="QVariantList"/>
-     <value key="Qt4ProjectManager.MakeStep.MakeCommand" type="QString"></value>
-    </valuemap>
-    <value key="ProjectExplorer.BuildConfiguration.BuildStepsCount" type="int">2</value>
-    <valuemap key="ProjectExplorer.BuildConfiguration.CleanStep.0" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MakeStep</value>
-     <value key="Qt4ProjectManager.MakeStep.Clean" type="bool">true</value>
-     <valuelist key="Qt4ProjectManager.MakeStep.MakeArguments" type="QVariantList">
-      <value type="QString">clean</value>
-     </valuelist>
-     <value key="Qt4ProjectManager.MakeStep.MakeCommand" type="QString"></value>
-    </valuemap>
-    <value key="ProjectExplorer.BuildConfiguration.CleanStepsCount" type="int">1</value>
-    <value key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment" type="bool">false</value>
-    <valuelist key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges" type="QVariantList"/>
-    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Qt aus PATH Release</value>
-    <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/media/wdc500/part6/winfried/tmp/qt/hexedit/QHexEdit2/hexedit-build-desktop</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
-   </valuemap>
-   <valuemap key="ProjectExplorer.Target.BuildConfiguration.2" type="QVariantMap">
-    <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">qmake</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">QtProjectManager.QMakeBuildStep</value>
-     <valuelist key="QtProjectManager.QMakeBuildStep.QMakeArguments" type="QVariantList"/>
-    </valuemap>
-    <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.1" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MakeStep</value>
-     <value key="Qt4ProjectManager.MakeStep.Clean" type="bool">false</value>
-     <valuelist key="Qt4ProjectManager.MakeStep.MakeArguments" type="QVariantList"/>
-     <value key="Qt4ProjectManager.MakeStep.MakeCommand" type="QString"></value>
-    </valuemap>
-    <value key="ProjectExplorer.BuildConfiguration.BuildStepsCount" type="int">2</value>
-    <valuemap key="ProjectExplorer.BuildConfiguration.CleanStep.0" type="QVariantMap">
-     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Make</value>
-     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MakeStep</value>
-     <value key="Qt4ProjectManager.MakeStep.Clean" type="bool">true</value>
-     <valuelist key="Qt4ProjectManager.MakeStep.MakeArguments" type="QVariantList">
-      <value type="QString">clean</value>
-     </valuelist>
-     <value key="Qt4ProjectManager.MakeStep.MakeCommand" type="QString"></value>
-    </valuemap>
-    <value key="ProjectExplorer.BuildConfiguration.CleanStepsCount" type="int">1</value>
-    <value key="ProjectExplorer.BuildConfiguration.ClearSystemEnvironment" type="bool">false</value>
-    <valuelist key="ProjectExplorer.BuildConfiguration.UserEnvironmentChanges" type="QVariantList"/>
-    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">4.7.0 Debug</value>
-    <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/media/wdc500/part6/winfried/tmp/qt/hexedit/QHexEdit2/hexedit-build-desktop</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">4</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
-   </valuemap>
-   <valuemap key="ProjectExplorer.Target.BuildConfiguration.3" type="QVariantMap">
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
      <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">qmake</value>
      <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">QtProjectManager.QMakeBuildStep</value>
@@ -153,7 +85,7 @@
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">0</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
    </valuemap>
-   <value key="ProjectExplorer.Target.BuildConfigurationCount" type="int">4</value>
+   <value key="ProjectExplorer.Target.BuildConfigurationCount" type="int">2</value>
    <valuemap key="ProjectExplorer.Target.RunConfiguration.0" type="QVariantMap">
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">hexedit</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4RunConfiguration</value>

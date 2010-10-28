@@ -178,21 +178,21 @@ void MainWindow::createStatusBar()
     cbOverwriteMode->setText(tr("Overwrite Mode"));
     cbOverwriteMode->setChecked(Qt::Checked);
     statusBar()->addPermanentWidget(cbOverwriteMode);
-    connect(cbOverwriteMode, SIGNAL(stateChanged(int)), hexEdit, SLOT(setOverwriteMode(int)));
+    connect(cbOverwriteMode, SIGNAL(stateChanged(int)), this, SLOT(setOverwriteMode(int)));
 
     // Address Area
     cbAddressArea = new QCheckBox();
     cbAddressArea->setText(tr("Address Area"));
     cbAddressArea->setChecked(Qt::Checked);
     statusBar()->addPermanentWidget(cbAddressArea);
-    connect(cbAddressArea, SIGNAL(stateChanged(int)), hexEdit, SLOT(setAddressArea(int)));
+    connect(cbAddressArea, SIGNAL(stateChanged(int)), this, SLOT(setAddressArea(int)));
 
     // Ascii Area
     cbAsciiArea = new QCheckBox();
     cbAsciiArea->setText(tr("Ascii Area"));
     cbAsciiArea->setChecked(Qt::Checked);
     statusBar()->addPermanentWidget(cbAsciiArea);
-    connect(cbAsciiArea, SIGNAL(stateChanged(int)), hexEdit, SLOT(setAsciiArea(int)));
+    connect(cbAsciiArea, SIGNAL(stateChanged(int)), this, SLOT(setAsciiArea(int)));
 
     // AddressNumbers Spinbox
     sbAddressWidth = new QSpinBox();
@@ -214,6 +214,22 @@ void MainWindow::setAddress(int address)
 {
     lbAddress->setText(QString("%1").arg(address, 4, 16, QChar('0')));
 }
+
+void MainWindow::setOverwriteMode(int mode)
+{
+    hexEdit->setOverwriteMode(mode != 0);
+}
+
+void MainWindow::setAddressArea(int area)
+{
+    hexEdit->setAddressArea(area != 0);
+}
+
+void MainWindow::setAsciiArea(int area)
+{
+    hexEdit->setAsciiArea(area != 0);
+}
+
 
 void MainWindow::readSettings()
 {
