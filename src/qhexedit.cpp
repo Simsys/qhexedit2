@@ -28,6 +28,31 @@ void QHexEdit::remove(int pos, int len)
     qHexEdit_p->remove(pos, len);
 }
 
+void QHexEdit::setAddressArea(bool addressArea)
+{
+    qHexEdit_p->setAddressArea(addressArea);
+}
+
+void QHexEdit::setAddressWidth(int addressWidth)
+{
+    qHexEdit_p->setAddressWidth(addressWidth);
+}
+
+void QHexEdit::setAsciiArea(bool asciiArea)
+{
+    qHexEdit_p->setAsciiArea(asciiArea);
+}
+
+void QHexEdit::setHighlighting(bool mode)
+{
+    qHexEdit_p->setHighlighting(mode);
+}
+
+void QHexEdit::setOverwriteMode(bool overwriteMode)
+{
+    qHexEdit_p->setOverwriteMode(overwriteMode);
+}
+
 void QHexEdit::setAddressOffset(int offset)
 {
     qHexEdit_p->setAddressOffset(offset);
@@ -48,27 +73,18 @@ QByteArray QHexEdit::data()
     return qHexEdit_p->data();
 }
 
+void QHexEdit::setHighlightingColor(const QColor &color)
+{
+    qHexEdit_p->setHighlightingColor(color);
+}
+
+QColor QHexEdit::highlightingColor()
+{
+    return qHexEdit_p->highlightingColor();
+}
+
 void QHexEdit::setFont(const QFont &font)
 {
     qHexEdit_p->setFont(font);
 }
 
-void QHexEdit::setAddressArea(bool addressArea)
-{
-    qHexEdit_p->setAddressArea(addressArea);
-}
-
-void QHexEdit::setAddressWidth(int addressWidth)
-{
-    qHexEdit_p->setAddressWidth(addressWidth);
-}
-
-void QHexEdit::setAsciiArea(bool asciiArea)
-{
-    qHexEdit_p->setAsciiArea(asciiArea);
-}
-
-void QHexEdit::setOverwriteMode(bool overwriteMode)
-{
-    qHexEdit_p->setOverwriteMode(overwriteMode);
-}

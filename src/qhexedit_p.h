@@ -19,6 +19,9 @@ public:
     void setData(QByteArray const &data);
     QByteArray data();
 
+    void setHighlightingColor(QColor const &color);
+    QColor highlightingColor();
+
     void insert(int i, const QByteArray & ba);
     void insert(int i, char ch);
     void remove(int index, int len=1);
@@ -26,6 +29,7 @@ public:
     void setAddressArea(bool addressArea);
     void setAddressWidth(int addressWidth);
     void setAsciiArea(bool asciiArea);
+    void setHighlighting(bool mode);
     virtual void setFont(const QFont &font);
     void setOverwriteMode(bool overwriteMode);
 
@@ -48,12 +52,14 @@ private:
 
     QByteArray _data;
     QByteArray _originalData;
-    QTimer _cursorTimer;
+    QColor _highlightingColor;
     QScrollArea *_scrollArea;
+    QTimer _cursorTimer;
 
     bool _blink;
     bool _addressArea;
     bool _asciiArea;
+    bool _highlighting;
     bool _overwriteMode;
 
     int _addressNumbers, _realAddressNumbers;
