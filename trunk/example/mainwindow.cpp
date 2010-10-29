@@ -18,13 +18,6 @@ void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
     if (!fileName.isEmpty()) {
-        MainWindow *existing = findMainWindow(fileName);
-        if (existing) {
-            existing->show();
-            existing->raise();
-            existing->activateWindow();
-            return;
-        }
         loadFile(fileName);
     }
 }
@@ -101,24 +94,6 @@ void MainWindow::createActions()
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 
-//    cutAct = new QAction(QIcon(":/images/cut.png"), tr("Cu&t"), this);
-//    cutAct->setShortcuts(QKeySequence::Cut);
-//    cutAct->setStatusTip(tr("Cut the current selection's contents to the "
-//                            "clipboard"));
-//    connect(cutAct, SIGNAL(triggered()), textEdit, SLOT(cut()));
-
-//    copyAct = new QAction(QIcon(":/images/copy.png"), tr("&Copy"), this);
-//    copyAct->setShortcuts(QKeySequence::Copy);
-//    copyAct->setStatusTip(tr("Copy the current selection's contents to the "
-//                             "clipboard"));
-//    connect(copyAct, SIGNAL(triggered()), textEdit, SLOT(copy()));
-
-//    pasteAct = new QAction(QIcon(":/images/paste.png"), tr("&Paste"), this);
-//    pasteAct->setShortcuts(QKeySequence::Paste);
-//    pasteAct->setStatusTip(tr("Paste the clipboard's contents into the current "
-//                              "selection"));
-//    connect(pasteAct, SIGNAL(triggered()), textEdit, SLOT(paste()));
-
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
@@ -127,30 +102,18 @@ void MainWindow::createActions()
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
-//    cutAct->setEnabled(false);
-//    copyAct->setEnabled(false);
-//    connect(textEdit, SIGNAL(copyAvailable(bool)),
-//            cutAct, SLOT(setEnabled(bool)));
-//    connect(textEdit, SIGNAL(copyAvailable(bool)),
-//            copyAct, SLOT(setEnabled(bool)));
 }
 
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
 //! [implicit tr context]
-//    fileMenu->addAction(newAct);
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addSeparator();
     fileMenu->addAction(closeAct);
     fileMenu->addAction(exitAct);
-
-//    editMenu = menuBar()->addMenu(tr("&Edit"));
-//    editMenu->addAction(cutAct);
-//    editMenu->addAction(copyAct);
-//    editMenu->addAction(pasteAct);
 
     menuBar()->addSeparator();
 
@@ -162,14 +125,8 @@ void MainWindow::createMenus()
 void MainWindow::createToolBars()
 {
     fileToolBar = addToolBar(tr("File"));
-//    fileToolBar->addAction(newAct);
     fileToolBar->addAction(openAct);
     fileToolBar->addAction(saveAct);
-
-//    editToolBar = addToolBar(tr("Edit"));
-//    editToolBar->addAction(cutAct);
-//    editToolBar->addAction(copyAct);
-//    editToolBar->addAction(pasteAct);
 }
 
 void MainWindow::createStatusBar()

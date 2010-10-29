@@ -84,9 +84,9 @@ Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9e8ed54e47fec94cfd64b14ea1f7cee8">highlightingColor</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
-<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a binary editor widget. <a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a hex editor widget written in C++ for the Qt (Qt4) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data.</p>
+<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a hex editor widget written in C++ for the Qt (Qt4) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python.</p>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a>.</p>
-<p>Normaly <a class="el" href="class_q_hex_edit.html">QHexEdit</a> works in the overwrite Mode. You can set overwriteMode() to false and insert data. In this case the size of <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a> increases. It is also possible to delete the byte under the cursor, her the size of data decreases.</p>
+<p>Normaly <a class="el" href="class_q_hex_edit.html">QHexEdit</a> works in the overwrite Mode. You can set overwriteMode(false) and insert data. In this case the size of <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a> increases. It is also possible to delete bytes under the cursor, here the size of data decreases.</p>
 <p>There are some limitations: The size of data has in general to be below 10 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any more. Copy and paste functionality is perhaps a subject of a later release. </p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aec1f1e5b7652e7e39a8ca5e73ed63373"></a><!-- doxytag: member="QHexEdit::QHexEdit" ref="aec1f1e5b7652e7e39a8ca5e73ed63373" args="(QWidget *parent=0)" -->
@@ -446,7 +446,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>/media/wdc500/part6/winfried/tmp/qt/hexedit/QHexEdit2_google/qhexedit2/src/<a class="el" href="qhexedit_8h_source.html">qhexedit.h</a></li>
+<li>/media/wdc500/part6/winfried/tmp/qt/qhexedit2/src/<a class="el" href="qhexedit_8h_source.html">qhexedit.h</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->
@@ -463,7 +463,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Thu Oct 28 2010 21:55:05 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Oct 30 2010 00:04:53 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
