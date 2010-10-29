@@ -7,22 +7,23 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.3.5
+\version Version 0.4.0
 \image html hexedit.png
 */
 
 
-/*!  QHexEdit is a binary editor widget.
-QHexEdit is a hex editor widget written in C++ for the Qt (Qt4) framework.
+/*! QHexEdit is a hex editor widget written in C++ for the Qt (Qt4) framework.
 It is a simple editor for binary data, just like QPlainTextEdit is for text data.
+There are sip configuration files included, so it is easy to create bindings
+for PyQt and you can use this widget also in python.
 
 QHexEdit takes the data of a QByteArray (setData()) and shows it. You can use the
 mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f)
 you will change the data. Changed data is highlighted and can be accessed via data().
 
-Normaly QHexEdit works in the overwrite Mode. You can set overwriteMode() to false and
+Normaly QHexEdit works in the overwrite Mode. You can set overwriteMode(false) and
 insert data. In this case the size of data() increases. It is also possible to delete
-the byte under the cursor, her the size of data decreases.
+bytes under the cursor, here the size of data decreases.
 
 There are some limitations: The size of data has in general to be below 10 megabytes,
 otherwise the scroll sliders ard not shown and you can't scroll any more. Copy and
