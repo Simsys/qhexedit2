@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.4.0
+\version Version 0.4.1
 \image html hexedit.png
 */
 
@@ -120,6 +120,9 @@ signals:
 
     /*! The signal is emited every time, the data is changed. */
     void dataChanged();
+
+    /*! The signal is emited every time, the overwrite mode is changed. */
+    void overwriteModeChanged(bool state);
 
 private:
     /*! \cond docNever */

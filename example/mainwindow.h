@@ -10,56 +10,49 @@ class QAction;
 class QMenu;
 QT_END_NAMESPACE
 
-//! [class definition with macro]
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
     MainWindow();
-//! [class definition with macro]
     MainWindow(const QString &fileName);
 
 protected:
     void closeEvent(QCloseEvent *event);
 
 private slots:
+    void about();
     void open();
     bool save();
     bool saveAs();
-    void about();
     void setAddress(int address);
 
 private:
     void init();
     void createActions();
     void createMenus();
-    void createToolBars();
     void createStatusBar();
-    void readSettings();
-    void writeSettings();
+    void createToolBars();
     void loadFile(const QString &fileName);
+    void readSettings();
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
     QString strippedName(const QString &fullFileName);
-    MainWindow *findMainWindow(const QString &fileName);
+    void writeSettings();
 
-    bool isUntitled;
-
-    QHexEdit *hexEdit;
     QString curFile;
-    QLabel *lbAddress;
-    QSpinBox *sbAddressWidth;
+    bool isUntitled;
+    
     QCheckBox *cbAddressArea;
     QCheckBox *cbAsciiArea;
-    QCheckBox *cbOverwriteMode;
     QCheckBox *cbHighlighting;
+    QCheckBox *cbOverwriteMode;
 
     QMenu *fileMenu;
     QMenu *helpMenu;
 
     QToolBar *fileToolBar;
-    QToolBar *editToolBar;
 
     QAction *openAct;
     QAction *saveAct;
@@ -68,6 +61,11 @@ private:
     QAction *exitAct;
     QAction *aboutAct;
     QAction *aboutQtAct;
+
+    QHexEdit *hexEdit;
+    QLabel *lbAddress;
+    QSpinBox *sbAddressWidth;
+
 };
 
 #endif

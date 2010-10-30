@@ -28,6 +28,7 @@ public slots:
     void setOverwriteMode(bool);
 
 signals:
-    void currentAddress(int address);
+    void currentAddress(int);
     void dataChanged();
+    void overwriteModeChanged(bool);
 };

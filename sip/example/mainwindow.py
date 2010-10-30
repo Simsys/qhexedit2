@@ -92,7 +92,7 @@ class MainWindow(QtGui.QMainWindow):
         self.cbOverwriteMode.setChecked(QtCore.Qt.Checked);
         self.statusBar().addPermanentWidget(self.cbOverwriteMode);
         self.cbOverwriteMode.toggled.connect(self.hexEdit.setOverwriteMode);
-
+        self.hexEdit.overwriteModeChanged.connect(self.cbOverwriteMode.setChecked);
 
     def readSettings(self):
         settings = QtCore.QSettings('QHexEdit', 'Example')
