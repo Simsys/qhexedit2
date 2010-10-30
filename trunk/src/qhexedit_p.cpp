@@ -118,6 +118,8 @@ void QHexEditPrivate::setHighlighting(bool mode)
 
 void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
 {
+    if (overwriteMode != _overwriteMode)
+        emit overwriteModeChanged(overwriteMode);
     _overwriteMode = overwriteMode;
     adjust();
 }
@@ -164,6 +166,9 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
         }
 
     // handle other function keys
+    if (event->key() == Qt::Key_Insert)
+        setOverwriteMode(!_overwriteMode);
+
     if (event->matches(QKeySequence::MoveToNextChar))
     {
         setCursorPos(_cursorPosition + 1);

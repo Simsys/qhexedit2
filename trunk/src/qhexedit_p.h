@@ -36,6 +36,7 @@ public:
 signals:
     void currentAddress(int address);
     void dataChanged();
+    void overwriteModeChanged(bool state);
 
 protected:
     void keyPressEvent(QKeyEvent * event);

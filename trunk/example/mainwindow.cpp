@@ -14,6 +14,12 @@ void MainWindow::closeEvent(QCloseEvent *)
     writeSettings();
 }
 
+void MainWindow::about()
+{
+   QMessageBox::about(this, tr("About HexEdit"),
+            tr("The HexEdit example is a short Demo of the QHexEdit Widget."));
+}
+
 void MainWindow::open()
 {
     QString fileName = QFileDialog::getOpenFileName(this);
@@ -41,10 +47,9 @@ bool MainWindow::saveAs()
     return saveFile(fileName);
 }
 
-void MainWindow::about()
+void MainWindow::setAddress(int address)
 {
-   QMessageBox::about(this, tr("About HexEdit"),
-            tr("The HexEdit example is a short Demo of the QHexEdit Widget."));
+    lbAddress->setText(QString("%1").arg(address, 4, 16, QChar('0')));
 }
 
 void MainWindow::init()
@@ -122,13 +127,6 @@ void MainWindow::createMenus()
     helpMenu->addAction(aboutQtAct);
 }
 
-void MainWindow::createToolBars()
-{
-    fileToolBar = addToolBar(tr("File"));
-    fileToolBar->addAction(openAct);
-    fileToolBar->addAction(saveAct);
-}
-
 void MainWindow::createStatusBar()
 {
     // Overwrite Mode
@@ -137,6 +135,7 @@ void MainWindow::createStatusBar()
     cbOverwriteMode->setChecked(Qt::Checked);
     statusBar()->addPermanentWidget(cbOverwriteMode);
     connect(cbOverwriteMode, SIGNAL(toggled(bool)), hexEdit, SLOT(setOverwriteMode(bool)));
+    connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), cbOverwriteMode, SLOT(setChecked(bool)));
 
     // Address Area
     cbAddressArea = new QCheckBox();
@@ -175,25 +174,11 @@ void MainWindow::createStatusBar()
     statusBar()->showMessage(tr("Ready"));
 }
 
-void MainWindow::setAddress(int address)
+void MainWindow::createToolBars()
 {
-    lbAddress->setText(QString("%1").arg(address, 4, 16, QChar('0')));
-}
-
-void MainWindow::readSettings()
-{
-    QSettings settings;
-    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
-    QSize size = settings.value("size", QSize(400, 400)).toSize();
-    move(pos);
-    resize(size);
-}
-
-void MainWindow::writeSettings()
-{
-    QSettings settings;
-    settings.setValue("pos", pos());
-    settings.setValue("size", size());
+    fileToolBar = addToolBar(tr("File"));
+    fileToolBar->addAction(openAct);
+    fileToolBar->addAction(saveAct);
 }
 
 void MainWindow::loadFile(const QString &fileName)
@@ -214,6 +199,15 @@ void MainWindow::loadFile(const QString &fileName)
 
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File loaded"), 2000);
+}
+
+void MainWindow::readSettings()
+{
+    QSettings settings;
+    QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
+    QSize size = settings.value("size", QSize(400, 400)).toSize();
+    move(pos);
+    resize(size);
 }
 
 bool MainWindow::saveFile(const QString &fileName)
@@ -256,14 +250,10 @@ QString MainWindow::strippedName(const QString &fullFileName)
     return QFileInfo(fullFileName).fileName();
 }
 
-MainWindow *MainWindow::findMainWindow(const QString &fileName)
+void MainWindow::writeSettings()
 {
-    QString canonicalFilePath = QFileInfo(fileName).canonicalFilePath();
-
-    foreach (QWidget *widget, qApp->topLevelWidgets()) {
-        MainWindow *mainWin = qobject_cast<MainWindow *>(widget);
-        if (mainWin && mainWin->curFile == canonicalFilePath)
-            return mainWin;
-    }
-    return 0;
+    QSettings settings;
+    settings.setValue("pos", pos());
+    settings.setValue("size", size());
 }
+

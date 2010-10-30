@@ -11,6 +11,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QScrollArea(parent)
 
     connect(qHexEdit_p, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
     connect(qHexEdit_p, SIGNAL(currentAddress(int)), this, SIGNAL(currentAddress(int)));
+    connect(qHexEdit_p, SIGNAL(overwriteModeChanged(bool)), this, SIGNAL(overwriteModeChanged(bool)));
 }
 
 void QHexEdit::insert(int i, const QByteArray & ba)
