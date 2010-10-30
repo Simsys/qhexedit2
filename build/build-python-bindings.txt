@@ -1,0 +1,18 @@
+How to build the Bindings and run the Python Example?
+=====================================================
+
+1 Build and Install QHexEditWidget
+----------------------------------
+$ qmake ../sip/
+$ sudo make
+
+2 Build and Install QHexEdit Python Module
+------------------------------------------
+$ python ../sip/configure.py
+$ make
+$ sudo make install
+
+3 Start the Python Example
+--------------------------
+$ python ../sip/example/mainwindow.py
+

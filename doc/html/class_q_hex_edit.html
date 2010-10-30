@@ -70,6 +70,7 @@ Public Slots</h2></td></tr>
 Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a> (int address)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d">dataChanged</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a15abf5af9aa3a91d18ec17cc33b8e4a1">overwriteModeChanged</a> (bool state)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aec1f1e5b7652e7e39a8ca5e73ed63373">QHexEdit</a> (QWidget *parent=0)</td></tr>
@@ -152,6 +153,41 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a990a5188800f295f1d15f51b857fd7b9"></a><!-- doxytag: member="QHexEdit::insert" ref="a990a5188800f295f1d15f51b857fd7b9" args="(int i, const QByteArray &amp;ba)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::insert </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&nbsp;</td>
+          <td class="paramname"> <em>ba</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Inserts a byte array. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ba</em>&nbsp;</td><td>byte array, which is to insert </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="aae1006e9ebf9233e782bedeb70b722c7"></a><!-- doxytag: member="QHexEdit::insert" ref="aae1006e9ebf9233e782bedeb70b722c7" args="(int i, char ch)" -->
 <div class="memitem">
 <div class="memproto">
@@ -187,38 +223,22 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a990a5188800f295f1d15f51b857fd7b9"></a><!-- doxytag: member="QHexEdit::insert" ref="a990a5188800f295f1d15f51b857fd7b9" args="(int i, const QByteArray &amp;ba)" -->
+<a class="anchor" id="a15abf5af9aa3a91d18ec17cc33b8e4a1"></a><!-- doxytag: member="QHexEdit::overwriteModeChanged" ref="a15abf5af9aa3a91d18ec17cc33b8e4a1" args="(bool state)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void QHexEdit::insert </td>
+          <td class="memname">void QHexEdit::overwriteModeChanged </td>
           <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QByteArray &amp;&nbsp;</td>
-          <td class="paramname"> <em>ba</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>state</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [signal]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Inserts a byte array. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>ba</em>&nbsp;</td><td>byte array, which is to insert </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>The signal is emited every time, the overwrite mode is changed. </p>
 
 </div>
 </div>
@@ -463,7 +483,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Oct 30 2010 00:04:53 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Oct 30 2010 11:16:12 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>
