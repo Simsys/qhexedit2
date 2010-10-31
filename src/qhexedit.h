@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.4.2
+\version Version 0.4.3
 \image html hexedit.png
 */
 
@@ -44,11 +44,21 @@ paste functionality is perhaps a subject of a later release.
     */
     Q_PROPERTY(int addressOffset READ addressOffset WRITE setAddressOffset)
 
+    /*! Property address area color sets (setAddressAreaColor()) the backgorund
+    color of address areas. You can also read the color (addressaAreaColor()).
+    */
+    Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
+
     /*! Property highlighting color sets (setHighlightingColor()) the backgorund
     color of highlighted text areas. You can also read the color
     (highlightingColor()).
     */
     Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor)
+
+    /*! Porperty overwrite mode sets (setOverwriteMode()) or gets (overwriteMode()) the mode
+    in which the editor works. In overwritem mode the user will overwrite existing data.
+    */
+    Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode)
 
 public:
     /*! Creates an instance of QHexEdit.
@@ -82,8 +92,12 @@ public:
     int addressOffset();
     void setData(QByteArray const &data);
     QByteArray data();
+    void setAddressAreaColor(QColor const &color);
+    QColor addressAreaColor();
     void setHighlightingColor(QColor const &color);
     QColor highlightingColor();
+    void setOverwriteMode(bool);
+    bool overwriteMode();
     /*! \endcond docNever */
 
 public slots:
@@ -107,11 +121,6 @@ public slots:
       \param mode true (show it), false (hide it).
       */
     void setHighlighting(bool mode);
-
-    /*! Switch the ascii area on or off.
-      \param overwriteMode true (overwrite mode), false (insert mode).
-      */
-    void setOverwriteMode(bool overwriteMode);
 
 signals:
 

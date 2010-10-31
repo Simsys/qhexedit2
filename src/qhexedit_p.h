@@ -19,8 +19,14 @@ public:
     void setData(QByteArray const &data);
     QByteArray data();
 
+    void setAddressAreaColor(QColor const &color);
+    QColor addressAreaColor();
+
     void setHighlightingColor(QColor const &color);
     QColor highlightingColor();
+
+    void setOverwriteMode(bool overwriteMode);
+    bool overwriteMode();
 
     void insert(int i, const QByteArray & ba);
     void insert(int i, char ch);
@@ -31,7 +37,6 @@ public:
     void setAsciiArea(bool asciiArea);
     void setHighlighting(bool mode);
     virtual void setFont(const QFont &font);
-    void setOverwriteMode(bool overwriteMode);
 
 signals:
     void currentAddress(int address);
@@ -51,6 +56,7 @@ private slots:
 private:
     void adjust();
 
+    QColor _addressAreaColor;
     QByteArray _data;
     QByteArray _originalData;
     QColor _highlightingColor;

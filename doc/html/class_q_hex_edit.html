@@ -65,7 +65,6 @@ Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9353e8a6906e0ce08af873a149f627b2">setAddressArea</a> (bool addressArea)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a16ee969c29d3d30be0f7fbfe4f63e622">setAsciiArea</a> (bool asciiArea)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#af10f1fb0005904d40af5508a40399415">setHighlighting</a> (bool mode)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a5b0f4ff156071d00f20c219d7abe6920">setOverwriteMode</a> (bool overwriteMode)</td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a> (int address)</td></tr>
@@ -82,7 +81,9 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QByteArray&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a6e27b73514e243c0b8b2a3efafbb5e32">addressAreaColor</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QColor&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9e8ed54e47fec94cfd64b14ea1f7cee8">highlightingColor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a941a91c36eb8429c41096bfcd45f38c1">overwriteMode</a></td></tr>
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is a hex editor widget written in C++ for the Qt (Qt4) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python.</p>
@@ -153,41 +154,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a990a5188800f295f1d15f51b857fd7b9"></a><!-- doxytag: member="QHexEdit::insert" ref="a990a5188800f295f1d15f51b857fd7b9" args="(int i, const QByteArray &amp;ba)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void QHexEdit::insert </td>
-          <td>(</td>
-          <td class="paramtype">int&nbsp;</td>
-          <td class="paramname"> <em>i</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QByteArray &amp;&nbsp;</td>
-          <td class="paramname"> <em>ba</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Inserts a byte array. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>ba</em>&nbsp;</td><td>byte array, which is to insert </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a class="anchor" id="aae1006e9ebf9233e782bedeb70b722c7"></a><!-- doxytag: member="QHexEdit::insert" ref="aae1006e9ebf9233e782bedeb70b722c7" args="(int i, char ch)" -->
 <div class="memitem">
 <div class="memproto">
@@ -217,6 +183,41 @@ Properties</h2></td></tr>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>ch</em>&nbsp;</td><td>Char, which is to insert </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a990a5188800f295f1d15f51b857fd7b9"></a><!-- doxytag: member="QHexEdit::insert" ref="a990a5188800f295f1d15f51b857fd7b9" args="(int i, const QByteArray &amp;ba)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::insert </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&nbsp;</td>
+          <td class="paramname"> <em>ba</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Inserts a byte array. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>i</em>&nbsp;</td><td>Index position, where to insert </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>ba</em>&nbsp;</td><td>byte array, which is to insert </td></tr>
   </table>
   </dd>
 </dl>
@@ -397,32 +398,21 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5b0f4ff156071d00f20c219d7abe6920"></a><!-- doxytag: member="QHexEdit::setOverwriteMode" ref="a5b0f4ff156071d00f20c219d7abe6920" args="(bool overwriteMode)" -->
+<hr/><h2>Property Documentation</h2>
+<a class="anchor" id="a6e27b73514e243c0b8b2a3efafbb5e32"></a><!-- doxytag: member="QHexEdit::addressAreaColor" ref="a6e27b73514e243c0b8b2a3efafbb5e32" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void QHexEdit::setOverwriteMode </td>
-          <td>(</td>
-          <td class="paramtype">bool&nbsp;</td>
-          <td class="paramname"> <em>overwriteMode</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [slot]</code></td>
+          <td class="memname">QColor QHexEdit::addressAreaColor<code> [read, write]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Switch the ascii area on or off. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>overwriteMode</em>&nbsp;</td><td>true (overwrite mode), false (insert mode). </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Property address area color sets (setAddressAreaColor()) the backgorund color of address areas. You can also read the color (addressaAreaColor()). </p>
 
 </div>
 </div>
-<hr/><h2>Property Documentation</h2>
 <a class="anchor" id="a147d80029bb855dedd91fe2a67b7b886"></a><!-- doxytag: member="QHexEdit::addressOffset" ref="a147d80029bb855dedd91fe2a67b7b886" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -465,6 +455,20 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a941a91c36eb8429c41096bfcd45f38c1"></a><!-- doxytag: member="QHexEdit::overwriteMode" ref="a941a91c36eb8429c41096bfcd45f38c1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool QHexEdit::overwriteMode<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Porperty overwrite mode sets (setOverwriteMode()) or gets (<a class="el" href="class_q_hex_edit.html#a941a91c36eb8429c41096bfcd45f38c1">overwriteMode()</a>) the mode in which the editor works. In overwritem mode the user will overwrite existing data. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/media/wdc500/part6/winfried/tmp/qt/qhexedit2/src/<a class="el" href="qhexedit_8h_source.html">qhexedit.h</a></li>
 </ul>
@@ -483,7 +487,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Oct 30 2010 11:16:12 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Oct 31 2010 22:03:05 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

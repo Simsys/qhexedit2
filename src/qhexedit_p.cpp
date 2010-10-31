@@ -16,6 +16,7 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setAsciiArea(true);
     setHighlighting(true);
     setOverwriteMode(true);
+    setAddressAreaColor(QColor(Qt::lightGray).lighter(110));
     setHighlightingColor(QColor(Qt::yellow).lighter(160));
 
     setFont(QFont("Mono", 10));
@@ -52,6 +53,17 @@ QByteArray QHexEditPrivate::data()
     return _data;
 }
 
+void QHexEditPrivate::setAddressAreaColor(const QColor &color)
+{
+    _addressAreaColor = color;
+    update();
+}
+
+QColor QHexEditPrivate::addressAreaColor()
+{
+    return _addressAreaColor;
+}
+
 void QHexEditPrivate::setHighlightingColor(const QColor &color)
 {
     _highlightingColor = color;
@@ -61,6 +73,21 @@ void QHexEditPrivate::setHighlightingColor(const QColor &color)
 QColor QHexEditPrivate::highlightingColor()
 {
     return _highlightingColor;
+}
+
+void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
+{
+    if (overwriteMode != _overwriteMode)
+    {
+        emit overwriteModeChanged(overwriteMode);
+        _overwriteMode = overwriteMode;
+        adjust();
+    }
+}
+
+bool QHexEditPrivate::overwriteMode()
+{
+    return _overwriteMode;
 }
 
 void QHexEditPrivate::insert(int i, const QByteArray & ba)
@@ -114,14 +141,6 @@ void QHexEditPrivate::setHighlighting(bool mode)
 {
     _highlighting = mode;
     update();
-}
-
-void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
-{
-    if (overwriteMode != _overwriteMode)
-        emit overwriteModeChanged(overwriteMode);
-    _overwriteMode = overwriteMode;
-    adjust();
 }
 
 void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
@@ -222,7 +241,7 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     // draw some patterns if needed
     painter.fillRect(event->rect(), this->palette().color(QPalette::Base));
     if (_addressArea)
-        painter.fillRect(QRect(_xPosAdr, event->rect().top(), _xPosHex - GAP_ADR_HEX + 2, height()), Qt::lightGray);
+        painter.fillRect(QRect(_xPosAdr, event->rect().top(), _xPosHex - GAP_ADR_HEX + 2, height()), _addressAreaColor);
     if (_asciiArea)
     {
         int linePos = _xPosAscii - (GAP_HEX_ASCII / 2);
