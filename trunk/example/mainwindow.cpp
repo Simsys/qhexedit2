@@ -1,4 +1,3 @@
-
 #include <QtGui>
 
 #include "mainwindow.h"
@@ -52,15 +51,31 @@ void MainWindow::setAddress(int address)
     lbAddress->setText(QString("%1").arg(address, 4, 16, QChar('0')));
 }
 
+void MainWindow::setOverwriteMode(bool mode)
+{
+    if (mode)
+        lbOverwriteMode->setText(tr("Overwrite"));
+    else
+        lbOverwriteMode->setText(tr("Insert"));
+}
+
+void MainWindow::showOptionsDialog()
+{
+    optionsDialog->show();
+}
+
+
 void MainWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
+    optionsDialog = new OptionsDialog(this);
+    connect(optionsDialog, SIGNAL(accepted()), this, SLOT(readSettings()));
 
     isUntitled = true;
 
     hexEdit = new QHexEdit;
     setCentralWidget(hexEdit);
-    hexEdit->setHighlightingColor(QColor(Qt::red).lighter(180));
+    connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), this, SLOT(setOverwriteMode(bool)));
 
     createActions();
     createMenus();
@@ -107,12 +122,15 @@ void MainWindow::createActions()
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
+    optionsAct = new QAction(tr("&Options"), this);
+    optionsAct->setStatusTip(tr("Show the Dialog to select applications options"));
+    connect(optionsAct, SIGNAL(triggered()), this, SLOT(showOptionsDialog()));
+
 }
 
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
-//! [implicit tr context]
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
@@ -120,56 +138,29 @@ void MainWindow::createMenus()
     fileMenu->addAction(closeAct);
     fileMenu->addAction(exitAct);
 
-    menuBar()->addSeparator();
-
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
+    helpMenu->addSeparator();
+    helpMenu->addAction(optionsAct);
 }
 
 void MainWindow::createStatusBar()
 {
-    // Overwrite Mode
-    cbOverwriteMode = new QCheckBox();
-    cbOverwriteMode->setText(tr("Overwrite Mode"));
-    cbOverwriteMode->setChecked(Qt::Checked);
-    statusBar()->addPermanentWidget(cbOverwriteMode);
-    connect(cbOverwriteMode, SIGNAL(toggled(bool)), hexEdit, SLOT(setOverwriteMode(bool)));
-    connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), cbOverwriteMode, SLOT(setChecked(bool)));
-
-    // Address Area
-    cbAddressArea = new QCheckBox();
-    cbAddressArea->setText(tr("Address Area"));
-    cbAddressArea->setChecked(Qt::Checked);
-    statusBar()->addPermanentWidget(cbAddressArea);
-    connect(cbAddressArea, SIGNAL(toggled(bool)), hexEdit, SLOT(setAddressArea(bool)));
-
-    // Ascii Area
-    cbAsciiArea = new QCheckBox();
-    cbAsciiArea->setText(tr("Ascii Area"));
-    cbAsciiArea->setChecked(Qt::Checked);
-    statusBar()->addPermanentWidget(cbAsciiArea);
-    connect(cbAsciiArea, SIGNAL(toggled(bool)), hexEdit, SLOT(setAsciiArea(bool)));
-
-    // Highlighting
-    cbHighlighting = new QCheckBox();
-    cbHighlighting->setText(tr("Highlighting"));
-    cbHighlighting->setChecked(Qt::Checked);
-    statusBar()->addPermanentWidget(cbHighlighting);
-    connect(cbHighlighting, SIGNAL(toggled(bool)), hexEdit, SLOT(setHighlighting(bool)));
-
-    // AddressNumbers Spinbox
-    sbAddressWidth = new QSpinBox();
-    sbAddressWidth->setValue(4);
-    statusBar()->addPermanentWidget(sbAddressWidth);
-    connect(sbAddressWidth, SIGNAL(valueChanged(int)), hexEdit, SLOT(setAddressWidth(int)));
-
     // Address Label
     lbAddress = new QLabel();
     lbAddress->setFrameShape(QFrame::Panel);
     lbAddress->setFrameShadow(QFrame::Sunken);
     statusBar()->addPermanentWidget(lbAddress);
     connect(hexEdit, SIGNAL(currentAddress(int)), this, SLOT(setAddress(int)));
+
+    // Overwrite Mode Label
+    lbOverwriteMode = new QLabel();
+    lbOverwriteMode->setFrameShape(QFrame::Panel);
+    lbOverwriteMode->setFrameShadow(QFrame::Sunken);
+    lbOverwriteMode->setMinimumWidth(70);
+    statusBar()->addPermanentWidget(lbOverwriteMode);
+    setOverwriteMode(hexEdit->overwriteMode());
 
     statusBar()->showMessage(tr("Ready"));
 }
@@ -205,16 +196,26 @@ void MainWindow::readSettings()
 {
     QSettings settings;
     QPoint pos = settings.value("pos", QPoint(200, 200)).toPoint();
-    QSize size = settings.value("size", QSize(400, 400)).toSize();
+    QSize size = settings.value("size", QSize(610, 460)).toSize();
     move(pos);
     resize(size);
+
+    hexEdit->setAddressArea(settings.value("AddressArea").toBool());
+    hexEdit->setAsciiArea(settings.value("AsciiArea").toBool());
+    hexEdit->setHighlighting(settings.value("Highlighting").toBool());
+    hexEdit->setOverwriteMode(settings.value("OverwriteMode").toBool());
+
+    hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
+    hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
+
+    hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
 }
 
 bool MainWindow::saveFile(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("SDI"),
+        QMessageBox::warning(this, tr("HexEdit"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
@@ -232,15 +233,8 @@ bool MainWindow::saveFile(const QString &fileName)
 
 void MainWindow::setCurrentFile(const QString &fileName)
 {
-    static int sequenceNumber = 1;
-
+    curFile = QFileInfo(fileName).canonicalFilePath();
     isUntitled = fileName.isEmpty();
-    if (isUntitled) {
-        curFile = tr("document%1.txt").arg(sequenceNumber++);
-    } else {
-        curFile = QFileInfo(fileName).canonicalFilePath();
-    }
-
     setWindowModified(false);
     setWindowFilePath(curFile);
 }

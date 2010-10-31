@@ -1,9 +1,8 @@
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
 #include "../src/qhexedit.h"
+#include "optionsdialog.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -27,6 +26,11 @@ private slots:
     bool save();
     bool saveAs();
     void setAddress(int address);
+    void setOverwriteMode(bool mode);
+    void showOptionsDialog();
+
+private slots:
+    void readSettings();
 
 private:
     void init();
@@ -35,7 +39,6 @@ private:
     void createStatusBar();
     void createToolBars();
     void loadFile(const QString &fileName);
-    void readSettings();
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
     QString strippedName(const QString &fullFileName);
@@ -44,11 +47,6 @@ private:
     QString curFile;
     bool isUntitled;
     
-    QCheckBox *cbAddressArea;
-    QCheckBox *cbAsciiArea;
-    QCheckBox *cbHighlighting;
-    QCheckBox *cbOverwriteMode;
-
     QMenu *fileMenu;
     QMenu *helpMenu;
 
@@ -59,13 +57,15 @@ private:
     QAction *saveAsAct;
     QAction *closeAct;
     QAction *exitAct;
+
     QAction *aboutAct;
     QAction *aboutQtAct;
+    QAction *optionsAct;
 
     QHexEdit *hexEdit;
+    OptionsDialog *optionsDialog;
     QLabel *lbAddress;
-    QSpinBox *sbAddressWidth;
-
+    QLabel *lbOverwriteMode;
 };
 
 #endif

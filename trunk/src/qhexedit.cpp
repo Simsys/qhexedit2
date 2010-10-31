@@ -49,11 +49,6 @@ void QHexEdit::setHighlighting(bool mode)
     qHexEdit_p->setHighlighting(mode);
 }
 
-void QHexEdit::setOverwriteMode(bool overwriteMode)
-{
-    qHexEdit_p->setOverwriteMode(overwriteMode);
-}
-
 void QHexEdit::setAddressOffset(int offset)
 {
     qHexEdit_p->setAddressOffset(offset);
@@ -74,6 +69,16 @@ QByteArray QHexEdit::data()
     return qHexEdit_p->data();
 }
 
+void QHexEdit::setAddressAreaColor(const QColor &color)
+{
+    qHexEdit_p->setAddressAreaColor(color);
+}
+
+QColor QHexEdit::addressAreaColor()
+{
+    return qHexEdit_p->addressAreaColor();
+}
+
 void QHexEdit::setHighlightingColor(const QColor &color)
 {
     qHexEdit_p->setHighlightingColor(color);
@@ -82,6 +87,16 @@ void QHexEdit::setHighlightingColor(const QColor &color)
 QColor QHexEdit::highlightingColor()
 {
     return qHexEdit_p->highlightingColor();
+}
+
+void QHexEdit::setOverwriteMode(bool overwriteMode)
+{
+    qHexEdit_p->setOverwriteMode(overwriteMode);
+}
+
+bool QHexEdit::overwriteMode()
+{
+    return qHexEdit_p->overwriteMode();
 }
 
 void QHexEdit::setFont(const QFont &font)
