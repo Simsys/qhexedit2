@@ -30,7 +30,7 @@ private slots:
     void showOptionsDialog();
 
 private slots:
-    void readSettings();
+    void optionsAccepted();
 
 private:
     void init();
@@ -39,6 +39,7 @@ private:
     void createStatusBar();
     void createToolBars();
     void loadFile(const QString &fileName);
+    void readSettings();
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
     QString strippedName(const QString &fullFileName);
