@@ -64,12 +64,18 @@ void MainWindow::showOptionsDialog()
     optionsDialog->show();
 }
 
+void MainWindow::optionsAccepted()
+{
+    writeSettings();
+    readSettings();
+}
+
 
 void MainWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
     optionsDialog = new OptionsDialog(this);
-    connect(optionsDialog, SIGNAL(accepted()), this, SLOT(readSettings()));
+    connect(optionsDialog, SIGNAL(accepted()), this, SLOT(optionsAccepted()));
 
     isUntitled = true;
 
@@ -207,6 +213,7 @@ void MainWindow::readSettings()
 
     hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
     hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
+    hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
 
     hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
 }

@@ -33,6 +33,7 @@ void OptionsDialog::readSettings()
 
     setPbHighlightingColor(settings.value("HighlightingColor", QColor(Qt::yellow).lighter(160)).value<QColor>());
     setPbAddressAreaColor(settings.value("AddressAreaColor", QColor(Qt::lightGray).lighter(110)).value<QColor>());
+    ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Courier", 10)).value<QFont>());
 
     ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth", 4).toInt());
 }
@@ -47,6 +48,7 @@ void OptionsDialog::writeSettings()
 
     settings.setValue("HighlightingColor", ui->lbHighlightingColor->palette().color(QPalette::Background));
     settings.setValue("AddressAreaColor", ui->lbAddressAreaColor->palette().color(QPalette::Background));
+    settings.setValue("WidgetFont",ui->leWidgetFont->font());
 
     settings.setValue("AddressAreaWidth", ui->sbAddressAreaWidth->value());
 }
@@ -74,14 +76,20 @@ void OptionsDialog::setPbAddressAreaColor(const QColor &color)
 
 void OptionsDialog::on_pbHighlightingColor_clicked()
 {
-    QColorDialog *qcd = new QColorDialog(ui->lbHighlightingColor->palette().color(QPalette::Background), this);
-    connect(qcd, SIGNAL(colorSelected(QColor)), this, SLOT(setPbHighlightingColor(QColor)));
-    qcd->open();
+    QColor color = QColorDialog::getColor(ui->lbHighlightingColor->palette().color(QPalette::Background), this);
+    setPbHighlightingColor(color);
 }
 
 void OptionsDialog::on_pbAddressAreaColor_clicked()
 {
-    QColorDialog *qcd = new QColorDialog(ui->lbAddressAreaColor->palette().color(QPalette::Background), this);
-    connect(qcd, SIGNAL(colorSelected(QColor)), this, SLOT(setPbAddressAreaColor(QColor)));
-    qcd->open();
+    QColor color = QColorDialog::getColor(ui->lbAddressAreaColor->palette().color(QPalette::Background), this);
+    setPbAddressAreaColor(color);
+}
+
+void OptionsDialog::on_pbWidgetFont_clicked()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, ui->leWidgetFont->font(), this);
+    if (ok)
+        ui->leWidgetFont->setFont(font);
 }

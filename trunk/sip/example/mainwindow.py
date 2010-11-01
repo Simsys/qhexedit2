@@ -46,11 +46,15 @@ class MainWindow(QtGui.QMainWindow):
             
     def showOptionsDialog(self):
         self.optionsDialog.show()
+        
+    def optionsAccepted(self):
+        self.writeSettings()
+        self.readSettings()
 
     def init(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.optionsDialog = OptionsDialog(self)
-        self.optionsDialog.accepted.connect(self.readSettings)
+        self.optionsDialog.accepted.connect(self.optionsAccepted)
         
         self.isUntitled = True
         
@@ -151,6 +155,7 @@ class MainWindow(QtGui.QMainWindow):
 
         self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")));
         self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")));
+        self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
 
         self.hexEdit.setAddressWidth(settings.value("AddressAreaWidth").toInt()[0]);
 
