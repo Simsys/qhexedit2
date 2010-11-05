@@ -39,7 +39,8 @@ public:
     virtual void setFont(const QFont &font);
 
 signals:
-    void currentAddress(int address);
+    void currentAddressChanged(int address);
+    void currentSizeChanged(int size);
     void dataChanged();
     void overwriteModeChanged(bool state);
 
@@ -74,6 +75,7 @@ private:
     int _charWidth, _charHeight;
     int _cursorX, _cursorY, _cursorWidth, _cursorHeight, _cursorPosition;
     int _xPosAdr, _xPosHex, _xPosAscii;
+    int _size;
 };
 
 /** \endcond docNever */

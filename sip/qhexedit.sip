@@ -36,7 +36,8 @@ public slots:
     void setHighlighting(bool);
 
 signals:
-    void currentAddress(int);
+    void currentAddressChanged(int);
+    void currentSizeChanged(int);
     void dataChanged();
     void overwriteModeChanged(bool);
 };

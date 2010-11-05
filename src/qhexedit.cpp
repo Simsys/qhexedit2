@@ -9,8 +9,9 @@ QHexEdit::QHexEdit(QWidget *parent) : QScrollArea(parent)
     setWidget(qHexEdit_p);
     setWidgetResizable(true);
 
+    connect(qHexEdit_p, SIGNAL(currentAddressChanged(int)), this, SIGNAL(currentAddressChanged(int)));
+    connect(qHexEdit_p, SIGNAL(currentSizeChanged(int)), this, SIGNAL(currentSizeChanged(int)));
     connect(qHexEdit_p, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
-    connect(qHexEdit_p, SIGNAL(currentAddress(int)), this, SIGNAL(currentAddress(int)));
     connect(qHexEdit_p, SIGNAL(overwriteModeChanged(bool)), this, SIGNAL(overwriteModeChanged(bool)));
 }
 

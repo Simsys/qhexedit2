@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.4.4
+\version Version 0.4.5
 \image html hexedit.png
 */
 
@@ -125,7 +125,10 @@ public slots:
 signals:
 
     /*! Contains the address, where the cursor is located. */
-    void currentAddress(int address);
+    void currentAddressChanged(int address);
+
+    /*! Contains the size of the data to edit. */
+    void currentSizeChanged(int size);
 
     /*! The signal is emited every time, the data is changed. */
     void dataChanged();

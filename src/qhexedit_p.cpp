@@ -26,6 +26,7 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     _cursorTimer.start();
 
     setFocusPolicy(Qt::StrongFocus);
+    _size = -1;
 }
 
 void QHexEditPrivate::setAddressOffset(int offset)
@@ -326,6 +327,12 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     // paint cursor
     if ((_data.size() > 0) and _blink)
         painter.fillRect(_cursorX, _cursorY, _cursorWidth, _cursorHeight, this->palette().color(QPalette::WindowText));
+
+    if (_size != _data.size())
+    {
+        _size = _data.size();
+        emit currentSizeChanged(_size);
+    }
 }
 
 void QHexEditPrivate::setCursorPos(int position)
@@ -356,7 +363,7 @@ void QHexEditPrivate::setCursorPos(int position)
     // immiadately draw cursor
     _blink = true;
     update();
-    emit currentAddress(_cursorPosition/2);
+    emit currentAddressChanged(_cursorPosition/2);
 }
 
 void QHexEditPrivate::setCursorPos(QPoint pos)
@@ -405,6 +412,7 @@ void QHexEditPrivate::adjust()
     else
         _cursorWidth = 2;
     _cursorHeight = _charHeight - 3;
+
 
     // tell QAbstractScollbar, how big we are
     setMinimumHeight(((_data.size()/16 + 1) * _charHeight) + 3);
