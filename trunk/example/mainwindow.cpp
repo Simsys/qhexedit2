@@ -48,7 +48,7 @@ bool MainWindow::saveAs()
 
 void MainWindow::setAddress(int address)
 {
-    lbAddress->setText(QString("%1").arg(address, 4, 16, QChar('0')));
+    lbAddress->setText(QString("%1").arg(address, 1, 16));
 }
 
 void MainWindow::setOverwriteMode(bool mode)
@@ -57,6 +57,11 @@ void MainWindow::setOverwriteMode(bool mode)
         lbOverwriteMode->setText(tr("Overwrite"));
     else
         lbOverwriteMode->setText(tr("Insert"));
+}
+
+void MainWindow::setSize(int size)
+{
+    lbSize->setText(QString("%1").arg(size));
 }
 
 void MainWindow::showOptionsDialog()
@@ -154,13 +159,31 @@ void MainWindow::createMenus()
 void MainWindow::createStatusBar()
 {
     // Address Label
+    lbAddressName = new QLabel();
+    lbAddressName->setText(tr("Address:"));
+    statusBar()->addPermanentWidget(lbAddressName);
     lbAddress = new QLabel();
     lbAddress->setFrameShape(QFrame::Panel);
     lbAddress->setFrameShadow(QFrame::Sunken);
+    lbAddress->setMinimumWidth(70);
     statusBar()->addPermanentWidget(lbAddress);
-    connect(hexEdit, SIGNAL(currentAddress(int)), this, SLOT(setAddress(int)));
+    connect(hexEdit, SIGNAL(currentAddressChanged(int)), this, SLOT(setAddress(int)));
+
+    // Size Label
+    lbSizeName = new QLabel();
+    lbSizeName->setText(tr("Size:"));
+    statusBar()->addPermanentWidget(lbSizeName);
+    lbSize = new QLabel();
+    lbSize->setFrameShape(QFrame::Panel);
+    lbSize->setFrameShadow(QFrame::Sunken);
+    lbSize->setMinimumWidth(70);
+    statusBar()->addPermanentWidget(lbSize);
+    connect(hexEdit, SIGNAL(currentSizeChanged(int)), this, SLOT(setSize(int)));
 
     // Overwrite Mode Label
+    lbOverwriteModeName = new QLabel();
+    lbOverwriteModeName->setText(tr("Mode:"));
+    statusBar()->addPermanentWidget(lbOverwriteModeName);
     lbOverwriteMode = new QLabel();
     lbOverwriteMode->setFrameShape(QFrame::Panel);
     lbOverwriteMode->setFrameShadow(QFrame::Sunken);

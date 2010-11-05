@@ -67,7 +67,8 @@ Public Slots</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#af10f1fb0005904d40af5508a40399415">setHighlighting</a> (bool mode)</td></tr>
 <tr><td colspan="2"><h2><a name="signals"></a>
 Signals</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a19601944073270107de5266c3f0313be">currentAddress</a> (int address)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#acd488289b1d6082623b4018f81243b24">currentAddressChanged</a> (int address)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#afa809fa43dc6b2410f817c91fa981824">currentSizeChanged</a> (int size)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d">dataChanged</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a15abf5af9aa3a91d18ec17cc33b8e4a1">overwriteModeChanged</a> (bool state)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
@@ -117,12 +118,12 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a19601944073270107de5266c3f0313be"></a><!-- doxytag: member="QHexEdit::currentAddress" ref="a19601944073270107de5266c3f0313be" args="(int address)" -->
+<a class="anchor" id="acd488289b1d6082623b4018f81243b24"></a><!-- doxytag: member="QHexEdit::currentAddressChanged" ref="acd488289b1d6082623b4018f81243b24" args="(int address)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void QHexEdit::currentAddress </td>
+          <td class="memname">void QHexEdit::currentAddressChanged </td>
           <td>(</td>
           <td class="paramtype">int&nbsp;</td>
           <td class="paramname"> <em>address</em></td>
@@ -133,6 +134,25 @@ Properties</h2></td></tr>
 </div>
 <div class="memdoc">
 <p>Contains the address, where the cursor is located. </p>
+
+</div>
+</div>
+<a class="anchor" id="afa809fa43dc6b2410f817c91fa981824"></a><!-- doxytag: member="QHexEdit::currentSizeChanged" ref="afa809fa43dc6b2410f817c91fa981824" args="(int size)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::currentSizeChanged </td>
+          <td>(</td>
+          <td class="paramtype">int&nbsp;</td>
+          <td class="paramname"> <em>size</em></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [signal]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Contains the size of the data to edit. </p>
 
 </div>
 </div>
@@ -487,7 +507,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Tue Nov 2 2010 20:10:38 for QHexEdit by&nbsp;
+<hr class="footer"/><address class="footer"><small>Generated on Fri Nov 5 2010 21:45:30 for QHexEdit by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.1 </small></address>
 </body>

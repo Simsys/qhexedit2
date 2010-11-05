@@ -27,6 +27,7 @@ private slots:
     bool saveAs();
     void setAddress(int address);
     void setOverwriteMode(bool mode);
+    void setSize(int size);
     void showOptionsDialog();
 
 private slots:
@@ -65,8 +66,9 @@ private:
 
     QHexEdit *hexEdit;
     OptionsDialog *optionsDialog;
-    QLabel *lbAddress;
-    QLabel *lbOverwriteMode;
+    QLabel *lbAddress, *lbAddressName;
+    QLabel *lbOverwriteMode, *lbOverwriteModeName;
+    QLabel *lbSize, *lbSizeName;
 };
 
 #endif

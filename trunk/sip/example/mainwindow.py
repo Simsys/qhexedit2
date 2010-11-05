@@ -36,13 +36,16 @@ class MainWindow(QtGui.QMainWindow):
         return self.saveFile(fileName)
         
     def setAddress(self, address):
-        self.lbAddress.setText('%04x' % address)
+        self.lbAddress.setText('%x' % address)
         
     def setOverwriteMode(self, mode):
         if mode:
             self.lbOverwriteMode.setText("Overwrite")
         else:
             self.lbOverwriteMode.setText("Insert")
+            
+    def setSize(self, size):
+        self.lbSize.setText('%d' % size)
             
     def showOptionsDialog(self):
         self.optionsDialog.show()
@@ -108,15 +111,36 @@ class MainWindow(QtGui.QMainWindow):
         self.helpMenu.addAction(self.optionsAct)
         
     def createStatusBar(self):
+        # Address Label
+        self.lbAddressName = QtGui.QLabel()
+        self.lbAddressName.setText("Address:")
+        self.statusBar().addPermanentWidget(self.lbAddressName)
         self.lbAddress = QtGui.QLabel()
         self.lbAddress.setFrameShape(QtGui.QFrame.Panel)
         self.lbAddress.setFrameShadow(QtGui.QFrame.Sunken)
+        self.lbAddress.setMinimumWidth(70)
         self.statusBar().addPermanentWidget(self.lbAddress)
-        self.hexEdit.currentAddress.connect(self.setAddress)
+        self.hexEdit.currentAddressChanged.connect(self.setAddress)
         
+        # Address Size
+        self.lbSizeName = QtGui.QLabel()
+        self.lbSizeName.setText("Size:")
+        self.statusBar().addPermanentWidget(self.lbSizeName)
+        self.lbSize = QtGui.QLabel()
+        self.lbSize.setFrameShape(QtGui.QFrame.Panel)
+        self.lbSize.setFrameShadow(QtGui.QFrame.Sunken)
+        self.lbSize.setMinimumWidth(70)
+        self.statusBar().addPermanentWidget(self.lbSize)
+        self.hexEdit.currentSizeChanged.connect(self.setSize)
+        
+        # Overwrite Mode label
+        self.lbOverwriteModeName = QtGui.QLabel()
+        self.lbOverwriteModeName.setText("Mode:")
+        self.statusBar().addPermanentWidget(self.lbOverwriteModeName)
         self.lbOverwriteMode = QtGui.QLabel()
         self.lbOverwriteMode.setFrameShape(QtGui.QFrame.Panel)
         self.lbOverwriteMode.setFrameShadow(QtGui.QFrame.Sunken)
+        self.lbOverwriteMode.setMinimumWidth(70)
         self.statusBar().addPermanentWidget(self.lbOverwriteMode)
         self.setOverwriteMode(self.hexEdit.overwriteMode())
 
