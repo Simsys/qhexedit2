@@ -73,7 +73,7 @@ private:
     int _addressNumbers, _realAddressNumbers;
     int _addressOffset;
     int _charWidth, _charHeight;
-    int _cursorX, _cursorY, _cursorWidth, _cursorHeight, _cursorPosition;
+    int _cursorX, _cursorY, _cursorPosition;
     int _xPosAdr, _xPosHex, _xPosAscii;
     int _size;
 };
