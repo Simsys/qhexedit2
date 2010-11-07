@@ -154,9 +154,6 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
     int key = int(event->text()[0].toAscii());
     if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
     {
-        // calc address
-
-
         // insert char
         if (_overwriteMode == false)
             if ((charX % 3) == 0)
@@ -164,16 +161,19 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
                 insert(posBa, char(0));
                 adjust();
             }
-        QByteArray hexValue = _data.mid(posBa, 1).toHex();
-        if ((charX % 3) == 0)
-            hexValue[0] = key;
-        else
-            hexValue[1] = key;
-        _data.replace(posBa, 1, QByteArray().fromHex(hexValue));
-        emit dataChanged();
+        if (_data.size() > 0)
+        {
+            QByteArray hexValue = _data.mid(posBa, 1).toHex();
+            if ((charX % 3) == 0)
+                hexValue[0] = key;
+            else
+                hexValue[1] = key;
+            _data.replace(posBa, 1, QByteArray().fromHex(hexValue));
+            emit dataChanged();
 
-        setCursorPos(_cursorPosition + 1);
-        down = true;
+            setCursorPos(_cursorPosition + 1);
+            down = true;
+        }
     }
 
     // delete char
@@ -187,7 +187,10 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
 
     // handle other function keys
     if (event->key() == Qt::Key_Insert)
+    {
         setOverwriteMode(!_overwriteMode);
+        setCursorPos(_cursorPosition);
+    }
 
     if (event->matches(QKeySequence::MoveToNextChar))
     {
@@ -325,8 +328,13 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     }
 
     // paint cursor
-    if ((_data.size() > 0) and _blink)
-        painter.fillRect(_cursorX, _cursorY, _cursorWidth, _cursorHeight, this->palette().color(QPalette::WindowText));
+    if (_blink)
+    {
+        if (_overwriteMode)
+            painter.fillRect(_cursorX, _cursorY + _charHeight - 2, _charWidth, 2, this->palette().color(QPalette::WindowText));
+        else
+            painter.fillRect(_cursorX, _cursorY, 2, _charHeight, this->palette().color(QPalette::WindowText));
+    }
 
     if (_size != _data.size())
     {
@@ -406,13 +414,6 @@ void QHexEditPrivate::adjust()
     else
         _xPosHex = 0;
     _xPosAscii = _xPosHex + HEXCHARS_IN_LINE * _charWidth + GAP_HEX_ASCII;
-
-    if (_overwriteMode)
-        _cursorWidth = _charWidth;
-    else
-        _cursorWidth = 2;
-    _cursorHeight = _charHeight - 3;
-
 
     // tell QAbstractScollbar, how big we are
     setMinimumHeight(((_data.size()/16 + 1) * _charHeight) + 3);
