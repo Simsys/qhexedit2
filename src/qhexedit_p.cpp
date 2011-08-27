@@ -106,11 +106,16 @@ bool QHexEditPrivate::overwriteMode()
 
 void QHexEditPrivate::insert(int index, const QByteArray & ba)
 {
-    _data.insert(index, ba);
-    _changedData.insert(index, ba);
-    for (int idx = index; idx < (index + ba.length()); idx++)
-        _changedData[idx] = 0;
-    emit dataChanged();
+    if (_overwriteMode)
+    {
+        replace(index, ba);
+    }
+    else
+    {
+        _data.insert(index, ba);
+        _changedData.insert(index, QByteArray(ba.length(), char(0)));
+        emit dataChanged();
+    }
 }
 
 void QHexEditPrivate::insert(int index, char ch)
@@ -122,9 +127,17 @@ void QHexEditPrivate::insert(int index, char ch)
 
 void QHexEditPrivate::remove(int index, int len)
 {
-    _data.remove(index, len);
-    _changedData.remove(index, len);
-    emit dataChanged();
+    if (_overwriteMode)
+    {
+        QByteArray ba = QByteArray(len, char(0));
+        insert(index, ba);
+    }
+    else
+    {
+        _data.remove(index, len);
+        _changedData.remove(index, len);
+        emit dataChanged();
+    }
 }
 
 void QHexEditPrivate::replace(int index, const QByteArray & ba)
@@ -141,8 +154,7 @@ void QHexEditPrivate::replace(int index, int length, const QByteArray & ba)
     else
         len = length;
     _data.replace(index, len, ba.mid(0, len));
-    for (int idx = index; idx < (index + len); idx++)
-        _changedData[idx] = 0;
+    _changedData.replace(index, len, QByteArray(len, char(0)));
     emit dataChanged();
 }
 
@@ -387,14 +399,7 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
     {
         QClipboard *clipboard = QApplication::clipboard();
         QByteArray ba = QByteArray().fromHex(clipboard->text().toLatin1());
-        if (_overwriteMode)
-        {
-            replace(_cursorPosition / 2, ba);
-        }
-        else
-        {
-            insert(_cursorPosition / 2, ba);
-        }
+        insert(_cursorPosition / 2, ba);
         setCursorPos((_cursorPosition + (2 * ba.length()) + 1) & 0xfffffffe);
         resetSelection(getSelectionBegin());
     }
