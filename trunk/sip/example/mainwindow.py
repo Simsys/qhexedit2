@@ -179,6 +179,7 @@ class MainWindow(QtGui.QMainWindow):
 
         self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")));
         self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")));
+        self.hexEdit.setSelectionColor(QtGui.QColor(settings.value("SelectionColor")));
         self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
 
         self.hexEdit.setAddressWidth(settings.value("AddressAreaWidth").toInt()[0]);

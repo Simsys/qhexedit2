@@ -17,16 +17,13 @@ public:
     ~OptionsDialog();
     Ui::OptionsDialog *ui;
 
-signals:
-    void accepted();
-
 public slots:
     virtual void accept();
-    virtual void recect();
 
 private slots:
     void on_pbHighlightingColor_clicked();
     void on_pbAddressAreaColor_clicked();
+    void on_pbSelectionColor_clicked();
     void on_pbWidgetFont_clicked();
 
 private:
@@ -34,6 +31,7 @@ private:
     void writeSettings();
     void setPbAddressAreaColor(const QColor &color);
     void setPbHighlightingColor(const QColor &color);
+    void setPbSelectionColor(const QColor &color);
 };
 
 #endif // OPTIONSDIALOG_H

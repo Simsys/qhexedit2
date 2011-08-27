@@ -25,12 +25,17 @@ public:
     void setHighlightingColor(QColor const &color);
     QColor highlightingColor();
 
+    void setSelectionColor(QColor const &color);
+    QColor selectionColor();
+
     void setOverwriteMode(bool overwriteMode);
     bool overwriteMode();
 
-    void insert(int i, const QByteArray & ba);
-    void insert(int i, char ch);
+    void insert(int index, const QByteArray & ba);
+    void insert(int index, char ch);
     void remove(int index, int len=1);
+    void replace(int index, const QByteArray & ba);
+    void replace(int index, int length, const QByteArray & ba);
 
     void setAddressArea(bool addressArea);
     void setAddressWidth(int addressWidth);
@@ -46,10 +51,20 @@ signals:
 
 protected:
     void keyPressEvent(QKeyEvent * event);
+    void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent * event);
+
     void paintEvent(QPaintEvent *event);
-    void setCursorPos(QPoint pos);
-    void setCursorPos(int position);
+
+    int getCursorPos(QPoint pos);               // calc cursorpos from graphics position. DOES NOT STORE POSITION
+    int getCursorPos();                         // get actual cursorpos
+    void setCursorPos(int position);            // set cursorpos to position
+
+    void resetSelection(int pos);
+    void setSelection(int pos);                 // set min (if below init) or max (if greater init)
+    int getSelectionBegin();
+    int getSelectionEnd();
+
 
 private slots:
     void updateCursor();
@@ -58,24 +73,31 @@ private:
     void adjust();
 
     QColor _addressAreaColor;
-    QByteArray _data;
-    QByteArray _originalData;
     QColor _highlightingColor;
+    QColor _selectionColor;
+    QByteArray _data;
+    QByteArray _changedData;
     QScrollArea *_scrollArea;
     QTimer _cursorTimer;
 
-    bool _blink;
-    bool _addressArea;
-    bool _asciiArea;
-    bool _highlighting;
-    bool _overwriteMode;
+    bool _blink;                            // true: then cursor blinks
+    bool _addressArea;                      // left area of QHexEdit
+    bool _asciiArea;                        // medium area
+    bool _highlighting;                     // highlighting of changed bytes
+    bool _overwriteMode;                    // true: then input overwrites existen bytes
 
-    int _addressNumbers, _realAddressNumbers;
-    int _addressOffset;
-    int _charWidth, _charHeight;
-    int _cursorX, _cursorY, _cursorPosition;
-    int _xPosAdr, _xPosHex, _xPosAscii;
-    int _size;
+    int _addressNumbers;                    // wanted width of address area
+    int _realAddressNumbers;                // real width of address area (can be greater then wanted width)
+    int _addressOffset;                     // will be added to the real addres inside bytearray
+    int _charWidth, _charHeight;            // char dimensions (dpendend on font)
+    int _cursorX, _cursorY;                 // graphics position of the cursor
+    int _cursorPosition;                    // charakter positioin in stream (on byte ends in to steps)
+    int _xPosAdr, _xPosHex, _xPosAscii;     // graphics x-position of the areas
+    int _size;                              // size of data
+
+    int _selectionBegin;                    // First selected char
+    int _selectionEnd;                      // Last selected char
+    int _selectionInit;                     // That's, where we pressed the mouse button
 };
 
 /** \endcond docNever */
