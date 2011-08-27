@@ -1,21 +1,26 @@
 
+Release 0.5.2, 2011-08-27
+-------------------------
+QHexEdit
+    - New Feature: Del & Backspace fill with 0x0 in overwrite mode,
+      so data length is here allways constant
 
 Release 0.5.1, 2011-08-27
 -------------------------
- Documentation
-        - Release information corrected
+Documentation
+    - Release information corrected
 
 Release 0.5.0, 2011-08-27
 -------------------------
-    Example/OptionsDialog:
-        - BugFix: No redefining of signal "accepted"
-        - BugFix: Method "recect" removed
-        - New Feature: Choose selection color
+Example/OptionsDialog:
+    - BugFix: No redefining of signal "accepted"
+    - BugFix: Method "recect" removed
+    - New Feature: Choose selection color
 
-    QHexEdit:
-        - New Feature: Select data with mouse and keyboard
-        - New Feature: Cut, Copy and Paste functionality
-        - BugFix: Ensure cursor visible now works properly
-        - BugFix: When using mouse weel, qhexedit looses focus
-        - BugFix: Changed status is independent on the content
-        - Polishing: Nicer colors for highlighting, selection, and address area
+QHexEdit:
+    - New Feature: Select data with mouse and keyboard
+    - New Feature: Cut, Copy and Paste functionality
+    - BugFix: Ensure cursor visible now works properly
+    - BugFix: When using mouse weel, qhexedit looses focus
+    - BugFix: Changed status is independent on the content
+    - Polishing: Nicer colors for highlighting, selection, and address area

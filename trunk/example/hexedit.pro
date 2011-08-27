@@ -17,3 +17,6 @@ RESOURCES   = \
 
 FORMS += \
     optionsdialog.ui
+
+OTHER_FILES += \
+    ../doc/release.txt

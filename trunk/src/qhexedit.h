@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.5.1
+\version Version 0.5.2
 \image html hexedit.png
 */
 
@@ -101,6 +101,7 @@ public:
     /*! Removes len bytes from the content.
     \param pos Index position, where to remove
     \param len Amount of bytes to remove
+    In overwrite mode, the existing bytes will be overwriten with 0x00.
     */
     void remove(int pos, int len=1);
 
