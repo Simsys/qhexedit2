@@ -13,6 +13,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QScrollArea(parent)
     connect(qHexEdit_p, SIGNAL(currentSizeChanged(int)), this, SIGNAL(currentSizeChanged(int)));
     connect(qHexEdit_p, SIGNAL(dataChanged()), this, SIGNAL(dataChanged()));
     connect(qHexEdit_p, SIGNAL(overwriteModeChanged(bool)), this, SIGNAL(overwriteModeChanged(bool)));
+    setFocusPolicy(Qt::NoFocus);
 }
 
 void QHexEdit::insert(int i, const QByteArray & ba)
@@ -88,6 +89,16 @@ void QHexEdit::setHighlightingColor(const QColor &color)
 QColor QHexEdit::highlightingColor()
 {
     return qHexEdit_p->highlightingColor();
+}
+
+void QHexEdit::setSelectionColor(const QColor &color)
+{
+    qHexEdit_p->setSelectionColor(color);
+}
+
+QColor QHexEdit::selectionColor()
+{
+    return qHexEdit_p->selectionColor();
 }
 
 void QHexEdit::setOverwriteMode(bool overwriteMode)

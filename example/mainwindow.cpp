@@ -236,6 +236,7 @@ void MainWindow::readSettings()
 
     hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
     hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
+    hexEdit->setSelectionColor(settings.value("SelectionColor").value<QColor>());
     hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
 
     hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());

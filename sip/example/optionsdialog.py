@@ -32,8 +32,9 @@ class OptionsDialog(QtGui.QDialog):
         self.ui.cbHighlighting.setChecked(settings.value("Highlighting", True).toBool())
         self.ui.cbOverwriteMode.setChecked(settings.value("OverwriteMode", True).toBool())
         
-        self.setPbHighlightingColor(QtGui.QColor(settings.value("HighlightingColor", QtGui.QColor(QtCore.Qt.yellow).lighter(160))));
-        self.setPbAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor", QtGui.QColor(QtCore.Qt.lightGray).lighter(110))));
+        self.setPbHighlightingColor(QtGui.QColor(settings.value("HighlightingColor", QtGui.QColor(0xff, 0xff, 0x99, 0xff))))
+        self.setPbAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor", QtGui.QColor(0xd4, 0xd4, 0xd4, 0xff))))
+        self.setPbSelectionColor(QtGui.QColor(settings.value("SelectionColor", QtGui.QColor(0x6d, 0x9e, 0xff, 0xff))))
         self.ui.leWidgetFont.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
         
         self.ui.sbAddressAreaWidth.setValue(settings.value("AddressAreaWidth", 4).toInt()[0])
@@ -47,6 +48,7 @@ class OptionsDialog(QtGui.QDialog):
         
         settings.setValue("HighlightingColor", self.ui.lbHighlightingColor.palette().color(QtGui.QPalette.Background))
         settings.setValue("AddressAreaColor", self.ui.lbAddressAreaColor.palette().color(QtGui.QPalette.Background))
+        settings.setValue("SelectionColor", self.ui.lbSelectionColor.palette().color(QtGui.QPalette.Background))
         settings.setValue("WidgetFont", self.ui.leWidgetFont.font())
         
         settings.setValue("AddressAreaWidth", self.ui.sbAddressAreaWidth.value())
@@ -66,6 +68,12 @@ class OptionsDialog(QtGui.QDialog):
         self.ui.lbAddressAreaColor.setPalette(palette)
         self.ui.lbAddressAreaColor.setAutoFillBackground(True)
         
+    def setPbSelectionColor(self, color):
+        palette = self.ui.lbSelectionColor.palette()
+        palette.setColor(QtGui.QPalette.Background, color)
+        self.ui.lbSelectionColor.setPalette(palette)
+        self.ui.lbSelectionColor.setAutoFillBackground(True)
+        
     def onPbHighlightingColor(self):
         color = QtGui.QColorDialog.getColor(self.ui.lbHighlightingColor.palette().color(QtGui.QPalette.Background), self)
         self.setPbHighlightingColor(color)
@@ -73,6 +81,10 @@ class OptionsDialog(QtGui.QDialog):
     def onPbAddressAreaColor(self):
         color = QtGui.QColorDialog.getColor(self.ui.lbAddressAreaColor.palette().color(QtGui.QPalette.Background), self)
         self.setPbAddressAreaColor(color)
+        
+    def on_pbSelectionColor_clicked(self):
+        color = QtGui.QColorDialog.getColor(self.ui.lbSelectionColor.palette().color(QtGui.QPalette.Background), self)
+        self.setPbSelectionColor(color)
         
     def onPbWidgetFont(self):
         font, ok = QtGui.QFontDialog().getFont(self.ui.leWidgetFont.font(), self)

@@ -21,6 +21,8 @@ public:
     QColor addressAreaColor();
     void setHighlightingColor(const QColor &);
     QColor highlightingColor();
+    void setSelectionColor(const QColor &);
+    QColor selectionColor();
     void setOverwriteMode(bool);
     bool overwriteMode();
 

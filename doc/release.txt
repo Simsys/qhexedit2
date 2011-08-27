@@ -1,0 +1,16 @@
+
+
+Release 0.5.0, 2011-08-27
+-------------------------
+    Example/OptionsDialog:
+        - BugFix: No redefining of signal "accepted"
+        - BugFix: Method "recect" removed
+        - New Feature: Choose selection color
+
+    QHexEdit:
+        - New Feature: Select data with mouse and keyboard
+        - New Feature: Cut, Copy and Paste functionality
+        - BugFix: Ensure cursor visible now works properly
+        - BugFix: When using mouse weel, qhexedit looses focus
+        - BugFix: Changed status is independent on the content
+        - Polishing: Nicer colors for highlighting, selection, and address area
