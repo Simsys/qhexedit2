@@ -85,9 +85,6 @@ class MainWindow(QtGui.QMainWindow):
                 shortcut=QtGui.QKeySequence.SaveAs,
                 statusTip="Save the document under a new name", triggered=self.saveAs)
 
-        self.closeAct = QtGui.QAction("&Close", self, shortcut="Ctrl+W",
-                statusTip="Close this window", triggered=self.close)
-
         self.exitAct = QtGui.QAction("E&xit", self, shortcut="Ctrl+Q",
                 statusTip="Exit the application", triggered=self.close)
                 
@@ -103,7 +100,6 @@ class MainWindow(QtGui.QMainWindow):
         self.fileMenu.addAction(self.saveAct)
         self.fileMenu.addAction(self.saveAsAct)
         self.fileMenu.addSeparator()
-        self.fileMenu.addAction(self.closeAct)
         self.fileMenu.addAction(self.exitAct)
         
         self.helpMenu = self.menuBar().addMenu("&Help")

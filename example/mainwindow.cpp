@@ -115,11 +115,6 @@ void MainWindow::createActions()
     saveAsAct->setStatusTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
-    closeAct = new QAction(tr("&Close"), this);
-    closeAct->setShortcut(tr("Ctrl+W"));
-    closeAct->setStatusTip(tr("Close this window"));
-    connect(closeAct, SIGNAL(triggered()), this, SLOT(close()));
-
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
@@ -146,7 +141,6 @@ void MainWindow::createMenus()
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
     fileMenu->addSeparator();
-    fileMenu->addAction(closeAct);
     fileMenu->addAction(exitAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));

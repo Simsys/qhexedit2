@@ -12,9 +12,6 @@ class OptionsDialog(QtGui.QDialog):
         super(OptionsDialog, self).__init__()
         self.ui = Ui_OptionsDialog()
         self.ui.setupUi(self)
-        self.ui.pbHighlightingColor.clicked.connect(self.onPbHighlightingColor)
-        self.ui.pbAddressAreaColor.clicked.connect(self.onPbAddressAreaColor)
-        self.ui.pbWidgetFont.clicked.connect(self.onPbWidgetFont)
         
         self.readSettings()
         self.writeSettings()
@@ -32,9 +29,9 @@ class OptionsDialog(QtGui.QDialog):
         self.ui.cbHighlighting.setChecked(settings.value("Highlighting", True).toBool())
         self.ui.cbOverwriteMode.setChecked(settings.value("OverwriteMode", True).toBool())
         
-        self.setPbHighlightingColor(QtGui.QColor(settings.value("HighlightingColor", QtGui.QColor(0xff, 0xff, 0x99, 0xff))))
-        self.setPbAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor", QtGui.QColor(0xd4, 0xd4, 0xd4, 0xff))))
-        self.setPbSelectionColor(QtGui.QColor(settings.value("SelectionColor", QtGui.QColor(0x6d, 0x9e, 0xff, 0xff))))
+        self.setColor(self.ui.lbHighlightingColor, QtGui.QColor(settings.value("HighlightingColor", QtGui.QColor(0xff, 0xff, 0x99, 0xff))))
+        self.setColor(self.ui.lbAddressAreaColor, QtGui.QColor(settings.value("AddressAreaColor", QtGui.QColor(0xd4, 0xd4, 0xd4, 0xff))))
+        self.setColor(self.ui.lbSelectionColor, QtGui.QColor(settings.value("SelectionColor", QtGui.QColor(0x6d, 0x9e, 0xff, 0xff))))
         self.ui.leWidgetFont.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
         
         self.ui.sbAddressAreaWidth.setValue(settings.value("AddressAreaWidth", 4).toInt()[0])
@@ -56,37 +53,29 @@ class OptionsDialog(QtGui.QDialog):
     def reject(self):
         super(OptionsDialog, self).hide()
         
-    def setPbHighlightingColor(self, color):
-        palette = self.ui.lbHighlightingColor.palette()
+    def setColor(self, label, color):
+        palette = label.palette()
         palette.setColor(QtGui.QPalette.Background, color)
-        self.ui.lbHighlightingColor.setPalette(palette)
-        self.ui.lbHighlightingColor.setAutoFillBackground(True)
+        label.setPalette(palette)
+        label.setAutoFillBackground(True)
 
-    def setPbAddressAreaColor(self, color):
-        palette = self.ui.lbAddressAreaColor.palette()
-        palette.setColor(QtGui.QPalette.Background, color)
-        self.ui.lbAddressAreaColor.setPalette(palette)
-        self.ui.lbAddressAreaColor.setAutoFillBackground(True)
-        
-    def setPbSelectionColor(self, color):
-        palette = self.ui.lbSelectionColor.palette()
-        palette.setColor(QtGui.QPalette.Background, color)
-        self.ui.lbSelectionColor.setPalette(palette)
-        self.ui.lbSelectionColor.setAutoFillBackground(True)
-        
-    def onPbHighlightingColor(self):
+    def on_pbHighlightingColor_pressed(self):
+        print "hier"
         color = QtGui.QColorDialog.getColor(self.ui.lbHighlightingColor.palette().color(QtGui.QPalette.Background), self)
-        self.setPbHighlightingColor(color)
+        if color.isValid():
+            self.setColor(self.ui.lbHighlightingColor, color)
         
-    def onPbAddressAreaColor(self):
+    def on_pbAddressAreaColor_pressed(self):
         color = QtGui.QColorDialog.getColor(self.ui.lbAddressAreaColor.palette().color(QtGui.QPalette.Background), self)
-        self.setPbAddressAreaColor(color)
+        if color.isValid():
+            self.setColor(self.ui.lbAddressAreaColor, color)
         
-    def on_pbSelectionColor_clicked(self):
+    def on_pbSelectionColor_pressed(self):
         color = QtGui.QColorDialog.getColor(self.ui.lbSelectionColor.palette().color(QtGui.QPalette.Background), self)
-        self.setPbSelectionColor(color)
+        if color.isValid():
+            self.setColor(self.ui.lbSelectioncColor, color)
         
-    def onPbWidgetFont(self):
+    def on_pbWidgetFont_pressed(self):
         font, ok = QtGui.QFontDialog().getFont(self.ui.leWidgetFont.font(), self)
         if ok:
             self.ui.leWidgetFont.setFont(font)
