@@ -31,6 +31,9 @@ public:
     void setOverwriteMode(bool overwriteMode);
     bool overwriteMode();
 
+    void setReadOnly(bool readOnly);
+    bool isReadOnly();
+
     void insert(int index, const QByteArray & ba);
     void insert(int index, char ch);
     void remove(int index, int len=1);
@@ -85,6 +88,7 @@ private:
     bool _asciiArea;                        // medium area
     bool _highlighting;                     // highlighting of changed bytes
     bool _overwriteMode;                    // true: then input overwrites existen bytes
+    bool _readOnly;                         // true: the user can only look and navigate
 
     int _addressNumbers;                    // wanted width of address area
     int _realAddressNumbers;                // real width of address area (can be greater then wanted width)

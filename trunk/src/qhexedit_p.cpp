@@ -16,6 +16,7 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setAsciiArea(true);
     setHighlighting(true);
     setOverwriteMode(true);
+    setReadOnly(false);
     setAddressAreaColor(QColor(0xd4, 0xd4, 0xd4, 0xff));
     setHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
     setSelectionColor(QColor(0x6d, 0x9e, 0xff, 0xff));
@@ -102,6 +103,16 @@ void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
 bool QHexEditPrivate::overwriteMode()
 {
     return _overwriteMode;
+}
+
+void QHexEditPrivate::setReadOnly(bool readOnly)
+{
+    _readOnly = readOnly;
+}
+
+bool QHexEditPrivate::isReadOnly()
+{
+    return _readOnly;
 }
 
 void QHexEditPrivate::insert(int index, const QByteArray & ba)
@@ -199,43 +210,6 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
     int posX = (charX / 3) * 2 + (charX % 3);
     int posBa = (_cursorY / _charHeight) * BYTES_PER_LINE + posX / 2;
 
-/*****************************************************************************/
-/* Hex input */
-/*****************************************************************************/
-
-    int key = int(event->text()[0].toAscii());
-    if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
-    {
-        if (getSelectionBegin() != getSelectionEnd())
-        {
-            posBa = getSelectionBegin();
-            remove(posBa, getSelectionEnd() - posBa);
-            setCursorPos(2*posBa);
-            resetSelection(2*posBa);
-        }
-
-        // If insert mode, then insert a byte
-        if (_overwriteMode == false)
-            if ((charX % 3) == 0)
-            {
-                insert(posBa, char(0));
-                adjust();
-            }
-
-        // Change content
-        if (_data.size() > 0)
-        {
-            QByteArray hexValue = _data.mid(posBa, 1).toHex();
-            if ((charX % 3) == 0)
-                hexValue[0] = key;
-            else
-                hexValue[1] = key;
-            replace(posBa, 1, QByteArray().fromHex(hexValue));
-
-            setCursorPos(_cursorPosition + 1);
-            resetSelection(_cursorPosition);
-        }
-    }
 
 /*****************************************************************************/
 /* Cursor movements */
@@ -364,22 +338,104 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
     }
 
 /*****************************************************************************/
-/* Cut, copy & paste */
+/* Edit Commands */
 /*****************************************************************************/
-    if (event->matches(QKeySequence::Cut))
-    {
-        QString result = QString();
-        for (int idx = getSelectionBegin(); idx < getSelectionEnd(); idx++)
+if (!_readOnly)
+{
+    /* Hex input */
+        int key = int(event->text()[0].toAscii());
+        if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
         {
-            result += _data.mid(idx, 1).toHex() + " ";
-            if ((idx % 16) == 15)
-                result.append("\n");
+            if (getSelectionBegin() != getSelectionEnd())
+            {
+                posBa = getSelectionBegin();
+                remove(posBa, getSelectionEnd() - posBa);
+                setCursorPos(2*posBa);
+                resetSelection(2*posBa);
+            }
+
+            // If insert mode, then insert a byte
+            if (_overwriteMode == false)
+                if ((charX % 3) == 0)
+                {
+                    insert(posBa, char(0));
+                    adjust();
+                }
+
+            // Change content
+            if (_data.size() > 0)
+            {
+                QByteArray hexValue = _data.mid(posBa, 1).toHex();
+                if ((charX % 3) == 0)
+                    hexValue[0] = key;
+                else
+                    hexValue[1] = key;
+                replace(posBa, 1, QByteArray().fromHex(hexValue));
+
+                setCursorPos(_cursorPosition + 1);
+                resetSelection(_cursorPosition);
+            }
         }
-        remove(getSelectionBegin(), getSelectionEnd());
-        QClipboard *clipboard = QApplication::clipboard();
-        clipboard->setText(result);
-        setCursorPos(getSelectionBegin());
-        resetSelection(getSelectionBegin());
+
+        /* Cut & Paste */
+        if (event->matches(QKeySequence::Cut))
+        {
+            QString result = QString();
+            for (int idx = getSelectionBegin(); idx < getSelectionEnd(); idx++)
+            {
+                result += _data.mid(idx, 1).toHex() + " ";
+                if ((idx % 16) == 15)
+                    result.append("\n");
+            }
+            remove(getSelectionBegin(), getSelectionEnd());
+            QClipboard *clipboard = QApplication::clipboard();
+            clipboard->setText(result);
+            setCursorPos(getSelectionBegin());
+            resetSelection(getSelectionBegin());
+        }
+
+        if (event->matches(QKeySequence::Paste))
+        {
+            QClipboard *clipboard = QApplication::clipboard();
+            QByteArray ba = QByteArray().fromHex(clipboard->text().toLatin1());
+            insert(_cursorPosition / 2, ba);
+            setCursorPos((_cursorPosition + (2 * ba.length()) + 1) & 0xfffffffe);
+            resetSelection(getSelectionBegin());
+        }
+
+
+        /* Delete char */
+        if (event->matches(QKeySequence::Delete))
+        {
+            if (getSelectionBegin() != getSelectionEnd())
+            {
+                posBa = getSelectionBegin();
+                remove(posBa, getSelectionEnd() - posBa);
+                setCursorPos(2*posBa);
+                resetSelection(2*posBa);
+            }
+            else
+            {
+                remove(posBa);
+            }
+        }
+
+        /* Backspace */
+        if ((event->key() == Qt::Key_Backspace) && (event->modifiers() == Qt::NoModifier))
+            {
+                if (getSelectionBegin() != getSelectionEnd())
+                {
+                    posBa = getSelectionBegin();
+                    remove(posBa, getSelectionEnd() - posBa);
+                    setCursorPos(2*posBa);
+                    resetSelection(2*posBa);
+                }
+                else
+                {
+                    remove(posBa - 1);
+                    setCursorPos(_cursorPosition - 2);
+                }
+            }
     }
 
     if (event->matches(QKeySequence::Copy))
@@ -394,52 +450,6 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
         QClipboard *clipboard = QApplication::clipboard();
         clipboard->setText(result);
     }
-
-    if (event->matches(QKeySequence::Paste))
-    {
-        QClipboard *clipboard = QApplication::clipboard();
-        QByteArray ba = QByteArray().fromHex(clipboard->text().toLatin1());
-        insert(_cursorPosition / 2, ba);
-        setCursorPos((_cursorPosition + (2 * ba.length()) + 1) & 0xfffffffe);
-        resetSelection(getSelectionBegin());
-    }
-
-
-/*****************************************************************************/
-/* Other Commands */
-/*****************************************************************************/
-
-    // Delete char
-    if (event->matches(QKeySequence::Delete))
-    {
-        if (getSelectionBegin() != getSelectionEnd())
-        {
-            posBa = getSelectionBegin();
-            remove(posBa, getSelectionEnd() - posBa);
-            setCursorPos(2*posBa);
-            resetSelection(2*posBa);
-        }
-        else
-        {
-            remove(posBa);
-        }
-    }
-
-    if ((event->key() == Qt::Key_Backspace) && (event->modifiers() == Qt::NoModifier))
-        {
-            if (getSelectionBegin() != getSelectionEnd())
-            {
-                posBa = getSelectionBegin();
-                remove(posBa, getSelectionEnd() - posBa);
-                setCursorPos(2*posBa);
-                resetSelection(2*posBa);
-            }
-            else
-            {
-                remove(posBa - 1);
-                setCursorPos(_cursorPosition - 2);
-            }
-        }
 
     // Switch between insert/overwrite mode
     if ((event->key() == Qt::Key_Insert) && (event->modifiers() == Qt::NoModifier))

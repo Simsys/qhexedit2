@@ -227,6 +227,7 @@ void MainWindow::readSettings()
     hexEdit->setAsciiArea(settings.value("AsciiArea").toBool());
     hexEdit->setHighlighting(settings.value("Highlighting").toBool());
     hexEdit->setOverwriteMode(settings.value("OverwriteMode").toBool());
+    hexEdit->setReadOnly(settings.value("ReadOnly").toBool());
 
     hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
     hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
