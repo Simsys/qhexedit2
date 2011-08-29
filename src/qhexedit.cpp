@@ -58,7 +58,7 @@ void QHexEdit::setAddressOffset(int offset)
 
 int QHexEdit::addressOffset()
 {
-    return addressOffset();
+    return qHexEdit_p->addressOffset();
 }
 
 void QHexEdit::setData(const QByteArray &data)
@@ -109,6 +109,16 @@ void QHexEdit::setOverwriteMode(bool overwriteMode)
 bool QHexEdit::overwriteMode()
 {
     return qHexEdit_p->overwriteMode();
+}
+
+void QHexEdit::setReadOnly(bool readOnly)
+{
+    qHexEdit_p->setReadOnly(readOnly);
+}
+
+bool QHexEdit::isReadOnly()
+{
+    return qHexEdit_p->isReadOnly();
 }
 
 void QHexEdit::setFont(const QFont &font)

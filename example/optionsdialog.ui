@@ -20,31 +20,38 @@
       <string>Flags</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="cbAddressArea">
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="cbReadOnly">
         <property name="text">
-         <string>Address Area</string>
+         <string>ReadOnly</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="cbHighlighting">
+        <property name="text">
+         <string>Higlighting</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
        <widget class="QCheckBox" name="cbOverwriteMode">
         <property name="text">
          <string>Overwrite Mode</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="cbAsciiArea">
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="cbAddressArea">
         <property name="text">
-         <string>Ascii Area</string>
+         <string>Address Area</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="cbHighlighting">
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="cbAsciiArea">
         <property name="text">
-         <string>Higlighting</string>
+         <string>Ascii Area</string>
         </property>
        </widget>
       </item>
@@ -237,10 +244,6 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>cbOverwriteMode</tabstop>
-  <tabstop>cbAsciiArea</tabstop>
-  <tabstop>cbAddressArea</tabstop>
-  <tabstop>cbHighlighting</tabstop>
   <tabstop>pbHighlightingColor</tabstop>
   <tabstop>pbAddressAreaColor</tabstop>
   <tabstop>buttonBox</tabstop>

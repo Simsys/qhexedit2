@@ -30,6 +30,7 @@ void OptionsDialog::readSettings()
     ui->cbAsciiArea->setChecked(settings.value("AsciiArea", true).toBool());
     ui->cbHighlighting->setChecked(settings.value("Highlighting", true).toBool());
     ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode", true).toBool());
+    ui->cbReadOnly->setChecked(settings.value("ReadOnly").toBool());
 
     setColor(ui->lbHighlightingColor, settings.value("HighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
     setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor", QColor(0xd4, 0xd4, 0xd4, 0xff)).value<QColor>());
@@ -46,6 +47,7 @@ void OptionsDialog::writeSettings()
     settings.setValue("AsciiArea", ui->cbAsciiArea->isChecked());
     settings.setValue("Highlighting", ui->cbHighlighting->isChecked());
     settings.setValue("OverwriteMode", ui->cbOverwriteMode->isChecked());
+    settings.setValue("ReadOnly", ui->cbReadOnly->isChecked());
 
     settings.setValue("HighlightingColor", ui->lbHighlightingColor->palette().color(QPalette::Background));
     settings.setValue("AddressAreaColor", ui->lbAddressAreaColor->palette().color(QPalette::Background));

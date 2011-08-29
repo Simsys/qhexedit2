@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.5.2
+\version Version 0.5.3
 \image html hexedit.png
 */
 
@@ -76,6 +76,13 @@ more.
     */
     Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode)
 
+    /*! Porperty readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
+    in which the editor works. In readonly mode the the user can only navigate
+    through the data and select data; modifying is not possible. This
+    property's default is false.
+    */
+    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -121,6 +128,8 @@ public:
     QColor selectionColor();
     void setOverwriteMode(bool);
     bool overwriteMode();
+    void setReadOnly(bool);
+    bool isReadOnly();
     /*! \endcond docNever */
 
 public slots:

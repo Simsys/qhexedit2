@@ -88,77 +88,81 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031     <span class="keywordtype">void</span> setOverwriteMode(<span class="keywordtype">bool</span> overwriteMode);
 <a name="l00032"></a>00032     <span class="keywordtype">bool</span> overwriteMode();
 <a name="l00033"></a>00033 
-<a name="l00034"></a>00034     <span class="keywordtype">void</span> insert(<span class="keywordtype">int</span> index, <span class="keyword">const</span> QByteArray &amp; ba);
-<a name="l00035"></a>00035     <span class="keywordtype">void</span> insert(<span class="keywordtype">int</span> index, <span class="keywordtype">char</span> ch);
-<a name="l00036"></a>00036     <span class="keywordtype">void</span> <span class="keyword">remove</span>(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> len=1);
-<a name="l00037"></a>00037     <span class="keywordtype">void</span> replace(<span class="keywordtype">int</span> index, <span class="keyword">const</span> QByteArray &amp; ba);
-<a name="l00038"></a>00038     <span class="keywordtype">void</span> replace(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> length, <span class="keyword">const</span> QByteArray &amp; ba);
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     <span class="keywordtype">void</span> setAddressArea(<span class="keywordtype">bool</span> addressArea);
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> setAddressWidth(<span class="keywordtype">int</span> addressWidth);
-<a name="l00042"></a>00042     <span class="keywordtype">void</span> setAsciiArea(<span class="keywordtype">bool</span> asciiArea);
-<a name="l00043"></a>00043     <span class="keywordtype">void</span> setHighlighting(<span class="keywordtype">bool</span> mode);
-<a name="l00044"></a>00044     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFont(<span class="keyword">const</span> QFont &amp;font);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046 signals:
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> currentAddressChanged(<span class="keywordtype">int</span> address);
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> currentSizeChanged(<span class="keywordtype">int</span> size);
-<a name="l00049"></a>00049     <span class="keywordtype">void</span> dataChanged();
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> overwriteModeChanged(<span class="keywordtype">bool</span> state);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="keyword">protected</span>:
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> keyPressEvent(QKeyEvent * event);
-<a name="l00054"></a>00054     <span class="keywordtype">void</span> mouseMoveEvent(QMouseEvent * event);
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> mousePressEvent(QMouseEvent * event);
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> paintEvent(QPaintEvent *event);
-<a name="l00058"></a>00058 
-<a name="l00059"></a>00059     <span class="keywordtype">int</span> getCursorPos(QPoint pos);               <span class="comment">// calc cursorpos from graphics position. DOES NOT STORE POSITION</span>
-<a name="l00060"></a>00060     <span class="keywordtype">int</span> getCursorPos();                         <span class="comment">// get actual cursorpos</span>
-<a name="l00061"></a>00061     <span class="keywordtype">void</span> setCursorPos(<span class="keywordtype">int</span> position);            <span class="comment">// set cursorpos to position</span>
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063     <span class="keywordtype">void</span> resetSelection(<span class="keywordtype">int</span> pos);
-<a name="l00064"></a>00064     <span class="keywordtype">void</span> setSelection(<span class="keywordtype">int</span> pos);                 <span class="comment">// set min (if below init) or max (if greater init)</span>
-<a name="l00065"></a>00065     <span class="keywordtype">int</span> getSelectionBegin();
-<a name="l00066"></a>00066     <span class="keywordtype">int</span> getSelectionEnd();
-<a name="l00067"></a>00067 
-<a name="l00068"></a>00068 
-<a name="l00069"></a>00069 <span class="keyword">private</span> slots:
-<a name="l00070"></a>00070     <span class="keywordtype">void</span> updateCursor();
+<a name="l00034"></a>00034     <span class="keywordtype">void</span> setReadOnly(<span class="keywordtype">bool</span> readOnly);
+<a name="l00035"></a>00035     <span class="keywordtype">bool</span> isReadOnly();
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037     <span class="keywordtype">void</span> insert(<span class="keywordtype">int</span> index, <span class="keyword">const</span> QByteArray &amp; ba);
+<a name="l00038"></a>00038     <span class="keywordtype">void</span> insert(<span class="keywordtype">int</span> index, <span class="keywordtype">char</span> ch);
+<a name="l00039"></a>00039     <span class="keywordtype">void</span> <span class="keyword">remove</span>(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> len=1);
+<a name="l00040"></a>00040     <span class="keywordtype">void</span> replace(<span class="keywordtype">int</span> index, <span class="keyword">const</span> QByteArray &amp; ba);
+<a name="l00041"></a>00041     <span class="keywordtype">void</span> replace(<span class="keywordtype">int</span> index, <span class="keywordtype">int</span> length, <span class="keyword">const</span> QByteArray &amp; ba);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     <span class="keywordtype">void</span> setAddressArea(<span class="keywordtype">bool</span> addressArea);
+<a name="l00044"></a>00044     <span class="keywordtype">void</span> setAddressWidth(<span class="keywordtype">int</span> addressWidth);
+<a name="l00045"></a>00045     <span class="keywordtype">void</span> setAsciiArea(<span class="keywordtype">bool</span> asciiArea);
+<a name="l00046"></a>00046     <span class="keywordtype">void</span> setHighlighting(<span class="keywordtype">bool</span> mode);
+<a name="l00047"></a>00047     <span class="keyword">virtual</span> <span class="keywordtype">void</span> setFont(<span class="keyword">const</span> QFont &amp;font);
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 signals:
+<a name="l00050"></a>00050     <span class="keywordtype">void</span> currentAddressChanged(<span class="keywordtype">int</span> address);
+<a name="l00051"></a>00051     <span class="keywordtype">void</span> currentSizeChanged(<span class="keywordtype">int</span> size);
+<a name="l00052"></a>00052     <span class="keywordtype">void</span> dataChanged();
+<a name="l00053"></a>00053     <span class="keywordtype">void</span> overwriteModeChanged(<span class="keywordtype">bool</span> state);
+<a name="l00054"></a>00054 
+<a name="l00055"></a>00055 <span class="keyword">protected</span>:
+<a name="l00056"></a>00056     <span class="keywordtype">void</span> keyPressEvent(QKeyEvent * event);
+<a name="l00057"></a>00057     <span class="keywordtype">void</span> mouseMoveEvent(QMouseEvent * event);
+<a name="l00058"></a>00058     <span class="keywordtype">void</span> mousePressEvent(QMouseEvent * event);
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060     <span class="keywordtype">void</span> paintEvent(QPaintEvent *event);
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     <span class="keywordtype">int</span> getCursorPos(QPoint pos);               <span class="comment">// calc cursorpos from graphics position. DOES NOT STORE POSITION</span>
+<a name="l00063"></a>00063     <span class="keywordtype">int</span> getCursorPos();                         <span class="comment">// get actual cursorpos</span>
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> setCursorPos(<span class="keywordtype">int</span> position);            <span class="comment">// set cursorpos to position</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066     <span class="keywordtype">void</span> resetSelection(<span class="keywordtype">int</span> pos);
+<a name="l00067"></a>00067     <span class="keywordtype">void</span> setSelection(<span class="keywordtype">int</span> pos);                 <span class="comment">// set min (if below init) or max (if greater init)</span>
+<a name="l00068"></a>00068     <span class="keywordtype">int</span> getSelectionBegin();
+<a name="l00069"></a>00069     <span class="keywordtype">int</span> getSelectionEnd();
+<a name="l00070"></a>00070 
 <a name="l00071"></a>00071 
-<a name="l00072"></a>00072 <span class="keyword">private</span>:
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> adjust();
+<a name="l00072"></a>00072 <span class="keyword">private</span> slots:
+<a name="l00073"></a>00073     <span class="keywordtype">void</span> updateCursor();
 <a name="l00074"></a>00074 
-<a name="l00075"></a>00075     QColor _addressAreaColor;
-<a name="l00076"></a>00076     QColor _highlightingColor;
-<a name="l00077"></a>00077     QColor _selectionColor;
-<a name="l00078"></a>00078     QByteArray _data;
-<a name="l00079"></a>00079     QByteArray _changedData;
-<a name="l00080"></a>00080     QScrollArea *_scrollArea;
-<a name="l00081"></a>00081     QTimer _cursorTimer;
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083     <span class="keywordtype">bool</span> _blink;                            <span class="comment">// true: then cursor blinks</span>
-<a name="l00084"></a>00084     <span class="keywordtype">bool</span> _addressArea;                      <span class="comment">// left area of QHexEdit</span>
-<a name="l00085"></a>00085     <span class="keywordtype">bool</span> _asciiArea;                        <span class="comment">// medium area</span>
-<a name="l00086"></a>00086     <span class="keywordtype">bool</span> _highlighting;                     <span class="comment">// highlighting of changed bytes</span>
-<a name="l00087"></a>00087     <span class="keywordtype">bool</span> _overwriteMode;                    <span class="comment">// true: then input overwrites existen bytes</span>
-<a name="l00088"></a>00088 
-<a name="l00089"></a>00089     <span class="keywordtype">int</span> _addressNumbers;                    <span class="comment">// wanted width of address area</span>
-<a name="l00090"></a>00090     <span class="keywordtype">int</span> _realAddressNumbers;                <span class="comment">// real width of address area (can be greater then wanted width)</span>
-<a name="l00091"></a>00091     <span class="keywordtype">int</span> _addressOffset;                     <span class="comment">// will be added to the real addres inside bytearray</span>
-<a name="l00092"></a>00092     <span class="keywordtype">int</span> _charWidth, _charHeight;            <span class="comment">// char dimensions (dpendend on font)</span>
-<a name="l00093"></a>00093     <span class="keywordtype">int</span> _cursorX, _cursorY;                 <span class="comment">// graphics position of the cursor</span>
-<a name="l00094"></a>00094     <span class="keywordtype">int</span> _cursorPosition;                    <span class="comment">// charakter positioin in stream (on byte ends in to steps)</span>
-<a name="l00095"></a>00095     <span class="keywordtype">int</span> _xPosAdr, _xPosHex, _xPosAscii;     <span class="comment">// graphics x-position of the areas</span>
-<a name="l00096"></a>00096     <span class="keywordtype">int</span> _size;                              <span class="comment">// size of data</span>
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098     <span class="keywordtype">int</span> _selectionBegin;                    <span class="comment">// First selected char</span>
-<a name="l00099"></a>00099     <span class="keywordtype">int</span> _selectionEnd;                      <span class="comment">// Last selected char</span>
-<a name="l00100"></a>00100     <span class="keywordtype">int</span> _selectionInit;                     <span class="comment">// That&#39;s, where we pressed the mouse button</span>
-<a name="l00101"></a>00101 };
-<a name="l00102"></a>00102 
-<a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span>
+<a name="l00075"></a>00075 <span class="keyword">private</span>:
+<a name="l00076"></a>00076     <span class="keywordtype">void</span> adjust();
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     QColor _addressAreaColor;
+<a name="l00079"></a>00079     QColor _highlightingColor;
+<a name="l00080"></a>00080     QColor _selectionColor;
+<a name="l00081"></a>00081     QByteArray _data;
+<a name="l00082"></a>00082     QByteArray _changedData;
+<a name="l00083"></a>00083     QScrollArea *_scrollArea;
+<a name="l00084"></a>00084     QTimer _cursorTimer;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     <span class="keywordtype">bool</span> _blink;                            <span class="comment">// true: then cursor blinks</span>
+<a name="l00087"></a>00087     <span class="keywordtype">bool</span> _addressArea;                      <span class="comment">// left area of QHexEdit</span>
+<a name="l00088"></a>00088     <span class="keywordtype">bool</span> _asciiArea;                        <span class="comment">// medium area</span>
+<a name="l00089"></a>00089     <span class="keywordtype">bool</span> _highlighting;                     <span class="comment">// highlighting of changed bytes</span>
+<a name="l00090"></a>00090     <span class="keywordtype">bool</span> _overwriteMode;                    <span class="comment">// true: then input overwrites existen bytes</span>
+<a name="l00091"></a>00091     <span class="keywordtype">bool</span> _readOnly;                         <span class="comment">// true: the user can only look and navigate</span>
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     <span class="keywordtype">int</span> _addressNumbers;                    <span class="comment">// wanted width of address area</span>
+<a name="l00094"></a>00094     <span class="keywordtype">int</span> _realAddressNumbers;                <span class="comment">// real width of address area (can be greater then wanted width)</span>
+<a name="l00095"></a>00095     <span class="keywordtype">int</span> _addressOffset;                     <span class="comment">// will be added to the real addres inside bytearray</span>
+<a name="l00096"></a>00096     <span class="keywordtype">int</span> _charWidth, _charHeight;            <span class="comment">// char dimensions (dpendend on font)</span>
+<a name="l00097"></a>00097     <span class="keywordtype">int</span> _cursorX, _cursorY;                 <span class="comment">// graphics position of the cursor</span>
+<a name="l00098"></a>00098     <span class="keywordtype">int</span> _cursorPosition;                    <span class="comment">// charakter positioin in stream (on byte ends in to steps)</span>
+<a name="l00099"></a>00099     <span class="keywordtype">int</span> _xPosAdr, _xPosHex, _xPosAscii;     <span class="comment">// graphics x-position of the areas</span>
+<a name="l00100"></a>00100     <span class="keywordtype">int</span> _size;                              <span class="comment">// size of data</span>
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     <span class="keywordtype">int</span> _selectionBegin;                    <span class="comment">// First selected char</span>
+<a name="l00103"></a>00103     <span class="keywordtype">int</span> _selectionEnd;                      <span class="comment">// Last selected char</span>
+<a name="l00104"></a>00104     <span class="keywordtype">int</span> _selectionInit;                     <span class="comment">// That&#39;s, where we pressed the mouse button</span>
+<a name="l00105"></a>00105 };
+<a name="l00106"></a>00106 
+<a name="l00109"></a>00109 <span class="preprocessor">#endif</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span>
 </pre></div></div>
 </div>
 <!--- window showing the filter options -->
@@ -175,7 +179,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Aug 27 2011 23:24:18 for QHexEdit by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Mon Aug 29 2011 20:57:58 for QHexEdit by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>
