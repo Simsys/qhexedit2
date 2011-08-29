@@ -29,9 +29,7 @@ private slots:
 private:
     void readSettings();
     void writeSettings();
-    void setPbAddressAreaColor(const QColor &color);
-    void setPbHighlightingColor(const QColor &color);
-    void setPbSelectionColor(const QColor &color);
+    void setColor(QWidget *widget, QColor color);
 };
 
 #endif // OPTIONSDIALOG_H

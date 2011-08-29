@@ -31,9 +31,9 @@ void OptionsDialog::readSettings()
     ui->cbHighlighting->setChecked(settings.value("Highlighting", true).toBool());
     ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode", true).toBool());
 
-    setPbHighlightingColor(settings.value("HighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
-    setPbAddressAreaColor(settings.value("AddressAreaColor", QColor(0xd4, 0xd4, 0xd4, 0xff)).value<QColor>());
-    setPbSelectionColor(settings.value("SelectionColor", QColor(0x6d, 0x9e, 0xff, 0xff)).value<QColor>());
+    setColor(ui->lbHighlightingColor, settings.value("HighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
+    setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor", QColor(0xd4, 0xd4, 0xd4, 0xff)).value<QColor>());
+    setColor(ui->lbSelectionColor, settings.value("SelectionColor", QColor(0x6d, 0x9e, 0xff, 0xff)).value<QColor>());
     ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Courier", 10)).value<QFont>());
 
     ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth", 4).toInt());
@@ -55,46 +55,33 @@ void OptionsDialog::writeSettings()
     settings.setValue("AddressAreaWidth", ui->sbAddressAreaWidth->value());
 }
 
-void OptionsDialog::setPbHighlightingColor(const QColor &color)
+void OptionsDialog::setColor(QWidget *widget, QColor color)
 {
-    QPalette palette = ui->lbHighlightingColor->palette();
+    QPalette palette = widget->palette();
     palette.setColor(QPalette::Background, color);
-    ui->lbHighlightingColor->setPalette(palette);
-    ui->lbHighlightingColor->setAutoFillBackground(true);
-}
-
-void OptionsDialog::setPbAddressAreaColor(const QColor &color)
-{
-    QPalette palette = ui->lbAddressAreaColor->palette();
-    palette.setColor(QPalette::Background, color);
-    ui->lbAddressAreaColor->setPalette(palette);
-    ui->lbAddressAreaColor->setAutoFillBackground(true);
-}
-
-void OptionsDialog::setPbSelectionColor(const QColor &color)
-{
-    QPalette palette = ui->lbSelectionColor->palette();
-    palette.setColor(QPalette::Background, color);
-    ui->lbSelectionColor->setPalette(palette);
-    ui->lbSelectionColor->setAutoFillBackground(true);
+    widget->setPalette(palette);
+    widget->setAutoFillBackground(true);
 }
 
 void OptionsDialog::on_pbHighlightingColor_clicked()
 {
     QColor color = QColorDialog::getColor(ui->lbHighlightingColor->palette().color(QPalette::Background), this);
-    setPbHighlightingColor(color);
+    if (color.isValid())
+        setColor(ui->lbHighlightingColor, color);
 }
 
 void OptionsDialog::on_pbAddressAreaColor_clicked()
 {
     QColor color = QColorDialog::getColor(ui->lbAddressAreaColor->palette().color(QPalette::Background), this);
-    setPbAddressAreaColor(color);
+    if (color.isValid())
+        setColor(ui->lbAddressAreaColor, color);
 }
 
 void OptionsDialog::on_pbSelectionColor_clicked()
 {
     QColor color = QColorDialog::getColor(ui->lbSelectionColor->palette().color(QPalette::Background), this);
-    setPbSelectionColor(color);
+    if (color.isValid())
+        setColor(ui->lbSelectionColor, color);
 }
 
 void OptionsDialog::on_pbWidgetFont_clicked()
