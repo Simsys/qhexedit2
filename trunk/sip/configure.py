@@ -17,13 +17,13 @@ qt_sip_flags = config.pyqt_sip_flags
 # Run SIP to generate the code.  Note that we tell SIP where to find the qt
 # module's specification files using the -I flag.
 os.system(" ".join([config.sip_bin, "-c", ".", "-b", build_file, "-I",
-config.pyqt_sip_dir, qt_sip_flags, "../sip/qhexedit.sip"]))
+config.pyqt_sip_dir, qt_sip_flags, "..\\sip\\qhexedit.sip"]))
 
 # We are going to install the SIP specification file for this module and
 # its configuration module.
 installs = []
 
-installs.append(["../sip/qhexedit.sip", os.path.join(config.default_sip_dir,
+installs.append(["..\\sip\\qhexedit.sip", os.path.join(config.default_sip_dir,
 "qhexedit")])
 
 # Create the Makefile.  The QtModuleMakefile class provided by the

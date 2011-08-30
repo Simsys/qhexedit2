@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from PyQt4 import QtCore, QtGui
-from qhexedit import QHexEdit
+from techem.labwidgets.qhexedit import QHexEdit
 
 from optionsdialog import OptionsDialog
 import qhexedit_rc
@@ -224,3 +224,4 @@ if __name__ == '__main__':
     mainWin = MainWindow()
     mainWin.show()
     sys.exit(app.exec_())
+
