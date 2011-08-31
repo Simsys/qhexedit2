@@ -83,6 +83,10 @@ more.
     */
     Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
 
+    /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
+    Q_PROPERTY(QFont font READ font WRITE setFont)
+
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -112,8 +116,6 @@ public:
     */
     void remove(int pos, int len=1);
 
-    /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
-    void setFont(const QFont &);
 
     /*! \cond docNever */
     void setAddressOffset(int offset);
@@ -130,6 +132,8 @@ public:
     bool overwriteMode();
     void setReadOnly(bool);
     bool isReadOnly();
+    const QFont &font() const;
+    void setFont(const QFont &);
     /*! \endcond docNever */
 
 public slots:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from PyQt4 import QtCore, QtGui
-from techem.labwidgets.qhexedit import QHexEdit
+from qhexedit import QHexEdit
 
 from optionsdialog import OptionsDialog
 import qhexedit_rc
@@ -172,6 +172,7 @@ class MainWindow(QtGui.QMainWindow):
         self.hexEdit.setAsciiArea(settings.value("AsciiArea").toBool());
         self.hexEdit.setHighlighting(settings.value("Highlighting").toBool());
         self.hexEdit.setOverwriteMode(settings.value("OverwriteMode").toBool());
+        self.hexEdit.setReadOnly(settings.value("ReadOnly").toBool());
 
         self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")));
         self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")));

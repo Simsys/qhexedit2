@@ -126,3 +126,7 @@ void QHexEdit::setFont(const QFont &font)
     qHexEdit_p->setFont(font);
 }
 
+const QFont & QHexEdit::font() const
+{
+    return qHexEdit_p->font();
+}

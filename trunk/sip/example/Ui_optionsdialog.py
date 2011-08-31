@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'D:\_SVN\QHexEdit\sip\example\optionsdialog.ui'
 #
-# Created: Tue Aug 30 17:49:24 2011
+# Created: Wed Aug 31 12:01:41 2011
 #      by: PyQt4 UI code generator 4.7.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,18 +19,21 @@ class Ui_OptionsDialog(object):
         self.gbFlags.setObjectName("gbFlags")
         self.gridLayout_2 = QtGui.QGridLayout(self.gbFlags)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.cbAddressArea = QtGui.QCheckBox(self.gbFlags)
-        self.cbAddressArea.setObjectName("cbAddressArea")
-        self.gridLayout_2.addWidget(self.cbAddressArea, 0, 0, 1, 1)
-        self.cbOverwriteMode = QtGui.QCheckBox(self.gbFlags)
-        self.cbOverwriteMode.setObjectName("cbOverwriteMode")
-        self.gridLayout_2.addWidget(self.cbOverwriteMode, 0, 1, 1, 1)
-        self.cbAsciiArea = QtGui.QCheckBox(self.gbFlags)
-        self.cbAsciiArea.setObjectName("cbAsciiArea")
-        self.gridLayout_2.addWidget(self.cbAsciiArea, 1, 0, 1, 1)
+        self.cbReadOnly = QtGui.QCheckBox(self.gbFlags)
+        self.cbReadOnly.setObjectName("cbReadOnly")
+        self.gridLayout_2.addWidget(self.cbReadOnly, 3, 0, 1, 1)
         self.cbHighlighting = QtGui.QCheckBox(self.gbFlags)
         self.cbHighlighting.setObjectName("cbHighlighting")
-        self.gridLayout_2.addWidget(self.cbHighlighting, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.cbHighlighting, 2, 0, 1, 1)
+        self.cbOverwriteMode = QtGui.QCheckBox(self.gbFlags)
+        self.cbOverwriteMode.setObjectName("cbOverwriteMode")
+        self.gridLayout_2.addWidget(self.cbOverwriteMode, 1, 0, 1, 1)
+        self.cbAddressArea = QtGui.QCheckBox(self.gbFlags)
+        self.cbAddressArea.setObjectName("cbAddressArea")
+        self.gridLayout_2.addWidget(self.cbAddressArea, 1, 1, 1, 1)
+        self.cbAsciiArea = QtGui.QCheckBox(self.gbFlags)
+        self.cbAsciiArea.setObjectName("cbAsciiArea")
+        self.gridLayout_2.addWidget(self.cbAsciiArea, 2, 1, 1, 1)
         self.verticalLayout.addWidget(self.gbFlags)
         self.gbColors = QtGui.QGroupBox(OptionsDialog)
         self.gbColors.setObjectName("gbColors")
@@ -111,20 +114,17 @@ class Ui_OptionsDialog(object):
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), OptionsDialog.accept)
         QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), OptionsDialog.reject)
         QtCore.QMetaObject.connectSlotsByName(OptionsDialog)
-        OptionsDialog.setTabOrder(self.cbOverwriteMode, self.cbAsciiArea)
-        OptionsDialog.setTabOrder(self.cbAsciiArea, self.cbAddressArea)
-        OptionsDialog.setTabOrder(self.cbAddressArea, self.cbHighlighting)
-        OptionsDialog.setTabOrder(self.cbHighlighting, self.pbHighlightingColor)
         OptionsDialog.setTabOrder(self.pbHighlightingColor, self.pbAddressAreaColor)
         OptionsDialog.setTabOrder(self.pbAddressAreaColor, self.buttonBox)
 
     def retranslateUi(self, OptionsDialog):
         OptionsDialog.setWindowTitle(QtGui.QApplication.translate("OptionsDialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
         self.gbFlags.setTitle(QtGui.QApplication.translate("OptionsDialog", "Flags", None, QtGui.QApplication.UnicodeUTF8))
-        self.cbAddressArea.setText(QtGui.QApplication.translate("OptionsDialog", "Address Area", None, QtGui.QApplication.UnicodeUTF8))
-        self.cbOverwriteMode.setText(QtGui.QApplication.translate("OptionsDialog", "Overwrite Mode", None, QtGui.QApplication.UnicodeUTF8))
-        self.cbAsciiArea.setText(QtGui.QApplication.translate("OptionsDialog", "Ascii Area", None, QtGui.QApplication.UnicodeUTF8))
+        self.cbReadOnly.setText(QtGui.QApplication.translate("OptionsDialog", "ReadOnly", None, QtGui.QApplication.UnicodeUTF8))
         self.cbHighlighting.setText(QtGui.QApplication.translate("OptionsDialog", "Higlighting", None, QtGui.QApplication.UnicodeUTF8))
+        self.cbOverwriteMode.setText(QtGui.QApplication.translate("OptionsDialog", "Overwrite Mode", None, QtGui.QApplication.UnicodeUTF8))
+        self.cbAddressArea.setText(QtGui.QApplication.translate("OptionsDialog", "Address Area", None, QtGui.QApplication.UnicodeUTF8))
+        self.cbAsciiArea.setText(QtGui.QApplication.translate("OptionsDialog", "Ascii Area", None, QtGui.QApplication.UnicodeUTF8))
         self.gbColors.setTitle(QtGui.QApplication.translate("OptionsDialog", "Colors and Fonts", None, QtGui.QApplication.UnicodeUTF8))
         self.pbHighlightingColor.setText(QtGui.QApplication.translate("OptionsDialog", "Highlighting Color", None, QtGui.QApplication.UnicodeUTF8))
         self.pbAddressAreaColor.setText(QtGui.QApplication.translate("OptionsDialog", "Address Area Color", None, QtGui.QApplication.UnicodeUTF8))

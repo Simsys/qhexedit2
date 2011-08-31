@@ -28,6 +28,7 @@ class OptionsDialog(QtGui.QDialog):
         self.ui.cbAsciiArea.setChecked(settings.value("AsciiArea", True).toBool())
         self.ui.cbHighlighting.setChecked(settings.value("Highlighting", True).toBool())
         self.ui.cbOverwriteMode.setChecked(settings.value("OverwriteMode", True).toBool())
+        self.ui.cbReadOnly.setChecked(settings.value("ReadOnly", False).toBool())
         
         self.setColor(self.ui.lbHighlightingColor, QtGui.QColor(settings.value("HighlightingColor", QtGui.QColor(0xff, 0xff, 0x99, 0xff))))
         self.setColor(self.ui.lbAddressAreaColor, QtGui.QColor(settings.value("AddressAreaColor", QtGui.QColor(0xd4, 0xd4, 0xd4, 0xff))))
@@ -42,6 +43,7 @@ class OptionsDialog(QtGui.QDialog):
         settings.setValue("AsciiArea", self.ui.cbAsciiArea.isChecked())
         settings.setValue("Highlighting", self.ui.cbHighlighting.isChecked())
         settings.setValue("OverwriteMode", self.ui.cbOverwriteMode.isChecked())
+        settings.setValue("ReadOnly", self.ui.cbReadOnly.isChecked())
         
         settings.setValue("HighlightingColor", self.ui.lbHighlightingColor.palette().color(QtGui.QPalette.Background))
         settings.setValue("AddressAreaColor", self.ui.lbAddressAreaColor.palette().color(QtGui.QPalette.Background))

@@ -25,10 +25,13 @@ public:
     QColor selectionColor();
     void setOverwriteMode(bool);
     bool overwriteMode();
+    void setReadOnly(bool);
+    bool isReadOnly();
 
     void insert(int, char);
     void remove(int, int);
     void setFont(const QFont &);
+    QFont font();
     
 
 public slots:
