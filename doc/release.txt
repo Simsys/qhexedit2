@@ -1,6 +1,7 @@
 Release 0.5.3, 2011-08-29
 -------------------------
     - BugFix: recursive call in "qhexedit.cpp" addressOffset()
+    - New Feature: Property readOnly
 
 Release 0.5.2, 2011-08-27
 -------------------------
