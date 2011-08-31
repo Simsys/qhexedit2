@@ -5,7 +5,7 @@
 
 from PyQt4 import QtGui, QtDesigner
 
-from techem.labwidgets.qhexedit import QHexEdit
+from qhexedit import QHexEdit
 
 
 # This class implements the interface expected by Qt Designer to access the
@@ -33,7 +33,9 @@ class QHexEditPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
 
     # Return a new instance of the custom widget with the given parent.
     def createWidget(self, parent):
-        return QHexEdit(parent)
+        he = QHexEdit(parent)
+        he.setMinimumSize(100, 100)
+        return he
 
     # Return the name of the class that implements the custom widget.
     def name(self):
@@ -43,7 +45,7 @@ class QHexEditPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
     # Return the name of the group to which the custom widget belongs.  A new
     # group will be created if it doesn't already exist.
     def group(self):
-        return "Techem Widgets"
+        return "Python Widgets"
 
     # Return the icon used to represent the custom widget in Designer's widget
     # box.
@@ -68,7 +70,7 @@ class QHexEditPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
     # Return an XML fragment that allows the default values of the custom
     # widget's properties to be overridden.
     def domXml(self):
-        return '<widget class="QHexEdit" name="hexedit">\n' \
+        return '<widget class="QHexEdit" name="hexEdit">\n' \
                ' <property name="toolTip" >\n' \
                '  <string>A Simple Hex Editor</string>\n' \
                ' </property>\n' \
@@ -82,7 +84,6 @@ class QHexEditPlugin(QtDesigner.QPyDesignerCustomWidgetPlugin):
     # Return the name of the module containing the class that implements the
     # custom widget.  It may include a module path.
     def includeFile(self):
-#        return "qhexedit"
         return "qhexedit"
 
 
