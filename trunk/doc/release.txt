@@ -1,3 +1,10 @@
+Release 0.5.4, 2011-08-31
+-------------------------
+    - New Feature: Property font
+    - txt Files replaced by shell building scripts
+    - Python Example is now identical to C++ Example
+    - Windows and Linux build scripts added
+
 Release 0.5.3, 2011-08-29
 -------------------------
     - BugFix: recursive call in "qhexedit.cpp" addressOffset()
