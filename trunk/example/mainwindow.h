@@ -7,6 +7,7 @@
 QT_BEGIN_NAMESPACE
 class QAction;
 class QMenu;
+class QUndoStack;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -25,6 +26,8 @@ private slots:
     void open();
     bool save();
     bool saveAs();
+    void saveToReadableFile();
+    void saveSelectionToReadableFile();
     void setAddress(int address);
     void setOverwriteMode(bool mode);
     void setSize(int size);
@@ -50,6 +53,7 @@ private:
     bool isUntitled;
     
     QMenu *fileMenu;
+    QMenu *editMenu;
     QMenu *helpMenu;
 
     QToolBar *fileToolBar;
@@ -57,8 +61,13 @@ private:
     QAction *openAct;
     QAction *saveAct;
     QAction *saveAsAct;
+    QAction *saveReadable;
     QAction *closeAct;
     QAction *exitAct;
+
+    QAction *undoAct;
+    QAction *redoAct;
+    QAction *saveSelectionReadable;
 
     QAction *aboutAct;
     QAction *aboutQtAct;

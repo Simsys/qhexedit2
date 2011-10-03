@@ -31,9 +31,29 @@ void QHexEdit::remove(int pos, int len)
     qHexEdit_p->remove(pos, len);
 }
 
+QString QHexEdit::toReadableString()
+{
+    return qHexEdit_p->toRedableString();
+}
+
+QString QHexEdit::selectionToReadableString()
+{
+    return qHexEdit_p->selectionToReadableString();
+}
+
 void QHexEdit::setAddressArea(bool addressArea)
 {
     qHexEdit_p->setAddressArea(addressArea);
+}
+
+void QHexEdit::redo()
+{
+    qHexEdit_p->redo();
+}
+
+void QHexEdit::undo()
+{
+    qHexEdit_p->undo();
 }
 
 void QHexEdit::setAddressWidth(int addressWidth)

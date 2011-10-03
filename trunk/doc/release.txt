@@ -1,7 +1,13 @@
+Release 0.6.0, 2011-10-03
+-------------------------
+    - Undo/Redo functioinality
+    - toReadableString(), selectionToReadableString() added
+    - New structure, new classes XByteArray, CharCommands, ArrayCommands
+    - C++ and Python example reflect the nuew features
+
 Release 0.5.4, 2011-08-31
 -------------------------
     - New Feature: Property font
-    - txt Files replaced by shell building scripts
     - Python Example is now identical to C++ Example
     - Windows and Linux build scripts added
 

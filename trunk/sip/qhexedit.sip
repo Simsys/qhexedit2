@@ -27,18 +27,22 @@ public:
     bool overwriteMode();
     void setReadOnly(bool);
     bool isReadOnly();
-
-    void insert(int, char);
-    void remove(int, int);
     void setFont(const QFont &);
     QFont font();
-    
+
+    void insert(int, QByteArray &);
+    void insert(int, char);
+    void remove(int, int);
+    QString toReadableString();
+    QString selectionToReadableString();
 
 public slots:
+    void redo();
     void setAddressWidth(int);
     void setAddressArea(bool);
     void setAsciiArea(bool);
     void setHighlighting(bool);
+    void undo();
 
 signals:
     void currentAddressChanged(int);
