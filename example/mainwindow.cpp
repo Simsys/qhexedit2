@@ -115,10 +115,26 @@ void MainWindow::createActions()
     saveAsAct->setStatusTip(tr("Save the document under a new name"));
     connect(saveAsAct, SIGNAL(triggered()), this, SLOT(saveAs()));
 
+    saveReadable = new QAction(tr("Save &Readable..."), this);
+    saveReadable->setStatusTip(tr("Save document in readable form"));
+    connect(saveReadable, SIGNAL(triggered()), this, SLOT(saveToReadableFile()));
+
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
+
+    undoAct = new QAction(tr("&Undo"), this);
+    undoAct->setShortcuts(QKeySequence::Undo);
+    connect(undoAct, SIGNAL(triggered()), hexEdit, SLOT(undo()));
+
+    redoAct = new QAction(tr("&Redo"), this);
+    redoAct->setShortcuts(QKeySequence::Redo);
+    connect(redoAct, SIGNAL(triggered()), hexEdit, SLOT(redo()));
+
+    saveSelectionReadable = new QAction(tr("&Save Selection Readable..."), this);
+    saveSelectionReadable->setStatusTip(tr("Save selection in readable form"));
+    connect(saveSelectionReadable, SIGNAL(triggered()), this, SLOT(saveSelectionToReadableFile()));
 
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
@@ -140,14 +156,20 @@ void MainWindow::createMenus()
     fileMenu->addAction(openAct);
     fileMenu->addAction(saveAct);
     fileMenu->addAction(saveAsAct);
+    fileMenu->addAction(saveReadable);
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
+
+    editMenu = menuBar()->addMenu(tr("&Edit"));
+    editMenu->addAction(undoAct);
+    editMenu->addAction(redoAct);
+    editMenu->addAction(saveSelectionReadable);
+    editMenu->addSeparator();
+    editMenu->addAction(optionsAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(aboutQtAct);
-    helpMenu->addSeparator();
-    helpMenu->addAction(optionsAct);
 }
 
 void MainWindow::createStatusBar()
@@ -255,6 +277,50 @@ bool MainWindow::saveFile(const QString &fileName)
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File saved"), 2000);
     return true;
+}
+
+void MainWindow::saveToReadableFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
+    if (!fileName.isEmpty())
+    {
+        QFile file(fileName);
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, tr("HexEdit"),
+                                 tr("Cannot write file %1:\n%2.")
+                                 .arg(fileName)
+                                 .arg(file.errorString()));
+            return;
+        }
+
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        file.write(hexEdit->toReadableString().toLatin1());
+        QApplication::restoreOverrideCursor();
+
+        statusBar()->showMessage(tr("File saved"), 2000);
+    }
+}
+
+void MainWindow::saveSelectionToReadableFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
+    if (!fileName.isEmpty())
+    {
+        QFile file(fileName);
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, tr("HexEdit"),
+                                 tr("Cannot write file %1:\n%2.")
+                                 .arg(fileName)
+                                 .arg(file.errorString()));
+            return;
+        }
+
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        file.write(hexEdit->selectionToReadableString().toLatin1());
+        QApplication::restoreOverrideCursor();
+
+        statusBar()->showMessage(tr("File saved"), 2000);
+    }
 }
 
 void MainWindow::setCurrentFile(const QString &fileName)

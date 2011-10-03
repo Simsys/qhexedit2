@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.5.4
+\version Version 0.6.0
 \image html hexedit.png
 */
 
@@ -27,11 +27,16 @@ and insert data. In this case the size of data() increases. It is also possible
 to delete bytes (del or backspace), here the size of data decreases.
 
 You can select data with keyboard hits or mouse movements. The copy-key will
-copy the selected data into the clipboard. The cut-key copies also but delets it
-afterwards. In overwrite mode, the paste function overwrites the content of the
-(does not change the length) data. In insert mode, clipboard data will be
+copy the selected data into the clipboard. The cut-key copies also but delets
+it afterwards. In overwrite mode, the paste function overwrites the content of
+the (does not change the length) data. In insert mode, clipboard data will be
 inserted. The clipboard content is expected in ASCII Hex notation. Unknown
 characters will be ignored.
+
+QHexEdit comes with undo/redo functionality. All changes can be undone, by
+pressing the undo-key (usually ctr-z). They can also be redone afterwards.
+The undo/redo framework is cleared, when setData() sets up a new
+content for the editor.
 
 This widget can only handle small amounts of data. The size has to be below 10
 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any
@@ -116,6 +121,13 @@ public:
     */
     void remove(int pos, int len=1);
 
+    /*! Gives back a formatted image of the content of QHexEdit
+    */
+    QString toReadableString();
+
+    /*! Gives back a formatted image of the selected content of QHexEdit
+    */
+    QString selectionToReadableString();
 
     /*! \cond docNever */
     void setAddressOffset(int offset);
@@ -137,6 +149,10 @@ public:
     /*! \endcond docNever */
 
 public slots:
+    /*! Redoes the last operation. If there is no operation to redo, i.e.
+      there is no redo step in the undo/redo history, nothing happens.
+      */
+    void redo();
 
     /*! Set the minimum width of the address area.
       \param addressWidth Width in characters.
@@ -157,6 +173,11 @@ public slots:
       \param mode true (show it), false (hide it).
       */
     void setHighlighting(bool mode);
+
+    /*! Undoes the last operation. If there is no operation to undo, i.e.
+      there is no undo step in the undo/redo history, nothing happens.
+      */
+    void undo();
 
 signals:
 

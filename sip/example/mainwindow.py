@@ -84,10 +84,23 @@ class MainWindow(QtGui.QMainWindow):
         self.saveAsAct = QtGui.QAction("Save &As...", self,
                 shortcut=QtGui.QKeySequence.SaveAs,
                 statusTip="Save the document under a new name", triggered=self.saveAs)
+        
+        self.saveReadable = QtGui.QAction("Save as &Readable...", self,
+                statusTip="Save in a readable format", triggered=self.saveToReadableFile)
 
         self.exitAct = QtGui.QAction("E&xit", self, shortcut="Ctrl+Q",
                 statusTip="Exit the application", triggered=self.close)
+        
+        self.undoAct = QtGui.QAction("&Undo", self, shortcut=QtGui.QKeySequence.Undo,
+                triggered=self.hexEdit.undo)
                 
+        self.redoAct = QtGui.QAction("&Redo", self, shortcut=QtGui.QKeySequence.Redo,
+                triggered=self.hexEdit.redo)
+        
+        self.saveSelectionReadable = QtGui.QAction("Save Selection Readable...", self,
+                statusTip="Save selection in a readable format",
+                triggered=self.saveSelectionToReadableFile)
+        
         self.aboutAct = QtGui.QAction("&About", self,
                 statusTip="Show the application's About box", triggered=self.about)
                 
@@ -99,12 +112,19 @@ class MainWindow(QtGui.QMainWindow):
         self.fileMenu.addAction(self.openAct)
         self.fileMenu.addAction(self.saveAct)
         self.fileMenu.addAction(self.saveAsAct)
+        self.fileMenu.addAction(self.saveReadable)
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.exitAct)
         
+        self.editMenu = self.menuBar().addMenu("&Edit")
+        self.editMenu.addAction(self.undoAct)
+        self.editMenu.addAction(self.redoAct)
+        self.editMenu.addAction(self.saveSelectionReadable)
+        self.editMenu.addSeparator()
+        self.editMenu.addAction(self.optionsAct)
+        
         self.helpMenu = self.menuBar().addMenu("&Help")
         self.helpMenu.addAction(self.aboutAct)
-        self.helpMenu.addAction(self.optionsAct)
         
     def createStatusBar(self):
         # Address Label
@@ -193,13 +213,25 @@ class MainWindow(QtGui.QMainWindow):
                     "Cannot write file %s:\n%s." % (fileName, file.errorString()))
             return False
 
-        QtGui.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         file.write(self.hexEdit.data())
-        QtGui.QApplication.restoreOverrideCursor()
 
         self.setCurrentFile(fileName)
         self.statusBar().showMessage("File saved", 2000)
         return True
+    
+    def saveToReadableFile(self):
+        fileName = QtGui.QFileDialog.getSaveFileName(self, "Save To Readable File")
+        if not fileName.isEmpty():
+            file = open(unicode(fileName), "wb")
+            file.write(str(self.hexEdit.toReadableString()))
+            self.statusBar().showMessage("File saved", 2000);
+
+    def saveSelectionToReadableFile(self):
+        fileName = QtGui.QFileDialog.getSaveFileName(self, "Save To Readable File")
+        if not fileName.isEmpty():
+            file = open(unicode(fileName), "wb")
+            file.write(str(self.hexEdit.selectionToReadableString()))
+            self.statusBar().showMessage("File saved", 2000);
 
     def setCurrentFile(self, fileName):
         self.curFile = fileName
