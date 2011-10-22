@@ -2,17 +2,26 @@
 
 #include "mainwindow.h"
 
+/*****************************************************************************/
+/* Public methods */
+/*****************************************************************************/
 MainWindow::MainWindow()
 {
     init();
     setCurrentFile("");
 }
 
+/*****************************************************************************/
+/* Protected methods */
+/*****************************************************************************/
 void MainWindow::closeEvent(QCloseEvent *)
 {
     writeSettings();
 }
 
+/*****************************************************************************/
+/* Private Slots */
+/*****************************************************************************/
 void MainWindow::about()
 {
    QMessageBox::about(this, tr("About HexEdit"),
@@ -25,6 +34,12 @@ void MainWindow::open()
     if (!fileName.isEmpty()) {
         loadFile(fileName);
     }
+}
+
+void MainWindow::optionsAccepted()
+{
+    writeSettings();
+    readSettings();
 }
 
 bool MainWindow::save()
@@ -44,6 +59,50 @@ bool MainWindow::saveAs()
         return false;
 
     return saveFile(fileName);
+}
+
+void MainWindow::saveSelectionToReadableFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
+    if (!fileName.isEmpty())
+    {
+        QFile file(fileName);
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, tr("HexEdit"),
+                                 tr("Cannot write file %1:\n%2.")
+                                 .arg(fileName)
+                                 .arg(file.errorString()));
+            return;
+        }
+
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        file.write(hexEdit->selectionToReadableString().toLatin1());
+        QApplication::restoreOverrideCursor();
+
+        statusBar()->showMessage(tr("File saved"), 2000);
+    }
+}
+
+void MainWindow::saveToReadableFile()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
+    if (!fileName.isEmpty())
+    {
+        QFile file(fileName);
+        if (!file.open(QFile::WriteOnly | QFile::Text)) {
+            QMessageBox::warning(this, tr("HexEdit"),
+                                 tr("Cannot write file %1:\n%2.")
+                                 .arg(fileName)
+                                 .arg(file.errorString()));
+            return;
+        }
+
+        QApplication::setOverrideCursor(Qt::WaitCursor);
+        file.write(hexEdit->toReadableString().toLatin1());
+        QApplication::restoreOverrideCursor();
+
+        statusBar()->showMessage(tr("File saved"), 2000);
+    }
 }
 
 void MainWindow::setAddress(int address)
@@ -69,13 +128,9 @@ void MainWindow::showOptionsDialog()
     optionsDialog->show();
 }
 
-void MainWindow::optionsAccepted()
-{
-    writeSettings();
-    readSettings();
-}
-
-
+/*****************************************************************************/
+/* Private Methods */
+/*****************************************************************************/
 void MainWindow::init()
 {
     setAttribute(Qt::WA_DeleteOnClose);
@@ -277,50 +332,6 @@ bool MainWindow::saveFile(const QString &fileName)
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File saved"), 2000);
     return true;
-}
-
-void MainWindow::saveToReadableFile()
-{
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
-    if (!fileName.isEmpty())
-    {
-        QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text)) {
-            QMessageBox::warning(this, tr("HexEdit"),
-                                 tr("Cannot write file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-            return;
-        }
-
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-        file.write(hexEdit->toReadableString().toLatin1());
-        QApplication::restoreOverrideCursor();
-
-        statusBar()->showMessage(tr("File saved"), 2000);
-    }
-}
-
-void MainWindow::saveSelectionToReadableFile()
-{
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Save To Readable File"));
-    if (!fileName.isEmpty())
-    {
-        QFile file(fileName);
-        if (!file.open(QFile::WriteOnly | QFile::Text)) {
-            QMessageBox::warning(this, tr("HexEdit"),
-                                 tr("Cannot write file %1:\n%2.")
-                                 .arg(fileName)
-                                 .arg(file.errorString()));
-            return;
-        }
-
-        QApplication::setOverrideCursor(Qt::WaitCursor);
-        file.write(hexEdit->selectionToReadableString().toLatin1());
-        QApplication::restoreOverrideCursor();
-
-        statusBar()->showMessage(tr("File saved"), 2000);
-    }
 }
 
 void MainWindow::setCurrentFile(const QString &fileName)

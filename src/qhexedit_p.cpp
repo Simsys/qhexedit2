@@ -52,7 +52,6 @@ void QHexEditPrivate::setData(const QByteArray &data)
     _undoStack->clear();
     adjust();
     setCursorPos(0);
-    setFocus();
 }
 
 QByteArray QHexEditPrivate::data()
@@ -129,8 +128,6 @@ void QHexEditPrivate::insert(int index, const QByteArray & ba)
 
 void QHexEditPrivate::insert(int index, char ch)
 {
-    //QUndoCommand *insertCharCommand = new InsertCharCommand(&_xData, index, ch);
-    //_undoStack->push(insertCharCommand);
     QUndoCommand *charCommand = new CharCommand(&_xData, CharCommand::insert, index, ch);
     _undoStack->push(charCommand);
     emit dataChanged();
@@ -144,16 +141,12 @@ void QHexEditPrivate::remove(int index, int len)
         {
             if (_overwriteMode)
             {
-                // QUndoCommand *replaceCharCommand = new ReplaceCharCommand(&_xData, index, char(0));
-                // _undoStack->push(replaceCharCommand);
                 QUndoCommand *charCommand = new CharCommand(&_xData, CharCommand::replace, index, char(0));
                 _undoStack->push(charCommand);
                 emit dataChanged();
             }
             else
             {
-                //QUndoCommand *removeCharCommand = new RemoveCharCommand(&_xData, index);
-                //_undoStack->push(removeCharCommand);
                 QUndoCommand *charCommand = new CharCommand(&_xData, CharCommand::remove, index, char(0));
                 _undoStack->push(charCommand);
                 emit dataChanged();
@@ -180,8 +173,6 @@ void QHexEditPrivate::remove(int index, int len)
 
 void QHexEditPrivate::replace(int index, char ch)
 {
-    //QUndoCommand *replaceCharCommand = new ReplaceCharCommand(&_xData, index, ch);
-    //_undoStack->push(replaceCharCommand);
     QUndoCommand *charCommand = new CharCommand(&_xData, CharCommand::replace, index, ch);
     _undoStack->push(charCommand);
     emit dataChanged();
@@ -495,11 +486,14 @@ if (!_readOnly)
                 }
                 else
                 {
-                    if (_overwriteMode)
-                        replace(posBa - 1, char(0));
-                    else
-                        remove(posBa - 1, 1);
-                    setCursorPos(_cursorPosition - 2);
+                    if (posBa > 0)
+                    {
+                        if (_overwriteMode)
+                            replace(posBa - 1, char(0));
+                        else
+                            remove(posBa - 1, 1);
+                        setCursorPos(_cursorPosition - 2);
+                    }
                 }
             }
 
