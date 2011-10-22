@@ -1,3 +1,8 @@
+Release 0.6.1, 2011-10-22
+-------------------------
+    - Fix issue #2 "setData() steals focus"
+    - Fix issue #3 "QHexEdit crashes, when hitting Backspace on the first Byte"
+
 Release 0.6.0, 2011-10-03
 -------------------------
     - Undo/Redo functioinality

@@ -18,59 +18,10 @@ class MainWindow(QtGui.QMainWindow):
         QtGui.QMessageBox.about(self, "About HexEdit",
             "The HexEdit example is a short Demo of the QHexEdit Widget.");
 
-    def open(self):
-        fileName = QtGui.QFileDialog.getOpenFileName(self)
-        if fileName:
-            self.loadFile(fileName)
-
-    def save(self):
-        if self.isUntitled:
-            return self.saveAs()
-        else:
-            return self.saveFile(self.curFile)
-
-    def saveAs(self):
-        fileName = QtGui.QFileDialog.getSaveFileName(self, "Save As", self.curFile)
-        if not fileName:
-            return False
-        return self.saveFile(fileName)
-        
-    def setAddress(self, address):
-        self.lbAddress.setText('%x' % address)
-        
-    def setOverwriteMode(self, mode):
-        if mode:
-            self.lbOverwriteMode.setText("Overwrite")
-        else:
-            self.lbOverwriteMode.setText("Insert")
-            
-    def setSize(self, size):
-        self.lbSize.setText('%d' % size)
-            
-    def showOptionsDialog(self):
-        self.optionsDialog.show()
-        
-    def optionsAccepted(self):
+    def closeEvent(self, event):
         self.writeSettings()
-        self.readSettings()
-
-    def init(self):
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.optionsDialog = OptionsDialog(self)
-        self.optionsDialog.accepted.connect(self.optionsAccepted)
-        
-        self.isUntitled = True
-        
-        self.hexEdit = QHexEdit()
-        self.setCentralWidget(self.hexEdit)
-        self.hexEdit.overwriteModeChanged.connect(self.setOverwriteMode)
-
-        self.createActions()
-        self.createMenus()
-        self.createToolBars()
-        self.createStatusBar()
-
-        self.readSettings()
+        del self.optionsDialog
+        self.close()
 
     def createActions(self):
         self.openAct = QtGui.QAction(QtGui.QIcon(':/images/open.png'),
@@ -167,6 +118,24 @@ class MainWindow(QtGui.QMainWindow):
         self.fileToolBar.addAction(self.openAct)
         self.fileToolBar.addAction(self.saveAct)
 
+    def init(self):
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.optionsDialog = OptionsDialog(self)
+        self.optionsDialog.accepted.connect(self.optionsAccepted)
+        
+        self.isUntitled = True
+        
+        self.hexEdit = QHexEdit()
+        self.setCentralWidget(self.hexEdit)
+        self.hexEdit.overwriteModeChanged.connect(self.setOverwriteMode)
+
+        self.createActions()
+        self.createMenus()
+        self.createToolBars()
+        self.createStatusBar()
+
+        self.readSettings()
+
     def loadFile(self, fileName):
         file = QtCore.QFile(fileName)
         if not file.open( QtCore.QFile.ReadOnly | QtCore.QFile.Text):
@@ -180,6 +149,15 @@ class MainWindow(QtGui.QMainWindow):
 
         self.setCurrentFile(fileName)
         self.statusBar().showMessage("File loaded", 2000)
+
+    def open(self):
+        fileName = QtGui.QFileDialog.getOpenFileName(self)
+        if fileName:
+            self.loadFile(fileName)
+
+    def optionsAccepted(self):
+        self.writeSettings()
+        self.readSettings()
 
     def readSettings(self):
         settings = QtCore.QSettings()
@@ -201,11 +179,33 @@ class MainWindow(QtGui.QMainWindow):
 
         self.hexEdit.setAddressWidth(settings.value("AddressAreaWidth").toInt()[0]);
 
-    def closeEvent(self, event):
-        self.writeSettings()
-        del self.optionsDialog
-        self.close()
+    def save(self):
+        if self.isUntitled:
+            return self.saveAs()
+        else:
+            return self.saveFile(self.curFile)
 
+    def saveAs(self):
+        fileName = QtGui.QFileDialog.getSaveFileName(self, "Save As", self.curFile)
+        if not fileName:
+            return False
+        return self.saveFile(fileName)
+
+    def showOptionsDialog(self):
+        self.optionsDialog.show()
+        
+    def setAddress(self, address):
+        self.lbAddress.setText('%x' % address)
+        
+    def setOverwriteMode(self, mode):
+        if mode:
+            self.lbOverwriteMode.setText("Overwrite")
+        else:
+            self.lbOverwriteMode.setText("Insert")
+            
+    def setSize(self, size):
+        self.lbSize.setText('%d' % size)
+            
     def saveFile(self, fileName):
         file = QtCore.QFile(fileName)
         if not file.open( QtCore.QFile.WriteOnly | QtCore.QFile.Text):

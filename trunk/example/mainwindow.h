@@ -16,7 +16,6 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
-    MainWindow(const QString &fileName);
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -24,17 +23,15 @@ protected:
 private slots:
     void about();
     void open();
+    void optionsAccepted();
     bool save();
     bool saveAs();
-    void saveToReadableFile();
     void saveSelectionToReadableFile();
+    void saveToReadableFile();
     void setAddress(int address);
     void setOverwriteMode(bool mode);
     void setSize(int size);
     void showOptionsDialog();
-
-private slots:
-    void optionsAccepted();
 
 private:
     void init();
