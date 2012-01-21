@@ -665,7 +665,7 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     }
 
     // paint cursor
-    if (_blink)
+    if (_blink && !_readOnly && hasFocus())
     {
         if (_overwriteMode)
             painter.fillRect(_cursorX, _cursorY + _charHeight - 2, _charWidth, 2, this->palette().color(QPalette::WindowText));
@@ -794,7 +794,10 @@ void QHexEditPrivate::adjust()
 
     // tell QAbstractScollbar, how big we are
     setMinimumHeight(((_xData.size()/16 + 1) * _charHeight) + 5);
-    setMinimumWidth(_xPosAscii + (BYTES_PER_LINE * _charWidth));
+    if(_asciiArea)
+        setMinimumWidth(_xPosAscii + (BYTES_PER_LINE * _charWidth));
+    else
+        setMinimumWidth(_xPosHex + HEXCHARS_IN_LINE * _charWidth);
 
     update();
 }
