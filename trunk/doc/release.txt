@@ -1,3 +1,8 @@
+Release 0.6.2, 2012-01-21
+-------------------------
+    - Fix issue #4 "Hiding the ascii area doesn't resize the widget properly"
+    - Fix issue #5 "Blinking cursor is displayed even if the control is set to read only"
+
 Release 0.6.1, 2011-10-22
 -------------------------
     - Fix issue #2 "setData() steals focus"
@@ -8,7 +13,7 @@ Release 0.6.0, 2011-10-03
     - Undo/Redo functioinality
     - toReadableString(), selectionToReadableString() added
     - New structure, new classes XByteArray, CharCommands, ArrayCommands
-    - C++ and Python example reflect the nuew features
+    - C++ and Python example reflect the new features
 
 Release 0.5.4, 2011-08-31
 -------------------------
@@ -46,3 +51,4 @@ QHexEdit:
     - BugFix: When using mouse weel, qhexedit looses focus
     - BugFix: Changed status is independent on the content
     - Polishing: Nicer colors for highlighting, selection, and address area
+
