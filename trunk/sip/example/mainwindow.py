@@ -4,6 +4,7 @@ from PyQt4 import QtCore, QtGui
 from qhexedit import QHexEdit
 
 from optionsdialog import OptionsDialog
+from searchdialog import SearchDialog
 import qhexedit_rc
 
 
@@ -55,6 +56,12 @@ class MainWindow(QtGui.QMainWindow):
         self.aboutAct = QtGui.QAction("&About", self,
                 statusTip="Show the application's About box", triggered=self.about)
                 
+        self.findAct = QtGui.QAction("&Find/Replace", self, shortcut=QtGui.QKeySequence.Find,
+                statusTip="Show the Dialog for finding and replacing", triggered=self.showSearchDialog)
+
+        self.findNextAct = QtGui.QAction("Find &next", self, shortcut=QtGui.QKeySequence.FindNext, 
+                statusTip="Find next occurrence of the searched pattern", triggered=self.findNext)
+
         self.optionsAct = QtGui.QAction("&Options", self,
                 statusTip="Show the options dialog", triggered=self.showOptionsDialog)
 
@@ -71,6 +78,9 @@ class MainWindow(QtGui.QMainWindow):
         self.editMenu.addAction(self.undoAct)
         self.editMenu.addAction(self.redoAct)
         self.editMenu.addAction(self.saveSelectionReadable)
+        self.editMenu.addSeparator()
+        self.editMenu.addAction(self.findAct)
+        self.editMenu.addAction(self.findNextAct)
         self.editMenu.addSeparator()
         self.editMenu.addAction(self.optionsAct)
         
@@ -120,15 +130,16 @@ class MainWindow(QtGui.QMainWindow):
 
     def init(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.optionsDialog = OptionsDialog(self)
-        self.optionsDialog.accepted.connect(self.optionsAccepted)
-        
         self.isUntitled = True
         
         self.hexEdit = QHexEdit()
         self.setCentralWidget(self.hexEdit)
         self.hexEdit.overwriteModeChanged.connect(self.setOverwriteMode)
 
+        self.optionsDialog = OptionsDialog(self)
+        self.optionsDialog.accepted.connect(self.optionsAccepted)
+        self.searchDialog = SearchDialog(self, self.hexEdit)
+        
         self.createActions()
         self.createMenus()
         self.createToolBars()
@@ -158,6 +169,9 @@ class MainWindow(QtGui.QMainWindow):
     def optionsAccepted(self):
         self.writeSettings()
         self.readSettings()
+        
+    def findNext(self):
+        self.searchDialog.findNext()
 
     def readSettings(self):
         settings = QtCore.QSettings()
@@ -193,6 +207,9 @@ class MainWindow(QtGui.QMainWindow):
 
     def showOptionsDialog(self):
         self.optionsDialog.show()
+        
+    def showSearchDialog(self):
+        self.searchDialog.show()
         
     def setAddress(self, address):
         self.lbAddress.setText('%x' % address)

@@ -7,7 +7,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.6.2
+\version Version 0.6.3
 \image html hexedit.png
 */
 
@@ -36,7 +36,9 @@ characters will be ignored.
 QHexEdit comes with undo/redo functionality. All changes can be undone, by
 pressing the undo-key (usually ctr-z). They can also be redone afterwards.
 The undo/redo framework is cleared, when setData() sets up a new
-content for the editor.
+content for the editor. You can search data inside the content with indexOf()
+and lastIndexOf(). The replace() function is to change located subdata. This
+'replaced' data can also be undone by the undo/redo framework.
 
 This widget can only handle small amounts of data. The size has to be below 10
 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any
@@ -61,6 +63,11 @@ more.
     color of address areas. You can also read the color (addressaAreaColor()).
     */
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
+
+    /*! Porperty cursorPosition sets or gets the position of the editor cursor
+    in QHexEdit.
+    */
+    Q_PROPERTY(int cursorPosition READ cursorPosition WRITE setCursorPosition)
 
     /*! Property highlighting color sets (setHighlightingColor()) the backgorund
     color of highlighted text areas. You can also read the color
@@ -98,11 +105,20 @@ public:
     */
     QHexEdit(QWidget *parent = 0);
 
+    /*! Returns the index position of the first occurrence
+    of the byte array ba in this byte array, searching forward from index position
+    from. Returns -1 if ba could not be found. In addition to this functionality
+    of QByteArray the cursorposition is set to the end of found bytearray and
+    it will be selected.
+
+    */
+    int indexOf(const QByteArray & ba, int from = 0) const;
+
     /*! Inserts a byte array.
     \param i Index position, where to insert
     \param ba byte array, which is to insert
     In overwrite mode, the existing data will be overwritten, in insertmode ba will be
-    insertet and size of data grows.
+    inserted and size of data grows.
     */
     void insert(int i, const QByteArray & ba);
 
@@ -110,9 +126,18 @@ public:
     \param i Index position, where to insert
     \param ch Char, which is to insert
     In overwrite mode, the existing data will be overwritten, in insertmode ba will be
-    insertet and size of data grows.
+    inserted and size of data grows.
     */
     void insert(int i, char ch);
+
+    /*! Returns the index position of the last occurrence
+    of the byte array ba in this byte array, searching backwards from index position
+    from. Returns -1 if ba could not be found. In addition to this functionality
+    of QByteArray the cursorposition is set to the beginning of found bytearray and
+    it will be selected.
+
+    */
+    int lastIndexOf(const QByteArray & ba, int from = 0) const;
 
     /*! Removes len bytes from the content.
     \param pos Index position, where to remove
@@ -120,6 +145,10 @@ public:
     In overwrite mode, the existing bytes will be overwriten with 0x00.
     */
     void remove(int pos, int len=1);
+
+    /*! Replaces len bytes from index position pos with the byte array after.
+    */
+    void replace( int pos, int len, const QByteArray & after);
 
     /*! Gives back a formatted image of the content of QHexEdit
     */
@@ -132,6 +161,8 @@ public:
     /*! \cond docNever */
     void setAddressOffset(int offset);
     int addressOffset();
+    void setCursorPosition(int cusorPos);
+    int cursorPosition();
     void setData(QByteArray const &data);
     QByteArray data();
     void setAddressAreaColor(QColor const &color);

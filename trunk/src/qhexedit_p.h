@@ -40,11 +40,14 @@ public:
 
     XByteArray & xData();
 
+    int indexOf(const QByteArray & ba, int from = 0);
     void insert(int index, const QByteArray & ba);
     void insert(int index, char ch);
+    int lastIndexOf(const QByteArray & ba, int from = 0);
     void remove(int index, int len=1);
     void replace(int index, char ch);
     void replace(int index, const QByteArray & ba);
+    void replace(int pos, int len, const QByteArray & after);
 
     void setAddressArea(bool addressArea);
     void setAddressWidth(int addressWidth);
@@ -71,10 +74,11 @@ protected:
 
     void paintEvent(QPaintEvent *event);
 
-    int cursorPos(QPoint pos);               // calc cursorpos from graphics position. DOES NOT STORE POSITION
+    int cursorPos(QPoint pos);          // calc cursorpos from graphics position. DOES NOT STORE POSITION
 
-    void resetSelection(int pos);
-    void setSelection(int pos);                 // set min (if below init) or max (if greater init)
+    void resetSelection(int pos);       // set selectionStart and selectionEnd to pos
+    void resetSelection();              // set selectionEnd to selectionStart
+    void setSelection(int pos);         // set min (if below init) or max (if greater init)
     int getSelectionBegin();
     int getSelectionEnd();
 
@@ -84,6 +88,7 @@ private slots:
 
 private:
     void adjust();
+    void ensureVisible();
 
     QColor _addressAreaColor;
     QColor _highlightingColor;
@@ -92,7 +97,7 @@ private:
     QTimer _cursorTimer;
     QUndoStack *_undoStack;
 
-    XByteArray _xData;                  // Hält den Inhalt des Hex Editors
+    XByteArray _xData;                      // Hält den Inhalt des Hex Editors
 
     bool _blink;                            // true: then cursor blinks
     bool _renderingRequired;                // Flag to store that rendering is necessary
@@ -104,7 +109,7 @@ private:
 
     int _charWidth, _charHeight;            // char dimensions (dpendend on font)
     int _cursorX, _cursorY;                 // graphics position of the cursor
-    int _cursorPosition;                    // charakter positioin in stream (on byte ends in to steps)
+    int _cursorPosition;                    // character positioin in stream (on byte ends in to steps)
     int _xPosAdr, _xPosHex, _xPosAscii;     // graphics x-position of the areas
 
     int _selectionBegin;                    // First selected char

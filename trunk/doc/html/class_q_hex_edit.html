@@ -87,9 +87,12 @@ Signals</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aec1f1e5b7652e7e39a8ca5e73ed63373">QHexEdit</a> (QWidget *parent=0)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a1865c7553fe4c2b27d581159f7956c8a">indexOf</a> (const QByteArray &amp;ba, int from=0) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a990a5188800f295f1d15f51b857fd7b9">insert</a> (int i, const QByteArray &amp;ba)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aae1006e9ebf9233e782bedeb70b722c7">insert</a> (int i, char ch)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9396c2f6c4cfcbfc6a956d536f7de56c">lastIndexOf</a> (const QByteArray &amp;ba, int from=0) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a66dcc5787c347a6ff28e78dc13fe1439">remove</a> (int pos, int len=1)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a94daa3f50679836e929689d771b5404a">replace</a> (int pos, int len, const QByteArray &amp;after)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a43c6db0509fee9b10198bef48d8eaa2e">toReadableString</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a2ada1230ace92da4e1f006b88ab3b503">selectionToReadableString</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="properties"></a>
@@ -97,6 +100,7 @@ Properties</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QByteArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a147d80029bb855dedd91fe2a67b7b886">addressOffset</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a6e27b73514e243c0b8b2a3efafbb5e32">addressAreaColor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#acb5de93abe0e3fb2da4c674b84a96004">cursorPosition</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9e8ed54e47fec94cfd64b14ea1f7cee8">highlightingColor</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#ac0b628f34316aff9e18fc73a738250d7">selectionColor</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a941a91c36eb8429c41096bfcd45f38c1">overwriteMode</a></td></tr>
@@ -108,7 +112,7 @@ Properties</h2></td></tr>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a>.</p>
 <p>Normaly <a class="el" href="class_q_hex_edit.html">QHexEdit</a> works in the overwrite Mode. You can set overwriteMode(false) and insert data. In this case the size of <a class="el" href="class_q_hex_edit.html#a7f4e532611a6eff27b75d3cb88e91618">data()</a> increases. It is also possible to delete bytes (del or backspace), here the size of data decreases.</p>
 <p>You can select data with keyboard hits or mouse movements. The copy-key will copy the selected data into the clipboard. The cut-key copies also but delets it afterwards. In overwrite mode, the paste function overwrites the content of the (does not change the length) data. In insert mode, clipboard data will be inserted. The clipboard content is expected in ASCII Hex notation. Unknown characters will be ignored.</p>
-<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> comes with undo/redo functionality. All changes can be undone, by pressing the undo-key (usually ctr-z). They can also be redone afterwards. The undo/redo framework is cleared, when setData() sets up a new content for the editor.</p>
+<p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> comes with undo/redo functionality. All changes can be undone, by pressing the undo-key (usually ctr-z). They can also be redone afterwards. The undo/redo framework is cleared, when setData() sets up a new content for the editor. You can search data inside the content with <a class="el" href="class_q_hex_edit.html#a1865c7553fe4c2b27d581159f7956c8a">indexOf()</a> and <a class="el" href="class_q_hex_edit.html#a9396c2f6c4cfcbfc6a956d536f7de56c">lastIndexOf()</a>. The <a class="el" href="class_q_hex_edit.html#a94daa3f50679836e929689d771b5404a">replace()</a> function is to change located subdata. This 'replaced' data can also be undone by the undo/redo framework.</p>
 <p>This widget can only handle small amounts of data. The size has to be below 10 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any more. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aec1f1e5b7652e7e39a8ca5e73ed63373"></a><!-- doxytag: member="QHexEdit::QHexEdit" ref="aec1f1e5b7652e7e39a8ca5e73ed63373" args="(QWidget *parent=0)" -->
@@ -189,38 +193,31 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aae1006e9ebf9233e782bedeb70b722c7"></a><!-- doxytag: member="QHexEdit::insert" ref="aae1006e9ebf9233e782bedeb70b722c7" args="(int i, char ch)" -->
+<a class="anchor" id="a1865c7553fe4c2b27d581159f7956c8a"></a><!-- doxytag: member="QHexEdit::indexOf" ref="a1865c7553fe4c2b27d581159f7956c8a" args="(const QByteArray &amp;ba, int from=0) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void QHexEdit::insert </td>
+          <td class="memname">int QHexEdit::indexOf </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>i</em>, </td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>ba</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>ch</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>from</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<p>Inserts a char. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">i</td><td>Index position, where to insert </td></tr>
-    <tr><td class="paramname">ch</td><td>Char, which is to insert In overwrite mode, the existing data will be overwritten, in insertmode ba will be insertet and size of data grows. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Returns the index position of the first occurrence of the byte array ba in this byte array, searching forward from index position from. Returns -1 if ba could not be found. In addition to this functionality of QByteArray the cursorposition is set to the end of found bytearray and it will be selected. </p>
 
 </div>
 </div>
@@ -252,10 +249,73 @@ Properties</h2></td></tr>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">i</td><td>Index position, where to insert </td></tr>
-    <tr><td class="paramname">ba</td><td>byte array, which is to insert In overwrite mode, the existing data will be overwritten, in insertmode ba will be insertet and size of data grows. </td></tr>
+    <tr><td class="paramname">ba</td><td>byte array, which is to insert In overwrite mode, the existing data will be overwritten, in insertmode ba will be inserted and size of data grows. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="aae1006e9ebf9233e782bedeb70b722c7"></a><!-- doxytag: member="QHexEdit::insert" ref="aae1006e9ebf9233e782bedeb70b722c7" args="(int i, char ch)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::insert </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>ch</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Inserts a char. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Index position, where to insert </td></tr>
+    <tr><td class="paramname">ch</td><td>Char, which is to insert In overwrite mode, the existing data will be overwritten, in insertmode ba will be inserted and size of data grows. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9396c2f6c4cfcbfc6a956d536f7de56c"></a><!-- doxytag: member="QHexEdit::lastIndexOf" ref="a9396c2f6c4cfcbfc6a956d536f7de56c" args="(const QByteArray &amp;ba, int from=0) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QHexEdit::lastIndexOf </td>
+          <td>(</td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>ba</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>from</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Returns the index position of the last occurrence of the byte array ba in this byte array, searching backwards from index position from. Returns -1 if ba could not be found. In addition to this functionality of QByteArray the cursorposition is set to the beginning of found bytearray and it will be selected. </p>
 
 </div>
 </div>
@@ -327,6 +387,40 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="a94daa3f50679836e929689d771b5404a"></a><!-- doxytag: member="QHexEdit::replace" ref="a94daa3f50679836e929689d771b5404a" args="(int pos, int len, const QByteArray &amp;after)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::replace </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>after</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Replaces len bytes from index position pos with the byte array after. </p>
 
 </div>
 </div>
@@ -506,6 +600,20 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="acb5de93abe0e3fb2da4c674b84a96004"></a><!-- doxytag: member="QHexEdit::cursorPosition" ref="acb5de93abe0e3fb2da4c674b84a96004" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int QHexEdit::cursorPosition<code> [read, write]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Porperty cursorPosition sets or gets the position of the editor cursor in <a class="el" href="class_q_hex_edit.html">QHexEdit</a>. </p>
+
+</div>
+</div>
 <a class="anchor" id="a7f4e532611a6eff27b75d3cb88e91618"></a><!-- doxytag: member="QHexEdit::data" ref="a7f4e532611a6eff27b75d3cb88e91618" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -608,7 +716,7 @@ Properties</h2></td></tr>
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 21 2012 15:18:08 for QHexEdit by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sat Jan 28 2012 13:52:02 for QHexEdit by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </small></address>
 </body>

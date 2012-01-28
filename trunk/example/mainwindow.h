@@ -3,6 +3,7 @@
 
 #include "../src/qhexedit.h"
 #include "optionsdialog.h"
+#include "searchdialog.h"
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -24,6 +25,7 @@ private slots:
     void about();
     void open();
     void optionsAccepted();
+    void findNext();
     bool save();
     bool saveAs();
     void saveSelectionToReadableFile();
@@ -32,6 +34,7 @@ private slots:
     void setOverwriteMode(bool mode);
     void setSize(int size);
     void showOptionsDialog();
+    void showSearchDialog();
 
 private:
     void init();
@@ -69,9 +72,12 @@ private:
     QAction *aboutAct;
     QAction *aboutQtAct;
     QAction *optionsAct;
+    QAction *findAct;
+    QAction *findNextAct;
 
     QHexEdit *hexEdit;
     OptionsDialog *optionsDialog;
+    SearchDialog *searchDialog;
     QLabel *lbAddress, *lbAddressName;
     QLabel *lbOverwriteMode, *lbOverwriteModeName;
     QLabel *lbSize, *lbSizeName;

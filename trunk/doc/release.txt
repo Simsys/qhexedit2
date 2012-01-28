@@ -1,3 +1,12 @@
+Release 0.6.3, 2012-01-28
+-------------------------
+    - Searching and replacing included (indexOf(), lastIndexOf(), replace())
+    - Example ist now named consequently "QHexEdit"
+    - Example reflects the search/replace functionality
+    - Translateions (cs, de) for the example are contained
+    - Python bindings include also the new features
+    - Paython example is also updated
+
 Release 0.6.2, 2012-01-21
 -------------------------
     - Fix issue #4 "Hiding the ascii area doesn't resize the widget properly"
