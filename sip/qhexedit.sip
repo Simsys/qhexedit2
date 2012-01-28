@@ -19,6 +19,8 @@ public:
     int addressOffset();
     void setAddressAreaColor(const QColor &);
     QColor addressAreaColor();
+    void setCursorPosition(int);
+    int cursorPosition();
     void setHighlightingColor(const QColor &);
     QColor highlightingColor();
     void setSelectionColor(const QColor &);
@@ -30,9 +32,12 @@ public:
     void setFont(const QFont &);
     QFont font();
 
+    int indexOf(QByteArray &, int);
     void insert(int, QByteArray &);
     void insert(int, char);
+    int lastIndexOf(QByteArray &, int);
     void remove(int, int);
+    void replace(int, int, QByteArray &);
     QString toReadableString();
     QString selectionToReadableString();
 

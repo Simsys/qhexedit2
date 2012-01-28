@@ -1,1 +1,4 @@
-rm -r -f build/*
+cd build
+qmake ../example/qhexedit.pro
+make clean
+cd ..

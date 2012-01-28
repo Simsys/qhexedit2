@@ -1,4 +1,4 @@
 cd build
-qmake ../example/hexedit.pro
+qmake ../example/qhexedit.pro
 make
 cd ..

@@ -24,8 +24,8 @@ void MainWindow::closeEvent(QCloseEvent *)
 /*****************************************************************************/
 void MainWindow::about()
 {
-   QMessageBox::about(this, tr("About HexEdit"),
-            tr("The HexEdit example is a short Demo of the QHexEdit Widget."));
+   QMessageBox::about(this, tr("About QHexEdit"),
+            tr("The QHexEdit example is a short Demo of the QHexEdit Widget."));
 }
 
 void MainWindow::open()
@@ -40,6 +40,11 @@ void MainWindow::optionsAccepted()
 {
     writeSettings();
     readSettings();
+}
+
+void MainWindow::findNext()
+{
+    searchDialog->findNext();
 }
 
 bool MainWindow::save()
@@ -68,7 +73,7 @@ void MainWindow::saveSelectionToReadableFile()
     {
         QFile file(fileName);
         if (!file.open(QFile::WriteOnly | QFile::Text)) {
-            QMessageBox::warning(this, tr("HexEdit"),
+            QMessageBox::warning(this, tr("QHexEdit"),
                                  tr("Cannot write file %1:\n%2.")
                                  .arg(fileName)
                                  .arg(file.errorString()));
@@ -90,7 +95,7 @@ void MainWindow::saveToReadableFile()
     {
         QFile file(fileName);
         if (!file.open(QFile::WriteOnly | QFile::Text)) {
-            QMessageBox::warning(this, tr("HexEdit"),
+            QMessageBox::warning(this, tr("QHexEdit"),
                                  tr("Cannot write file %1:\n%2.")
                                  .arg(fileName)
                                  .arg(file.errorString()));
@@ -128,6 +133,11 @@ void MainWindow::showOptionsDialog()
     optionsDialog->show();
 }
 
+void MainWindow::showSearchDialog()
+{
+    searchDialog->show();
+}
+
 /*****************************************************************************/
 /* Private Methods */
 /*****************************************************************************/
@@ -136,12 +146,12 @@ void MainWindow::init()
     setAttribute(Qt::WA_DeleteOnClose);
     optionsDialog = new OptionsDialog(this);
     connect(optionsDialog, SIGNAL(accepted()), this, SLOT(optionsAccepted()));
-
     isUntitled = true;
 
     hexEdit = new QHexEdit;
     setCentralWidget(hexEdit);
     connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), this, SLOT(setOverwriteMode(bool)));
+    searchDialog = new SearchDialog(hexEdit, this);
 
     createActions();
     createMenus();
@@ -199,10 +209,19 @@ void MainWindow::createActions()
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
+    findAct = new QAction(tr("&Find/Replace"), this);
+    findAct->setShortcuts(QKeySequence::Find);
+    findAct->setStatusTip(tr("Show the Dialog for finding and replacing"));
+    connect(findAct, SIGNAL(triggered()), this, SLOT(showSearchDialog()));
+
+    findNextAct = new QAction(tr("Find &next"), this);
+    findNextAct->setShortcuts(QKeySequence::FindNext);
+    findNextAct->setStatusTip(tr("Find next occurrence of the searched pattern"));
+    connect(findNextAct, SIGNAL(triggered()), this, SLOT(findNext()));
+
     optionsAct = new QAction(tr("&Options"), this);
     optionsAct->setStatusTip(tr("Show the Dialog to select applications options"));
     connect(optionsAct, SIGNAL(triggered()), this, SLOT(showOptionsDialog()));
-
 }
 
 void MainWindow::createMenus()
@@ -219,6 +238,9 @@ void MainWindow::createMenus()
     editMenu->addAction(undoAct);
     editMenu->addAction(redoAct);
     editMenu->addAction(saveSelectionReadable);
+    editMenu->addSeparator();
+    editMenu->addAction(findAct);
+    editMenu->addAction(findNextAct);
     editMenu->addSeparator();
     editMenu->addAction(optionsAct);
 
@@ -318,7 +340,7 @@ bool MainWindow::saveFile(const QString &fileName)
 {
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, tr("HexEdit"),
+        QMessageBox::warning(this, tr("QHexEdit"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
