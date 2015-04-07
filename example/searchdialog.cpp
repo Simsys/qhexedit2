@@ -1,6 +1,8 @@
 #include "searchdialog.h"
 #include "ui_searchdialog.h"
 
+#include <QMessageBox>
+
 SearchDialog::SearchDialog(QHexEdit *hexEdit, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SearchDialog)
@@ -78,7 +80,7 @@ QByteArray SearchDialog::getContent(int comboIndex, const QString &input)
     switch (comboIndex)
     {
         case 0:     // hex
-            findBa = QByteArray::fromHex(input.toAscii());
+            findBa = QByteArray::fromHex(input.toLatin1());
             break;
         case 1:     // text
             findBa = input.toUtf8();

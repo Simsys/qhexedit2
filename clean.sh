@@ -1,4 +1,2 @@
-cd build
-qmake ../example/qhexedit.pro
-make clean
-cd ..
+rm -r -f build
+mkdir build

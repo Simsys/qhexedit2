@@ -1,4 +1,13 @@
-#include <QtGui>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QApplication>
+#include <QStatusBar>
+#include <QLabel>
+#include <QAction>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QColorDialog>
+#include <QFontDialog>
 
 #include "mainwindow.h"
 

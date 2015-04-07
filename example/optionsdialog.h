@@ -2,7 +2,7 @@
 #define OPTIONSDIALOG_H
 
 #include <QtCore>
-#include <QtGui>
+#include <QDialog>
 
 namespace Ui {
     class OptionsDialog;

@@ -3,8 +3,10 @@
 
 /** \cond docNever */
 
-
 #include <QtGui>
+#include <QWidget>
+#include <QScrollArea>
+#include <QUndoStack>
 #include "xbytearray.h"
 
 class QHexEditPrivate : public QWidget

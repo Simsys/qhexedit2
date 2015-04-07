@@ -1,4 +1,4 @@
-%Module qhexedit 0
+%Module qhexedit
 
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
