@@ -1,0 +1,16 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\optionsdialog.o
+./release\qhexedit.o
+./release\qhexedit_p.o
+./release\xbytearray.o
+./release\commands.o
+./release\searchdialog.o
+./release\moc_mainwindow.o
+./release\moc_optionsdialog.o
+./release\moc_qhexedit.o
+./release\moc_qhexedit_p.o
+./release\moc_searchdialog.o
+./release\qrc_qhexedit.o
+);
