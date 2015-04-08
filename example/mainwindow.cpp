@@ -348,7 +348,7 @@ void MainWindow::readSettings()
 bool MainWindow::saveFile(const QString &fileName)
 {
     QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Text)) {
+    if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
         QMessageBox::warning(this, tr("QHexEdit"),
                              tr("Cannot write file %1:\n%2.")
                              .arg(fileName)
