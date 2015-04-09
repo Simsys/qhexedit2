@@ -126,6 +126,8 @@ void MainWindow::setAddress(int address)
 
 void MainWindow::setOverwriteMode(bool mode)
 {
+    QSettings settings;
+    settings.setValue("OverwriteMode", mode);
     if (mode)
         lbOverwriteMode->setText(tr("Overwrite"));
     else

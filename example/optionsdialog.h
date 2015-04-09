@@ -16,6 +16,7 @@ public:
     explicit OptionsDialog(QWidget *parent = 0);
     ~OptionsDialog();
     Ui::OptionsDialog *ui;
+    void show();
 
 public slots:
     virtual void accept();

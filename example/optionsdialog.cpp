@@ -19,6 +19,12 @@ OptionsDialog::~OptionsDialog()
     delete ui;
 }
 
+void OptionsDialog::show()
+{
+    readSettings();
+    QWidget::show();
+}
+
 void OptionsDialog::accept()
 {
     writeSettings();
