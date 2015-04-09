@@ -32,6 +32,7 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) : QWidget(parent)
     setFocusPolicy(Qt::StrongFocus);
 
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
+    connect(this, SIGNAL(dataChanged()), this, SLOT(adjust()));
     _cursorTimer.setInterval(500);
     _cursorTimer.start();
 }
