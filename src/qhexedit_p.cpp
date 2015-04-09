@@ -702,6 +702,18 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
             int xPosAscii = _xPosAscii;
             for (int colIdx = 0; ((lineIdx + colIdx) < _xData.size() and (colIdx < BYTES_PER_LINE)); colIdx++)
             {
+                int posBa = lineIdx + colIdx;
+
+                if ((getSelectionBegin() <= posBa) && (getSelectionEnd() > posBa))
+                {
+                    painter.setBackground(selected);
+                    painter.setBackgroundMode(Qt::OpaqueMode);
+                    painter.setPen(colSelected);
+                } else {
+                    painter.setBackgroundMode(Qt::TransparentMode);
+                    painter.setPen(colStandard);
+                }
+
                 painter.drawText(xPosAscii, yPos, _xData.asciiChar(lineIdx + colIdx));
                 xPosAscii += _charWidth;
             }
