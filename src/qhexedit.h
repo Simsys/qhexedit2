@@ -7,12 +7,12 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.6.3
+\version Version 0.6.4
 \image html hexedit.png
 */
 
 
-/*! QHexEdit is a hex editor widget written in C++ for the Qt (Qt4) framework.
+/*! QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5) framework.
 It is a simple editor for binary data, just like QPlainTextEdit is for text
 data. There are sip configuration files included, so it is easy to create
 bindings for PyQt and you can use this widget also in python.

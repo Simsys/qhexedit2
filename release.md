@@ -1,3 +1,12 @@
+Release 0.6.4, 2015-04-09
+-------------------------
+    - Feature Ready for Qt5
+	- Feature Show Selection in ASCII Part
+	- Bugfix Selecting last item in a row
+	- Bugfix Scroll Bar not shown when extra data inserted
+	- Bugfix address area doesn't update when changed ouside
+	- Bugfix Error while saving (Example)
+	
 Release 0.6.3, 2012-01-28
 -------------------------
     - Searching and replacing included (indexOf(), lastIndexOf(), replace())
