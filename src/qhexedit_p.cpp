@@ -759,7 +759,7 @@ int QHexEditPrivate::cursorPos(QPoint pos)
 {
     int result = -1;
     // find char under cursor
-    if ((pos.x() >= _xPosHex) and (pos.x() < (_xPosHex + HEXCHARS_IN_LINE * _charWidth)))
+    if ((pos.x() >= _xPosHex) and (pos.x() < (_xPosHex + (HEXCHARS_IN_LINE + 2) * _charWidth)))
     {
         int x = (pos.x() - _xPosHex) / _charWidth;
         if ((x % 3) == 0)
