@@ -293,7 +293,7 @@ void MainWindow::createStatusBar()
     statusBar()->addPermanentWidget(lbOverwriteMode);
     setOverwriteMode(hexEdit->overwriteMode());
 
-    statusBar()->showMessage(tr("Ready"));
+    statusBar()->showMessage(tr("Ready"), 2000);
 }
 
 void MainWindow::createToolBars()
@@ -308,7 +308,7 @@ void MainWindow::loadFile(const QString &fileName)
 
     QFile file(fileName);
     if (!file.open(QFile::ReadOnly)) {
-        QMessageBox::warning(this, tr("SDI"),
+        QMessageBox::warning(this, tr("QHexEdit"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
