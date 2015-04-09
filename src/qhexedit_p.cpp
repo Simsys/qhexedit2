@@ -266,7 +266,11 @@ void QHexEditPrivate::setHighlighting(bool mode)
 
 void QHexEditPrivate::setOverwriteMode(bool overwriteMode)
 {
-    _overwriteMode = overwriteMode;
+    if (overwriteMode != _overwriteMode)
+    {
+        _overwriteMode = overwriteMode;
+        overwriteModeChanged(_overwriteMode);
+    }
 }
 
 bool QHexEditPrivate::overwriteMode()
@@ -573,9 +577,8 @@ if (!_readOnly)
     // Switch between insert/overwrite mode
     if ((event->key() == Qt::Key_Insert) && (event->modifiers() == Qt::NoModifier))
     {
-        _overwriteMode = !_overwriteMode;
         setCursorPos(_cursorPosition);
-        overwriteModeChanged(_overwriteMode);
+        setOverwriteMode(!overwriteMode());
     }
 
     ensureVisible();
