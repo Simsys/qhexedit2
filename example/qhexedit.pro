@@ -28,7 +28,12 @@ FORMS += \
     searchdialog.ui
 
 OTHER_FILES += \
-    ../doc/release.txt
+    ../readme.md \
+    ../doc/release.txt \
+    ../build-example.bat \
+    ../build-python-bindings.bat \
+    ../build-example.sh \
+    ../build-python-bindings.sh
 
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \

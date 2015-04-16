@@ -215,6 +215,8 @@ class MainWindow(QtGui.QMainWindow):
         self.lbAddress.setText('%x' % address)
         
     def setOverwriteMode(self, mode):
+        settings = QtCore.QSettings()
+        settings.setValue("OverwriteMode", mode)
         if mode:
             self.lbOverwriteMode.setText("Overwrite")
         else:
@@ -225,7 +227,7 @@ class MainWindow(QtGui.QMainWindow):
             
     def saveFile(self, fileName):
         file = QtCore.QFile(fileName)
-        if not file.open( QtCore.QFile.WriteOnly | QtCore.QFile.Text):
+        if not file.open( QtCore.QFile.WriteOnly | QtCore.QFile.Truncate):
             QtGui.QMessageBox.warning(self, "HexEdit",
                     "Cannot write file %s:\n%s." % (fileName, file.errorString()))
             return False

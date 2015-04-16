@@ -15,6 +15,10 @@ class OptionsDialog(QtGui.QDialog):
         
         self.readSettings()
         self.writeSettings()
+
+    def show(self):
+        self.readSettings()
+        super(OptionsDialog, self).show()
         
     def accept(self):
         self.writeSettings()
