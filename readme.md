@@ -3,7 +3,7 @@ QHexEdit2
 ![Application QHexEdit2 in Action](http://simsys.github.io/hexedit.png)
 
 
-QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python.
+QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python 2 and 3.
 
 QHexEdit takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via data().
 
@@ -16,3 +16,5 @@ QHexEdit comes with undo/redo functionality. All changes can be undone, by press
 This widget can only handle small amounts of data. The size has to be below 10 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any more.
 
 You can read the documentation of the project [here](http://simsys.github.io/).
+
+Please submit bug reports [here](https://github.com/Simsys/qhexedit2/issues).

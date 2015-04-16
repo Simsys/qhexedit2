@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 from PyQt4 import QtCore, QtGui
 from qhexedit import QHexEdit
 
@@ -175,23 +176,41 @@ class MainWindow(QtGui.QMainWindow):
 
     def readSettings(self):
         settings = QtCore.QSettings()
-        pos = settings.value('pos', QtCore.QPoint(200, 200)).toPoint()
-        size = settings.value('size', QtCore.QSize(610, 460)).toSize()
+
+        if sys.version_info >= (3, 0):
+            pos = settings.value('pos', QtCore.QPoint(200, 200))
+            size = settings.value('size', QtCore.QSize(610, 460))
+            self.hexEdit.setAddressArea(settings.value("AddressArea")=='true')
+            self.hexEdit.setAsciiArea(settings.value("AsciiArea")=='true')
+            self.hexEdit.setHighlighting(settings.value("Highlighting")=='true')
+            self.hexEdit.setOverwriteMode(settings.value("OverwriteMode")=='true')
+            self.hexEdit.setReadOnly(settings.value("ReadOnly")=='true')
+
+            self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")))
+            self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")))
+            self.hexEdit.setSelectionColor(QtGui.QColor(settings.value("SelectionColor")))
+            self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
+
+            self.hexEdit.setAddressWidth(int(settings.value("AddressAreaWidth")));
+        else:
+            pos = settings.value('pos', QtCore.QPoint(200, 200)).toPoint()
+            size = settings.value('size', QtCore.QSize(610, 460)).toSize()
+            self.hexEdit.setAddressArea(settings.value("AddressArea").toBool())
+            self.hexEdit.setAsciiArea(settings.value("AsciiArea").toBool())
+            self.hexEdit.setHighlighting(settings.value("Highlighting").toBool())
+            self.hexEdit.setOverwriteMode(settings.value("OverwriteMode").toBool())
+            self.hexEdit.setReadOnly(settings.value("ReadOnly").toBool())
+
+            self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")))
+            self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")))
+            self.hexEdit.setSelectionColor(QtGui.QColor(settings.value("SelectionColor")))
+            self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
+
+            self.hexEdit.setAddressWidth(settings.value("AddressAreaWidth").toInt()[0]);
+
         self.move(pos)
         self.resize(size)
         
-        self.hexEdit.setAddressArea(settings.value("AddressArea").toBool())
-        self.hexEdit.setAsciiArea(settings.value("AsciiArea").toBool());
-        self.hexEdit.setHighlighting(settings.value("Highlighting").toBool());
-        self.hexEdit.setOverwriteMode(settings.value("OverwriteMode").toBool());
-        self.hexEdit.setReadOnly(settings.value("ReadOnly").toBool());
-
-        self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")));
-        self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")));
-        self.hexEdit.setSelectionColor(QtGui.QColor(settings.value("SelectionColor")));
-        self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
-
-        self.hexEdit.setAddressWidth(settings.value("AddressAreaWidth").toInt()[0]);
 
     def save(self):
         if self.isUntitled:
@@ -241,14 +260,14 @@ class MainWindow(QtGui.QMainWindow):
     def saveToReadableFile(self):
         fileName = QtGui.QFileDialog.getSaveFileName(self, "Save To Readable File")
         if not fileName.isEmpty():
-            file = open(unicode(fileName), "wb")
+            file = open(str(fileName), "wb")
             file.write(str(self.hexEdit.toReadableString()))
             self.statusBar().showMessage("File saved", 2000);
 
     def saveSelectionToReadableFile(self):
         fileName = QtGui.QFileDialog.getSaveFileName(self, "Save To Readable File")
         if not fileName.isEmpty():
-            file = open(unicode(fileName), "wb")
+            file = open(str(fileName), "wb")
             file.write(str(self.hexEdit.selectionToReadableString()))
             self.statusBar().showMessage("File saved", 2000);
 
@@ -267,11 +286,8 @@ class MainWindow(QtGui.QMainWindow):
         settings.setValue('size', self.size())
         
 if __name__ == '__main__':
-
-    import sys
-
     app = QtGui.QApplication(sys.argv)
-    app.setApplicationName("Hexedit");
+    app.setApplicationName("QHexEdit");
     app.setOrganizationName("QHexEdit");
     mainWin = MainWindow()
     mainWin.show()
