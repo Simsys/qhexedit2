@@ -665,19 +665,17 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
             }
             else
             {
+                painter.setPen(colStandard);
+                painter.setBackgroundMode(Qt::TransparentMode);
+
                 if (_highlighting)
                 {
                     // hilight diff bytes
-                    painter.setBackground(highLighted);
                     if (_xData.dataChanged(posBa))
                     {
-                        painter.setPen(colHighlighted);
+                        painter.setBackground(highLighted);
                         painter.setBackgroundMode(Qt::OpaqueMode);
-                    }
-                    else
-                    {
-                        painter.setPen(colStandard);
-                        painter.setBackgroundMode(Qt::TransparentMode);
+                        painter.setPen(colHighlighted);
                     }
                 }
             }
