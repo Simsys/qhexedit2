@@ -1,3 +1,9 @@
+Release 0.6.6, 2015-05-01
+-------------------------
+    - Feature Adding drag and drop
+    - Feature Adding toolbar buttons for undo, redo and find
+    - Bugfix Selection is allways shown to end of file
+
 Release 0.6.5, 2015-04-16
 -------------------------
     - Feature Python Example ready for Python 2 and 3
