@@ -225,11 +225,11 @@ void MainWindow::createActions()
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, SIGNAL(triggered()), qApp, SLOT(closeAllWindows()));
 
-    undoAct = new QAction(tr("&Undo"), this);
+    undoAct = new QAction(QIcon(":/images/undo.png"), tr("&Undo"), this);
     undoAct->setShortcuts(QKeySequence::Undo);
     connect(undoAct, SIGNAL(triggered()), hexEdit, SLOT(undo()));
 
-    redoAct = new QAction(tr("&Redo"), this);
+    redoAct = new QAction(QIcon(":/images/redo.png"), tr("&Redo"), this);
     redoAct->setShortcuts(QKeySequence::Redo);
     connect(redoAct, SIGNAL(triggered()), hexEdit, SLOT(redo()));
 
@@ -245,7 +245,7 @@ void MainWindow::createActions()
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
-    findAct = new QAction(tr("&Find/Replace"), this);
+    findAct = new QAction(QIcon(":/images/find.png"), tr("&Find/Replace"), this);
     findAct->setShortcuts(QKeySequence::Find);
     findAct->setStatusTip(tr("Show the Dialog for finding and replacing"));
     connect(findAct, SIGNAL(triggered()), this, SLOT(showSearchDialog()));
@@ -328,6 +328,10 @@ void MainWindow::createToolBars()
     fileToolBar = addToolBar(tr("File"));
     fileToolBar->addAction(openAct);
     fileToolBar->addAction(saveAct);
+    editToolBar = addToolBar(tr("Edit"));
+    editToolBar->addAction(undoAct);
+    editToolBar->addAction(redoAct);
+    editToolBar->addAction(findAct);
 }
 
 void MainWindow::loadFile(const QString &fileName)

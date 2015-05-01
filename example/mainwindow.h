@@ -64,6 +64,7 @@ private:
     QMenu *helpMenu;
 
     QToolBar *fileToolBar;
+    QToolBar *editToolBar;
 
     QAction *openAct;
     QAction *saveAct;
