@@ -12,6 +12,8 @@ class QAction;
 class QMenu;
 class QUndoStack;
 class QLabel;
+class QDragEnterEvent;
+class QDropEvent;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -23,6 +25,8 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 
 private slots:
     void about();

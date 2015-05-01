@@ -8,6 +8,8 @@
 #include <QToolBar>
 #include <QColorDialog>
 #include <QFontDialog>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 
 #include "mainwindow.h"
 
@@ -16,6 +18,7 @@
 /*****************************************************************************/
 MainWindow::MainWindow()
 {
+    setAcceptDrops( true );
     init();
     setCurrentFile("");
 }
@@ -26,6 +29,28 @@ MainWindow::MainWindow()
 void MainWindow::closeEvent(QCloseEvent *)
 {
     writeSettings();
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    if (event->mimeData()->hasUrls())
+    {
+        event->accept();
+        QList<QUrl> urls = event->mimeData()->urls();
+        QString str = urls.at(0).toLocalFile();
+        statusBar()->showMessage( tr("Drop File: ")+str );
+    }
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    if (event->mimeData()->hasUrls())
+    {
+        QList<QUrl> urls = event->mimeData()->urls();
+        QString str = urls.at(0).toLocalFile();
+        loadFile(str);
+        event->accept();
+    }
 }
 
 /*****************************************************************************/
