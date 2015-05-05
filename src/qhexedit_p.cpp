@@ -443,7 +443,8 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
 /*****************************************************************************/
     if (!_readOnly)
     {
-        if (QApplication::keyboardModifiers() == Qt::NoModifier)
+        if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
+                (QApplication::keyboardModifiers() == Qt::KeypadModifier))
         {
             /* Hex input */
             int key = int(event->text()[0].toLatin1());
