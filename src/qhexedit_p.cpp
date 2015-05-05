@@ -441,40 +441,43 @@ void QHexEditPrivate::keyPressEvent(QKeyEvent *event)
 /*****************************************************************************/
 /* Edit Commands */
 /*****************************************************************************/
-if (!_readOnly)
-{
-    /* Hex input */
-        int key = int(event->text()[0].toLatin1());
-        if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
+    if (!_readOnly)
+    {
+        if (QApplication::keyboardModifiers() == Qt::NoModifier)
         {
-            if (getSelectionBegin() != getSelectionEnd())
+            /* Hex input */
+            int key = int(event->text()[0].toLatin1());
+            if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
             {
-                posBa = getSelectionBegin();
-                remove(posBa, getSelectionEnd() - posBa);
-                setCursorPos(2*posBa);
-                resetSelection(2*posBa);
-            }
-
-            // If insert mode, then insert a byte
-            if (_overwriteMode == false)
-                if ((charX % 3) == 0)
+                if (getSelectionBegin() != getSelectionEnd())
                 {
-                    insert(posBa, char(0));
+                    posBa = getSelectionBegin();
+                    remove(posBa, getSelectionEnd() - posBa);
+                    setCursorPos(2*posBa);
+                    resetSelection(2*posBa);
                 }
 
-            // Change content
-            if (_xData.size() > 0)
-            {
-                QByteArray hexValue = _xData.data().mid(posBa, 1).toHex();
-                if ((charX % 3) == 0)
-                    hexValue[0] = key;
-                else
-                    hexValue[1] = key;
+                // If insert mode, then insert a byte
+                if (_overwriteMode == false)
+                    if ((charX % 3) == 0)
+                    {
+                        insert(posBa, char(0));
+                    }
 
-                replace(posBa, QByteArray().fromHex(hexValue)[0]);
+                // Change content
+                if (_xData.size() > 0)
+                {
+                    QByteArray hexValue = _xData.data().mid(posBa, 1).toHex();
+                    if ((charX % 3) == 0)
+                        hexValue[0] = key;
+                    else
+                        hexValue[1] = key;
 
-                setCursorPos(_cursorPosition + 1);
-                resetSelection(_cursorPosition);
+                    replace(posBa, QByteArray().fromHex(hexValue)[0]);
+
+                    setCursorPos(_cursorPosition + 1);
+                    resetSelection(_cursorPosition);
+                }
             }
         }
 
