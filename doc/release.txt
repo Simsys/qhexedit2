@@ -1,7 +1,3 @@
-Release 0.6.7, 2015-05-11
--------------------------
-    - Bugfix Ctrl-C does not work properly
-
 Release 0.6.6, 2015-05-01
 -------------------------
     - Feature Adding drag and drop

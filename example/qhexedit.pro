@@ -33,8 +33,7 @@ OTHER_FILES += \
     ../build-example.bat \
     ../build-python-bindings.bat \
     ../build-example.sh \
-    ../build-python-bindings.sh \
-    ../doc/howtorelease.txt
+    ../build-python-bindings.sh
 
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \
