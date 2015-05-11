@@ -24,10 +24,12 @@ int SearchDialog::findNext()
 
     if (findBa.length() > 0)
     {
+/* Todo
         if (ui->cbBackwards->isChecked())
             idx = _hexEdit->lastIndexOf(findBa, from);
         else
             idx = _hexEdit->indexOf(findBa, from);
+*/
     }
     return idx;
 }
@@ -102,13 +104,15 @@ int SearchDialog::replaceOccurrence(int idx, const QByteArray &replaceBa)
 
             if (result == QMessageBox::Yes)
             {
-                _hexEdit->replace(idx, replaceBa.length(), replaceBa);
+                // ToDo
+                // _hexEdit->replace(idx, replaceBa.length(), replaceBa);
                 _hexEdit->update();
             }
         }
         else
         {
-            _hexEdit->replace(idx, replaceBa.length(), replaceBa);
+            // ToDo
+            // ToDo _hexEdit->replace(idx, replaceBa.length(), replaceBa);
         }
     }
     return result;

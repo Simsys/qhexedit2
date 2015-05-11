@@ -4,8 +4,7 @@ HEADERS = \
     mainwindow.h \
     optionsdialog.h \
     ../src/qhexedit.h \
-    ../src/qhexedit_p.h \
-    ../src/xbytearray.h \
+    ../src/chunks.h \
     ../src/commands.h \
     searchdialog.h
 
@@ -15,8 +14,7 @@ SOURCES = \
     mainwindow.cpp \
     optionsdialog.cpp \
     ../src/qhexedit.cpp \
-    ../src/qhexedit_p.cpp \
-    ../src/xbytearray.cpp \
+    ../src/chunks.cpp \
     ../src/commands.cpp \
     searchdialog.cpp
 

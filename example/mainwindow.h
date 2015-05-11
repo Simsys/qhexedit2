@@ -37,9 +37,9 @@ private slots:
     bool saveAs();
     void saveSelectionToReadableFile();
     void saveToReadableFile();
-    void setAddress(int address);
+    void setAddress(qint64 address);
     void setOverwriteMode(bool mode);
-    void setSize(int size);
+    void setSize(qint64 size);
     void showOptionsDialog();
     void showSearchDialog();
 

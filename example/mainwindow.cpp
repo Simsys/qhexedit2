@@ -115,7 +115,7 @@ void MainWindow::saveSelectionToReadableFile()
         }
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        file.write(hexEdit->selectionToReadableString().toLatin1());
+        // Todo file.write(hexEdit->selectionToReadableString().toLatin1());
         QApplication::restoreOverrideCursor();
 
         statusBar()->showMessage(tr("File saved"), 2000);
@@ -137,14 +137,14 @@ void MainWindow::saveToReadableFile()
         }
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        file.write(hexEdit->toReadableString().toLatin1());
+        // Todo file.write(hexEdit->toReadableString().toLatin1());
         QApplication::restoreOverrideCursor();
 
         statusBar()->showMessage(tr("File saved"), 2000);
     }
 }
 
-void MainWindow::setAddress(int address)
+void MainWindow::setAddress(qint64 address)
 {
     lbAddress->setText(QString("%1").arg(address, 1, 16));
 }
@@ -159,7 +159,7 @@ void MainWindow::setOverwriteMode(bool mode)
         lbOverwriteMode->setText(tr("Insert"));
 }
 
-void MainWindow::setSize(int size)
+void MainWindow::setSize(qint64 size)
 {
     lbSize->setText(QString("%1").arg(size));
 }
@@ -296,7 +296,7 @@ void MainWindow::createStatusBar()
     lbAddress->setFrameShadow(QFrame::Sunken);
     lbAddress->setMinimumWidth(70);
     statusBar()->addPermanentWidget(lbAddress);
-    connect(hexEdit, SIGNAL(currentAddressChanged(int)), this, SLOT(setAddress(int)));
+    connect(hexEdit, SIGNAL(currentAddressChanged(qint64)), this, SLOT(setAddress(qint64)));
 
     // Size Label
     lbSizeName = new QLabel();
@@ -307,7 +307,7 @@ void MainWindow::createStatusBar()
     lbSize->setFrameShadow(QFrame::Sunken);
     lbSize->setMinimumWidth(70);
     statusBar()->addPermanentWidget(lbSize);
-    connect(hexEdit, SIGNAL(currentSizeChanged(int)), this, SLOT(setSize(int)));
+    connect(hexEdit, SIGNAL(currentSizeChanged(qint64)), this, SLOT(setSize(qint64)));
 
     // Overwrite Mode Label
     lbOverwriteModeName = new QLabel();
