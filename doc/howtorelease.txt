@@ -1,0 +1,11 @@
+How to release
+==============
+
+1. Make changes, test them
+2. Edit qhexedit.h, version number
+3. Edit release.txt
+4. Make doxygen documentation and check it
+5. $ git add *
+6. $ git commit -m "v0.x.y"
+7. $ git push origin master
+
