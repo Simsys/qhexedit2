@@ -299,6 +299,7 @@ void QHexEdit::redo()
 {
     _undoStack->redo();
     setCursorPosition(_chunks->pos()*2);
+    ensureVisible();
     readBuffers();
     viewport()->update();
 }
@@ -320,6 +321,7 @@ void QHexEdit::undo()
 {
     _undoStack->undo();
     setCursorPosition(_chunks->pos()*2);
+    ensureVisible();
     readBuffers();
     viewport()->update();
 }
