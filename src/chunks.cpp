@@ -114,7 +114,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
     return buffer;
 }
 
-bool Chunks::data(QIODevice &iODevice, qint64 pos, qint64 count)
+bool Chunks::write(QIODevice &iODevice, qint64 pos, qint64 count)
 {
     if (count == -1)
         count = _size;

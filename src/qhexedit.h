@@ -123,7 +123,7 @@ public:
     /*! Givs back the data into a QIODevice starting at position \param pos and
     delivering \param count bytes.
     */
-    bool data(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
+    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
 
     // Char handling

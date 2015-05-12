@@ -382,7 +382,7 @@ bool MainWindow::saveFile(const QString &fileName)
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
     QFile file(tmpFileName);
-    bool ok = hexEdit->data(file);
+    bool ok = hexEdit->write(file);
     if (QFile::exists(fileName))
         ok = QFile::remove(fileName);
     if (ok)

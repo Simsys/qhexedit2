@@ -253,9 +253,9 @@ QByteArray QHexEdit::data(qint64 pos, qint64 count)
     return _chunks->data(pos, count);
 }
 
-bool QHexEdit::data(QIODevice &iODevice, qint64 pos, qint64 count)
+bool QHexEdit::write(QIODevice &iODevice, qint64 pos, qint64 count)
 {
-    return _chunks->data(iODevice, pos, count);
+    return _chunks->write(iODevice, pos, count);
 }
 
 // ********************************************************************** Char handling

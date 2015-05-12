@@ -20,7 +20,7 @@ public:
 
     // Getting data out of Chunks
     QByteArray data(qint64 pos=0, qint64 count=-1, QByteArray *highlighted=0);
-    bool data(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
+    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
     // Set and get highlighting infos
     void setDataChanged(qint64 pos, bool dataChanged);
