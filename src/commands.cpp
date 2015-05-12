@@ -105,15 +105,13 @@ void UndoStack::insert(qint64 pos, char c)
     }
 }
 
-void UndoStack::insert(qint64 pos, const QByteArray &ba, int len)
+void UndoStack::insert(qint64 pos, const QByteArray &ba)
 {
     if ((pos >= 0) && (pos <= _chunks->size()))
     {
         QString txt = QString(tr("Inserting %1 bytes")).arg(ba.size());
         beginMacro(txt);
-        if (len==-1)
-            len = ba.size();
-        for (int idx=0; idx < len; idx++)
+        for (int idx=0; idx < ba.size(); idx++)
         {
             QUndoCommand *cc = new CharCommand(_chunks, CharCommand::insert, pos + idx, ba.at(idx));
             this->push(cc);
@@ -156,21 +154,14 @@ void UndoStack::overwrite(qint64 pos, char c)
     }
 }
 
-void UndoStack::overwrite(qint64 pos, const QByteArray &ba, int len)
+void UndoStack::overwrite(qint64 pos, int len, const QByteArray &ba)
 {
     if ((pos >= 0) && (pos < _chunks->size()))
     {
-        if (len == -1)
-            len = ba.size();
-        if (len > (_chunks->size() - pos))
-            len = _chunks->size() - pos;
-        QString txt = QString(tr("Overwriting %1 bytes")).arg(ba.size());
+        QString txt = QString(tr("Overwrite %1 chars")).arg(len);
         beginMacro(txt);
-        for (int idx=0; idx < len; idx++)
-        {
-            QUndoCommand *cc = new CharCommand(_chunks, CharCommand::overwrite, pos + idx, ba.at(idx));
-            this->push(cc);
-        }
+        removeAt(pos, len);
+        insert(pos, ba);
         endMacro();
     }
 }

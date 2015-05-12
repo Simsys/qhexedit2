@@ -89,7 +89,7 @@ QByteArray SearchDialog::getContent(int comboIndex, const QString &input)
     return findBa;
 }
 
-int SearchDialog::replaceOccurrence(int idx, const QByteArray &replaceBa)
+qint64 SearchDialog::replaceOccurrence(qint64 idx, const QByteArray &replaceBa)
 {
     int result = QMessageBox::Yes;
     if (replaceBa.length() >= 0)
@@ -102,15 +102,13 @@ int SearchDialog::replaceOccurrence(int idx, const QByteArray &replaceBa)
 
             if (result == QMessageBox::Yes)
             {
-                // ToDo
-                // _hexEdit->replace(idx, replaceBa.length(), replaceBa);
+                _hexEdit->replace(idx, replaceBa.length(), replaceBa);
                 _hexEdit->update();
             }
         }
         else
         {
-            // ToDo
-            // ToDo _hexEdit->replace(idx, replaceBa.length(), replaceBa);
+            _hexEdit->replace(idx, replaceBa.length(), replaceBa);
         }
     }
     return result;

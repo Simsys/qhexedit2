@@ -115,7 +115,7 @@ void MainWindow::saveSelectionToReadableFile()
         }
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        // Todo file.write(hexEdit->selectionToReadableString().toLatin1());
+        file.write(hexEdit->selectionToReadableString().toLatin1());
         QApplication::restoreOverrideCursor();
 
         statusBar()->showMessage(tr("File saved"), 2000);
@@ -137,7 +137,7 @@ void MainWindow::saveToReadableFile()
         }
 
         QApplication::setOverrideCursor(Qt::WaitCursor);
-        // Todo file.write(hexEdit->toReadableString().toLatin1());
+        file.write(hexEdit->toReadableString().toLatin1());
         QApplication::restoreOverrideCursor();
 
         statusBar()->showMessage(tr("File saved"), 2000);
@@ -415,4 +415,3 @@ void MainWindow::writeSettings()
     settings.setValue("pos", pos());
     settings.setValue("size", size());
 }
-

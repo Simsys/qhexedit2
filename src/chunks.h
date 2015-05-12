@@ -19,7 +19,7 @@ public:
     bool setIODevice(QIODevice &ioDevice);
 
     // Getting data out of Chunks
-    QByteArray data(qint64 pos, qint64 count, QByteArray *highlighted=0);
+    QByteArray data(qint64 pos=0, qint64 count=-1, QByteArray *highlighted=0);
     bool data(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
     // Set and get highlighting infos

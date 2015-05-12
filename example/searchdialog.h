@@ -25,7 +25,7 @@ private slots:
 
 private:
     QByteArray getContent(int comboIndex, const QString &input);
-    int replaceOccurrence(int idx, const QByteArray &replaceBa);
+    qint64 replaceOccurrence(qint64 idx, const QByteArray &replaceBa);
 
     QHexEdit *_hexEdit;
 };

@@ -151,21 +151,21 @@ public:
 
     // ByteArray handling
 
-    /*! Inserts a QByteArray.
+    /*! Inserts a byte array.
     \param pos Index position, where to insert
     \param ba QByteArray, which is to insert
     \param len count of bytes to insert
     The QByteArray will be inserted and size of data grows.
     */
-    void insert(qint64 pos, const QByteArray &ba, qint64 len=-1);
+    void insert(qint64 pos, const QByteArray &ba);
 
-    /*! Replaces with a QByteArray.
+    /*! Replaces \param len bytes with a byte array \param ba.
     \param pos Index position, where to overwrite
-    \param ba QByteArray, which is used to overwrite
+    \param ba QByteArray, which is inserted
     \param len count of bytes to overwrite
     The data is overwritten and size of data will remain stable.
     */
-    void replace(qint64 pos, const QByteArray &ba, qint64 len=-1);
+    void replace(qint64 pos, qint64 len, const QByteArray &ba);
 
 
     // Utility functioins
@@ -222,11 +222,20 @@ public:
      */
     qint64 lastIndexOf(const QByteArray &ba, qint64 from);
 
+    /*! Gives back a formatted image of the selected content of QHexEdit
+    */
+    QString selectionToReadableString();
+
     /*!
      * \brief Set Font of QHexEdit
      * \param font
      */
     virtual void setFont(const QFont &font);
+
+    /*! Gives back a formatted image of the content of QHexEdit
+    */
+    QString toReadableString();
+
 
 public slots:
     /*! Redoes the last operation. If there is no operation to redo, i.e.
@@ -314,20 +323,22 @@ protected:
 
 private:
     // Handle selections
-    void resetSelection(qint64 pos);    // set selectionStart and selectionEnd to pos
-    void resetSelection();              // set selectionEnd to selectionStart
-    void setSelection(qint64 pos);      // set min (if below init) or max (if greater init)
+    void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos
+    void resetSelection();                      // set selectionEnd to selectionStart
+    void setSelection(qint64 pos);              // set min (if below init) or max (if greater init)
     int getSelectionBegin();
     int getSelectionEnd();
 
     // Private utility functions
     void init();
     void readBuffers();
+    QString toReadable(const QByteArray &ba);
 
 private slots:
-    void adjust();
-    void dataChangedPrivate();
-    void updateCursor();
+    void adjust();                              // recalc pixel positions
+    void dataChangedPrivate();                  // emit dataChanged() signal
+    void refresh();                             // ensureVisible() and readBuffers()
+    void updateCursor();                        // update blinking cursor
 
 private:
     // Name convention: pixel positions start with _px

@@ -28,10 +28,10 @@ class UndoStack : public QUndoStack
 public:
     UndoStack(Chunks *chunks, QObject * parent=0);
     void insert(qint64 pos, char c);
-    void insert(qint64 pos, const QByteArray &ba, int len=-1);
+    void insert(qint64 pos, const QByteArray &ba);
     void removeAt(qint64 pos, qint64 len=1);
     void overwrite(qint64 pos, char c);
-    void overwrite(qint64 pos, const QByteArray &ba, int len=-1);
+    void overwrite(qint64 pos, int len, const QByteArray &ba);
 
 signals:
     void dataChanged();
