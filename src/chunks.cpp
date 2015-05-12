@@ -30,6 +30,7 @@ bool Chunks::setIODevice(QIODevice &ioDevice)
         _size = _ioDevice->size();
         _pos = 0;
         _ioDevice->close();
+        _chunks.clear();
     }
     return ok;
 }
