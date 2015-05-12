@@ -94,17 +94,20 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
             {
                 chunkIdx += 1;
                 ioDelta += CHUNK_SIZE - chunk.data.size();
-                int count;
+                qint64 count;
                 qint64 chunkOfs = pos - chunk.absPos;
                 if (maxSize > ((qint64)chunk.data.size() - chunkOfs))
-                    count = (int)(((qint64)chunk.data.size() - chunkOfs));
+                    count = (qint64)chunk.data.size() - chunkOfs;
                 else
-                    count = (int)maxSize;
-                buffer += chunk.data.mid(chunkOfs, count);
-                maxSize -= count;
-                pos += count;
-                if (highlighted)
-                    *highlighted += chunk.dataChanged.mid(chunkOfs, count);
+                    count = maxSize;
+                if (count > 0)
+                {
+                    buffer += chunk.data.mid(chunkOfs, (int)count);
+                    maxSize -= count;
+                    pos += count;
+                    if (highlighted)
+                        *highlighted += chunk.dataChanged.mid(chunkOfs, (int)count);
+                }
             }
         }
 
@@ -118,13 +121,15 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
                 byteCount = chunk.absPos - pos;
 
             maxSize -= byteCount;
-            _ioDevice->seek(pos + ioDelta);
-            readBuffer = _ioDevice->read(byteCount);
-            buffer += readBuffer;
-            if (highlighted)
-                *highlighted += QByteArray(readBuffer.size(), NORMAL);
-            pos += readBuffer.size();
-            //ioDelta += readBuffer.size();
+            if ((pos + ioDelta) < _size)
+            {
+                _ioDevice->seek(pos + ioDelta);
+                readBuffer = _ioDevice->read(byteCount);
+                buffer += readBuffer;
+                if (highlighted)
+                    *highlighted += QByteArray(readBuffer.size(), NORMAL);
+                pos += readBuffer.size();
+            }
         }
     }
     _ioDevice->close();
