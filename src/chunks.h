@@ -13,21 +13,31 @@ struct Chunk
 class Chunks
 {
 public:
+    // Constructors and file settings
     Chunks();
     Chunks(QIODevice &ioDevice);
+    bool setIODevice(QIODevice &ioDevice);
 
+    // Getting data out of Chunks
     QByteArray data(qint64 pos, qint64 count, QByteArray *highlighted=0);
     bool data(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
+    // Set and get highlighting infos
     void setDataChanged(qint64 pos, bool dataChanged);
     bool dataChanged(qint64 pos);
 
-    bool removeAt(qint64 pos);
+    // Search API
+    qint64 indexOf(const QByteArray &ba, qint64 from);
+    qint64 lastIndexOf(const QByteArray &ba, qint64 from);
+
+    // Char manipulations
     bool insert(qint64 pos, char b);
     bool overwrite(qint64 pos, char b);
+    bool removeAt(qint64 pos);
+
+    // Utility functions
     char operator[](qint64 pos);
     qint64 pos();
-    bool setIODevice(QIODevice &ioDevice);
     qint64 size();
 
 
