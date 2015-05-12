@@ -38,7 +38,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
         event->accept();
         QList<QUrl> urls = event->mimeData()->urls();
         QString str = urls.at(0).toLocalFile();
-        statusBar()->showMessage( tr("Drop File: ")+str );
+        statusBar()->showMessage( tr("Drop File: ") + str, 2000);
     }
 }
 
@@ -60,6 +60,11 @@ void MainWindow::about()
 {
    QMessageBox::about(this, tr("About QHexEdit"),
             tr("The QHexEdit example is a short Demo of the QHexEdit Widget."));
+}
+
+void MainWindow::dataChanged()
+{
+    setWindowModified(true);
 }
 
 void MainWindow::open()
@@ -187,6 +192,7 @@ void MainWindow::init()
     hexEdit = new QHexEdit;
     setCentralWidget(hexEdit);
     connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), this, SLOT(setOverwriteMode(bool)));
+    connect(hexEdit, SIGNAL(dataChanged()), this, SLOT(dataChanged()));
     searchDialog = new SearchDialog(hexEdit, this);
 
     createActions();
@@ -336,20 +342,14 @@ void MainWindow::createToolBars()
 
 void MainWindow::loadFile(const QString &fileName)
 {
-
-    QFile file(fileName);
-    if (!file.open(QFile::ReadOnly)) {
+    file.setFileName(fileName);
+    if (!hexEdit->setData(file)) {
         QMessageBox::warning(this, tr("QHexEdit"),
                              tr("Cannot read file %1:\n%2.")
                              .arg(fileName)
                              .arg(file.errorString()));
         return;
     }
-
-    QApplication::setOverrideCursor(Qt::WaitCursor);
-    hexEdit->setData(file.readAll());
-    QApplication::restoreOverrideCursor();
-
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File loaded"), 2000);
 }
@@ -378,18 +378,28 @@ void MainWindow::readSettings()
 
 bool MainWindow::saveFile(const QString &fileName)
 {
-    QFile file(fileName);
-    if (!file.open(QFile::WriteOnly | QFile::Truncate)) {
-        QMessageBox::warning(this, tr("QHexEdit"),
-                             tr("Cannot write file %1:\n%2.")
-                             .arg(fileName)
-                             .arg(file.errorString()));
-        return false;
-    }
+    QString tmpFileName = fileName + ".~tmp";
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    file.write(hexEdit->data());
+    QFile file(tmpFileName);
+    bool ok = hexEdit->data(file);
+    if (QFile::exists(fileName))
+        ok = QFile::remove(fileName);
+    if (ok)
+    {
+        file.setFileName(tmpFileName);
+        ok = file.copy(fileName);
+        if (ok)
+            ok = QFile::remove(tmpFileName);
+    }
     QApplication::restoreOverrideCursor();
+
+    if (!ok) {
+        QMessageBox::warning(this, tr("QHexEdit"),
+                             tr("Cannot write file %1.")
+                             .arg(fileName));
+        return false;
+    }
 
     setCurrentFile(fileName);
     statusBar()->showMessage(tr("File saved"), 2000);
@@ -401,7 +411,10 @@ void MainWindow::setCurrentFile(const QString &fileName)
     curFile = QFileInfo(fileName).canonicalFilePath();
     isUntitled = fileName.isEmpty();
     setWindowModified(false);
-    setWindowFilePath(curFile);
+    if (fileName.isEmpty())
+        setWindowFilePath("QHexEdit");
+    else
+        setWindowFilePath(curFile + " - QHexEdit");
 }
 
 QString MainWindow::strippedName(const QString &fullFileName)

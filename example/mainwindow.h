@@ -30,6 +30,7 @@ protected:
 
 private slots:
     void about();
+    void dataChanged();
     void open();
     void optionsAccepted();
     void findNext();
@@ -57,6 +58,7 @@ private:
     void writeSettings();
 
     QString curFile;
+    QFile file;
     bool isUntitled;
     
     QMenu *fileMenu;
