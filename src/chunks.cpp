@@ -75,10 +75,16 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
 
     if (highlighted)
         highlighted->clear();
-    if ((maxSize - pos) > _size)
-        maxSize = _size - pos;
-    if (maxSize == -1)
+
+    if (pos >= _size)
+        return buffer;
+
+    if (maxSize < 0)
         maxSize = _size;
+    else
+        if ((pos + maxSize) > _size)
+            maxSize = _size - pos;
+
     _ioDevice->open(QIODevice::ReadOnly);
 
     while (maxSize > 0)
@@ -93,11 +99,13 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
             else
             {
                 chunkIdx += 1;
-                ioDelta += CHUNK_SIZE - chunk.data.size();
                 qint64 count;
                 qint64 chunkOfs = pos - chunk.absPos;
                 if (maxSize > ((qint64)chunk.data.size() - chunkOfs))
+                {
                     count = (qint64)chunk.data.size() - chunkOfs;
+                    ioDelta += CHUNK_SIZE - chunk.data.size();
+                }
                 else
                     count = maxSize;
                 if (count > 0)
@@ -111,7 +119,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
             }
         }
 
-        if (_ioDevice && (maxSize > 0) && (pos < chunk.absPos))
+        if ((maxSize > 0) && (pos < chunk.absPos))
         {
             qint64 byteCount;
             QByteArray readBuffer;
@@ -121,15 +129,12 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
                 byteCount = chunk.absPos - pos;
 
             maxSize -= byteCount;
-            if ((pos + ioDelta) < _size)
-            {
-                _ioDevice->seek(pos + ioDelta);
-                readBuffer = _ioDevice->read(byteCount);
-                buffer += readBuffer;
-                if (highlighted)
-                    *highlighted += QByteArray(readBuffer.size(), NORMAL);
-                pos += readBuffer.size();
-            }
+            _ioDevice->seek(pos + ioDelta);
+            readBuffer = _ioDevice->read(byteCount);
+            buffer += readBuffer;
+            if (highlighted)
+                *highlighted += QByteArray(readBuffer.size(), NORMAL);
+            pos += readBuffer.size();
         }
     }
     _ioDevice->close();
