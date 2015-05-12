@@ -295,6 +295,36 @@ void QHexEdit::ensureVisible()
         verticalScrollBar()->setValue((int)(_cursorPosition / 2 / BYTES_PER_LINE) - _rowsShown + 1);
 }
 
+qint64 QHexEdit::indexOf(const QByteArray &ba, qint64 from)
+{
+    qint64 pos = _chunks->indexOf(ba, from);
+    if (pos > -1)
+    {
+        qint64 curPos = pos*2;
+        setCursorPosition(curPos + ba.length()*2);
+        resetSelection(curPos);
+        setSelection(curPos + ba.length()*2);
+        ensureVisible();
+        viewport()->update();
+    }
+    return pos;
+}
+
+qint64 QHexEdit::lastIndexOf(const QByteArray &ba, qint64 from)
+{
+    qint64 pos = _chunks->lastIndexOf(ba, from);
+    if (pos > -1)
+    {
+        qint64 curPos = pos*2;
+        setCursorPosition(curPos - 1);
+        resetSelection(curPos);
+        setSelection(curPos + ba.length()*2);
+        ensureVisible();
+        viewport()->update();
+    }
+    return pos;
+}
+
 void QHexEdit::redo()
 {
     _undoStack->redo();

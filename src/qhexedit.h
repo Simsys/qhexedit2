@@ -125,6 +125,7 @@ public:
     */
     bool data(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
+
     // Char handling
 
     /*! Inserts a char.
@@ -200,10 +201,26 @@ public:
     void ensureVisible();
 
     /*!
+     * \brief Find first occurence of ba in QHexEdit data
+     * \param ba Data to find
+     * \param from Point where the search starts
+     * \return pos if fond, else -1
+     */
+    qint64 indexOf(const QByteArray &ba, qint64 from);
+
+    /*!
      * \brief Get state of highlighting of made changes
      * \return state
      */
     bool highlighting();
+
+    /*!
+     * \brief Find last occurence of ba in QHexEdit data
+     * \param ba Data to find
+     * \param from Point where the search starts
+     * \return pos if fond, else -1
+     */
+    qint64 lastIndexOf(const QByteArray &ba, qint64 from);
 
     /*!
      * \brief Set Font of QHexEdit

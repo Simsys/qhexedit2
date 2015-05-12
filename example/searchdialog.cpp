@@ -16,20 +16,18 @@ SearchDialog::~SearchDialog()
   delete ui;
 }
 
-int SearchDialog::findNext()
+qint64 SearchDialog::findNext()
 {
-    int from = _hexEdit->cursorPosition();
+    qint64 from = _hexEdit->cursorPosition() / 2;
     QByteArray findBa = getContent(ui->cbFindFormat->currentIndex(), ui->cbFind->currentText());
-    int idx = -1;
+    qint64 idx = -1;
 
     if (findBa.length() > 0)
     {
-/* Todo
         if (ui->cbBackwards->isChecked())
             idx = _hexEdit->lastIndexOf(findBa, from);
         else
             idx = _hexEdit->indexOf(findBa, from);
-*/
     }
     return idx;
 }

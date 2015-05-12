@@ -15,7 +15,7 @@ class SearchDialog : public QDialog
 public:
     explicit SearchDialog(QHexEdit *hexEdit, QWidget *parent = 0);
     ~SearchDialog();
-    int findNext();
+    qint64 findNext();
     Ui::SearchDialog *ui;
 
 private slots:
