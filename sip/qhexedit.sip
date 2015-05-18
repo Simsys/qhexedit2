@@ -3,55 +3,76 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
-class QHexEdit : QScrollArea
+class QHexEdit : QAbstractScrollArea
 {
 %TypeHeaderCode
 #include "../src/qhexedit.h"
 %End
 
 public:
-    explicit QHexEdit(QWidget *parent /TransferThis/ = 0);
-    virtual ~QHexEdit();
+    bool setData(QIODevice &);
+    QByteArray dataAt(qint64, qint64=-1);
+    bool write(QIODevice &iODevice, qint64=0, qint64=-1);
+    
+    void insert(qint64, char);
+    void remove(qint64, qint64);
+    void replace(qint64, char);
 
-    void setData(const QByteArray &);
-    QByteArray data();
-    void setAddressOffset(int);
-    int addressOffset();
-    void setAddressAreaColor(const QColor &);
-    QColor addressAreaColor();
-    void setCursorPosition(int);
-    int cursorPosition();
-    void setHighlightingColor(const QColor &);
-    QColor highlightingColor();
-    void setSelectionColor(const QColor &);
-    QColor selectionColor();
-    void setOverwriteMode(bool);
-    bool overwriteMode();
-    void setReadOnly(bool);
-    bool isReadOnly();
-    void setFont(const QFont &);
-    QFont font();
+    void insert(qint64, QByteArray &);
+    void replace(qint64, qint64, QByteArray &);
 
-    int indexOf(QByteArray &, int);
-    void insert(int, QByteArray &);
-    void insert(int, char);
-    int lastIndexOf(QByteArray &, int);
-    void remove(int, int);
-    void replace(int, int, QByteArray &);
-    QString toReadableString();
+    bool addressArea();
+    bool addressWidth();
+    bool asciiArea();
+    qint64 cursorPosition(QPoint);
+    void ensureVisible();
+    qint64 indexOf(QByteArray &, qint64);
+    bool isModified();
+    bool highlighting();
+    qint64 lastIndexOf(QByteArray &, qint64);
     QString selectionToReadableString();
+    void setFont(const QFont &);
+    QString toReadableString();
 
 public slots:
     void redo();
-    void setAddressWidth(int);
     void setAddressArea(bool);
+    void setAddressWidth(int);
     void setAsciiArea(bool);
     void setHighlighting(bool);
     void undo();
 
 signals:
-    void currentAddressChanged(int);
-    void currentSizeChanged(int);
+    void currentAddressChanged(qint64);
+    void currentSizeChanged(qint64);
     void dataChanged();
     void overwriteModeChanged(bool);
+
+public:
+    explicit QHexEdit(QWidget *parent /TransferThis/ = 0);
+    virtual ~QHexEdit();
+
+    QColor addressAreaColor();
+    void setAddressAreaColor(const QColor &);
+
+    qint64 addressOffset();
+    void setAddressOffset(qint64);
+
+    qint64 cursorPosition();
+    void setCursorPosition(qint64);
+
+    QByteArray data();
+    void setData(const QByteArray &);
+
+    QColor highlightingColor();
+    void setHighlightingColor(const QColor &);
+
+    bool overwriteMode();
+    void setOverwriteMode(bool);
+
+    bool isReadOnly();
+    void setReadOnly(bool);
+
+    QColor selectionColor();
+    void setSelectionColor(const QColor &);
 };
