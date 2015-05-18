@@ -2,6 +2,7 @@
 #include <QUndoCommand>
 
 
+// Helper class to store single byte commands
 class CharCommand : public QUndoCommand
 {
 public:
@@ -101,7 +102,6 @@ void UndoStack::insert(qint64 pos, char c)
     {
         QUndoCommand *cc = new CharCommand(_chunks, CharCommand::insert, pos, c);
         this->push(cc);
-        emit dataChanged();
     }
 }
 
@@ -140,7 +140,6 @@ void UndoStack::removeAt(qint64 pos, qint64 len)
             }
             endMacro();
         }
-        emit dataChanged();
     }
 }
 
@@ -150,7 +149,6 @@ void UndoStack::overwrite(qint64 pos, char c)
     {
         QUndoCommand *cc = new CharCommand(_chunks, CharCommand::overwrite, pos, c);
         this->push(cc);
-        emit dataChanged();
     }
 }
 

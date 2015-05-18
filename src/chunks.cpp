@@ -12,7 +12,7 @@
 
 Chunks::Chunks()
 {
-    QBuffer * buf = new QBuffer();
+    QBuffer *buf = new QBuffer();
     setIODevice(*buf);
 }
 
@@ -25,13 +25,19 @@ bool Chunks::setIODevice(QIODevice &ioDevice)
 {
     _ioDevice = &ioDevice;
     bool ok = _ioDevice->open(QIODevice::ReadOnly);
-    if (ok)
+    if (ok)   // Try to open IODevice
     {
         _size = _ioDevice->size();
-        _pos = 0;
         _ioDevice->close();
-        _chunks.clear();
     }
+    else                                        // Fallback is an empty buffer
+    {
+        QBuffer *buf = new QBuffer();
+        _ioDevice = buf;
+        _size = 0;
+    }
+    _chunks.clear();
+    _pos = 0;
     return ok;
 }
 
@@ -46,6 +52,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
     Chunk chunk;
     QByteArray buffer;
 
+    // Do some checks and some arrangements
     if (highlighted)
         highlighted->clear();
 
@@ -62,10 +69,15 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
 
     while (maxSize > 0)
     {
-        chunk.absPos = std::numeric_limits<qint64>::max();
+        chunk.absPos = LONG_LONG_MAX;
         bool chunksLoopOngoing = true;
         while ((chunkIdx < _chunks.count()) && chunksLoopOngoing)
         {
+            // In this section, we track changes before our required data and
+            // we take the editdet data, if availible. ioDelta is a difference
+            // counter to justify the read pointer to the original data, if
+            // data in between was deleted or inserted.
+
             chunk = _chunks[chunkIdx];
             if (chunk.absPos > pos)
                 chunksLoopOngoing = false;
@@ -94,6 +106,9 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
 
         if ((maxSize > 0) && (pos < chunk.absPos))
         {
+            // In this section, we read data from the original source. This only will
+            // happen, whe no copied data is available
+
             qint64 byteCount;
             QByteArray readBuffer;
             if ((chunk.absPos - pos) > maxSize)
@@ -255,6 +270,10 @@ qint64 Chunks::size()
 
 int Chunks::getChunkIndex(qint64 absPos)
 {
+    // This routine checks, if there is already a copied chunk available. If os, it
+    // returns a reference to it. If there is no copied chunk available, original
+    // data will be copied into a new chunk.
+
     int foundIdx = -1;
     int insertIdx = 0;
     qint64 ioDelta = 0;

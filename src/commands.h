@@ -19,6 +19,10 @@ the user to execute a undo command contation e.g. 3 steps in a single command.
 If you for example insert a new byt "34" this means for the editor doing 3
 steps: insert a "00", overwrite it with "03" and the overwrite it with "34". These
 3 steps are combined into a single step, insert a "34".
+
+The byte array oriented commands are just put into a set of single byte commands,
+which are pooled together with the macroBegin() and macroEnd() functionality of
+Qt's QUndoStack.
 */
 
 class UndoStack : public QUndoStack
@@ -32,9 +36,6 @@ public:
     void removeAt(qint64 pos, qint64 len=1);
     void overwrite(qint64 pos, char c);
     void overwrite(qint64 pos, int len, const QByteArray &ba);
-
-signals:
-    void dataChanged();
 
 private:
     Chunks * _chunks;
