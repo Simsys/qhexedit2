@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['undo',['undo',['../class_q_hex_edit.html#a57a6f775cd612f901567cc005988c6de',1,'QHexEdit']]]
+  ['redo',['redo',['../class_q_hex_edit.html#a9c9650f363859e42a0ebf4ed6a1c4ae0',1,'QHexEdit']]],
+  ['remove',['remove',['../class_q_hex_edit.html#a6fee4dba9a2eaeeccccbd84111f8bf2c',1,'QHexEdit']]],
+  ['replace',['replace',['../class_q_hex_edit.html#a386bff35c7453caaf547d203026fb462',1,'QHexEdit::replace(qint64 pos, char ch)'],['../class_q_hex_edit.html#a79dbbeaf7ddbb358730bed763d05a959',1,'QHexEdit::replace(qint64 pos, qint64 len, const QByteArray &amp;ba)']]]
 ];

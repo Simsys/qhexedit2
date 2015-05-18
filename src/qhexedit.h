@@ -12,7 +12,7 @@
 QHexEdit is a binary editor widget for Qt.
 
 \version Version 0.7.0
-\image html hexedit.png
+\image html qhexedit.png
 */
 
 
@@ -125,8 +125,8 @@ public:
     */
     QByteArray dataAt(qint64 pos, qint64 count=-1);
 
-    /*! Givs back the data into a QIODevice starting at position \param pos and
-    delivering \param count bytes.
+    /*! Givs back the data into a \param iODevice starting at position \param pos 
+    and delivering \param count bytes. 
     */
     bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
@@ -159,16 +159,15 @@ public:
     /*! Inserts a byte array.
     \param pos Index position, where to insert
     \param ba QByteArray, which is to insert
-    \param len count of bytes to insert
     The QByteArray will be inserted and size of data grows.
     */
     void insert(qint64 pos, const QByteArray &ba);
 
-    /*! Replaces \param len bytes with a byte array \param ba.
+    /*! Replaces \param len bytes with a byte array \param ba
     \param pos Index position, where to overwrite
     \param ba QByteArray, which is inserted
     \param len count of bytes to overwrite
-    The data is overwritten and size of data will remain stable.
+    The data is overwritten and size of data may change.
     */
     void replace(qint64 pos, qint64 len, const QByteArray &ba);
 

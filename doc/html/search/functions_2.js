@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['indexof',['indexOf',['../class_q_hex_edit.html#a1865c7553fe4c2b27d581159f7956c8a',1,'QHexEdit']]],
-  ['insert',['insert',['../class_q_hex_edit.html#a990a5188800f295f1d15f51b857fd7b9',1,'QHexEdit::insert(int i, const QByteArray &amp;ba)'],['../class_q_hex_edit.html#aae1006e9ebf9233e782bedeb70b722c7',1,'QHexEdit::insert(int i, char ch)']]]
+  ['dataat',['dataAt',['../class_q_hex_edit.html#a83c0c585108cc204852ff2e30214253a',1,'QHexEdit']]],
+  ['datachanged',['dataChanged',['../class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d',1,'QHexEdit']]]
 ];
