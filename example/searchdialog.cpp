@@ -19,15 +19,15 @@ SearchDialog::~SearchDialog()
 qint64 SearchDialog::findNext()
 {
     qint64 from = _hexEdit->cursorPosition() / 2;
-    QByteArray findBa = getContent(ui->cbFindFormat->currentIndex(), ui->cbFind->currentText());
+    _findBa = getContent(ui->cbFindFormat->currentIndex(), ui->cbFind->currentText());
     qint64 idx = -1;
 
-    if (findBa.length() > 0)
+    if (_findBa.length() > 0)
     {
         if (ui->cbBackwards->isChecked())
-            idx = _hexEdit->lastIndexOf(findBa, from);
+            idx = _hexEdit->lastIndexOf(_findBa, from);
         else
-            idx = _hexEdit->indexOf(findBa, from);
+            idx = _hexEdit->indexOf(_findBa, from);
     }
     return idx;
 }
@@ -108,7 +108,7 @@ qint64 SearchDialog::replaceOccurrence(qint64 idx, const QByteArray &replaceBa)
         }
         else
         {
-            _hexEdit->replace(idx, replaceBa.length(), replaceBa);
+            _hexEdit->replace(idx, _findBa.length(), replaceBa);
         }
     }
     return result;

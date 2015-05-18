@@ -28,6 +28,7 @@ private:
     qint64 replaceOccurrence(qint64 idx, const QByteArray &replaceBa);
 
     QHexEdit *_hexEdit;
+    QByteArray _findBa;
 };
 
 #endif // SEARCHDIALOG_H
