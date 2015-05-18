@@ -64,7 +64,7 @@ void MainWindow::about()
 
 void MainWindow::dataChanged()
 {
-    setWindowModified(true);
+    setWindowModified(hexEdit->isModified());
 }
 
 void MainWindow::open()
