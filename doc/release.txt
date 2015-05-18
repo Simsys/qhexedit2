@@ -1,87 +1,98 @@
+Release 0.7.0, 2015-05-18
+-------------------------
+- QHexEdit is now based on QIODevice. The data shown is not buffered in memory. QHexEdit can show now very big files (> 2 gigabytes) without any problems
+- QHexEdit has also a QByteArray based, backward compatible (as far as possible) interface for convenience 
+- Changes on the data will be stored in copied memory chunks, the base file will only read (QIODevice::ReadOnly)
+- QHexEdit is now directly derived from QAbstractScrollArea
+- The Widget calculates now all dimensions dynamically, hence small or big fonts will be shown properly on all screens
+- You can use also proportional fonts, though it is not recommended
+- Paint event needs very low cpu activity, when editor is in idle mode without user actions. Only the section of the data is rendered, which is shown to the user
+- Several bugfixes.
+
 Release 0.6.7, 2015-05-11
 -------------------------
-    - Bugfix Ctrl-C does not work properly
+- Bugfix Ctrl-C does not work properly
 
 Release 0.6.6, 2015-05-01
 -------------------------
-    - Feature Adding drag and drop
-    - Feature Adding toolbar buttons for undo, redo and find
-    - Bugfix Selection is allways shown to end of file
+- Feature Adding drag and drop
+- Feature Adding toolbar buttons for undo, redo and find
+- Bugfix Selection is allways shown to end of file
 
 Release 0.6.5, 2015-04-16
 -------------------------
-    - Feature Python Example ready for Python 2 and 3
-    - Bugfix Handling overwriteMode Flag
+- Feature Python Example ready for Python 2 and 3
+- Bugfix Handling overwriteMode Flag
 
 Release 0.6.4, 2015-04-09
 -------------------------
-    - Feature Ready for Qt5
-    - Feature Show Selection in ASCII Part
-    - Bugfix Selecting last item in a row
-    - Bugfix Scroll Bar not shown when extra data inserted
-    - Bugfix address area doesn't update when changed ouside
-    - Bugfix Error while saving (Example)
+- Feature Ready for Qt5
+- Feature Show Selection in ASCII Part
+- Bugfix Selecting last item in a row
+- Bugfix Scroll Bar not shown when extra data inserted
+- Bugfix address area doesn't update when changed ouside
+- Bugfix Error while saving (Example)
     
 Release 0.6.3, 2012-01-28
 -------------------------
-    - Searching and replacing included (indexOf(), lastIndexOf(), replace())
-    - Example ist now named consequently "QHexEdit"
-    - Example reflects the search/replace functionality
-    - Translateions (cs, de) for the example are contained
-    - Python bindings include also the new features
-    - Paython example is also updated
+- Searching and replacing included (indexOf(), lastIndexOf(), replace())
+- Example ist now named consequently "QHexEdit"
+- Example reflects the search/replace functionality
+- Translateions (cs, de) for the example are contained
+- Python bindings include also the new features
+- Paython example is also updated
 
 Release 0.6.2, 2012-01-21
 -------------------------
-    - Fix issue #4 "Hiding the ascii area doesn't resize the widget properly"
-    - Fix issue #5 "Blinking cursor is displayed even if the control is set to read only"
+- Fix issue #4 "Hiding the ascii area doesn't resize the widget properly"
+- Fix issue #5 "Blinking cursor is displayed even if the control is set to read only"
 
 Release 0.6.1, 2011-10-22
 -------------------------
-    - Fix issue #2 "setData() steals focus"
-    - Fix issue #3 "QHexEdit crashes, when hitting Backspace on the first Byte"
+- Fix issue #2 "setData() steals focus"
+- Fix issue #3 "QHexEdit crashes, when hitting Backspace on the first Byte"
 
 Release 0.6.0, 2011-10-03
 -------------------------
-    - Undo/Redo functioinality
-    - toReadableString(), selectionToReadableString() added
-    - New structure, new classes XByteArray, CharCommands, ArrayCommands
-    - C++ and Python example reflect the new features
+- Undo/Redo functioinality
+- toReadableString(), selectionToReadableString() added
+- New structure, new classes XByteArray, CharCommands, ArrayCommands
+- C++ and Python example reflect the new features
 
 Release 0.5.4, 2011-08-31
 -------------------------
-    - New Feature: Property font
-    - Python Example is now identical to C++ Example
-    - Windows and Linux build scripts added
+- New Feature: Property font
+- Python Example is now identical to C++ Example
+- Windows and Linux build scripts added
 
 Release 0.5.3, 2011-08-29
 -------------------------
-    - BugFix: recursive call in "qhexedit.cpp" addressOffset()
-    - New Feature: Property readOnly
+- BugFix: recursive call in "qhexedit.cpp" addressOffset()
+- New Feature: Property readOnly
 
 Release 0.5.2, 2011-08-27
 -------------------------
 QHexEdit
-    - New Feature: Del & Backspace fill with 0x0 in overwrite mode,
+- New Feature: Del & Backspace fill with 0x0 in overwrite mode,
       so data length is here allways constant
 
 Release 0.5.1, 2011-08-27
 -------------------------
 Documentation
-    - Release information corrected
+- Release information corrected
 
 Release 0.5.0, 2011-08-27
 -------------------------
 Example/OptionsDialog:
-    - BugFix: No redefining of signal "accepted"
-    - BugFix: Method "recect" removed
-    - New Feature: Choose selection color
+- BugFix: No redefining of signal "accepted"
+- BugFix: Method "recect" removed
+- New Feature: Choose selection color
 
 QHexEdit:
-    - New Feature: Select data with mouse and keyboard
-    - New Feature: Cut, Copy and Paste functionality
-    - BugFix: Ensure cursor visible now works properly
-    - BugFix: When using mouse weel, qhexedit looses focus
-    - BugFix: Changed status is independent on the content
-    - Polishing: Nicer colors for highlighting, selection, and address area
+- New Feature: Select data with mouse and keyboard
+- New Feature: Cut, Copy and Paste functionality
+- BugFix: Ensure cursor visible now works properly
+- BugFix: When using mouse weel, qhexedit looses focus
+- BugFix: Changed status is independent on the content
+- Polishing: Nicer colors for highlighting, selection, and address area
 
