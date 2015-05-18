@@ -13,7 +13,7 @@ You can select data with keyboard hits or mouse movements. The copy-key will cop
 
 QHexEdit comes with undo/redo functionality. All changes can be undone, by pressing the undo-key (usually ctr-z). They can also be redone afterwards. The undo/redo framework is cleared, when setData() sets up a new content for the editor. You can search data inside the content with indexOf() and lastIndexOf(). The replace() function is to change located subdata. This 'replaced' data can also be undone by the undo/redo framework.
 
-This widget can only handle small amounts of data. The size has to be below 10 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any more.
+QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of data. The size of edited data can be more then two gigabytes without any restrictions.
 
 You can read the documentation of the project [here](http://simsys.github.io/).
 
