@@ -1,3 +1,7 @@
+Release 0.7.1, 2015-05-19
+-------------------------
+- Change library version to 1.1.0, because the ABI changed 
+
 Release 0.7.0, 2015-05-18
 -------------------------
 - QHexEdit is now based on QIODevice. The data shown is not buffered in memory. QHexEdit can show now very big files (> 2 gigabytes) without any problems
