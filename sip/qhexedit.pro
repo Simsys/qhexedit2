@@ -2,7 +2,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TEMPLATE    = lib
 
-VERSION     = 1.1.0
+VERSION     = 2.0.0
 
 CONFIG      += qt warn_on release
 

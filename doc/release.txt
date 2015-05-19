@@ -1,6 +1,10 @@
+Release 0.7.2, 2015-05-19
+-------------------------
+- Change library version to 2.0.0, because the ABI has incompatible changes
+
 Release 0.7.1, 2015-05-19
 -------------------------
-- Change library version to 1.1.0, because the ABI changed 
+- Change library version to 1.1.0, because the ABI has changed 
 
 Release 0.7.0, 2015-05-18
 -------------------------
