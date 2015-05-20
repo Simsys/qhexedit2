@@ -764,8 +764,8 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 				else
 					r.setRect(pxPosX - _pxCharWidth, pxPosY - _pxCharHeight + _pxSelectionSub, 3*_pxCharWidth, _pxCharHeight);
 				painter.fillRect(r, c);
-				hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2);
-				painter.drawText(pxPosX, pxPosY, hex.toUpper());
+				hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2).toUpper();
+				painter.drawText(pxPosX, pxPosY, hex);
 				pxPosX += 3*_pxCharWidth;
 
 				// render ascii value
@@ -789,7 +789,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 	if (_blink && !_readOnly && hasFocus())
 		painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
 	else
-		painter.drawText(_pxCursorX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
+		painter.drawText(_pxCursorX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1).toUpper());
 
 	// emit event, if size has changed
 	if (_lastEventSize != _chunks->size())
