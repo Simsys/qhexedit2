@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'searchdialog.ui'
 #
-# Created: Sat Jan 28 13:08:02 2012
-#      by: PyQt4 UI code generator 4.8.5
+# Created: Thu May 28 21:45:19 2015
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,28 +12,33 @@ from PyQt4 import QtCore, QtGui
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
-    _fromUtf8 = lambda s: s
+    def _fromUtf8(s):
+        return s
+
+try:
+    _encoding = QtGui.QApplication.UnicodeUTF8
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+except AttributeError:
+    def _translate(context, text, disambig):
+        return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_SearchDialog(object):
     def setupUi(self, SearchDialog):
         SearchDialog.setObjectName(_fromUtf8("SearchDialog"))
         SearchDialog.resize(436, 223)
-        SearchDialog.setWindowTitle(QtGui.QApplication.translate("SearchDialog", "QHexEdit - Find/Replace", None, QtGui.QApplication.UnicodeUTF8))
         self.horizontalLayout_3 = QtGui.QHBoxLayout(SearchDialog)
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.verticalLayout_2 = QtGui.QVBoxLayout()
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
         self.gbFind = QtGui.QGroupBox(SearchDialog)
-        self.gbFind.setTitle(QtGui.QApplication.translate("SearchDialog", "Find", None, QtGui.QApplication.UnicodeUTF8))
         self.gbFind.setObjectName(_fromUtf8("gbFind"))
         self.horizontalLayout = QtGui.QHBoxLayout(self.gbFind)
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.cbFindFormat = QtGui.QComboBox(self.gbFind)
         self.cbFindFormat.setObjectName(_fromUtf8("cbFindFormat"))
         self.cbFindFormat.addItem(_fromUtf8(""))
-        self.cbFindFormat.setItemText(0, QtGui.QApplication.translate("SearchDialog", "Hex", None, QtGui.QApplication.UnicodeUTF8))
         self.cbFindFormat.addItem(_fromUtf8(""))
-        self.cbFindFormat.setItemText(1, QtGui.QApplication.translate("SearchDialog", "UTF-8", None, QtGui.QApplication.UnicodeUTF8))
         self.horizontalLayout.addWidget(self.cbFindFormat)
         self.cbFind = QtGui.QComboBox(self.gbFind)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
@@ -46,16 +51,13 @@ class Ui_SearchDialog(object):
         self.horizontalLayout.addWidget(self.cbFind)
         self.verticalLayout_2.addWidget(self.gbFind)
         self.gbReplace = QtGui.QGroupBox(SearchDialog)
-        self.gbReplace.setTitle(QtGui.QApplication.translate("SearchDialog", "Replace", None, QtGui.QApplication.UnicodeUTF8))
         self.gbReplace.setObjectName(_fromUtf8("gbReplace"))
         self.horizontalLayout_2 = QtGui.QHBoxLayout(self.gbReplace)
         self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
         self.cbReplaceFormat = QtGui.QComboBox(self.gbReplace)
         self.cbReplaceFormat.setObjectName(_fromUtf8("cbReplaceFormat"))
         self.cbReplaceFormat.addItem(_fromUtf8(""))
-        self.cbReplaceFormat.setItemText(0, QtGui.QApplication.translate("SearchDialog", "Hex", None, QtGui.QApplication.UnicodeUTF8))
         self.cbReplaceFormat.addItem(_fromUtf8(""))
-        self.cbReplaceFormat.setItemText(1, QtGui.QApplication.translate("SearchDialog", "UTF-8", None, QtGui.QApplication.UnicodeUTF8))
         self.horizontalLayout_2.addWidget(self.cbReplaceFormat)
         self.cbReplace = QtGui.QComboBox(self.gbReplace)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
@@ -68,16 +70,13 @@ class Ui_SearchDialog(object):
         self.horizontalLayout_2.addWidget(self.cbReplace)
         self.verticalLayout_2.addWidget(self.gbReplace)
         self.gbOptions = QtGui.QGroupBox(SearchDialog)
-        self.gbOptions.setTitle(QtGui.QApplication.translate("SearchDialog", "Options", None, QtGui.QApplication.UnicodeUTF8))
         self.gbOptions.setObjectName(_fromUtf8("gbOptions"))
         self.verticalLayout_3 = QtGui.QVBoxLayout(self.gbOptions)
         self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
         self.cbBackwards = QtGui.QCheckBox(self.gbOptions)
-        self.cbBackwards.setText(QtGui.QApplication.translate("SearchDialog", "&Backwards", None, QtGui.QApplication.UnicodeUTF8))
         self.cbBackwards.setObjectName(_fromUtf8("cbBackwards"))
         self.verticalLayout_3.addWidget(self.cbBackwards)
         self.cbPrompt = QtGui.QCheckBox(self.gbOptions)
-        self.cbPrompt.setText(QtGui.QApplication.translate("SearchDialog", "&Prompt on replace", None, QtGui.QApplication.UnicodeUTF8))
         self.cbPrompt.setObjectName(_fromUtf8("cbPrompt"))
         self.verticalLayout_3.addWidget(self.cbPrompt)
         self.verticalLayout_2.addWidget(self.gbOptions)
@@ -85,21 +84,16 @@ class Ui_SearchDialog(object):
         self.verticalLayout = QtGui.QVBoxLayout()
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
         self.pbFind = QtGui.QPushButton(SearchDialog)
-        self.pbFind.setText(QtGui.QApplication.translate("SearchDialog", "&Find", None, QtGui.QApplication.UnicodeUTF8))
-        self.pbFind.setShortcut(QtGui.QApplication.translate("SearchDialog", "F3", None, QtGui.QApplication.UnicodeUTF8))
         self.pbFind.setDefault(True)
         self.pbFind.setObjectName(_fromUtf8("pbFind"))
         self.verticalLayout.addWidget(self.pbFind)
         self.pbReplace = QtGui.QPushButton(SearchDialog)
-        self.pbReplace.setText(QtGui.QApplication.translate("SearchDialog", "&Replace", None, QtGui.QApplication.UnicodeUTF8))
         self.pbReplace.setObjectName(_fromUtf8("pbReplace"))
         self.verticalLayout.addWidget(self.pbReplace)
         self.pbReplaceAll = QtGui.QPushButton(SearchDialog)
-        self.pbReplaceAll.setText(QtGui.QApplication.translate("SearchDialog", "Replace &All", None, QtGui.QApplication.UnicodeUTF8))
         self.pbReplaceAll.setObjectName(_fromUtf8("pbReplaceAll"))
         self.verticalLayout.addWidget(self.pbReplaceAll)
         self.pbCancel = QtGui.QPushButton(SearchDialog)
-        self.pbCancel.setText(QtGui.QApplication.translate("SearchDialog", "&Close", None, QtGui.QApplication.UnicodeUTF8))
         self.pbCancel.setObjectName(_fromUtf8("pbCancel"))
         self.verticalLayout.addWidget(self.pbCancel)
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -120,5 +114,19 @@ class Ui_SearchDialog(object):
         SearchDialog.setTabOrder(self.pbReplaceAll, self.pbCancel)
 
     def retranslateUi(self, SearchDialog):
-        pass
+        SearchDialog.setWindowTitle(_translate("SearchDialog", "QHexEdit - Find/Replace", None))
+        self.gbFind.setTitle(_translate("SearchDialog", "Find", None))
+        self.cbFindFormat.setItemText(0, _translate("SearchDialog", "Hex", None))
+        self.cbFindFormat.setItemText(1, _translate("SearchDialog", "UTF-8", None))
+        self.gbReplace.setTitle(_translate("SearchDialog", "Replace", None))
+        self.cbReplaceFormat.setItemText(0, _translate("SearchDialog", "Hex", None))
+        self.cbReplaceFormat.setItemText(1, _translate("SearchDialog", "UTF-8", None))
+        self.gbOptions.setTitle(_translate("SearchDialog", "Options", None))
+        self.cbBackwards.setText(_translate("SearchDialog", "&Backwards", None))
+        self.cbPrompt.setText(_translate("SearchDialog", "&Prompt on replace", None))
+        self.pbFind.setText(_translate("SearchDialog", "&Find", None))
+        self.pbFind.setShortcut(_translate("SearchDialog", "F3", None))
+        self.pbReplace.setText(_translate("SearchDialog", "&Replace", None))
+        self.pbReplaceAll.setText(_translate("SearchDialog", "Replace &All", None))
+        self.pbCancel.setText(_translate("SearchDialog", "&Close", None))
 

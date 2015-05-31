@@ -1,7 +1,11 @@
-%Module qhexedit
+%Module(name=qhexedit, version=1)
 
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
+
+%If (Qt_5_0_0 -)
+%Import QtWidgets/QtWidgetsmod.sip
+%End
 
 class QHexEdit : QAbstractScrollArea
 {
@@ -10,6 +14,9 @@ class QHexEdit : QAbstractScrollArea
 %End
 
 public:
+    explicit QHexEdit(QWidget *parent /TransferThis/ = 0);
+    virtual ~QHexEdit();
+
     bool setData(QIODevice &);
     QByteArray dataAt(qint64, qint64=-1);
     bool write(QIODevice &iODevice, qint64=0, qint64=-1);
@@ -34,24 +41,6 @@ public:
     void setFont(const QFont &);
     QString toReadableString();
 
-public slots:
-    void redo();
-    void setAddressArea(bool);
-    void setAddressWidth(int);
-    void setAsciiArea(bool);
-    void setHighlighting(bool);
-    void undo();
-
-signals:
-    void currentAddressChanged(qint64);
-    void currentSizeChanged(qint64);
-    void dataChanged();
-    void overwriteModeChanged(bool);
-
-public:
-    explicit QHexEdit(QWidget *parent /TransferThis/ = 0);
-    virtual ~QHexEdit();
-
     QColor addressAreaColor();
     void setAddressAreaColor(const QColor &);
 
@@ -75,4 +64,18 @@ public:
 
     QColor selectionColor();
     void setSelectionColor(const QColor &);
+
+public slots:
+    void redo();
+    void setAddressArea(bool);
+    void setAddressWidth(int);
+    void setAsciiArea(bool);
+    void setHighlighting(bool);
+    void undo();
+
+signals:
+    void currentAddressChanged(qint64);
+    void currentSizeChanged(qint64);
+    void dataChanged();
+    void overwriteModeChanged(bool);
 };
