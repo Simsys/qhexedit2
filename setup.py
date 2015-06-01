@@ -43,7 +43,7 @@ class build_pyqt_ext(sipdistutils.build_ext):
             from PyQt4.QtCore import PYQT_CONFIGURATION
         sipdistutils.build_ext.finalize_options(self)
         self.sip_opts = self.sip_opts + PYQT_CONFIGURATION['sip_flags'].split()
-        self.sip_opts.append('-I/usr/share/sip/%s' % PyQt_Version)
+        self.sip_opts.append('-I%s/%s' % (pyqt_sip_dir, PyQt_Version))
         if self.required is not None:
             self.required = True
 
