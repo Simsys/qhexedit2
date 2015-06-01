@@ -21,9 +21,9 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
 #else
     setFont(QFont("Monospace", 10));
 #endif
-    setAddressAreaColor(QColor(0xd4, 0xd4, 0xd4, 0xff));
+    setAddressAreaColor(this->palette().alternateBase().color());
     setHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
-    setSelectionColor(QColor(0x6d, 0x9e, 0xff, 0xff));
+    setSelectionColor(this->palette().highlight().color());
 
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(adjust()));
