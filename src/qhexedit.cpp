@@ -37,6 +37,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     setAsciiArea(true);
     setOverwriteMode(true);
     setHighlighting(true);
+    setReadOnly(false);
 
     init();
 
