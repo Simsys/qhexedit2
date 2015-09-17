@@ -75,7 +75,7 @@ class QHexEdit : public QAbstractScrollArea
     with a QByteArray as argument, QHexEdit creates a internal copy of the data
     If you want to edit big files please use setData(), based on QIODevice.
     */
-    Q_PROPERTY(QByteArray data READ data WRITE setData)
+    Q_PROPERTY(QByteArray data READ data WRITE setData NOTIFY dataChanged)
 
     /*! Property highlighting color sets (setHighlightingColor()) the backgorund
     color of highlighted text areas. You can also read the color
