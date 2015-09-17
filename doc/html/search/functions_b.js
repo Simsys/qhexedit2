@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['toreadablestring',['toReadableString',['../class_q_hex_edit.html#a43c6db0509fee9b10198bef48d8eaa2e',1,'QHexEdit']]]
+  ['write',['write',['../class_q_hex_edit.html#acc71d91a132a7cf6504d3f20de0ef4ce',1,'QHexEdit']]]
 ];

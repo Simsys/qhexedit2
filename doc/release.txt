@@ -1,3 +1,10 @@
+Release 0.7.4, 2015-09-17
+-------------------------
+- Include some get/set functions in the definition of Q_PROPERTY, change lib version to 2.1.0
+- Definition of property "data" should mention signal "dataChanged"
+- Replace these "and" and "or" with their counterparts "&&" and "||"
+- LONG_LONG_MAX should not be used
+
 Release 0.7.3, 2015-06-01
 -------------------------
 - Get ready for PyQt5
