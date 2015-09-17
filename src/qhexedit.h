@@ -52,6 +52,11 @@ class QHexEdit : public QAbstractScrollArea
 {
     Q_OBJECT
 
+    /*! Property address area switch the address area on or off. Set addressArea true
+    (show it), false (hide it).
+    */
+    Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
+
     /*! Property address area color sets (setAddressAreaColor()) the backgorund
     color of address areas. You can also read the color (addressaAreaColor()).
     */
@@ -63,6 +68,14 @@ class QHexEdit : public QAbstractScrollArea
     this property - with addressOffset() you get the current value.
     */
     Q_PROPERTY(qint64 addressOffset READ addressOffset WRITE setAddressOffset)
+
+    /*! Set and get the minimum width of the address area, width in characters.
+    */
+    Q_PROPERTY(int addressWidth READ addressWidth WRITE setAddressWidth)
+
+    /*! Switch the ascii area on (true, show it) or off (false, hide it).
+    */
+    Q_PROPERTY(bool asciiArea READ asciiArea WRITE setAsciiArea)
 
     /*! Porperty cursorPosition sets or gets the position of the editor cursor
     in QHexEdit. Every byte in data has to cursor positions: the lower and upper
@@ -76,6 +89,10 @@ class QHexEdit : public QAbstractScrollArea
     If you want to edit big files please use setData(), based on QIODevice.
     */
     Q_PROPERTY(QByteArray data READ data WRITE setData NOTIFY dataChanged)
+
+    /*! Switch the highlighting feature on or of: true (show it), false (hide it).
+    */
+    Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
 
     /*! Property highlighting color sets (setHighlightingColor()) the backgorund
     color of highlighted text areas. You can also read the color
@@ -173,22 +190,6 @@ public:
 
 
     // Utility functioins
-
-    /*! Get state of addressArea
-     * \return true (show it) or false (hide it)
-     */
-    bool addressArea();
-
-    /*! Get minimum width of address area
-     * \return addressWidth
-     */
-    int addressWidth();
-
-    /*! Get state of asciiArea
-     * \return true (show it) or false (hide it)
-     */
-    bool asciiArea();
-
     /*! Calc cursor position from graphics position
      * \param point from where the cursor position should be calculated
      * \return Cursor postioin
@@ -210,11 +211,6 @@ public:
      * \return true when document is modified else false
      */
     bool isModified();
-
-    /*! Get state of highlighting of made changes
-     * \return state
-     */
-    bool highlighting();
 
     /*! Find last occurence of ba in QHexEdit data
      * \param ba Data to find
@@ -243,26 +239,6 @@ public slots:
       */
     void redo();
 
-    /*! Switch the address area on or off.
-      \param addressArea true (show it), false (hide it).
-      */
-    void setAddressArea(bool addressArea);
-
-    /*! Set the minimum width of the address area.
-      \param addressWidth Width in characters.
-      */
-    void setAddressWidth(int addressWidth);
-
-    /*! Switch the ascii area on or off.
-      \param asciiArea true (show it), false (hide it).
-      */
-    void setAsciiArea(bool asciiArea);
-
-    /*! Switch the highlighting feature on or of.
-      \param mode true (show it), false (hide it).
-      */
-    void setHighlighting(bool mode);
-
     /*! Undoes the last operation. If there is no operation to undo, i.e.
       there is no undo step in the undo/redo history, nothing happens.
       */
@@ -288,17 +264,29 @@ public:
     ~QHexEdit();
 
     // Properties
+    bool addressArea();
+    void setAddressArea(bool addressArea);
+
     QColor addressAreaColor();
     void setAddressAreaColor(const QColor &color);
 
     qint64 addressOffset();
     void setAddressOffset(qint64 addressArea);
 
+    int addressWidth();
+    void setAddressWidth(int addressWidth);
+
+    bool asciiArea();
+    void setAsciiArea(bool asciiArea);
+
     qint64 cursorPosition();
     void setCursorPosition(qint64 position);
 
     QByteArray data();
     void setData(const QByteArray &ba);
+
+    bool highlighting();
+    void setHighlighting(bool mode);
 
     QColor highlightingColor();
     void setHighlightingColor(const QColor &color);
