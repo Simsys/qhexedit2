@@ -69,7 +69,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
 
     while (maxSize > 0)
     {
-        chunk.absPos = LONG_LONG_MAX;
+        chunk.absPos = LLONG_MAX;
         bool chunksLoopOngoing = true;
         while ((chunkIdx < _chunks.count()) && chunksLoopOngoing)
         {
