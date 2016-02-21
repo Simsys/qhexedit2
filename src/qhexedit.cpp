@@ -134,7 +134,7 @@ void QHexEdit::setCursorPosition(qint64 position)
     if (position < 0)
         position = 0;
 
-    // 3. Calc new position of curser
+    // 3. Calc new position of cursor
     _cursorPosition = position;
     _bPosCurrent = position / 2;
     _pxCursorY = ((position/2 - _bPosFirst) / BYTES_PER_LINE + 1) * _pxCharHeight;
@@ -156,9 +156,11 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
 {
     // Calc cursorposition depending on a graphical position
     qint64 result = -1;
-    if ((pos.x() >= _pxPosHexX) && (pos.x() < (_pxPosHexX + (1 + HEXCHARS_IN_LINE) * _pxCharWidth)))
+    // We take the horizontal scrolling into consideration 
+    int pxOfsX = horizontalScrollBar()->value();
+    if ((pos.x() >= (_pxPosHexX - pxOfsX)) && (pos.x() < ((_pxPosHexX - pxOfsX) + (1 + HEXCHARS_IN_LINE) * _pxCharWidth)))
     {
-        int x = (pos.x() - _pxPosHexX - _pxCharWidth / 2) / _pxCharWidth;
+        int x = (pos.x() - (_pxPosHexX - pxOfsX) - _pxCharWidth / 2) / _pxCharWidth;
         x = (x / 3) * 2 + x % 3;
         int y = ((pos.y() - 3) / _pxCharHeight) * 2 * BYTES_PER_LINE;
         result = _bPosFirst * 2 + x + y;
@@ -705,7 +707,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         // draw some patterns if needed
         painter.fillRect(event->rect(), viewport()->palette().color(QPalette::Base));
         if (_addressArea)
-            painter.fillRect(QRect(-pxOfsX, event->rect().top(), _pxPosHexX - _pxGapAdrHex/2 - pxOfsX, height()), _addressAreaColor);
+            painter.fillRect(QRect(-pxOfsX, event->rect().top(), _pxPosHexX - _pxGapAdrHex/2, height()), _addressAreaColor);
         if (_asciiArea)
         {
             int linePos = _pxPosAsciiX - (_pxGapHexAscii / 2);
@@ -786,11 +788,18 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         painter.setPen(viewport()->palette().color(QPalette::WindowText));
     }
 
+    // recalc new cursor position and dimesions depending on the horizontal scrolling
+    int pxOfsX = horizontalScrollBar()->value();
+    if (_overwriteMode)
+        _cursorRect = QRect(_pxCursorX - pxOfsX, _pxCursorY + _pxCursorWidth, _pxCharWidth, _pxCursorWidth);
+    else
+        _cursorRect = QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + 4, _pxCursorWidth, _pxCharHeight);
+
     // paint cursor
     if (_blink && !_readOnly && hasFocus())
         painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
     else
-        painter.drawText(_pxCursorX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
+        painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
 
     // emit event, if size has changed
     if (_lastEventSize != _chunks->size())
