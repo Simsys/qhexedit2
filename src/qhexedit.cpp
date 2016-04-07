@@ -623,12 +623,19 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             }
             else
             {
+                bool behindLastByte = false;
+                if ((_cursorPosition / 2) == _chunks->size())
+                    behindLastByte = true;
+
                 _bPosCurrent -= 1;
                 if (_overwriteMode)
                     replace(_bPosCurrent, char(0));
                 else
                     remove(_bPosCurrent, 1);
-                _bPosCurrent -= 1;
+
+                if (!behindLastByte)
+                    _bPosCurrent -= 1;
+                
                 setCursorPosition(2 * _bPosCurrent);
                 resetSelection(2 * _bPosCurrent);
             }
