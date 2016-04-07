@@ -27,6 +27,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
 
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
     connect(verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(adjust()));
+    connect(horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(adjust()));
     connect(_undoStack, SIGNAL(indexChanged(int)), this, SLOT(dataChangedPrivate(int)));
 
     _cursorTimer.setInterval(500);
@@ -142,9 +143,9 @@ void QHexEdit::setCursorPosition(qint64 position)
     _pxCursorX = (((x / 2) * 3) + (x % 2)) * _pxCharWidth + _pxPosHexX;
 
     if (_overwriteMode)
-        _cursorRect = QRect(_pxCursorX, _pxCursorY + _pxCursorWidth, _pxCharWidth, _pxCursorWidth);
+        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY + _pxCursorWidth, _pxCharWidth, _pxCursorWidth);
     else
-        _cursorRect = QRect(_pxCursorX, _pxCursorY - _pxCharHeight + 4, _pxCursorWidth, _pxCharHeight);
+        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY - _pxCharHeight + 4, _pxCursorWidth, _pxCharHeight);
 
     // 4. Immiadately draw new cursor
     _blink = true;
