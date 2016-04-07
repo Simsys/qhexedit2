@@ -1,3 +1,9 @@
+Release 0.7.5, 2016-04-07
+-------------------------
+- Cursor position in insert mode (when deleting last byte) corrected
+- resetSelection() now clips to max data size
+- setSelection() now clips to max data size
+
 Release 0.7.4, 2015-09-17
 -------------------------
 - Include some get/set functions in the definition of Q_PROPERTY, change lib version to 2.1.0
