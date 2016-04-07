@@ -824,9 +824,12 @@ void QHexEdit::resetSelection(qint64 pos)
 
 void QHexEdit::setSelection(qint64 pos)
 {
+    pos = pos / 2;
     if (pos < 0)
         pos = 0;
-    pos = pos / 2;
+    if (pos > _chunks->size())
+        pos = _chunks->size();
+
     if (pos >= _bSelectionInit)
     {
         _bSelectionEnd = pos;
