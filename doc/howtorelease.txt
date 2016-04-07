@@ -1,5 +1,5 @@
-How to release
-==============
+How to make consistent changes
+==============================
 
 1. Make changes, test them
 2. Edit qhexedit.h, version number
@@ -8,4 +8,13 @@ How to release
 5. $ git add *
 6. $ git commit -m "v0.x.y"
 7. $ git push origin master
+
+
+How to make a release
+=====================
+1. Copy doxygen html to ...github.io
+2. $ git add *
+3. $ git commit -m "v0.x.y"
+4. $ git push origin master
+5. Create new release on github webpage
 
