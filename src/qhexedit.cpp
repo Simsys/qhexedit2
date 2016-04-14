@@ -157,11 +157,13 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
 {
     // Calc cursorposition depending on a graphical position
     qint64 result = -1;
-    if ((pos.x() >= _pxPosHexX) && (pos.x() < (_pxPosHexX + (1 + HEXCHARS_IN_LINE) * _pxCharWidth)))
+    int posX = pos.x() + horizontalScrollBar()->value();
+    int posY = pos.y() - 3;
+    if ((posX >= _pxPosHexX) && (posX < (_pxPosHexX + (1 + HEXCHARS_IN_LINE) * _pxCharWidth)))
     {
-        int x = (pos.x() - _pxPosHexX - _pxCharWidth / 2) / _pxCharWidth;
+        int x = (posX - _pxPosHexX - _pxCharWidth / 2) / _pxCharWidth;
         x = (x / 3) * 2 + x % 3;
-        int y = ((pos.y() - 3) / _pxCharHeight) * 2 * BYTES_PER_LINE;
+        int y = (posY / _pxCharHeight) * 2 * BYTES_PER_LINE;
         result = _bPosFirst * 2 + x + y;
     }
     return result;
