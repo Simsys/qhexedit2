@@ -1,3 +1,9 @@
+Release 0.7.7, 2016-04-14
+-------------------------
+- Take horizontal scrolling position into account, when calculation cursor
+position from graphical (mouse click) position
+- Adjust horizontal scrollbar, when the cursor leaves the viewport
+
 Release 0.7.6, 2016-06-07
 -------------------------
 - Miscalculation of the position of cursor when scrolling horizontally corrected
