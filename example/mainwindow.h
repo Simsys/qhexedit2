@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+    void loadFileWrapper(const QString &fileName);
 
 protected:
     void closeEvent(QCloseEvent *event);

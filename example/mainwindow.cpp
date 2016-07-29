@@ -23,6 +23,10 @@ MainWindow::MainWindow()
     setCurrentFile("");
 }
 
+void MainWindow::loadFileWrapper(const QString &fileName) {
+    loadFile(fileName);
+}
+
 /*****************************************************************************/
 /* Protected methods */
 /*****************************************************************************/
