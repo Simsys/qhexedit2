@@ -1,3 +1,8 @@
+Release 0.7.8, 2016-08-01
+-------------------------
+- Adjust include directory for qt5 in setup.py for Ubuntu 16.04
+- Initialize values in constructor
+
 Release 0.7.7, 2016-04-14
 -------------------------
 - Take horizontal scrolling position into account, when calculation cursor
