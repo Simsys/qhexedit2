@@ -98,7 +98,7 @@ if cfg.qt_framework:
                                       lib + ".framework", "Headers")]
 else:
     if PyQt_Version == 'PyQt5':
-        for qt_inc_dir in ('/usr/include/qt', '/usr/include/qt5'):
+        for qt_inc_dir in ('/usr/include/qt', '/usr/include/x86_64-linux-gnu/qt5'):
             include_dirs.append(qt_inc_dir)
             include_dirs += [os.path.join(qt_inc_dir, lib) for lib in qt_libs]
         libraries = ["Qt5" + lib[2:] for lib in qt_libs]
