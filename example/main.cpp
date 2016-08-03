@@ -2,10 +2,9 @@
 
 #include "mainwindow.h"
 #include <QCommandLineParser>
-#include <QMessageBox>
 
 //Sync this version with the widget one is a good idea probably
-#define QHEXEDIT_VERSION "0.7.7"
+#define QHEXEDIT_VERSION "0.7.8"
 
 int main(int argc, char *argv[])
 {
@@ -23,9 +22,11 @@ int main(int argc, char *argv[])
     QString localeFromSettings = settings.value("Language","DEFAULT").toString();
     QString effectiveLocale;
 
-    if  (localeFromSettings.compare("DEFAULT") == 0) {
+    if  (localeFromSettings.compare("DEFAULT") == 0)
+    {
         effectiveLocale = QLocale::system().name();
-    } else {
+    } else
+    {
         effectiveLocale = localeFromSettings;
     }
 
@@ -49,7 +50,8 @@ int main(int argc, char *argv[])
 
     // Determining if any file was specified in the command line
     QString filename = parser.positionalArguments().value(0);
-    if (filename.length()) {
+    if (filename.length())
+    {
         filename = appDir.absoluteFilePath(filename);
         mainWin->loadFileWrapper(filename);
     }
