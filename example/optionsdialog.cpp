@@ -12,6 +12,7 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     ui->setupUi(this);
     readSettings();
     writeSettings();
+
 }
 
 OptionsDialog::~OptionsDialog()
@@ -52,6 +53,18 @@ void OptionsDialog::readSettings()
 #endif
 
     ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth", 4).toInt());
+
+    ui->cbLanguage->clear();
+    ui->cbLanguage->addItems(languages.values());
+
+    QString langSettings = settings.value("Language","DEFAULT").toString();
+    LanguageMap::const_iterator iLang = languages.find(langSettings);
+    if (iLang == languages.end()) {
+        ui->cbLanguage->setCurrentText(languages.find("DEFAULT").value());
+    } else {
+        ui->cbLanguage->setCurrentText(iLang.value());
+    }
+
 }
 
 void OptionsDialog::writeSettings()
@@ -69,6 +82,7 @@ void OptionsDialog::writeSettings()
     settings.setValue("WidgetFont",ui->leWidgetFont->font());
 
     settings.setValue("AddressAreaWidth", ui->sbAddressAreaWidth->value());
+    settings.setValue("Language", languages.key(ui->cbLanguage->currentText()));
 }
 
 void OptionsDialog::setColor(QWidget *widget, QColor color)
