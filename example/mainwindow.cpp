@@ -374,6 +374,8 @@ void MainWindow::readSettings()
     hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
 
     hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
+
+    hexEdit->setBytesPerLine(settings.value("BytesPerLine").toInt());
 }
 
 bool MainWindow::saveFile(const QString &fileName)
