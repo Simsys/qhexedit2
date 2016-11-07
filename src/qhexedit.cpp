@@ -23,7 +23,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _cursorPosition = 0;
     _lastEventSize = 0;
 
-    _chunks = new Chunks();
+    _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
 #ifdef Q_OS_WIN32
     setFont(QFont("Courier", 10));
