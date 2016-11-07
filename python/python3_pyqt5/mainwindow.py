@@ -7,7 +7,7 @@ class HexEdit(QHexEdit):
 
     def __init__(self, fileName=None):
         super(HexEdit, self).__init__()
-        file = open(fileName)
+        file = open(fileName, 'rb')
         data = file.read()
         self.setData(data)
         self.setReadOnly(False)
