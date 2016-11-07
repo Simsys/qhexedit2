@@ -1,3 +1,10 @@
+Release 0.8.0, 2016-11-07
+-------------------------
+- Add copyright and license statement
+- Make python example work (binary read)
+- setFont() ist not longer 'virtual' (minimal change in lib interface)
+- Fix leak memory issue
+
 Release 0.7.8, 2016-08-01
 -------------------------
 - Adjust include directory for qt5 in setup.py for Ubuntu 16.04
