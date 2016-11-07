@@ -18,3 +18,20 @@ QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of da
 You can read the documentation of the project [here](http://simsys.github.io/).
 
 Please submit bug reports [here](https://github.com/Simsys/qhexedit2/issues).
+
+## License
+```
+Copyright (C) 2015-2016 Winfried Simon
+
+This software may be used under the terms of the GNU Lesser General 
+Public License version 2.1 as published by the Free Software Foundation 
+and appearing in the file license.txt included in the packaging of this file.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+```
