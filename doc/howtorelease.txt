@@ -1,14 +1,13 @@
 How to make consistent changes
 ==============================
-
 1. Make changes, test them
 2. Edit qhexedit.h, version number
-3. Edit release.txt
-4. Make doxygen documentation and check it
-5. $ git add *
-6. $ git commit -m "v0.x.y"
-7. $ git push origin master
-
+3. Edit setup.py, version number
+4. Edit release.txt
+5. Make doxygen documentation and check it
+6. $ git add *
+7. $ git commit -m "v0.x.y"
+8. $ git push origin master
 
 How to make a release
 =====================
@@ -17,4 +16,3 @@ How to make a release
 3. $ git commit -m "v0.x.y"
 4. $ git push origin master
 5. Create new release on github webpage
-

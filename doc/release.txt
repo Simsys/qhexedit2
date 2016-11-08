@@ -1,3 +1,7 @@
+Release 0.8.1, 2016-11-08
+-------------------------
+- Bump lib version to 3.0.0
+
 Release 0.8.0, 2016-11-07
 -------------------------
 - Add copyright and license statement
