@@ -1,11 +1,12 @@
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+QT         += core gui
 TEMPLATE    = lib
 
 VERSION     = 3.0.0
 
-CONFIG      += qt warn_on release
+DEFINES += QHEXEDIT_EXPORTS
 
 HEADERS     = \
     qhexedit.h \
@@ -18,6 +19,7 @@ SOURCES     = \
     chunks.cpp \
     commands.cpp
 
-TARGET      = qhexedit
+Release:TARGET = qhexedit
+Debug:TARGET = qhexeditd
 
-DESTDIR     = /usr/lib
+DESTDIR = ../lib
