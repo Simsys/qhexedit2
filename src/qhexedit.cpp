@@ -134,13 +134,13 @@ void QHexEdit::setCursorPosition(qint64 position)
 
     // 2. Check, if cursor in range?
     if (_overwriteMode && (position > (_chunks->size() * 2 - 1)))
-        position = _chunks->size() * 2 - 1;
+        position = _chunks->size() * 2 ;
     if (!_overwriteMode && (position > (_chunks->size() * 2)))
         position = _chunks->size() * 2;
     if (position < 0)
         position = 0;
 
-    // 3. Calc new position of curser
+    // 3. Calc new position of cursor
     _cursorPosition = position;
     _bPosCurrent = position / 2;
     _pxCursorY = ((position/2 - _bPosFirst) / _bytesPerLine + 1) * _pxCharHeight;
@@ -160,7 +160,7 @@ void QHexEdit::setCursorPosition(qint64 position)
 
 qint64 QHexEdit::cursorPosition(QPoint pos)
 {
-    // Calc cursorposition depending on a graphical position
+    // Calc cursor position depending on a graphical position
     qint64 result = -1;
     int posX = pos.x() + horizontalScrollBar()->value();
     int posY = pos.y() - 3;
@@ -528,7 +528,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 (QApplication::keyboardModifiers() == Qt::KeypadModifier))
         {
             /* Hex input */
-            int key = int(event->text()[0].toLatin1());
+            int key = int(event->text()[0].toLower().toLatin1()); // accept keys a-f and A-F
             if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
             {
                 if (getSelectionBegin() != getSelectionEnd())
@@ -555,6 +555,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 // Change content
                 if (_chunks->size() > 0)
                 {
+					if (_chunks->size() == _bPosCurrent)
+						_chunks->insert(_bPosCurrent, 0);
                     QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
                     if ((_cursorPosition % 2) == 0)
                         hexValue[0] = key;

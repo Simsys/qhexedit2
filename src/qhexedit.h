@@ -10,8 +10,10 @@
 
 #ifdef QHEXEDIT_EXPORTS
 #define QHEXEDIT_API Q_DECL_EXPORT
-#else
+#elif QHEXEDIT_IMPORTS
 #define QHEXEDIT_API Q_DECL_IMPORT
+#else 
+#define QHEXEDIT_API
 #endif
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
