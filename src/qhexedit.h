@@ -8,6 +8,13 @@
 #include "chunks.h"
 #include "commands.h"
 
+#ifdef QHEXEDIT_EXPORTS
+#define QHEXEDIT_API Q_DECL_EXPORT
+#elif QHEXEDIT_IMPORTS
+#define QHEXEDIT_API Q_DECL_IMPORT
+#else 
+#define QHEXEDIT_API
+#endif
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
@@ -48,7 +55,7 @@ QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of
 data. The size of edited data can be more then two gigabytes without any
 restrictions.
 */
-class QHexEdit : public QAbstractScrollArea
+class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
 {
     Q_OBJECT
 
@@ -123,6 +130,9 @@ class QHexEdit : public QAbstractScrollArea
     /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
     Q_PROPERTY(QFont font READ font WRITE setFont)
 
+    /*! Set and get bytes number per line.*/
+    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -142,8 +152,8 @@ public:
     */
     QByteArray dataAt(qint64 pos, qint64 count=-1);
 
-    /*! Givs back the data into a \param iODevice starting at position \param pos 
-    and delivering \param count bytes. 
+    /*! Givs back the data into a \param iODevice starting at position \param pos
+    and delivering \param count bytes.
     */
     bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
@@ -300,6 +310,18 @@ public:
     QColor selectionColor();
     void setSelectionColor(const QColor &color);
 
+    int bytesPerLine();
+    void setBytesPerLine(int count);
+
+    bool lineNumberArea() const;
+    void setLineNumberArea(bool lineNumberArea);
+
+    QColor lineNumberAreaColor() const;
+    void setLineNumberAreaColor(const QColor &color);
+
+    int lineNumberWidth() const;
+    void setLineNumberWidth(int width);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -362,6 +384,8 @@ private:
     QBrush _brushHighlighted;
     QPen _penHighlighted;
     bool _readOnly;
+    int _bytesPerLine;
+    int _hexCharsInLine;
 
     // other variables
     int _addrDigits;                            // real no of addressdigits, may be > addressWidth
