@@ -144,7 +144,7 @@ void QHexEdit::setCursorPosition(qint64 position)
     if (position < 0)
         position = 0;
 
-    // 3. Calc new position of curser
+    // 3. Calc new position of cursor
     _cursorPosition = position;
     _bPosCurrent = position / 2;
     _pxCursorY = ((position/2 - _bPosFirst) / BYTES_PER_LINE + 1) * _pxCharHeight;

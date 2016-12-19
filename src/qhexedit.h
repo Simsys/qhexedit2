@@ -142,8 +142,8 @@ public:
     */
     QByteArray dataAt(qint64 pos, qint64 count=-1);
 
-    /*! Givs back the data into a \param iODevice starting at position \param pos 
-    and delivering \param count bytes. 
+    /*! Givs back the data into a \param iODevice starting at position \param pos
+    and delivering \param count bytes.
     */
     bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
 
