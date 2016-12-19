@@ -37,3 +37,5 @@ OTHER_FILES += \
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \
     translations/qhexedit_de.ts
+
+DEFINES += QHEXEDIT_EXPORTS

@@ -8,6 +8,14 @@
 #include "chunks.h"
 #include "commands.h"
 
+#ifdef QHEXEDIT_EXPORTS
+#define QHEXEDIT_API Q_DECL_EXPORT
+#elif QHEXEDIT_IMPORTS
+#define QHEXEDIT_API Q_DECL_IMPORT
+#else
+#define QHEXEDIT_API
+#endif
+
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
@@ -48,7 +56,7 @@ QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of
 data. The size of edited data can be more then two gigabytes without any
 restrictions.
 */
-class QHexEdit : public QAbstractScrollArea
+class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
 {
     Q_OBJECT
 
