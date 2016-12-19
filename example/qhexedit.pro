@@ -39,3 +39,7 @@ TRANSLATIONS += \
     translations/qhexedit_de.ts
 
 DEFINES += QHEXEDIT_EXPORTS
+
+DISTFILES += \
+    translations/qhexedit_cs.ts \
+    translations/qhexedit_de.ts
