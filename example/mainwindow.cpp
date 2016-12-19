@@ -31,24 +31,21 @@ void MainWindow::closeEvent(QCloseEvent *)
     writeSettings();
 }
 
+
 void MainWindow::dragEnterEvent(QDragEnterEvent *event)
 {
     if (event->mimeData()->hasUrls())
-    {
         event->accept();
-        QList<QUrl> urls = event->mimeData()->urls();
-        QString str = urls.at(0).toLocalFile();
-        statusBar()->showMessage( tr("Drop File: ") + str, 2000);
-    }
 }
+
 
 void MainWindow::dropEvent(QDropEvent *event)
 {
     if (event->mimeData()->hasUrls())
     {
         QList<QUrl> urls = event->mimeData()->urls();
-        QString str = urls.at(0).toLocalFile();
-        loadFile(str);
+        QString filePath = urls.at(0).toLocalFile();
+        loadFile(filePath);
         event->accept();
     }
 }
