@@ -514,10 +514,11 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     if (!_readOnly)
     {
         if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
-                (QApplication::keyboardModifiers() == Qt::KeypadModifier))
+            (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
+            (QApplication::keyboardModifiers() == Qt::ShiftModifier))
         {
             /* Hex input */
-            int key = int(event->text()[0].toLatin1());
+            int key = int(event->text()[0].toLower().toLatin1());
             if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
             {
                 if (getSelectionBegin() != getSelectionEnd())
