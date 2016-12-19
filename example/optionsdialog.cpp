@@ -52,6 +52,7 @@ void OptionsDialog::readSettings()
 #endif
 
     ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth", 4).toInt());
+    ui->sbBytesPerLine->setValue(settings.value("BytesPerLine", 16).toInt());
 }
 
 void OptionsDialog::writeSettings()
@@ -69,6 +70,7 @@ void OptionsDialog::writeSettings()
     settings.setValue("WidgetFont",ui->leWidgetFont->font());
 
     settings.setValue("AddressAreaWidth", ui->sbAddressAreaWidth->value());
+    settings.setValue("BytesPerLine", ui->sbBytesPerLine->value());
 }
 
 void OptionsDialog::setColor(QWidget *widget, QColor color)

@@ -85,6 +85,9 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool asciiArea READ asciiArea WRITE setAsciiArea)
 
+    /*! Set and get bytes number per line.*/
+    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
+
     /*! Porperty cursorPosition sets or gets the position of the editor cursor
     in QHexEdit. Every byte in data has to cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
@@ -287,6 +290,9 @@ public:
     bool asciiArea();
     void setAsciiArea(bool asciiArea);
 
+    int bytesPerLine();
+    void setBytesPerLine(int count);
+
     qint64 cursorPosition();
     void setCursorPosition(qint64 position);
 
@@ -363,6 +369,8 @@ private:
     int _addressWidth;
     bool _asciiArea;
     qint64 _addressOffset;
+    int _bytesPerLine;
+    int _hexCharsInLine;
     bool _highlighting;
     bool _overwriteMode;
     QBrush _brushSelection;
