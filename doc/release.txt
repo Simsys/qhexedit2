@@ -1,3 +1,13 @@
+Release 0.8.2, 2016-12-19
+-------------------------
+- New feature: Bytes per line is now adjustable
+- Fix build for MSVC
+- Allow hex input chars 'a'...'f' and 'A'...'F'
+- Typos
+- Bug fix: Glitch address area background color when view slided left
+- Bug fix: Glitch when view slided left and paint event
+- Bump lib version to 3.1.0
+
 Release 0.8.1, 2016-11-08
 -------------------------
 - Bump lib version to 3.0.0

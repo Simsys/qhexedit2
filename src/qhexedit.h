@@ -12,13 +12,14 @@
 #define QHEXEDIT_API Q_DECL_EXPORT
 #elif QHEXEDIT_IMPORTS
 #define QHEXEDIT_API Q_DECL_IMPORT
-#else 
+#else
 #define QHEXEDIT_API
 #endif
+
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.8.1
+\version Version 0.8.2
 \image html qhexedit.png
 */
 
@@ -33,12 +34,12 @@ the mouse or the keyboard to navigate inside the widget. If you hit the keys
 (0..9, a..f) you will change the data. Changed data is highlighted and can be
 accessed via data().
 
-Normally QHexEdit works in the overwrite Mode. You can set overwriteMode(false)
+Normaly QHexEdit works in the overwrite Mode. You can set overwriteMode(false)
 and insert data. In this case the size of data() increases. It is also possible
 to delete bytes (del or backspace), here the size of data decreases.
 
 You can select data with keyboard hits or mouse movements. The copy-key will
-copy the selected data into the clipboard. The cut-key copies also but deletes
+copy the selected data into the clipboard. The cut-key copies also but delets
 it afterwards. In overwrite mode, the paste function overwrites the content of
 the (does not change the length) data. In insert mode, clipboard data will be
 inserted. The clipboard content is expected in ASCII Hex notation. Unknown
@@ -58,26 +59,6 @@ restrictions.
 class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
 {
     Q_OBJECT
-	class CursorPosition{
-	public:
-		CursorPosition(const qint64 new_pos = -1, const bool new_isAscii = false) :_pos(new_pos), _isAscii(new_isAscii){}
-		qint64 pos() const { return _pos; }
-		void setPos(qint64 val) { _pos = val; }
-		bool isAscii() const { return _isAscii; }
-		void setIsAscii(bool val) { _isAscii = val; }
-		operator qint64() { return this->pos(); }
-		CursorPosition operator = (const qint64 & other){ this->setPos(other);  return *this; }
-		//CursorPosition operator - (const qint64 & other){ this->setPos(this->pos() - other); return *this; }
-		//CursorPosition operator + (const qint64 & other){ this->setPos(this->pos() + other); return *this; }
-		//CursorPosition operator / (const qint64 & other){ this->setPos(this->pos() / other); return *this; }
-		//CursorPosition operator * (const qint64 & other){ this->setPos(this->pos() * other); return *this; }
-		//CursorPosition operator % (const qint64 & other){ this->setPos(this->pos() % other); return *this; }
-		//bool operator > (const qint64 & other){ return this->pos() > other; };
-		//bool operator < (const qint64 & other){ return this->pos() < other; };
-	private:
-		qint64 _pos;
-		bool _isAscii;
-	};
 
     /*! Property address area switch the address area on or off. Set addressArea true
     (show it), false (hide it).
@@ -90,7 +71,7 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
 
     /*! Property addressOffset is added to the Numbers of the Address Area.
-    A offset in the address area (left side) is sometimes useful, when you show
+    A offset in the address area (left side) is sometimes usefull, whe you show
     only a segment of a complete memory picture. With setAddressOffset() you set
     this property - with addressOffset() you get the current value.
     */
@@ -104,11 +85,14 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool asciiArea READ asciiArea WRITE setAsciiArea)
 
-    /*! Property cursorPosition sets or gets the position of the editor cursor
+    /*! Set and get bytes number per line.*/
+    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
+
+    /*! Porperty cursorPosition sets or gets the position of the editor cursor
     in QHexEdit. Every byte in data has to cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
     */
-    Q_PROPERTY(CursorPosition cursorPosition READ cursorPosition WRITE setCursorPosition)
+    Q_PROPERTY(qint64 cursorPosition READ cursorPosition WRITE setCursorPosition)
 
     /*! Property data holds the content of QHexEdit. Call setData() to set the
     content of QHexEdit, data() returns the actual content. When calling setData()
@@ -150,9 +134,6 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
     Q_PROPERTY(QFont font READ font WRITE setFont)
 
-    /*! Set and get bytes number per line.*/
-    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
-
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -161,18 +142,18 @@ public:
 
     // Access to data of qhexedit
 
-    /*! Sets the data of QHexEdit. The QIODevice will be opened just before reading
+    /*! Sets the data of QHexEdit. The QIODevice will be opend just before reading
     and closed immediately afterwards. This is to allow other programs to rewrite
     the file while editing it.
     */
     bool setData(QIODevice &iODevice);
 
-    /*! Gives back the data as a QByteArray starting at position \param pos and
+    /*! Givs back the data as a QByteArray starting at position \param pos and
     delivering \param count bytes.
     */
     QByteArray dataAt(qint64 pos, qint64 count=-1);
 
-    /*! Gives back the data into a \param iODevice starting at position \param pos
+    /*! Givs back the data into a \param iODevice starting at position \param pos
     and delivering \param count bytes.
     */
     bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
@@ -219,18 +200,18 @@ public:
     void replace(qint64 pos, qint64 len, const QByteArray &ba);
 
 
-    // Utility function
+    // Utility functioins
     /*! Calc cursor position from graphics position
      * \param point from where the cursor position should be calculated
-     * \return Cursor position
+     * \return Cursor postioin
      */
-	CursorPosition cursorPosition(QPoint point);
+    qint64 cursorPosition(QPoint point);
 
-    /*! Ensure the cursor to be visible
+    /*! Ensure the cursor to be visble
      */
     void ensureVisible();
 
-    /*! Find first occurrence of ba in QHexEdit data
+    /*! Find first occurence of ba in QHexEdit data
      * \param ba Data to find
      * \param from Point where the search starts
      * \return pos if fond, else -1
@@ -242,7 +223,7 @@ public:
      */
     bool isModified();
 
-    /*! Find last occurrence of ba in QHexEdit data
+    /*! Find last occurence of ba in QHexEdit data
      * \param ba Data to find
      * \param from Point where the search starts
      * \return pos if fond, else -1
@@ -309,8 +290,11 @@ public:
     bool asciiArea();
     void setAsciiArea(bool asciiArea);
 
-	CursorPosition cursorPosition();
-    void setCursorPosition(const CursorPosition & position);
+    int bytesPerLine();
+    void setBytesPerLine(int count);
+
+    qint64 cursorPosition();
+    void setCursorPosition(qint64 position);
 
     QByteArray data();
     void setData(const QByteArray &ba);
@@ -330,21 +314,8 @@ public:
     QColor selectionColor();
     void setSelectionColor(const QColor &color);
 
-    int bytesPerLine();
-    void setBytesPerLine(int count);
-
-    bool lineNumberArea() const;
-    void setLineNumberArea(bool lineNumberArea);
-
-    QColor lineNumberAreaColor() const;
-    void setLineNumberAreaColor(const QColor &color);
-
-    int lineNumberWidth() const;
-    void setLineNumberWidth(int width);
-
 protected:
     // Handle events
-	void keyPressEventAscii(QKeyEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent * event);
@@ -353,9 +324,9 @@ protected:
 
 private:
     // Handle selections
-    void resetSelection(CursorPosition pos);            // set selectionStart and selectionEnd to pos
+    void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos
     void resetSelection();                      // set selectionEnd to selectionStart
-	void setSelection(CursorPosition pos);              // set min (if below init) or max (if greater init)
+    void setSelection(qint64 pos);              // set min (if below init) or max (if greater init)
     int getSelectionBegin();
     int getSelectionEnd();
 
@@ -398,6 +369,8 @@ private:
     int _addressWidth;
     bool _asciiArea;
     qint64 _addressOffset;
+    int _bytesPerLine;
+    int _hexCharsInLine;
     bool _highlighting;
     bool _overwriteMode;
     QBrush _brushSelection;
@@ -405,8 +378,6 @@ private:
     QBrush _brushHighlighted;
     QPen _penHighlighted;
     bool _readOnly;
-    int _bytesPerLine;
-    int _hexCharsInLine;
 
     // other variables
     int _addrDigits;                            // real no of addressdigits, may be > addressWidth
@@ -414,7 +385,7 @@ private:
     QBuffer _bData;                             // buffer, when setup with QByteArray
     Chunks *_chunks;                            // IODevice based access to data
     QTimer _cursorTimer;                        // for blinking cursor
-    CursorPosition _cursorPosition;             // absolute positioin of cursor, 1 Byte == 2 tics for hex and 1 Byte 1 tic for ascii
+    qint64 _cursorPosition;                     // absolute positioin of cursor, 1 Byte == 2 tics
     QRect _cursorRect;                          // physical dimensions of cursor
     QByteArray _data;                           // QHexEdit's data, when setup with QByteArray
     QByteArray _dataShown;                      // data in the current View

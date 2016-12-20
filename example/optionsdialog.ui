@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>395</width>
-    <height>472</height>
+    <width>347</width>
+    <height>553</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -64,10 +64,10 @@
       <string>Colors and Fonts</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="4" column="0">
-       <widget class="QPushButton" name="pbWidgetFont">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="pbHighlightingColor">
         <property name="text">
-         <string>Widget Font</string>
+         <string>Highlighting Color</string>
         </property>
        </widget>
       </item>
@@ -103,10 +103,28 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pbHighlightingColor">
+      <item row="1" column="1" rowspan="2">
+       <widget class="QLabel" name="lbAddressAreaColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
         <property name="text">
-         <string>Highlighting Color</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -135,35 +153,17 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1" rowspan="2">
-       <widget class="QLabel" name="lbAddressAreaColor">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Panel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
        <widget class="QPushButton" name="pbSelectionColor">
         <property name="text">
          <string>Selection Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="pbWidgetFont">
+        <property name="text">
+         <string>Widget Font</string>
         </property>
        </widget>
       </item>
@@ -195,6 +195,13 @@
       <string>Address Area</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lbAddressAreaWidth">
+        <property name="text">
+         <string>Address Area Width</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QSpinBox" name="sbAddressAreaWidth">
         <property name="minimum">
@@ -208,10 +215,32 @@
         </property>
        </widget>
       </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gbHexArea">
+     <property name="title">
+      <string>Hex Area</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
       <item row="0" column="0">
-       <widget class="QLabel" name="lbAddressAreaWidth">
+       <widget class="QLabel" name="lbBytesPerLine">
         <property name="text">
-         <string>Address Area Width</string>
+         <string>Bytes per Line</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="sbBytesPerLine">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="maximum">
+         <number>32</number>
+        </property>
+        <property name="value">
+         <number>16</number>
         </property>
        </widget>
       </item>
@@ -232,37 +261,6 @@
     </spacer>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Data Area</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="lbBytesPerLine">
-        <property name="text">
-         <string>Bytes per line</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="sbBytesPerLine">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>1024</number>
-        </property>
-        <property name="value">
-         <number>16</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-     <zorder>sbBytesPerLine</zorder>
-     <zorder>lbBytesPerLine</zorder>
-    </widget>
-   </item>
-   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -275,16 +273,9 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>cbOverwriteMode</tabstop>
-  <tabstop>cbHighlighting</tabstop>
-  <tabstop>cbReadOnly</tabstop>
   <tabstop>pbHighlightingColor</tabstop>
   <tabstop>pbAddressAreaColor</tabstop>
-  <tabstop>pbSelectionColor</tabstop>
-  <tabstop>pbWidgetFont</tabstop>
-  <tabstop>leWidgetFont</tabstop>
-  <tabstop>sbAddressAreaWidth</tabstop>
-  <tabstop>sbBytesPerLine</tabstop>
+  <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources/>
  <connections>

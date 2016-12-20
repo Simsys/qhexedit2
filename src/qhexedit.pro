@@ -1,20 +1,20 @@
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-QT         += core gui
-TEMPLATE    = lib
+QT += core gui
+TEMPLATE = lib
 
-VERSION     = 3.0.0
+VERSION = 3.1.0
 
-DEFINES += QHEXEDIT_EXPORTS
+DEFINES += QHEXEDIT_EXPORTS
 
-HEADERS     = \
+HEADERS = \
     qhexedit.h \
     chunks.h \
     commands.h
 
 
-SOURCES     = \
+SOURCES = \
     qhexedit.cpp \
     chunks.cpp \
     commands.cpp
@@ -22,4 +22,6 @@ SOURCES     = \
 Release:TARGET = qhexedit
 Debug:TARGET = qhexeditd
 
-DESTDIR = ../lib
+
+unix:DESTDIR = /usr/lib
+win32:DESTDIR = ../lib
