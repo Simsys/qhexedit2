@@ -826,8 +826,10 @@ void QHexEdit::paintEvent(QPaintEvent *event)
     // paint cursor
     if (_blink && !_readOnly && hasFocus())
         painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
-    else
-        painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
+	else{
+		painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
+		painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
+	}
 
     // emit event, if size has changed
     if (_lastEventSize != _chunks->size())
