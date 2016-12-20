@@ -174,7 +174,7 @@ void QHexEdit::setCursorPosition(qint64 position)
     else
         _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY - _pxCharHeight + 4, _pxCursorWidth, _pxCharHeight);
 
-    // 4. Immiadately draw new cursor
+    // 4. Immediately draw new cursor
     _blink = true;
     viewport()->update(_cursorRect);
     emit currentAddressChanged(_bPosCurrent);
@@ -417,6 +417,7 @@ void QHexEdit::undo()
 // ********************************************************************** Handle events
 void QHexEdit::keyPressEvent(QKeyEvent *event)
 {
+	int coef = _editAreaIsAscii ? 1 : 2;
     // Cursor movements
     if (event->matches(QKeySequence::MoveToNextChar))
     {
@@ -430,37 +431,37 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     }
     if (event->matches(QKeySequence::MoveToEndOfLine))
     {
-        setCursorPosition(_cursorPosition | (2 * _bytesPerLine -1));
+        setCursorPosition(_cursorPosition | (coef * _bytesPerLine -1));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToStartOfLine))
     {
-        setCursorPosition(_cursorPosition - (_cursorPosition % (2 * _bytesPerLine)));
+        setCursorPosition(_cursorPosition - (_cursorPosition % (coef * _bytesPerLine)));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToPreviousLine))
     {
-        setCursorPosition(_cursorPosition - (2 * _bytesPerLine));
+        setCursorPosition(_cursorPosition - (coef * _bytesPerLine));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToNextLine))
     {
-        setCursorPosition(_cursorPosition + (2 * _bytesPerLine));
+        setCursorPosition(_cursorPosition + (coef * _bytesPerLine));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToNextPage))
     {
-        setCursorPosition(_cursorPosition + (((_rowsShown - 1) * 2 * _bytesPerLine)));
+        setCursorPosition(_cursorPosition + (((_rowsShown - 1) * coef * _bytesPerLine)));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToPreviousPage))
     {
-        setCursorPosition(_cursorPosition - (((_rowsShown - 1) * 2 * _bytesPerLine)));
+        setCursorPosition(_cursorPosition - (((_rowsShown - 1) * coef * _bytesPerLine)));
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToEndOfDocument))
     {
-        setCursorPosition(_chunks->size() * 2);
+        setCursorPosition(_chunks->size() * coef );
         resetSelection(_cursorPosition);
     }
     if (event->matches(QKeySequence::MoveToStartOfDocument))
@@ -473,7 +474,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     if (event->matches(QKeySequence::SelectAll))
     {
         resetSelection(0);
-        setSelection(2*_chunks->size() + 1);
+        setSelection(coef*_chunks->size() + 1);
     }
     if (event->matches(QKeySequence::SelectNextChar))
     {
@@ -489,43 +490,43 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     }
     if (event->matches(QKeySequence::SelectEndOfLine))
     {
-        qint64 pos = _cursorPosition - (_cursorPosition % (2 * _bytesPerLine)) + (2 * _bytesPerLine);
+        qint64 pos = _cursorPosition - (_cursorPosition % (coef * _bytesPerLine)) + (coef * _bytesPerLine);
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectStartOfLine))
     {
-        qint64 pos = _cursorPosition - (_cursorPosition % (2 * _bytesPerLine));
+        qint64 pos = _cursorPosition - (_cursorPosition % (coef * _bytesPerLine));
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectPreviousLine))
     {
-        qint64 pos = _cursorPosition - (2 * _bytesPerLine);
+        qint64 pos = _cursorPosition - (coef * _bytesPerLine);
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectNextLine))
     {
-        qint64 pos = _cursorPosition + (2 * _bytesPerLine);
+        qint64 pos = _cursorPosition + (coef * _bytesPerLine);
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectNextPage))
     {
-        qint64 pos = _cursorPosition + (((viewport()->height() / _pxCharHeight) - 1) * 2 * _bytesPerLine);
+        qint64 pos = _cursorPosition + (((viewport()->height() / _pxCharHeight) - 1) * coef * _bytesPerLine);
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectPreviousPage))
     {
-        qint64 pos = _cursorPosition - (((viewport()->height() / _pxCharHeight) - 1) * 2 * _bytesPerLine);
+        qint64 pos = _cursorPosition - (((viewport()->height() / _pxCharHeight) - 1) * coef * _bytesPerLine);
         setCursorPosition(pos);
         setSelection(pos);
     }
     if (event->matches(QKeySequence::SelectEndOfDocument))
     {
-        qint64 pos = _chunks->size() * 2;
+        qint64 pos = _chunks->size() * coef;
         setCursorPosition(pos);
         setSelection(pos);
     }
@@ -544,8 +545,14 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             (QApplication::keyboardModifiers() == Qt::ShiftModifier))
         {
             /* Hex input */
-            int key = int(event->text()[0].toLower().toLatin1());
-            if ((key>='0' && key<='9') || (key>='a' && key <= 'f'))
+			int key;
+			if (_editAreaIsAscii)
+				key = event->text()[0].toLatin1();
+			else
+				key = int(event->text()[0].toLower().toLatin1());
+
+            if ( (((key>='0' && key<='9') || (key>='a' && key <= 'f')) && _editAreaIsAscii == false ) 
+				|| (key >= ' ' && _editAreaIsAscii ) )
             {
                 if (getSelectionBegin() != getSelectionEnd())
                 {
@@ -559,8 +566,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                         remove(getSelectionBegin(), getSelectionEnd() - getSelectionBegin());
                         _bPosCurrent = getSelectionBegin();
                     }
-                    setCursorPosition(2*_bPosCurrent);
-                    resetSelection(2*_bPosCurrent);
+                    setCursorPosition(coef*_bPosCurrent);
+                    resetSelection(coef*_bPosCurrent);
                 }
 
                 // If insert mode, then insert a byte
@@ -571,15 +578,17 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 // Change content
                 if (_chunks->size() > 0)
                 {
-                    QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
-                    if ((_cursorPosition % 2) == 0)
-                        hexValue[0] = key;
-                    else
-                        hexValue[1] = key;
-
-                    replace(_bPosCurrent, QByteArray().fromHex(hexValue)[0]);
-
-                    setCursorPosition(_cursorPosition + 1);
+					char ch = key;
+					if (!_editAreaIsAscii){
+						QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
+						if ((_cursorPosition % 2) == 0)
+							hexValue[0] = key;
+						else
+							hexValue[1] = key;
+						ch = QByteArray().fromHex(hexValue)[0];
+					}
+					replace(_bPosCurrent, ch);
+					setCursorPosition(_cursorPosition + 1);
                     resetSelection(_cursorPosition);
                 }
             }
@@ -602,8 +611,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             {
                 remove(getSelectionBegin(), getSelectionEnd() - getSelectionBegin());
             }
-            setCursorPosition(2*getSelectionBegin());
-            resetSelection(2*getSelectionBegin());
+            setCursorPosition(coef*getSelectionBegin());
+            resetSelection(coef*getSelectionBegin());
         }
 
         /* Paste */
@@ -615,7 +624,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 replace(_bPosCurrent, ba.size(), ba);
             else
                 insert(_bPosCurrent, ba);
-            setCursorPosition(_cursorPosition + 2 * ba.size());
+            setCursorPosition(_cursorPosition + coef * ba.size());
             resetSelection(getSelectionBegin());
         }
 
@@ -642,8 +651,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 else
                     remove(_bPosCurrent, 1);
             }
-            setCursorPosition(2 * _bPosCurrent);
-            resetSelection(2 * _bPosCurrent);
+            setCursorPosition(coef * _bPosCurrent);
+            resetSelection(coef * _bPosCurrent);
         }
 
         /* Backspace */
@@ -652,7 +661,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             if (getSelectionBegin() != getSelectionEnd())
             {
                 _bPosCurrent = getSelectionBegin();
-                setCursorPosition(2 * _bPosCurrent);
+                setCursorPosition(coef * _bPosCurrent);
                 if (_overwriteMode)
                 {
                     QByteArray ba = QByteArray(getSelectionEnd() - getSelectionBegin(), char(0));
@@ -662,12 +671,12 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 {
                     remove(_bPosCurrent, getSelectionEnd() - getSelectionBegin());
                 }
-                resetSelection(2 * _bPosCurrent);
+                resetSelection(coef * _bPosCurrent);
             }
             else
             {
                 bool behindLastByte = false;
-                if ((_cursorPosition / 2) == _chunks->size())
+                if ((_cursorPosition / coef) == _chunks->size())
                     behindLastByte = true;
 
                 _bPosCurrent -= 1;
@@ -679,8 +688,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 if (!behindLastByte)
                     _bPosCurrent -= 1;
                 
-                setCursorPosition(2 * _bPosCurrent);
-                resetSelection(2 * _bPosCurrent);
+                setCursorPosition(coef * _bPosCurrent);
+                resetSelection( coef * _bPosCurrent);
             }
         }
 
@@ -822,7 +831,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 if (_asciiArea)
                 {
                     char ch = _dataShown.at(bPosLine + colIdx);
-                    if ((ch < 0x20) || (ch > 0x7e))
+                    if ( ch < 0x20 )
                             ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(r, c);
@@ -841,7 +850,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 	else{
 		painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
 		if (_editAreaIsAscii)
-			painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(_dataShown.at(_cursorPosition - _bPosFirst)));
+			painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _dataShown.mid(_cursorPosition - _bPosFirst,1));
 		else
 			painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
 	}
@@ -868,7 +877,8 @@ void QHexEdit::resetSelection()
 
 void QHexEdit::resetSelection(qint64 pos)
 {
-    pos = pos / 2;
+    int coef = _editAreaIsAscii ? 1 : 2;
+    pos = pos / coef ;
     if (pos < 0)
         pos = 0;
     if (pos > _chunks->size())
@@ -881,7 +891,8 @@ void QHexEdit::resetSelection(qint64 pos)
 
 void QHexEdit::setSelection(qint64 pos)
 {
-    pos = pos / 2;
+    int coef = _editAreaIsAscii ? 1 : 2;
+    pos = pos / coef;
     if (pos < 0)
         pos = 0;
     if (pos > _chunks->size())
