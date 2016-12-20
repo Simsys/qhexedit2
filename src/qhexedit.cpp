@@ -184,7 +184,7 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
     int posY = pos.y() - 3;
     if ((posX >= _pxPosHexX) && (posX < (_pxPosHexX + (1 + _hexCharsInLine) * _pxCharWidth)))
     {
-        int x = (posX - _pxPosHexX - _pxCharWidth / 2) / _pxCharWidth;
+        int x = (posX - _pxPosHexX ) / _pxCharWidth;
         x = (x / 3) * 2 + x % 3;
         int y = (posY / _pxCharHeight) * 2 * _bytesPerLine;
         result = _bPosFirst * 2 + x + y;
