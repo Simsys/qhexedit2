@@ -380,6 +380,7 @@ private:
     bool _readOnly;
 
     // other variables
+	bool _editAreaIsAscii;                      // flag about the ascii mode edited
     int _addrDigits;                            // real no of addressdigits, may be > addressWidth
     bool _blink;                                // help get cursor blinking
     QBuffer _bData;                             // buffer, when setup with QByteArray
