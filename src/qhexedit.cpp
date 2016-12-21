@@ -573,7 +573,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
 
                 // If insert mode, then insert a byte
                 if (_overwriteMode == false)
-                    if ((_cursorPosition % 2) == 0)
+                    if ((_cursorPosition % coef ) == 0)
                         insert(_bPosCurrent, char(0));
 
                 // Change content
@@ -582,7 +582,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
 					char ch = key;
 					if (!_editAreaIsAscii){
 						QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
-						if ((_cursorPosition % 2) == 0)
+						if ((_cursorPosition % coef) == 0)
 							hexValue[0] = key;
 						else
 							hexValue[1] = key;
