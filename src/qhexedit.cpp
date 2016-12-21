@@ -545,7 +545,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
             (QApplication::keyboardModifiers() == Qt::ShiftModifier))
         {
-            /* Hex input */
+            /* Hex and ascii input */
 			int key;
 			if (_editAreaIsAscii)
 				key = event->text()[0].toLatin1();
