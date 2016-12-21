@@ -21,7 +21,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _lastEventSize = 0;
     _hexCharsInLine = 47;
     _bytesPerLine = 16;
-	_editAreaIsAscii = false;
+    _editAreaIsAscii = false;
 
     _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
@@ -152,22 +152,22 @@ void QHexEdit::setCursorPosition(qint64 position)
     viewport()->update(_cursorRect);
 
     // 2. Check, if cursor in range?
-	int coef = _editAreaIsAscii ? 1 : 2;
-	if (position > (_chunks->size() * coef - 1))
-		position = _chunks->size() * coef  - (_overwriteMode ? 1 : 0);
+    int coef = _editAreaIsAscii ? 1 : 2;
+    if (position > (_chunks->size() * coef - 1))
+        position = _chunks->size() * coef  - (_overwriteMode ? 1 : 0);
 
-	if (position < 0)
+    if (position < 0)
         position = 0;
 
     // 3. Calc new position of cursor
     _cursorPosition = position;
     _bPosCurrent = position / coef ;
-	_pxCursorY = ((position / coef - _bPosFirst) / _bytesPerLine + 1) * _pxCharHeight;
+    _pxCursorY = ((position / coef - _bPosFirst) / _bytesPerLine + 1) * _pxCharHeight;
     int x = (position % (coef * _bytesPerLine));
-	if (_editAreaIsAscii)
-		_pxCursorX = x * _pxCharWidth + _pxPosAsciiX;
-	else
-		_pxCursorX = (((x / 2) * 3) + (x % 2)) * _pxCharWidth + _pxPosHexX;
+    if (_editAreaIsAscii)
+        _pxCursorX = x * _pxCharWidth + _pxPosAsciiX;
+    else
+        _pxCursorX = (((x / 2) * 3) + (x % 2)) * _pxCharWidth + _pxPosHexX;
 
     if (_overwriteMode)
         _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY + _pxCursorWidth, _pxCharWidth, _pxCursorWidth);
@@ -188,19 +188,19 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
     int posY = pos.y() - 3;
     if ((posX >= _pxPosHexX) && (posX < (_pxPosHexX + (1 + _hexCharsInLine) * _pxCharWidth)))
     {
-		_editAreaIsAscii = false;
-		int x = (posX - _pxPosHexX) / _pxCharWidth;
+        _editAreaIsAscii = false;
+        int x = (posX - _pxPosHexX) / _pxCharWidth;
         x = (x / 3) * 2 + x % 3;
         int y = (posY / _pxCharHeight) * 2 * _bytesPerLine;
         result = _bPosFirst * 2 + x + y;
-	} else
-		if ((posX >= _pxPosAsciiX) && (posX < (_pxPosAsciiX + (1 + _bytesPerLine) * _pxCharWidth)))
-		{
-			_editAreaIsAscii = true;
-			int x = (posX - _pxPosAsciiX) / _pxCharWidth;
-			int y = (posY / _pxCharHeight) * _bytesPerLine;
-			result = _bPosFirst + x + y;
-		}
+    } else
+        if ((posX >= _pxPosAsciiX) && (posX < (_pxPosAsciiX + (1 + _bytesPerLine) * _pxCharWidth)))
+        {
+            _editAreaIsAscii = true;
+            int x = (posX - _pxPosAsciiX) / _pxCharWidth;
+            int y = (posY / _pxCharHeight) * _bytesPerLine;
+            result = _bPosFirst + x + y;
+        }
     return result;
 }
 
@@ -418,7 +418,7 @@ void QHexEdit::undo()
 // ********************************************************************** Handle events
 void QHexEdit::keyPressEvent(QKeyEvent *event)
 {
-	int coef = _editAreaIsAscii ? 1 : 2;
+    int coef = _editAreaIsAscii ? 1 : 2;
     // Cursor movements
     if (event->matches(QKeySequence::MoveToNextChar))
     {
@@ -546,14 +546,14 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             (QApplication::keyboardModifiers() == Qt::ShiftModifier))
         {
             /* Hex and ascii input */
-			int key;
-			if (_editAreaIsAscii)
-				key = event->text()[0].toLatin1();
-			else
-				key = int(event->text()[0].toLower().toLatin1());
+            int key;
+            if (_editAreaIsAscii)
+                key = event->text()[0].toLatin1();
+            else
+                key = int(event->text()[0].toLower().toLatin1());
 
             if ( (((key>='0' && key<='9') || (key>='a' && key <= 'f')) && _editAreaIsAscii == false ) 
-				|| (key >= ' ' && _editAreaIsAscii ) )
+                || (key >= ' ' && _editAreaIsAscii ) )
             {
                 if (getSelectionBegin() != getSelectionEnd())
                 {
@@ -579,17 +579,17 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 // Change content
                 if (_chunks->size() > 0)
                 {
-					char ch = key;
-					if (!_editAreaIsAscii){
-						QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
-						if ((_cursorPosition % coef) == 0)
-							hexValue[0] = key;
-						else
-							hexValue[1] = key;
-						ch = QByteArray().fromHex(hexValue)[0];
-					}
-					replace(_bPosCurrent, ch);
-					setCursorPosition(_cursorPosition + 1);
+                    char ch = key;
+                    if (!_editAreaIsAscii){
+                        QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
+                        if ((_cursorPosition % coef) == 0)
+                            hexValue[0] = key;
+                        else
+                            hexValue[1] = key;
+                        ch = QByteArray().fromHex(hexValue)[0];
+                    }
+                    replace(_bPosCurrent, ch);
+                    setCursorPosition(_cursorPosition + 1);
                     resetSelection(_cursorPosition);
                 }
             }
@@ -848,13 +848,13 @@ void QHexEdit::paintEvent(QPaintEvent *event)
     // paint cursor
     if (_blink && !_readOnly && hasFocus())
         painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
-	else{
-		painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
-		if (_editAreaIsAscii)
-			painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _dataShown.mid(_cursorPosition - _bPosFirst,1));
-		else
-			painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
-	}
+    else{
+        painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
+        if (_editAreaIsAscii)
+            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _dataShown.mid(_cursorPosition - _bPosFirst,1));
+        else
+            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst * 2, 1));
+    }
 
     // emit event, if size has changed
     if (_lastEventSize != _chunks->size())
