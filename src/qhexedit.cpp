@@ -199,7 +199,7 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
 			_editAreaIsAscii = true;
 			int x = (posX - _pxPosAsciiX) / _pxCharWidth;
 			int y = (posY / _pxCharHeight) * _bytesPerLine;
-			result = _bPosFirst * 2 + x + y;
+			result = _bPosFirst + x + y;
 		}
     return result;
 }
@@ -331,10 +331,11 @@ void QHexEdit::replace(qint64 pos, qint64 len, const QByteArray &ba)
 // ********************************************************************** Utility functions
 void QHexEdit::ensureVisible()
 {
-    if (_cursorPosition < (_bPosFirst * 2))
-        verticalScrollBar()->setValue((int)(_cursorPosition / 2 / _bytesPerLine));
-    if (_cursorPosition > ((_bPosFirst + (_rowsShown - 1)*_bytesPerLine) * 2))
-        verticalScrollBar()->setValue((int)(_cursorPosition / 2 / _bytesPerLine) - _rowsShown + 1);
+    int coef = _editAreaIsAscii ? 1 : 2;
+    if (_cursorPosition < (_bPosFirst * coef))
+        verticalScrollBar()->setValue((int)(_cursorPosition / coef / _bytesPerLine));
+    if (_cursorPosition > ((_bPosFirst + (_rowsShown - 1)*_bytesPerLine) * coef))
+        verticalScrollBar()->setValue((int)(_cursorPosition / coef / _bytesPerLine) - _rowsShown + 1);
     if (_pxCursorX < horizontalScrollBar()->value())
         horizontalScrollBar()->setValue(_pxCursorX);
     if ((_pxCursorX + _pxCharWidth) > (horizontalScrollBar()->value() + viewport()->width()))
@@ -832,7 +833,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 {
                     char ch = _dataShown.at(bPosLine + colIdx);
                     if ( ch < 0x20 )
-                            ch = '.';
+                        ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(r, c);
                     painter.drawText(pxPosAsciiX2, pxPosY, QChar(ch));
