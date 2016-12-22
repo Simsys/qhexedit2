@@ -543,12 +543,13 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     {
         if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
             (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
-            (QApplication::keyboardModifiers() == Qt::ShiftModifier))
+            (QApplication::keyboardModifiers() == Qt::ShiftModifier) || 
+            (QApplication::keyboardModifiers() == (Qt::AltModifier | Qt::ControlModifier) ) )
         {
             /* Hex and ascii input */
             int key;
             if (_editAreaIsAscii)
-                key = event->text()[0].toLatin1();
+                key = (uchar)event->text()[0].toLatin1();
             else
                 key = int(event->text()[0].toLower().toLatin1());
 
@@ -831,7 +832,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 // render ascii value
                 if (_asciiArea)
                 {
-                    char ch = _dataShown.at(bPosLine + colIdx);
+                    int ch = (uchar)_dataShown.at(bPosLine + colIdx);
                     if ( ch < 0x20 )
                         ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
