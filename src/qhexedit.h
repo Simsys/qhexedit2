@@ -321,7 +321,7 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *);
-
+    virtual bool focusNextPrevChild(bool next);
 private:
     // Handle selections
     void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos

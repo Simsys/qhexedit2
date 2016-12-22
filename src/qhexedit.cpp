@@ -724,6 +724,18 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
         setOverwriteMode(!overwriteMode());
         setCursorPosition(_cursorPosition);
     }
+    
+    // switch from hex to ascii edit
+    if (event->key() == Qt::Key_Tab && !_editAreaIsAscii){
+        _editAreaIsAscii = true;
+        setCursorPosition(_cursorPosition / 2);
+    } 
+
+    // switch from ascii to hex edit
+    if (event->key() == Qt::Key_Backtab  && _editAreaIsAscii){
+        _editAreaIsAscii = false;
+        setCursorPosition(_cursorPosition * 2);
+    }
 
     refresh();
 }
@@ -867,6 +879,13 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 void QHexEdit::resizeEvent(QResizeEvent *)
 {
     adjust();
+}
+
+bool QHexEdit::focusNextPrevChild(bool next){
+    if ( (next && _editAreaIsAscii) || (!next && !_editAreaIsAscii ))
+            return QWidget::focusNextPrevChild(next);
+    else
+            return false;
 }
 
 // ********************************************************************** Handle selections
