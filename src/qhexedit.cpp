@@ -556,7 +556,8 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
         if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
             (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
             (QApplication::keyboardModifiers() == Qt::ShiftModifier) ||
-            (QApplication::keyboardModifiers() == (Qt::AltModifier | Qt::ControlModifier) ) )
+            (QApplication::keyboardModifiers() == (Qt::AltModifier | Qt::ControlModifier)) ||
+            (QApplication::keyboardModifiers() == Qt::GroupSwitchModifier))
         {
             /* Hex and ascii input */
             int key;
