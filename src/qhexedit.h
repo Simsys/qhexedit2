@@ -321,7 +321,7 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *);
-
+    virtual bool focusNextPrevChild(bool next);
 private:
     // Handle selections
     void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos
@@ -380,6 +380,7 @@ private:
     bool _readOnly;
 
     // other variables
+    bool _editAreaIsAscii;                      // flag about the ascii mode edited
     int _addrDigits;                            // real no of addressdigits, may be > addressWidth
     bool _blink;                                // help get cursor blinking
     QBuffer _bData;                             // buffer, when setup with QByteArray
