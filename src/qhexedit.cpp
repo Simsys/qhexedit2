@@ -580,10 +580,12 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
         {
             QClipboard *clipboard = QApplication::clipboard();
             QByteArray ba = QByteArray().fromHex(clipboard->text().toLatin1());
-            if (_overwriteMode){
+            if (_overwriteMode)
+            {
                 ba = ba.left(std::min<qint64>(ba.size(), (_chunks->size() - _bPosCurrent)));
                 replace(_bPosCurrent, ba.size(), ba);
-            } else
+            }
+            else
                 insert(_bPosCurrent, ba);
             setCursorPosition(_cursorPosition + 2 * ba.size());
             resetSelection(getSelectionBegin());
@@ -910,9 +912,9 @@ void QHexEdit::resizeEvent(QResizeEvent *)
 
 bool QHexEdit::focusNextPrevChild(bool next){
     if ( (next && _editAreaIsAscii) || (!next && !_editAreaIsAscii ))
-            return true;
+        return QWidget::focusNextPrevChild(next);
     else
-            return false;
+        return false;
 }
 
 // ********************************************************************** Handle selections
