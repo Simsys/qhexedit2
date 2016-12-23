@@ -5,6 +5,7 @@
 #include <QScrollBar>
 
 #include "qhexedit.h"
+#include <algorithm>
 
 
 // ********************************************************************** Constructor, destructor
@@ -622,9 +623,10 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
         {
             QClipboard *clipboard = QApplication::clipboard();
             QByteArray ba = QByteArray().fromHex(clipboard->text().toLatin1());
-            if (_overwriteMode)
+            if (_overwriteMode){
+                ba = ba.left(std::min<qint64>(ba.size(), (_chunks->size() - _bPosCurrent)));
                 replace(_bPosCurrent, ba.size(), ba);
-            else
+            } else
                 insert(_bPosCurrent, ba);
             setCursorPosition(_cursorPosition + coef * ba.size());
             resetSelection(getSelectionBegin());
