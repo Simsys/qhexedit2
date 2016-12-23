@@ -553,65 +553,6 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     // Edit Commands
     if (!_readOnly)
     {
-        if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
-            (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
-            (QApplication::keyboardModifiers() == Qt::ShiftModifier) ||
-            (QApplication::keyboardModifiers() == (Qt::AltModifier | Qt::ControlModifier)) ||
-            (QApplication::keyboardModifiers() == Qt::GroupSwitchModifier))
-        {
-            /* Hex and ascii input */
-            int key;
-            if (_editAreaIsAscii)
-                key = (uchar)event->text()[0].toLatin1();
-            else
-                key = int(event->text()[0].toLower().toLatin1());
-
-            if ( (((key>='0' && key<='9') || (key>='a' && key <= 'f')) && _editAreaIsAscii == false )
-                || (key >= ' ' && _editAreaIsAscii ) )
-            {
-                if (getSelectionBegin() != getSelectionEnd())
-                {
-                    if (_overwriteMode)
-                    {
-                        qint64 len = getSelectionEnd() - getSelectionBegin();
-                        replace(getSelectionBegin(), (int)len, QByteArray((int)len, char(0)));
-                    }
-                    else
-                    {
-                        remove(getSelectionBegin(), getSelectionEnd() - getSelectionBegin());
-                        _bPosCurrent = getSelectionBegin();
-                    }
-                    setCursorPosition(2 * _bPosCurrent);
-                    resetSelection(2 * _bPosCurrent);
-                }
-
-                // If insert mode, then insert a byte
-                if (_overwriteMode == false)
-                    if ((_cursorPosition % 2 ) == 0)
-                        insert(_bPosCurrent, char(0));
-
-                // Change content
-                if (_chunks->size() > 0)
-                {
-                    char ch = key;
-                    if (!_editAreaIsAscii){
-                        QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
-                        if ((_cursorPosition % 2) == 0)
-                            hexValue[0] = key;
-                        else
-                            hexValue[1] = key;
-                        ch = QByteArray().fromHex(hexValue)[0];
-                    }
-                    replace(_bPosCurrent, ch);
-                    if (_editAreaIsAscii)
-                        setCursorPosition(_cursorPosition + 2);
-                    else
-                        setCursorPosition(_cursorPosition + 1);
-                    resetSelection(_cursorPosition);
-                }
-            }
-        }
-
         /* Cut */
         if (event->matches(QKeySequence::Cut))
         {
@@ -631,7 +572,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             }
             setCursorPosition(2 * getSelectionBegin());
             resetSelection(2 * getSelectionBegin());
-        }
+        } else
 
         /* Paste */
         if (event->matches(QKeySequence::Paste))
@@ -644,7 +585,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 insert(_bPosCurrent, ba);
             setCursorPosition(_cursorPosition + 2 * ba.size());
             resetSelection(getSelectionBegin());
-        }
+        } else
 
         /* Delete char */
         if (event->matches(QKeySequence::Delete))
@@ -671,7 +612,7 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             }
             setCursorPosition(2 * _bPosCurrent);
             resetSelection(2 * _bPosCurrent);
-        }
+        } else
 
         /* Backspace */
         if ((event->key() == Qt::Key_Backspace) && (event->modifiers() == Qt::NoModifier))
@@ -709,19 +650,78 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
                 setCursorPosition(2 * _bPosCurrent);
                 resetSelection(2 * _bPosCurrent);
             }
-        }
+        } else
 
         /* undo */
         if (event->matches(QKeySequence::Undo))
         {
             undo();
-        }
+        } else
 
         /* redo */
         if (event->matches(QKeySequence::Redo))
         {
             redo();
+        } else
+
+        if ((QApplication::keyboardModifiers() == Qt::NoModifier) ||
+            (QApplication::keyboardModifiers() == Qt::KeypadModifier) ||
+            (QApplication::keyboardModifiers() == Qt::ShiftModifier) ||
+            (QApplication::keyboardModifiers() == (Qt::AltModifier | Qt::ControlModifier)) ||
+            (QApplication::keyboardModifiers() == Qt::GroupSwitchModifier))
+        {
+            /* Hex and ascii input */
+            int key;
+            if (_editAreaIsAscii)
+                key = (uchar)event->text()[0].toLatin1();
+            else
+                key = int(event->text()[0].toLower().toLatin1());
+
+            if ((((key >= '0' && key <= '9') || (key >= 'a' && key <= 'f')) && _editAreaIsAscii == false)
+                || (key >= ' ' && _editAreaIsAscii))
+            {
+                if (getSelectionBegin() != getSelectionEnd())
+                {
+                    if (_overwriteMode)
+                    {
+                        qint64 len = getSelectionEnd() - getSelectionBegin();
+                        replace(getSelectionBegin(), (int)len, QByteArray((int)len, char(0)));
+                    } else
+                    {
+                        remove(getSelectionBegin(), getSelectionEnd() - getSelectionBegin());
+                        _bPosCurrent = getSelectionBegin();
+                    }
+                    setCursorPosition(2 * _bPosCurrent);
+                    resetSelection(2 * _bPosCurrent);
+                }
+
+                // If insert mode, then insert a byte
+                if (_overwriteMode == false)
+                    if ((_cursorPosition % 2) == 0)
+                        insert(_bPosCurrent, char(0));
+
+                // Change content
+                if (_chunks->size() > 0)
+                {
+                    char ch = key;
+                    if (!_editAreaIsAscii){
+                        QByteArray hexValue = _chunks->data(_bPosCurrent, 1).toHex();
+                        if ((_cursorPosition % 2) == 0)
+                            hexValue[0] = key;
+                        else
+                            hexValue[1] = key;
+                        ch = QByteArray().fromHex(hexValue)[0];
+                    }
+                    replace(_bPosCurrent, ch);
+                    if (_editAreaIsAscii)
+                        setCursorPosition(_cursorPosition + 2);
+                    else
+                        setCursorPosition(_cursorPosition + 1);
+                    resetSelection(_cursorPosition);
+                }
+            }
         }
+
 
     }
 
