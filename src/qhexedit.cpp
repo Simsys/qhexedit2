@@ -908,7 +908,7 @@ void QHexEdit::resizeEvent(QResizeEvent *)
 
 bool QHexEdit::focusNextPrevChild(bool next){
     if ( (next && _editAreaIsAscii) || (!next && !_editAreaIsAscii ))
-            return QWidget::focusNextPrevChild(next);
+            return true;
     else
             return false;
 }
