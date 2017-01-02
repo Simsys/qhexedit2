@@ -122,7 +122,11 @@ int QHexEdit::addressWidth()
 
 void QHexEdit::setAsciiArea(bool asciiArea)
 {
+    if (!asciiArea)
+        _editAreaIsAscii = false;
     _asciiArea = asciiArea;
+    adjust();
+    setCursorPosition(_cursorPosition);
     viewport()->update();
 }
 
@@ -196,8 +200,9 @@ qint64 QHexEdit::cursorPosition(QPoint pos)
         x = (x / 3) * 2 + x % 3;
         int y = (posY / _pxCharHeight) * 2 * _bytesPerLine;
         result = _bPosFirst * 2 + x + y;
-    } else
-        if ((posX >= _pxPosAsciiX) && (posX < (_pxPosAsciiX + (1 + _bytesPerLine) * _pxCharWidth)))
+    }
+    else
+        if (_asciiArea && (posX >= _pxPosAsciiX) && (posX < (_pxPosAsciiX + (1 + _bytesPerLine) * _pxCharWidth)))
         {
             _editAreaIsAscii = true;
             int x = 2 * (posX - _pxPosAsciiX) / _pxCharWidth;
@@ -910,11 +915,19 @@ void QHexEdit::resizeEvent(QResizeEvent *)
     adjust();
 }
 
-bool QHexEdit::focusNextPrevChild(bool next){
-    if ( (next && _editAreaIsAscii) || (!next && !_editAreaIsAscii ))
-        return QWidget::focusNextPrevChild(next);
+bool QHexEdit::focusNextPrevChild(bool next)
+{
+    if (_addressArea)
+    {
+        if ( (next && _editAreaIsAscii) || (!next && !_editAreaIsAscii ))
+            return QWidget::focusNextPrevChild(next);
+        else
+            return false;
+    }
     else
-        return false;
+    {
+        return QWidget::focusNextPrevChild(next);
+    }
 }
 
 // ********************************************************************** Handle selections

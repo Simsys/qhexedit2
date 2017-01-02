@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QIcon>
 
 #include "mainwindow.h"
 
@@ -8,6 +9,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     app.setApplicationName("QHexEdit");
     app.setOrganizationName("QHexEdit");
+    app.setWindowIcon(QIcon(":images/qhexedit.ico"));
 
     // Identify locale and load translation if available
     QString locale = QLocale::system().name();

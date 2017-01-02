@@ -188,6 +188,9 @@ $RECYCLE.BIN/
 ## Python
 #############
 
+# PyCharm
+.idea/
+
 *.py[cod]
 
 # Packages
