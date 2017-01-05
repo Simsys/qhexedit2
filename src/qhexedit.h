@@ -124,6 +124,9 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor)
 
+    /*! That property defines if the hex values looks as a-f if the value is false(default) or A-F if value is true. */
+    Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
+
     /*! Porperty readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
     in which the editor works. In readonly mode the the user can only navigate
     through the data and select data; modifying is not possible. This
@@ -314,6 +317,9 @@ public:
     QColor selectionColor();
     void setSelectionColor(const QColor &color);
 
+    void setHexCaps(const bool isCaps);
+    bool hexCaps();
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -378,6 +384,7 @@ private:
     QBrush _brushHighlighted;
     QPen _penHighlighted;
     bool _readOnly;
+    bool _hexCaps;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited

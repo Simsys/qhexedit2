@@ -23,6 +23,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _hexCharsInLine = 47;
     _bytesPerLine = 16;
     _editAreaIsAscii = false;
+    _hexCaps = false;
 
     _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
@@ -283,6 +284,19 @@ bool QHexEdit::isReadOnly()
 void QHexEdit::setReadOnly(bool readOnly)
 {
     _readOnly = readOnly;
+}
+
+void QHexEdit::setHexCaps(const bool isCaps)
+{
+    if (_hexCaps != isCaps){
+        _hexCaps = isCaps;
+        viewport()->update();
+    }
+}
+
+bool QHexEdit::hexCaps()
+{
+    return _hexCaps;
 }
 
 // ********************************************************************** Access to data of qhexedit
@@ -863,7 +877,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     r.setRect(pxPosX - _pxCharWidth, pxPosY - _pxCharHeight + _pxSelectionSub, 3*_pxCharWidth, _pxCharHeight);
                 painter.fillRect(r, c);
                 hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2);
-                painter.drawText(pxPosX, pxPosY, hex);
+                painter.drawText(pxPosX, pxPosY, hexCaps()?hex.toUpper():hex);
                 pxPosX += 3*_pxCharWidth;
 
                 // render ascii value
