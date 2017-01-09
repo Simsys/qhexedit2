@@ -288,7 +288,8 @@ void QHexEdit::setReadOnly(bool readOnly)
 
 void QHexEdit::setHexCaps(const bool isCaps)
 {
-    if (_hexCaps != isCaps){
+    if (_hexCaps != isCaps)
+    {
         _hexCaps = isCaps;
         viewport()->update();
     }
