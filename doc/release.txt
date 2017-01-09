@@ -1,3 +1,11 @@
+Release 0.8.3, 2017-01-09
+-------------------------
+- Ascii area ist now editable
+- New property hexCaps
+- Bugfixes
+- Translation updates
+- Bump lib version to 4.0.0
+
 Release 0.8.2, 2016-12-19
 -------------------------
 - New feature: Bytes per line is now adjustable
