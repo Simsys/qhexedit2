@@ -101,6 +101,11 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QByteArray data READ data WRITE setData NOTIFY dataChanged)
 
+    /*! That property defines if the hex values looks as a-f if the value is false(default)
+    or A-F if value is true.
+    */
+    Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
+
     /*! Switch the highlighting feature on or of: true (show it), false (hide it).
     */
     Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
@@ -299,6 +304,9 @@ public:
     QByteArray data();
     void setData(const QByteArray &ba);
 
+    void setHexCaps(const bool isCaps);
+    bool hexCaps();
+
     bool highlighting();
     void setHighlighting(bool mode);
 
@@ -378,6 +386,7 @@ private:
     QBrush _brushHighlighted;
     QPen _penHighlighted;
     bool _readOnly;
+    bool _hexCaps;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited
