@@ -24,6 +24,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _bytesPerLine = 16;
     _editAreaIsAscii = false;
     _hexCaps = false;
+    _dynamicBytesPerLine = false;
 
     _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
@@ -298,6 +299,17 @@ void QHexEdit::setHexCaps(const bool isCaps)
 bool QHexEdit::hexCaps()
 {
     return _hexCaps;
+}
+
+void QHexEdit::setDynamicBytesPerLine(const bool isDynamic)
+{
+    _dynamicBytesPerLine = isDynamic;
+    resizeEvent(NULL);
+}
+
+bool QHexEdit::dynamicBytesPerLine()
+{
+    return _dynamicBytesPerLine;
 }
 
 // ********************************************************************** Access to data of qhexedit
@@ -927,6 +939,18 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 
 void QHexEdit::resizeEvent(QResizeEvent *)
 {
+    if (_dynamicBytesPerLine)
+    {
+        int fixGaps = 0;
+        if (_addressArea)
+            fixGaps = addressWidth() * _pxCharWidth + _pxGapAdr;
+        fixGaps += _pxGapAdrHex;
+        if (_asciiArea)
+            fixGaps += _pxGapHexAscii;
+
+        int charWidth = (width() - fixGaps) / _pxCharWidth;
+        setBytesPerLine(charWidth / (_asciiArea ? 4 : 3));  // 2 hex alfa-digits 1 space 1 ascii per byte = 4; if ascii is disabled then 3
+    }
     adjust();
 }
 

@@ -106,6 +106,10 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
 
+    /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget. 
+    set this property true to avoid horizontal scrollbars and show the maximal possible data. defalut value is false*/
+    Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine)
+
     /*! Switch the highlighting feature on or of: true (show it), false (hide it).
     */
     Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
@@ -307,6 +311,9 @@ public:
     void setHexCaps(const bool isCaps);
     bool hexCaps();
 
+    void setDynamicBytesPerLine(const bool isDynamic);
+    bool dynamicBytesPerLine();
+
     bool highlighting();
     void setHighlighting(bool mode);
 
@@ -387,6 +394,7 @@ private:
     QPen _penHighlighted;
     bool _readOnly;
     bool _hexCaps;
+    bool _dynamicBytesPerLine;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited
