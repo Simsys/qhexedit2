@@ -941,15 +941,19 @@ void QHexEdit::resizeEvent(QResizeEvent *)
 {
     if (_dynamicBytesPerLine)
     {
-        int fixGaps = 0;
+        int pxFixGaps = 0;
         if (_addressArea)
-            fixGaps = addressWidth() * _pxCharWidth + _pxGapAdr;
-        fixGaps += _pxGapAdrHex;
+            pxFixGaps = addressWidth() * _pxCharWidth + _pxGapAdr;
+        pxFixGaps += _pxGapAdrHex;
         if (_asciiArea)
-            fixGaps += _pxGapHexAscii;
+            pxFixGaps += _pxGapHexAscii;
 
-        int charWidth = (width() - fixGaps) / _pxCharWidth;
-        setBytesPerLine(charWidth / (_asciiArea ? 4 : 3));  // 2 hex alfa-digits 1 space 1 ascii per byte = 4; if ascii is disabled then 3
+        // +1 because the last hex value do not have space. so it is effective one char more
+        int charWidth = (viewport()->width() - pxFixGaps ) / _pxCharWidth + 1; 
+
+        // 2 hex alfa-digits 1 space 1 ascii per byte = 4; if ascii is disabled then 3
+        // to prevent devision by zero use the min value 1
+        setBytesPerLine(std::max(charWidth / (_asciiArea ? 4 : 3),1));  
     }
     adjust();
 }
