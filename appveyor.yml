@@ -1,0 +1,40 @@
+version: build{build}
+
+environment:
+  matrix:
+  - example: qhexedit
+    name: win32
+    platform: mingw
+    qt: mingw492_32
+    
+clone_folder: c:\dev\qhexedit
+clone_depth: 5
+
+init:
+  - set PATH=C:\Qt\5.5\%qt%\bin;C:\Qt\Tools\mingw492_32\bin;"C:\Program Files (x86)\NSIS";%PATH%
+  
+before_build:
+  - cd c:\dev\qhexedit
+  - md build
+  - cd build
+  
+build_script:
+  - qmake ..\example\qhexedit.pro
+  - mingw32-make
+  - windeployqt.exe release\qhexedit.exe
+  - makensis ..\deploy.nsi
+ 
+artifacts:
+  - path: build\QHexEdit.exe
+
+deploy:
+  description: 'Latest QHexEdit Release'
+  provider: GitHub
+  auth_token:
+    secure: swhHkduATse1LV+aYaUVZ5qA6L0ZYbiKnh/xrsINEHP2zP49yelpMRkYIuYg3wDI
+  artifact: build\QHexEdit.exe
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
+    appveyor_repo_tag: true        # deploy on tag push only
