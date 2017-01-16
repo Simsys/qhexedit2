@@ -1,7 +1,8 @@
-﻿#!define VERSION "0.0.1"
-!define QT "D:\Programme\Qt\Qt5.3.2\5.3\mingw482_32\bin\"
-!define BUILD_DIR "..\build\qhexedit\release\"
-!define OUTFILE_NAME "..\build\QHexEdit.exe"
+#!define VERSION "0.0.1"
+!define QT "C:\Qt\5.5\mingw492_32\bin\"
+!define BUILD_DIR "C:\dev\qhexedit\build\release\"
+!define TRANS_DIR "C:\dev\qhexedit\example\translations\"
+!define OUTFILE_NAME "C:\dev\qhexedit\build\QHexEdit.exe"
 !define INSTALLATIONNAME "QHexEdit"
 
 ;--------------------------------
@@ -95,15 +96,8 @@
 Section ""
   SetOutPath $INSTDIR
   File ${BUILD_DIR}qhexedit.exe
-  File example\translations\*.qm
-  File ${QT}libwinpthread-1.dll
-  File ${QT}icudt52.dll
-  File ${QT}icuin52.dll
-  File ${QT}icuuc52.dll
-  File ${QT}libstdc++-6.dll
-  File ${QT}Qt5Core.dll
-  File ${QT}Qt5Gui.dll
-  File ${QT}QT5Widgets.dll
+  File /r ${BUILD_DIR}*.dll
+  File ${TRANS_DIR}*.qm
   WriteUninstaller $INSTDIR\uninstall.exe
   WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\${INSTALLATIONNAME}" "DisplayName" "QHexEdit Installer"
   WriteRegStr SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\${INSTALLATIONNAME}" "UninstallString" '"$INSTDIR\uninstall.exe"'
@@ -157,10 +151,7 @@ LangString DESC_Desktop ${LANG_GERMAN} "Einen Eintrag zum Desktop hinzufügen"
 Section "Uninstall"
   DeleteRegKey SHCTX "Software\Microsoft\Windows\CurrentVersion\Uninstall\${INSTALLATIONNAME}"
   DeleteRegKey SHCTX "Software\${INSTALLATIONNAME}"
-  Delete $INSTDIR\*.exe
-  Delete $INSTDIR\*.qm
-  Delete $INSTDIR\*.dll
-  RMDir $INSTDIR
+  RMDir /r $INSTDIR
   Delete "$SMPROGRAMS\${INSTALLATIONNAME}\Uninstall.lnk"
   Delete "$SMPROGRAMS\${INSTALLATIONNAME}\QHexEdit.lnk"
   Delete "$DESKTOP\QHexEdit.lnk"
