@@ -20,17 +20,10 @@
       <string>Flags</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="cbReadOnly">
-        <property name="text">
-         <string>ReadOnly</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0">
-       <widget class="QCheckBox" name="cbHighlighting">
+       <widget class="QCheckBox" name="cbChangesHighlighting">
         <property name="text">
-         <string>Higlighting</string>
+         <string>Changes Higlighting</string>
         </property>
        </widget>
       </item>
@@ -48,10 +41,24 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="cbReadOnly">
+        <property name="text">
+         <string>ReadOnly</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
        <widget class="QCheckBox" name="cbAsciiArea">
         <property name="text">
          <string>Ascii Area</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="cbPatternHighlighting">
+        <property name="text">
+         <string>Pattern Higlighting</string>
         </property>
        </widget>
       </item>
@@ -65,14 +72,14 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="0" column="0">
-       <widget class="QPushButton" name="pbHighlightingColor">
+       <widget class="QPushButton" name="pbChangesHighlightingColor">
         <property name="text">
-         <string>Highlighting Color</string>
+         <string>Changes Highlighting Color</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="lbHighlightingColor">
+       <widget class="QLabel" name="lbChangesHighlightingColor">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -96,14 +103,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" rowspan="2">
+      <item row="2" column="0" rowspan="2">
        <widget class="QPushButton" name="pbAddressAreaColor">
         <property name="text">
          <string>Address Area Color</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" rowspan="2">
+      <item row="2" column="1" rowspan="2">
        <widget class="QLabel" name="lbAddressAreaColor">
         <property name="minimumSize">
          <size>
@@ -128,7 +135,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QLabel" name="lbSelectionColor">
         <property name="minimumSize">
          <size>
@@ -153,21 +160,21 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QPushButton" name="pbSelectionColor">
         <property name="text">
          <string>Selection Color</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QPushButton" name="pbWidgetFont">
         <property name="text">
          <string>Widget Font</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="5" column="1">
        <widget class="QLineEdit" name="leWidgetFont">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -183,6 +190,38 @@
         </property>
         <property name="text">
          <string>01 23 45 67 89 ab cd ef</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pbPatternHighlightingColor">
+        <property name="text">
+         <string>Pattern Highlighting Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lbPatternHighlightingColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -273,7 +312,7 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pbHighlightingColor</tabstop>
+  <tabstop>pbChangesHighlightingColor</tabstop>
   <tabstop>pbAddressAreaColor</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>

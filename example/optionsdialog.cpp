@@ -38,11 +38,13 @@ void OptionsDialog::readSettings()
 
     ui->cbAddressArea->setChecked(settings.value("AddressArea", true).toBool());
     ui->cbAsciiArea->setChecked(settings.value("AsciiArea", true).toBool());
-    ui->cbHighlighting->setChecked(settings.value("Highlighting", true).toBool());
+    ui->cbChangesHighlighting->setChecked(settings.value("ChangesHighlighting", true).toBool());
+    ui->cbPatternHighlighting->setChecked(settings.value("PatternHighlighting", true).toBool());
     ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode", true).toBool());
     ui->cbReadOnly->setChecked(settings.value("ReadOnly").toBool());
 
-    setColor(ui->lbHighlightingColor, settings.value("HighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
+    setColor(ui->lbChangesHighlightingColor, settings.value("ChangesHighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
+    setColor(ui->lbPatternHighlightingColor, settings.value("PatternHighlightingColor", QColor(0xcc, 0xcc, 0xcc, 0xff)).value<QColor>());
     setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor", this->palette().alternateBase().color()).value<QColor>());
     setColor(ui->lbSelectionColor, settings.value("SelectionColor", this->palette().highlight().color()).value<QColor>());
 #ifdef Q_OS_WIN32
@@ -60,11 +62,13 @@ void OptionsDialog::writeSettings()
     QSettings settings;
     settings.setValue("AddressArea", ui->cbAddressArea->isChecked());
     settings.setValue("AsciiArea", ui->cbAsciiArea->isChecked());
-    settings.setValue("Highlighting", ui->cbHighlighting->isChecked());
+    settings.setValue("ChangesHighlighting", ui->cbChangesHighlighting->isChecked());
+    settings.setValue("PatternHighlighting", ui->cbPatternHighlighting->isChecked());
     settings.setValue("OverwriteMode", ui->cbOverwriteMode->isChecked());
     settings.setValue("ReadOnly", ui->cbReadOnly->isChecked());
 
-    settings.setValue("HighlightingColor", ui->lbHighlightingColor->palette().color(QPalette::Background));
+    settings.setValue("ChangesHighlightingColor", ui->lbChangesHighlightingColor->palette().color(QPalette::Background));
+    settings.setValue("PatternHighlightingColor", ui->lbPatternHighlightingColor->palette().color(QPalette::Background));
     settings.setValue("AddressAreaColor", ui->lbAddressAreaColor->palette().color(QPalette::Background));
     settings.setValue("SelectionColor", ui->lbSelectionColor->palette().color(QPalette::Background));
     settings.setValue("WidgetFont",ui->leWidgetFont->font());
@@ -81,11 +85,18 @@ void OptionsDialog::setColor(QWidget *widget, QColor color)
     widget->setAutoFillBackground(true);
 }
 
-void OptionsDialog::on_pbHighlightingColor_clicked()
+void OptionsDialog::on_pbChangesHighlightingColor_clicked()
 {
-    QColor color = QColorDialog::getColor(ui->lbHighlightingColor->palette().color(QPalette::Background), this);
+    QColor color = QColorDialog::getColor(ui->lbChangesHighlightingColor->palette().color(QPalette::Background), this);
     if (color.isValid())
-        setColor(ui->lbHighlightingColor, color);
+        setColor(ui->lbChangesHighlightingColor, color);
+}
+
+void OptionsDialog::on_pbPatternHighlightingColor_clicked()
+{
+    QColor color = QColorDialog::getColor(ui->lbPatternHighlightingColor->palette().color(QPalette::Background), this);
+    if (color.isValid())
+        setColor(ui->lbPatternHighlightingColor, color);
 }
 
 void OptionsDialog::on_pbAddressAreaColor_clicked()
