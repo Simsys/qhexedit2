@@ -70,22 +70,26 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
 
-    /*! Property address area color sets (setAddressFontColor()) the backgorund
+	/*! Property address font color sets (setAddressFontColor()) the text
     color of address areas. You can also read the color (addressFontColor()).
     */
     Q_PROPERTY(QColor addressFontColor READ addressFontColor WRITE setAddressFontColor)
     
-     /*! Property ascii area color sets (setAsciiAreaColor()) the backgorund
+	/*! Property ascii area color sets (setAsciiAreaColor()) the backgorund
     color of ascii areas. You can also read the color (asciiAreaColor()).
     */
     Q_PROPERTY(QColor asciiAreaColor READ asciiAreaColor WRITE setAsciiAreaColor)
     
-    
-     /*! Property ascii area color sets (setAsciiFontColor()) the backgorund
+	/*! Property ascii font color sets (setAsciiFontColor()) the text
     color of ascii areas. You can also read the color (asciiFontColor()).
     */
     Q_PROPERTY(QColor asciiFontColor READ asciiFontColor WRITE setAsciiFontColor)
-    
+
+	/*! Property hex font color sets (setHexFontColor()) the text
+	color of hex areas. You can also read the color (hexFontColor()).
+	*/
+	Q_PROPERTY(QColor hexFontColor READ hexFontColor WRITE setHexFontColor)
+
     /*! Property addressOffset is added to the Numbers of the Address Area.
     A offset in the address area (left side) is sometimes usefull, whe you show
     only a segment of a complete memory picture. With setAddressOffset() you set
@@ -315,6 +319,9 @@ public:
     QColor asciiFontColor();
     void setAsciiFontColor(const QColor &color);
 
+	QColor hexFontColor();
+	void setHexFontColor(const QColor &color);
+
     qint64 addressOffset();
     void setAddressOffset(qint64 addressArea);
 
@@ -409,6 +416,7 @@ private:
     QColor _asciiAreaColor;
     QColor _addressFontColor;
     QColor _asciiFontColor;
+	QColor _hexFontColor;
     int _addressWidth;
     bool _asciiArea;
     qint64 _addressOffset;

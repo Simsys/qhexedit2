@@ -123,6 +123,17 @@ void QHexEdit::setAsciiFontColor(const QColor &color)
     viewport()->update();
 }
 
+QColor QHexEdit::hexFontColor()
+{
+	return _hexFontColor;
+}
+
+void QHexEdit::setHexFontColor(const QColor &color)
+{
+	_hexFontColor = color;
+	viewport()->update();
+}
+
 void QHexEdit::setAddressOffset(qint64 addressOffset)
 {
     _addressOffset = addressOffset;
@@ -889,8 +900,6 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         }
 
         // paint hex and ascii area
-        QPen colStandard = QPen(viewport()->palette().color(QPalette::WindowText));
-
         painter.setBackgroundMode(Qt::TransparentMode);
 
         for (int row = 0, pxPosY = pxPosStartY; row <= _rowsShown; row++, pxPosY +=_pxCharHeight)
@@ -902,7 +911,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             for (int colIdx = 0; ((bPosLine + colIdx) < _dataShown.size() && (colIdx < _bytesPerLine)); colIdx++)
             {
                 QColor c = viewport()->palette().color(QPalette::Base);
-                painter.setPen(colStandard);
+				painter.setPen(QPen(_hexFontColor));
 
                 qint64 posBa = _bPosFirst + bPosLine + colIdx;
                 if ((getSelectionBegin() <= posBa) && (getSelectionEnd() > posBa))

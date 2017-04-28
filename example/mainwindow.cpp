@@ -366,9 +366,13 @@ void MainWindow::readSettings()
     hexEdit->setReadOnly(settings.value("ReadOnly").toBool());
 
     hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
-    hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
-    hexEdit->setSelectionColor(settings.value("SelectionColor").value<QColor>());
-    hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
+	hexEdit->setSelectionColor(settings.value("SelectionColor").value<QColor>());
+	hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
+	hexEdit->setAddressFontColor(settings.value("AddressFontColor").value<QColor>());
+	hexEdit->setAsciiAreaColor(settings.value("AsciiAreaColor").value<QColor>());
+	hexEdit->setAsciiFontColor(settings.value("AsciiFontColor").value<QColor>());
+	hexEdit->setHexFontColor(settings.value("HexFontColor").value<QColor>());
+	hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
 
     hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
     hexEdit->setBytesPerLine(settings.value("BytesPerLine").toInt());
