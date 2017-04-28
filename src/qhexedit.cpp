@@ -897,7 +897,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 if (_asciiArea)
                 {
                     int ch = (uchar)_dataShown.at(bPosLine + colIdx);
-                    if ( ch < 0x20 )
+                    if (ch < ' ')
                         ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(r, c);
@@ -911,21 +911,27 @@ void QHexEdit::paintEvent(QPaintEvent *event)
     }
 
     // paint cursor
-    if (_blink && !_readOnly && hasFocus())
-        painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
-    else
+	if (!_readOnly)
     {
-        painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
-        if (_editAreaIsAscii) {
-            QByteArray ba = _dataShown.mid((_cursorPosition - _bPosFirst) / 2, 1);
-            if (ba != "")
+        if (_blink && hasFocus())
+            painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
+        else
+        {
+            painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
+            if (_editAreaIsAscii)
             {
-                if (ba.at(0) <= ' ')
-                    ba[0] = '.';
-                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, ba);
+                QByteArray ba = _dataShown.mid((_cursorPosition - _bPosFirst) / 2, 1);
+                if (ba != "")
+                {
+                    if (ba.at(0) < ' ')
+                        ba[0] = '.';
+                    painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, ba);
+                }
             }
-        } else {
-            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst, 1));
+            else
+            {
+                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst, 1));
+			}
         }
     }
 
@@ -1115,9 +1121,12 @@ QString QHexEdit::toReadable(const QByteArray &ba)
 
 void QHexEdit::updateCursor()
 {
-    if (_blink)
-        _blink = false;
-    else
-        _blink = true;
-    viewport()->update(_cursorRect);
+    if (!_readOnly)
+    {
+        if (_blink)
+            _blink = false;
+        else
+           _blink = true;
+        viewport()->update(_cursorRect);
+    }
 }
