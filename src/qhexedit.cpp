@@ -34,6 +34,10 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     setFont(QFont("Monospace", 10));
 #endif
     setAddressAreaColor(this->palette().alternateBase().color());
+    setAddressFontColor(QPalette::WindowText);
+    setAsciiAreaColor(this->palette().alternateBase().color());
+	setAsciiFontColor(QPalette::WindowText);
+
     setHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
     setSelectionColor(this->palette().highlight().color());
 
@@ -75,15 +79,48 @@ bool QHexEdit::addressArea()
     return _addressArea;
 }
 
+QColor QHexEdit::addressAreaColor()
+{
+    return _addressAreaColor;
+}
+
 void QHexEdit::setAddressAreaColor(const QColor &color)
 {
     _addressAreaColor = color;
     viewport()->update();
 }
 
-QColor QHexEdit::addressAreaColor()
+QColor QHexEdit::addressFontColor()
 {
-    return _addressAreaColor;
+    return _addressFontColor;
+}
+
+void QHexEdit::setAddressFontColor(const QColor &color)
+{
+    _addressFontColor = color;
+    viewport()->update();
+}
+
+QColor QHexEdit::asciiAreaColor()
+{
+    return _asciiAreaColor;
+}
+
+void QHexEdit::setAsciiAreaColor(const QColor &color)
+{
+    _asciiAreaColor = color;
+    viewport()->update();
+}
+
+QColor QHexEdit::asciiFontColor()
+{
+    return _asciiFontColor;
+}
+
+void QHexEdit::setAsciiFontColor(const QColor &color)
+{
+    _asciiFontColor = color;
+    viewport()->update();
 }
 
 void QHexEdit::setAddressOffset(qint64 addressOffset)
@@ -843,9 +880,10 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         if (_addressArea)
         {
             QString address;
-			for (int row=0, pxPosY = _pxCharHeight; row < (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
+            for (int row=0, pxPosY = _pxCharHeight; row < (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
             {
                 address = QString("%1").arg(_bPosFirst + row*_bytesPerLine + _addressOffset, _addrDigits, 16, QChar('0'));
+                painter.setPen(QPen(_addressFontColor));
                 painter.drawText(_pxPosAdrX - pxOfsX, pxPosY, address);
             }
         }
@@ -900,7 +938,8 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     if (ch < ' ')
                         ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
-                    painter.fillRect(r, c);
+                    painter.fillRect(r, _asciiAreaColor);
+                    painter.setPen(QPen(_asciiFontColor));
                     painter.drawText(pxPosAsciiX2, pxPosY, QChar(ch));
                     pxPosAsciiX2 += _pxCharWidth;
                 }
