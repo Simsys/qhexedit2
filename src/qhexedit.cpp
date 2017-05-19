@@ -1125,7 +1125,7 @@ void QHexEdit::adjust()
     readBuffers();
     setCursorPosition(_cursorPosition);
 
-    if(_patternHighlightIndexList.length())
+    if(_patternHighlightData.length())
     {
         _patternHighlightIndexList.clear();
         {
