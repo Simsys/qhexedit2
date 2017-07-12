@@ -84,4 +84,6 @@ void QHexEditPlugin::initialize(QDesignerFormEditorInterface * /*core*/)
     initialized = true;
 }
 
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 Q_EXPORT_PLUGIN2(QHexEditPlugin, QHexEditPlugin)
+#endif
