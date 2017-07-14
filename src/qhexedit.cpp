@@ -910,22 +910,28 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         painter.setPen(viewport()->palette().color(QPalette::WindowText));
     }
 
-    // paint cursor
-    if (_blink && !_readOnly && hasFocus())
-        painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
-    else
+    int asciiPositionInShowData = _cursorPosition / 2 - _bPosFirst;
+
+    // due to scrolling the cursor can go out of the currently displayed data
+    if ((asciiPositionInShowData >= 0) && (asciiPositionInShowData < _dataShown.size()))
     {
-        painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
-        if (_editAreaIsAscii) {
-            QByteArray ba = _dataShown.mid((_cursorPosition - _bPosFirst) / 2, 1);
-            if (ba != "")
+        // paint cursor
+        if (_blink && !_readOnly && hasFocus())
+            painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
+        else
+        {
+            painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
+            if (_editAreaIsAscii)
             {
-                if (ba.at(0) <= ' ')
-                    ba[0] = '.';
-                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, ba);
+                int ch = (uchar)_dataShown.at(asciiPositionInShowData);
+                if ( ch < 0x20 )
+                    ch = '.';
+                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
             }
-        } else {
-            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst, 1));
+            else
+            {
+                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(2 * asciiPositionInShowData, 1));
+            }
         }
     }
 
