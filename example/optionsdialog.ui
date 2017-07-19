@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>347</width>
-    <height>553</height>
+    <width>374</width>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,17 +20,10 @@
       <string>Flags</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="cbReadOnly">
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="cbAddressArea">
         <property name="text">
-         <string>ReadOnly</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="cbHighlighting">
-        <property name="text">
-         <string>Higlighting</string>
+         <string>Address Area</string>
         </property>
        </widget>
       </item>
@@ -41,10 +34,10 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="cbAddressArea">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="cbHighlighting">
         <property name="text">
-         <string>Address Area</string>
+         <string>Higlighting</string>
         </property>
        </widget>
       </item>
@@ -55,11 +48,24 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="cbReadOnly">
+        <property name="text">
+         <string>ReadOnly</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="gbColors">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string>Colors and Fonts</string>
      </property>
@@ -96,39 +102,14 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" rowspan="2">
-       <widget class="QPushButton" name="pbAddressAreaColor">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pbSelectionColor">
         <property name="text">
-         <string>Address Area Color</string>
+         <string>Selection Color</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" rowspan="2">
-       <widget class="QLabel" name="lbAddressAreaColor">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::Panel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
+      <item row="1" column="1">
        <widget class="QLabel" name="lbSelectionColor">
         <property name="minimumSize">
          <size>
@@ -153,21 +134,174 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="pbSelectionColor">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pbAddressAreaColor">
         <property name="text">
-         <string>Selection Color</string>
+         <string>Address Area Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="lbAddressAreaColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pbAddressFontColor">
+        <property name="text">
+         <string>Address Font Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="lbAddressFontColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
+       <widget class="QPushButton" name="pbAsciiAreaColor">
+        <property name="text">
+         <string>ASCII Area Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lbAsciiAreaColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QPushButton" name="pbAsciiFontColor">
+        <property name="text">
+         <string>ASCII Font Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="lbAsciiFontColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QPushButton" name="pbHexFontColor">
+        <property name="text">
+         <string>Hex Font Color</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="lbHexFontColor">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Panel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Sunken</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
        <widget class="QPushButton" name="pbWidgetFont">
         <property name="text">
          <string>Widget Font</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="7" column="1">
        <widget class="QLineEdit" name="leWidgetFont">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -255,7 +389,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>28</height>
+       <height>40</height>
       </size>
      </property>
     </spacer>

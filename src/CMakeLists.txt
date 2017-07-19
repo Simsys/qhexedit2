@@ -1,0 +1,26 @@
+#CMakeLists.txt
+
+SET(HEX_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/commands.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/chunks.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/qhexedit.cpp)
+
+
+SET(HEX_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/commands.h
+                ${CMAKE_CURRENT_SOURCE_DIR}/chunks.h
+                ${CMAKE_CURRENT_SOURCE_DIR}/qhexedit.h)
+
+                
+SET(HEX_SOURCES ${HEX_SOURCES}
+		PARENT_SCOPE)
+		
+SET(HEX_HEADERS ${HEX_HEADERS}
+		PARENT_SCOPE)
+
+
+# SET(FILES_TO_TRANSLATE ${FILES_TO_TRANSLATE} ${MAIN_SOURCES} ${MAIN_FORMS} ${MAIN_HEADERS} 
+#                  PARENT_SCOPE)
+
+# cleanup $build/*.cpp~ on "make clean"
+SET_DIRECTORY_PROPERTIES(PROPERTIES
+    ADDITIONAL_MAKE_CLEAN_FILES "${CMAKE_CURRENT_SOURCE_DIR}/*~")
+

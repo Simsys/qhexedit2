@@ -24,7 +24,11 @@ public slots:
 private slots:
     void on_pbHighlightingColor_clicked();
     void on_pbAddressAreaColor_clicked();
-    void on_pbSelectionColor_clicked();
+	void on_pbAddressFontColor_clicked();
+	void on_pbAsciiAreaColor_clicked();
+	void on_pbAsciiFontColor_clicked();
+	void on_pbHexFontColor_clicked();
+	void on_pbSelectionColor_clicked();
     void on_pbWidgetFont_clicked();
 
 private:

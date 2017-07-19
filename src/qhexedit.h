@@ -66,9 +66,29 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
 
     /*! Property address area color sets (setAddressAreaColor()) the backgorund
-    color of address areas. You can also read the color (addressaAreaColor()).
+    color of address areas. You can also read the color (addressAreaColor()).
     */
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
+
+	/*! Property address font color sets (setAddressFontColor()) the text
+    color of address areas. You can also read the color (addressFontColor()).
+    */
+    Q_PROPERTY(QColor addressFontColor READ addressFontColor WRITE setAddressFontColor)
+    
+	/*! Property ascii area color sets (setAsciiAreaColor()) the backgorund
+    color of ascii areas. You can also read the color (asciiAreaColor()).
+    */
+    Q_PROPERTY(QColor asciiAreaColor READ asciiAreaColor WRITE setAsciiAreaColor)
+    
+	/*! Property ascii font color sets (setAsciiFontColor()) the text
+    color of ascii areas. You can also read the color (asciiFontColor()).
+    */
+    Q_PROPERTY(QColor asciiFontColor READ asciiFontColor WRITE setAsciiFontColor)
+
+	/*! Property hex font color sets (setHexFontColor()) the text
+	color of hex areas. You can also read the color (hexFontColor()).
+	*/
+	Q_PROPERTY(QColor hexFontColor READ hexFontColor WRITE setHexFontColor)
 
     /*! Property addressOffset is added to the Numbers of the Address Area.
     A offset in the address area (left side) is sometimes usefull, whe you show
@@ -89,7 +109,7 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
 
     /*! Porperty cursorPosition sets or gets the position of the editor cursor
-    in QHexEdit. Every byte in data has to cursor positions: the lower and upper
+    in QHexEdit. Every byte in data has two cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
     */
     Q_PROPERTY(qint64 cursorPosition READ cursorPosition WRITE setCursorPosition)
@@ -290,6 +310,18 @@ public:
     QColor addressAreaColor();
     void setAddressAreaColor(const QColor &color);
 
+    QColor addressFontColor();
+    void setAddressFontColor(const QColor &color);
+
+    QColor asciiAreaColor();
+    void setAsciiAreaColor(const QColor &color);
+
+    QColor asciiFontColor();
+    void setAsciiFontColor(const QColor &color);
+
+	QColor hexFontColor();
+	void setHexFontColor(const QColor &color);
+
     qint64 addressOffset();
     void setAddressOffset(qint64 addressArea);
 
@@ -381,6 +413,10 @@ private:
     // variables to store the property values
     bool _addressArea;                          // left area of QHexEdit
     QColor _addressAreaColor;
+    QColor _asciiAreaColor;
+    QColor _addressFontColor;
+    QColor _asciiFontColor;
+	QColor _hexFontColor;
     int _addressWidth;
     bool _asciiArea;
     qint64 _addressOffset;
