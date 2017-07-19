@@ -376,6 +376,7 @@ void MainWindow::readSettings()
 
     hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
     hexEdit->setBytesPerLine(settings.value("BytesPerLine").toInt());
+	hexEdit->setHexCaps(settings.value("HexCaps", true).toBool());
 }
 
 bool MainWindow::saveFile(const QString &fileName)
