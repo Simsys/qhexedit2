@@ -937,7 +937,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     r.setRect(pxPosX - _pxCharWidth, pxPosY - _pxCharHeight + _pxSelectionSub, 3*_pxCharWidth, _pxCharHeight);
                 painter.fillRect(r, c);
                 hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2);
-                painter.drawText(pxPosX, pxPosY, hexCaps()?hex.toUpper():hex);
+				painter.drawText(pxPosX, pxPosY, _hexCaps ? hex.toUpper() : hex);
                 pxPosX += 3*_pxCharWidth;
 
                 // render ascii value
@@ -998,7 +998,8 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 			}
             else
             {
-				painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(hexPositionInShowData, 1));
+				QByteArray hex = _hexDataShown.mid(hexPositionInShowData, 1);
+				painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexCaps ? hex.toUpper() : hex);
 			}
         }
     }
