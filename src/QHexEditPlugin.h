@@ -1,12 +1,22 @@
 #ifndef QHEXEDITPLUGIN_H
 #define QHEXEDITPLUGIN_H
+
 #include <QObject>
+
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 #include <QtDesigner/QDesignerCustomWidgetInterface>
+#else
+#include <QDesignerCustomWidgetInterface>
+#endif
 
 class QHexEditPlugin : public QObject, public QDesignerCustomWidgetInterface
 {
     Q_OBJECT
-        Q_INTERFACES(QDesignerCustomWidgetInterface)
+    Q_INTERFACES(QDesignerCustomWidgetInterface)
+#if QT_VERSION >= QT_VERSION_CHECK(5,0,0)
+    Q_PLUGIN_METADATA(IID "com.qt-project.Qt.QHexEditPlugin")
+#endif
+
 public:
     QHexEditPlugin(QObject * parent = 0);
 

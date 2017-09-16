@@ -1,5 +1,13 @@
 #! [0] #! [1]
-CONFIG      += designer plugin
+greaterThan(QT_MAJOR_VERSION, 4) {
+    QT      += widgets uiplugin
+}
+
+lessThan(QT_MAJOR_VERSION, 5) {
+    CONFIG  += designer
+}
+
+CONFIG      += plugin
 #! [0]
 TARGET      = $$qtLibraryTarget($$TARGET)
 #! [2]
