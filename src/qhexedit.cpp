@@ -43,7 +43,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     connect(_undoStack, SIGNAL(indexChanged(int)), this, SLOT(dataChangedPrivate(int)));
 
     _cursorTimer.setInterval(500);
-    _cursorTimer.start();
+    // the timer is started inside setReadOnly() if necessary
 
     setAddressWidth(4);
     setAddressArea(true);
@@ -154,10 +154,6 @@ int QHexEdit::bytesPerLine()
 
 void QHexEdit::setCursorPosition(qint64 position)
 {
-    // 1. delete old cursor
-    _blink = false;
-    viewport()->update(_cursorRect);
-
     // 2. Check, if cursor in range?
     if (position > (_chunks->size() * 2 - 1))
         position = _chunks->size() * 2  - (_overwriteMode ? 1 : 0);
@@ -179,13 +175,13 @@ void QHexEdit::setCursorPosition(qint64 position)
     }
 
     if (_overwriteMode)
-        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY + _pxCursorWidth, _pxCharWidth, _pxCursorWidth);
+        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY - _pxCursorWidth + _pxSelectionSub, _pxCharWidth, _pxCursorWidth);
     else
-        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY - _pxCharHeight + 4, _pxCursorWidth, _pxCharHeight);
+        _cursorRect = QRect(_pxCursorX - horizontalScrollBar()->value(), _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCursorWidth, _pxCharHeight);
 
-    // 4. Immediately draw new cursor
+    // 4. Immediately redraw everything
     _blink = true;
-    viewport()->update(_cursorRect);
+    viewport()->update();
     emit currentAddressChanged(_bPosCurrent);
 }
 
@@ -285,6 +281,10 @@ bool QHexEdit::isReadOnly()
 void QHexEdit::setReadOnly(bool readOnly)
 {
     _readOnly = readOnly;
+    if (_readOnly)
+        _cursorTimer.stop();
+    else
+        _cursorTimer.start();
 }
 
 void QHexEdit::setHexCaps(const bool isCaps)
@@ -910,22 +910,37 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         painter.setPen(viewport()->palette().color(QPalette::WindowText));
     }
 
-    // paint cursor
-    if (_blink && !_readOnly && hasFocus())
-        painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
-    else
+    // _cursorPosition counts in 2, _bPosFirst counts in 1
+    int hexPositionInShowData = _cursorPosition - 2 * _bPosFirst;
+
+    // due to scrolling the cursor can go out of the currently displayed data
+    if ((hexPositionInShowData >= 0) && (hexPositionInShowData < _hexDataShown.size()))
     {
-        painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
-        if (_editAreaIsAscii) {
-            QByteArray ba = _dataShown.mid((_cursorPosition - _bPosFirst) / 2, 1);
-            if (ba != "")
-            {
-                if (ba.at(0) <= ' ')
-                    ba[0] = '.';
-                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, ba);
-            }
-        } else {
-            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(_cursorPosition - _bPosFirst, 1));
+        // paint cursor
+        if (_readOnly)
+        {
+            // make the background stick out
+            QColor color = viewport()->palette().dark().color();
+            painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), color);
+        }
+        else
+        {
+            if (_blink && hasFocus())
+                painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
+        }
+
+        if (_editAreaIsAscii)
+        {
+            // every 2 hex there is 1 ascii
+            int asciiPositionInShowData = hexPositionInShowData / 2;
+            int ch = (uchar)_dataShown.at(asciiPositionInShowData);
+            if ( ch < 0x20 )
+                ch = '.';
+            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
+        }
+        else
+        {
+            painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(hexPositionInShowData, 1));
         }
     }
 
