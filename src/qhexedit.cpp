@@ -923,7 +923,9 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         // paint cursor
         if (_readOnly)
         {
-            painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), viewport()->palette().color(QPalette::Base));
+            // make the background stick out
+            QColor color = viewport()->palette().dark().color();
+            painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), color);
             if (_editAreaIsAscii)
             {
                 // every 2 hex there is 1 ascii
