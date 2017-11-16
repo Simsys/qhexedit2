@@ -110,15 +110,25 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     set this property true to avoid horizontal scrollbars and show the maximal possible data. defalut value is false*/
     Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine)
 
-    /*! Switch the highlighting feature on or of: true (show it), false (hide it).
+    /*! Switch the changes highlighting feature on or of: true (show it), false (hide it).
     */
-    Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
+    Q_PROPERTY(bool changesHighlighting READ changesHighlighting WRITE setChangesHighlighting)
 
-    /*! Property highlighting color sets (setHighlightingColor()) the backgorund
-    color of highlighted text areas. You can also read the color
+    /*! Property changes highlighting color sets (setChangesHighlightingColor()) the backgorund
+    color of changes highlighted text areas. You can also read the color
     (highlightingColor()).
     */
-    Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor)
+    Q_PROPERTY(QColor changesHighlightingColor READ changesHighlightingColor WRITE setChangesHighlightingColor)
+
+    /*! Switch the pattern highlighting feature on or of: true (show it), false (hide it).
+    */
+    Q_PROPERTY(bool patternHighlighting READ patternHighlighting WRITE setPatternHighlighting)
+
+    /*! Property pattern highlighting color sets (setPatternHighlightingColor()) the backgorund
+    color of pattern highlighted text areas. You can also read the color
+    (highlightingColor()).
+    */
+    Q_PROPERTY(QColor patternhighlightingColor READ patternHighlightingColor WRITE setPatternHighlightingColor)
 
     /*! Porperty overwrite mode sets (setOverwriteMode()) or gets (overwriteMode()) the mode
     in which the editor works. In overwrite mode the user will overwrite existing data. The
@@ -314,11 +324,17 @@ public:
     void setDynamicBytesPerLine(const bool isDynamic);
     bool dynamicBytesPerLine();
 
-    bool highlighting();
-    void setHighlighting(bool mode);
+    bool changesHighlighting();
+    void setChangesHighlighting(bool mode);
 
-    QColor highlightingColor();
-    void setHighlightingColor(const QColor &color);
+    QColor changesHighlightingColor();
+    void setChangesHighlightingColor(const QColor &color);
+
+    bool patternHighlighting();
+    void setPatternHighlighting(bool mode);
+
+    QColor patternHighlightingColor();
+    void setPatternHighlightingColor(const QColor &color);
 
     bool overwriteMode();
     void setOverwriteMode(bool overwriteMode);
@@ -386,12 +402,15 @@ private:
     qint64 _addressOffset;
     int _bytesPerLine;
     int _hexCharsInLine;
-    bool _highlighting;
+    bool _changesHighlighting;
+    bool _patternHighlighting;
     bool _overwriteMode;
     QBrush _brushSelection;
     QPen _penSelection;
-    QBrush _brushHighlighted;
-    QPen _penHighlighted;
+    QBrush _brushChangesHighlighted;
+    QBrush _brushPatternHighlighted;
+    QPen _penChangesHighlighted;
+    QPen _penPatternHighlighted;
     bool _readOnly;
     bool _hexCaps;
     bool _dynamicBytesPerLine;
@@ -413,6 +432,8 @@ private:
     bool _modified;                             // Is any data in editor modified?
     int _rowsShown;                             // lines of text shown
     UndoStack * _undoStack;                     // Stack to store edit actions for undo/redo
+    QByteArray _patternHighlightData;           // pattern data to highlight
+    QList<int> _patternHighlightIndexList;      // list of indexs where pattern occure
     /*! \endcond docNever */
 };
 

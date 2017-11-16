@@ -16,7 +16,8 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _addressWidth = 4;
     _asciiArea = true;
     _overwriteMode = true;
-    _highlighting = true;
+    _changesHighlighting = true;
+    _patternHighlighting = true;
     _readOnly = false;
     _cursorPosition = 0;
     _lastEventSize = 0;
@@ -34,7 +35,8 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     setFont(QFont("Monospace", 10));
 #endif
     setAddressAreaColor(this->palette().alternateBase().color());
-    setHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
+    setChangesHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
+    setPatternHighlightingColor(QColor(0xcc, 0xcc, 0xcc, 0xff));
     setSelectionColor(this->palette().highlight().color());
 
     connect(&_cursorTimer, SIGNAL(timeout()), this, SLOT(updateCursor()));
@@ -49,7 +51,8 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     setAddressArea(true);
     setAsciiArea(true);
     setOverwriteMode(true);
-    setHighlighting(true);
+    setChangesHighlighting(true);
+    setPatternHighlighting(true);
     setReadOnly(false);
 
     init();
@@ -231,27 +234,50 @@ QByteArray QHexEdit::data()
     return _chunks->data(0, -1);
 }
 
-void QHexEdit::setHighlighting(bool highlighting)
+void QHexEdit::setChangesHighlighting(bool changesHighlighting)
 {
-    _highlighting = highlighting;
+    _changesHighlighting = changesHighlighting;
     viewport()->update();
 }
 
-bool QHexEdit::highlighting()
+bool QHexEdit::changesHighlighting()
 {
-    return _highlighting;
+    return _changesHighlighting;
 }
 
-void QHexEdit::setHighlightingColor(const QColor &color)
+void QHexEdit::setChangesHighlightingColor(const QColor &color)
 {
-    _brushHighlighted = QBrush(color);
-    _penHighlighted = QPen(viewport()->palette().color(QPalette::WindowText));
+    _brushChangesHighlighted= QBrush(color);
+    _penChangesHighlighted = QPen(viewport()->palette().color(QPalette::WindowText));
     viewport()->update();
 }
 
-QColor QHexEdit::highlightingColor()
+QColor QHexEdit::changesHighlightingColor()
 {
-    return _brushHighlighted.color();
+    return _brushChangesHighlighted.color();
+}
+
+void QHexEdit::setPatternHighlighting(bool patternHighlighting)
+{
+    _patternHighlighting = patternHighlighting;
+    viewport()->update();
+}
+
+bool QHexEdit::patternHighlighting()
+{
+    return _patternHighlighting;
+}
+
+void QHexEdit::setPatternHighlightingColor(const QColor &color)
+{
+    _brushPatternHighlighted = QBrush(color);
+    _penPatternHighlighted = QPen(viewport()->palette().color(QPalette::WindowText));
+    viewport()->update();
+}
+
+QColor QHexEdit::patternHighlightingColor()
+{
+    return _brushPatternHighlighted.color();
 }
 
 void QHexEdit::setOverwriteMode(bool overwriteMode)
@@ -874,11 +900,24 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 }
                 else
                 {
-                    if (_highlighting)
+                    if(_patternHighlighting)
+                    {
+                        foreach(int i, _patternHighlightIndexList)
+                        {
+                            if(posBa >= i && posBa < i + _patternHighlightData.length())
+                            {
+                                c = _brushPatternHighlighted.color();
+                                painter.setPen(_penPatternHighlighted);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (_changesHighlighting)
                         if (_markedShown.at((int)(posBa - _bPosFirst)))
                         {
-                            c = _brushHighlighted.color();
-                            painter.setPen(_penHighlighted);
+                            c = _brushChangesHighlighted.color();
+                            painter.setPen(_penChangesHighlighted);
                         }
                 }
 
@@ -1008,6 +1047,8 @@ void QHexEdit::resetSelection(qint64 pos)
     _bSelectionInit = pos;
     _bSelectionBegin = pos;
     _bSelectionEnd = pos;
+    _patternHighlightData.clear();
+    _patternHighlightIndexList.clear();
 }
 
 void QHexEdit::setSelection(qint64 pos)
@@ -1027,6 +1068,22 @@ void QHexEdit::setSelection(qint64 pos)
     {
         _bSelectionBegin = pos;
         _bSelectionEnd = _bSelectionInit;
+    }
+    qint64 len = _bSelectionEnd-_bSelectionBegin;
+    _patternHighlightIndexList.clear();
+    if(len > 0)
+    {
+        _patternHighlightData = _dataShown.mid(_bSelectionBegin-_bPosFirst, len);
+        int index=0;
+        do
+        {
+            index = _dataShown.indexOf(_patternHighlightData, index+len);
+            if(index >= 0)
+            {
+                _patternHighlightIndexList.append(index+_bPosFirst);
+            }
+        }
+        while(index >= 0);
     }
 }
 
@@ -1084,6 +1141,23 @@ void QHexEdit::adjust()
         _bPosLast = _chunks->size() - 1;
     readBuffers();
     setCursorPosition(_cursorPosition);
+
+    if(_patternHighlightData.length())
+    {
+        _patternHighlightIndexList.clear();
+        {
+            int index=0;
+            do
+            {
+                index = _dataShown.indexOf(_patternHighlightData, index+_patternHighlightData.length());
+                if(index >= 0)
+                {
+                    _patternHighlightIndexList.append(index+_bPosFirst);
+                }
+            }
+            while(index >= 0);
+        }
+    }
 }
 
 void QHexEdit::dataChangedPrivate(int)

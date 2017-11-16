@@ -22,7 +22,8 @@ public slots:
     virtual void accept();
 
 private slots:
-    void on_pbHighlightingColor_clicked();
+    void on_pbChangesHighlightingColor_clicked();
+    void on_pbPatternHighlightingColor_clicked();
     void on_pbAddressAreaColor_clicked();
     void on_pbSelectionColor_clicked();
     void on_pbWidgetFont_clicked();
