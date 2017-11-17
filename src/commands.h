@@ -7,16 +7,16 @@
 
 #include "chunks.h"
 
-/*! CharCommand is a class to provid undo/redo functionality in QHexEdit.
+/*! CharCommand is a class to provide undo/redo functionality in QHexEdit.
 A QUndoCommand represents a single editing action on a document. CharCommand
-is responsable for manipulations on single chars. It can insert. overwrite and
-remove characters. A manipulation stores allways two actions
+is responsible for manipulations on single chars. It can insert. overwrite and
+remove characters. A manipulation stores always two actions
 1. redo (or do) action
 2. undo action.
 
 CharCommand also supports command compression via mergeWidht(). This allows
 the user to execute a undo command contation e.g. 3 steps in a single command.
-If you for example insert a new byt "34" this means for the editor doing 3
+If you for example insert a new byte "34" this means for the editor doing 3
 steps: insert a "00", overwrite it with "03" and the overwrite it with "34". These
 3 steps are combined into a single step, insert a "34".
 
@@ -35,6 +35,7 @@ public:
     void insert(qint64 pos, const QByteArray &ba);
     void removeAt(qint64 pos, qint64 len=1);
     void overwrite(qint64 pos, char c);
+    void overwrite(qint64 pos, const QByteArray &ba);
     void overwrite(qint64 pos, int len, const QByteArray &ba);
 
 private:

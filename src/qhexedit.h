@@ -4,6 +4,8 @@
 #include <QAbstractScrollArea>
 #include <QPen>
 #include <QBrush>
+#include <QBuffer>
+#include <QTimer>
 
 #include "chunks.h"
 #include "commands.h"
@@ -34,12 +36,12 @@ the mouse or the keyboard to navigate inside the widget. If you hit the keys
 (0..9, a..f) you will change the data. Changed data is highlighted and can be
 accessed via data().
 
-Normaly QHexEdit works in the overwrite Mode. You can set overwriteMode(false)
+Normally QHexEdit works in the overwrite Mode. You can set overwriteMode(false)
 and insert data. In this case the size of data() increases. It is also possible
 to delete bytes (del or backspace), here the size of data decreases.
 
 You can select data with keyboard hits or mouse movements. The copy-key will
-copy the selected data into the clipboard. The cut-key copies also but delets
+copy the selected data into the clipboard. The cut-key copies also but deletes
 it afterwards. In overwrite mode, the paste function overwrites the content of
 the (does not change the length) data. In insert mode, clipboard data will be
 inserted. The clipboard content is expected in ASCII Hex notation. Unknown
@@ -65,13 +67,13 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
 
-    /*! Property address area color sets (setAddressAreaColor()) the backgorund
+    /*! Property address area color sets (setAddressAreaColor()) the background
     color of address areas. You can also read the color (addressaAreaColor()).
     */
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
 
     /*! Property addressOffset is added to the Numbers of the Address Area.
-    A offset in the address area (left side) is sometimes usefull, whe you show
+    A offset in the address area (left side) is sometimes useful, when you show
     only a segment of a complete memory picture. With setAddressOffset() you set
     this property - with addressOffset() you get the current value.
     */
@@ -88,8 +90,8 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! Set and get bytes number per line.*/
     Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
 
-    /*! Porperty cursorPosition sets or gets the position of the editor cursor
-    in QHexEdit. Every byte in data has to cursor positions: the lower and upper
+    /*! Property cursorPosition sets or gets the position of the editor cursor
+    in QHexEdit. Every byte in data has two cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
     */
     Q_PROPERTY(qint64 cursorPosition READ cursorPosition WRITE setCursorPosition)
@@ -106,34 +108,34 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
 
-    /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget. 
-    set this property true to avoid horizontal scrollbars and show the maximal possible data. defalut value is false*/
+    /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget.
+    set this property true to avoid horizontal scrollbars and show the maximal possible data. Default value is false*/
     Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine)
 
     /*! Switch the highlighting feature on or of: true (show it), false (hide it).
     */
     Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
 
-    /*! Property highlighting color sets (setHighlightingColor()) the backgorund
+    /*! Property highlighting color sets (setHighlightingColor()) the background
     color of highlighted text areas. You can also read the color
     (highlightingColor()).
     */
     Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor)
 
-    /*! Porperty overwrite mode sets (setOverwriteMode()) or gets (overwriteMode()) the mode
+    /*! Property overwrite mode sets (setOverwriteMode()) or gets (overwriteMode()) the mode
     in which the editor works. In overwrite mode the user will overwrite existing data. The
     size of data will be constant. In insert mode the size will grow, when inserting
     new data.
     */
     Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode)
 
-    /*! Property selection color sets (setSelectionColor()) the backgorund
+    /*! Property selection color sets (setSelectionColor()) the background
     color of selected text areas. You can also read the color
     (selectionColor()).
     */
     Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor)
 
-    /*! Porperty readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
+    /*! Property readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
     in which the editor works. In readonly mode the the user can only navigate
     through the data and select data; modifying is not possible. This
     property's default is false.
@@ -151,18 +153,18 @@ public:
 
     // Access to data of qhexedit
 
-    /*! Sets the data of QHexEdit. The QIODevice will be opend just before reading
+    /*! Sets the data of QHexEdit. The QIODevice will be opened just before reading
     and closed immediately afterwards. This is to allow other programs to rewrite
     the file while editing it.
     */
     bool setData(QIODevice &iODevice);
 
-    /*! Givs back the data as a QByteArray starting at position \param pos and
+    /*! Gives back the data as a QByteArray starting at position \param pos and
     delivering \param count bytes.
     */
     QByteArray dataAt(qint64 pos, qint64 count=-1);
 
-    /*! Givs back the data into a \param iODevice starting at position \param pos
+    /*! Gives back the data into a \param iODevice starting at position \param pos
     and delivering \param count bytes.
     */
     bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
@@ -200,6 +202,13 @@ public:
     */
     void insert(qint64 pos, const QByteArray &ba);
 
+    /*! Replaces \param ba.size() bytes with a byte array \param ba
+    \param pos Index position, where to overwrite
+    \param ba QByteArray, which is inserted
+    The data is overwritten and the data size is not changed.
+    */
+    void replace(qint64 pos, const QByteArray &ba);
+
     /*! Replaces \param len bytes with a byte array \param ba
     \param pos Index position, where to overwrite
     \param ba QByteArray, which is inserted
@@ -209,18 +218,18 @@ public:
     void replace(qint64 pos, qint64 len, const QByteArray &ba);
 
 
-    // Utility functioins
+    // Utility functions
     /*! Calc cursor position from graphics position
      * \param point from where the cursor position should be calculated
-     * \return Cursor postioin
+     * \return Cursor position
      */
     qint64 cursorPosition(QPoint point);
 
-    /*! Ensure the cursor to be visble
+    /*! Ensure the cursor to be visible
      */
     void ensureVisible();
 
-    /*! Find first occurence of ba in QHexEdit data
+    /*! Find first occurrence of ba in QHexEdit data
      * \param ba Data to find
      * \param from Point where the search starts
      * \return pos if fond, else -1
@@ -232,7 +241,7 @@ public:
      */
     bool isModified();
 
-    /*! Find last occurence of ba in QHexEdit data
+    /*! Find last occurrence of ba in QHexEdit data
      * \param ba Data to find
      * \param from Point where the search starts
      * \return pos if fond, else -1
@@ -337,6 +346,7 @@ protected:
     void paintEvent(QPaintEvent *event);
     void resizeEvent(QResizeEvent *);
     virtual bool focusNextPrevChild(bool next);
+
 private:
     // Handle selections
     void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos
@@ -352,13 +362,13 @@ private:
 
 private slots:
     void adjust();                              // recalc pixel positions
-    void dataChangedPrivate(int idx=0);        // emit dataChanged() signal
+    void dataChangedPrivate(int idx=0);         // emit dataChanged() signal
     void refresh();                             // ensureVisible() and readBuffers()
     void updateCursor();                        // update blinking cursor
 
 private:
     // Name convention: pixel positions start with _px
-    int _pxCharWidth, _pxCharHeight;            // char dimensions (dpendend on font)
+    int _pxCharWidth, _pxCharHeight;            // char dimensions (dependent on font)
     int _pxPosHexX;                             // X-Pos of HeaxArea
     int _pxPosAdrX;                             // X-Pos of Address Area
     int _pxPosAsciiX;                           // X-Pos of Ascii Area
@@ -403,7 +413,7 @@ private:
     QBuffer _bData;                             // buffer, when setup with QByteArray
     Chunks *_chunks;                            // IODevice based access to data
     QTimer _cursorTimer;                        // for blinking cursor
-    qint64 _cursorPosition;                     // absolute positioin of cursor, 1 Byte == 2 tics
+    qint64 _cursorPosition;                     // absolute position of cursor, 1 Byte == 2 tics
     QRect _cursorRect;                          // physical dimensions of cursor
     QByteArray _data;                           // QHexEdit's data, when setup with QByteArray
     QByteArray _dataShown;                      // data in the current View
