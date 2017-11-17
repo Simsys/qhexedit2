@@ -1,5 +1,7 @@
 #include "testchunks.h"
 #include <cstdlib>
+#include <QFile>
+#include <QDebug>
 
 
 TestChunks::TestChunks(QTextStream &log, QString tName, int size, bool random, int saveFile)
@@ -57,8 +59,11 @@ void TestChunks::insert(qint64 pos, char b)
 
 void TestChunks::overwrite(qint64 pos, char b)
 {
-    _data[(int)pos] = b;
-    _highlighted[(int)pos] = 1;
+    if (_data[(int)pos] != b)
+    {
+        _data[(int)pos] = b;
+        _highlighted[(int)pos] = 1;
+    }
     _chunks.overwrite(pos, b);
     compare();
 }

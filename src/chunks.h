@@ -17,22 +17,37 @@
  *
  */
 
-#include <QtCore>
+#include <QObject>
+
+class QIODevice;
 
 struct Chunk
 {
     QByteArray data;
     QByteArray dataChanged;
     qint64 absPos;
+    int origLen;
+
+    Chunk(qint64 pos = 0);
+    Chunk(qint64 pos, const QByteArray & buffer);
+    bool contains(qint64 pos) const;
+    bool isUnchanged() const;
+    void mergeWith(const QByteArray & buffer);
+    bool mergeWith(const Chunk & chunk);
+
 };
+
+bool operator < (const Chunk & lhs, const Chunk & rhs);
+bool operator < (const Chunk & chunk, qint64 pos);
+bool operator < (qint64 pos, const Chunk & chunk);
 
 class Chunks: public QObject
 {
 Q_OBJECT
 public:
     // Constructors and file settings
-    Chunks(QObject *parent);
-    Chunks(QIODevice &ioDevice, QObject *parent);
+    Chunks(QObject *parent = nullptr);
+    Chunks(QIODevice &ioDevice, QObject *parent = nullptr);
     bool setIODevice(QIODevice &ioDevice);
 
     // Getting data out of Chunks
@@ -57,9 +72,10 @@ public:
     qint64 pos();
     qint64 size();
 
-
 private:
     int getChunkIndex(qint64 absPos);
+    void addChunkData(qint64 & readPos, int & readSize, int & insertIdx, qint64 absPos, bool merge);
+    QByteArray readData(qint64 readPos, qint64 maxSize);
 
     QIODevice * _ioDevice;
     qint64 _pos;
