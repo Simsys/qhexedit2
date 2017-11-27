@@ -46,8 +46,8 @@ class Chunks: public QObject
 Q_OBJECT
 public:
     // Constructors and file settings
-    Chunks(QObject *parent = nullptr);
-    Chunks(QIODevice &ioDevice, QObject *parent = nullptr);
+    Chunks(QObject *parent = 0);
+    Chunks(QIODevice &ioDevice, QObject *parent = 0);
     bool setIODevice(QIODevice &ioDevice);
 
     // Getting data out of Chunks
