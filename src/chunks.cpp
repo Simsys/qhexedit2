@@ -18,7 +18,8 @@ Chunk::Chunk(qint64 pos)
 }
 
 Chunk::Chunk(qint64 pos, const QByteArray & buffer)
-    : Chunk(pos)
+    : absPos(pos)
+    , origLen(0)
 {
     mergeWith(buffer);
 }
@@ -36,7 +37,7 @@ bool Chunk::isUnchanged() const
 void Chunk::mergeWith(const QByteArray & buffer)
 {
     data += buffer;
-    dataChanged.append(buffer.size(), NORMAL);
+    dataChanged += QByteArray(buffer.size(), NORMAL);
     origLen += buffer.size();
 }
 
@@ -180,7 +181,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
             readBuffer = _ioDevice->read(byteCount);
             buffer += readBuffer;
             if (highlighted)
-                highlighted->append(readBuffer.size(), NORMAL);
+                *highlighted += QByteArray(readBuffer.size(), NORMAL);
             if (readBuffer.size() < byteCount)
                 break;
             maxSize -= byteCount;
@@ -227,11 +228,12 @@ bool Chunks::dataChanged(qint64 pos)
     if (pos < 0 || pos >= _size)
         return false;
 
-    const auto range = std::equal_range(_chunks.begin(), _chunks.end(), pos);
+    const std::pair<QList<Chunk>::const_iterator, QList<Chunk>::const_iterator> range =
+        std::equal_range(_chunks.begin(), _chunks.end(), pos);
     if (range.first == range.second)
         return false;
 
-    const auto & chunk = *range.first;
+    const Chunk & chunk = *range.first;
     return chunk.dataChanged.at(pos - chunk.absPos) != NORMAL;
 }
 
@@ -359,7 +361,7 @@ int Chunks::getChunkIndex(qint64 absPos)
 
     for (int idx=0; idx < _chunks.size(); idx++)
     {
-        const auto & chunk = _chunks.at(idx);
+        const Chunk & chunk = _chunks.at(idx);
         if (absPos < chunk.absPos)
         {
             insertIdx = idx;
@@ -383,7 +385,7 @@ int Chunks::getChunkIndex(qint64 absPos)
         qint64 readLeftPos = 0;
         bool mergeLeft = false;
         if (insertIdx > 0) {
-            const auto & leftChunk = _chunks.at(insertIdx - 1);
+            const Chunk & leftChunk = _chunks.at(insertIdx - 1);
             readLeftPos = leftChunk.absPos + leftChunk.data.size() + ioDelta;
         }
         if (readPos < readLeftPos) {
@@ -396,7 +398,7 @@ int Chunks::getChunkIndex(qint64 absPos)
         qint64 readRightPos = _size + ioDelta;
         bool mergeRight = false;
         if (insertIdx < _chunks.size()) {
-            const auto & rightChunk = _chunks.at(insertIdx);
+            const Chunk & rightChunk = _chunks.at(insertIdx);
             readRightPos = rightChunk.absPos + ioDelta;
         }
         if (readRightPos < readPos + readSize) {
@@ -433,7 +435,7 @@ int Chunks::getChunkIndex(qint64 absPos)
 
 void Chunks::addChunkData(qint64 & readPos, int & readSize, int & insertIdx, qint64 absPos, bool merge)
 {
-    const auto readBuffer = readData(readPos, readSize);
+    const QByteArray readBuffer = readData(readPos, readSize);
     if (!readBuffer.isEmpty()) {
         if (merge) {
             _chunks[insertIdx - 1].mergeWith(readBuffer);
