@@ -15,7 +15,7 @@ class HexEdit(QHexEdit):
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    mainWin = HexEdit('mainwindow.py')
+    mainWin = HexEdit(sys.argv[1] if len(sys.argv) > 1 else sys.argv[0])
     mainWin.resize(600, 400)
     mainWin.move(300, 300)
     mainWin.show()

@@ -23,5 +23,5 @@ Release:TARGET = qhexedit
 Debug:TARGET = qhexeditd
 
 
-unix:DESTDIR = /usr/lib
+unix:DESTDIR = /usr/local/lib
 win32:DESTDIR = ../lib

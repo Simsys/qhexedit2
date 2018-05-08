@@ -4,7 +4,8 @@ cd build
 # /usr/share/qt4/bin/qmake ../src/qhexedit.pro
 
 # for Qt5 use qt5-qmake
-/usr/lib/x86_64-linux-gnu/qt5/bin/qmake ../src/qhexedit.pro
+#/usr/lib/x86_64-linux-gnu/qt5/bin/
+qmake ../src/qhexedit.pro
 
 sudo make
 cd ..
@@ -13,4 +14,5 @@ cd ..
 # sudo python2 setup.py install
 
 # for PyQt5 use python3 and PyQt5
-sudo python3 setup.py install
+[ -z "$PKG_CONFIG_PATH" ] && export PKG_CONFIG_PATH=/usr/local/opt/qt/lib/pkgconfig/
+sudo -E python3 setup.py install
