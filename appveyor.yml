@@ -5,7 +5,7 @@ environment:
   - example: qhexedit
     name: win32
     platform: mingw
-    qt: mingw492_32
+    qt: mingw530_32
     
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
