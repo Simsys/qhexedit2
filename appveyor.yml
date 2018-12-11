@@ -11,7 +11,7 @@ clone_folder: c:\dev\qhexedit
 clone_depth: 5
 
 init:
-  - set PATH=C:\Qt\5.5\%qt%\bin;C:\Qt\Tools\mingw492_32\bin;"C:\Program Files (x86)\NSIS";%PATH%
+  - set PATH=C:\Qt\5.11\bin;C:\Qt\Tools\mingw492_32\bin;"C:\Program Files (x86)\NSIS";%PATH%
   
 before_build:
   - cd c:\dev\qhexedit
