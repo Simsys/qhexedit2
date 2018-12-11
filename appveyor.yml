@@ -5,7 +5,6 @@ environment:
   - example: qhexedit
     name: win32
     platform: mingw
-    qt: mingw530_32
     
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
@@ -18,8 +17,6 @@ before_build:
   - cd c:\dev\qhexedit
   - md build
   - cd build
-  - dir C:\Qt\5.11.2
-  - dir QTDIR=C:\Qt\5.11.2\mingw53_32
   
 build_script:
   - qmake ..\example\qhexedit.pro
