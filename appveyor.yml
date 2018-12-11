@@ -18,6 +18,8 @@ before_build:
   - cd c:\dev\qhexedit
   - md build
   - cd build
+  - dir C:\Qt\5.11.0
+  - dir QTDIR=C:\Qt\5.11.0\mingw53_32
   
 build_script:
   - qmake ..\example\qhexedit.pro
