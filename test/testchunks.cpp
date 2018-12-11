@@ -2,7 +2,7 @@
 #include <cstdlib>
 
 
-TestChunks::TestChunks(QTextStream &log, QString tName, int size, bool random, int saveFile)
+TestChunks::TestChunks(QTextStream &log, QString tName, int size, bool random, int saveFile) : _chunks(nullptr)
 {
     char hex[] = "0123456789abcdef";
     srand(0);
