@@ -11,15 +11,15 @@ clone_folder: c:\dev\qhexedit
 clone_depth: 5
 
 install:
-  - set QTDIR=C:\Qt\5.11.0\mingw53_32
+  - set QTDIR=C:\Qt\5.11.2\mingw53_32
   - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\NSIS";%PATH%
   
 before_build:
   - cd c:\dev\qhexedit
   - md build
   - cd build
-  - dir C:\Qt\5.11.0
-  - dir QTDIR=C:\Qt\5.11.0\mingw53_32
+  - dir C:\Qt\5.11.2
+  - dir QTDIR=C:\Qt\5.11.2\mingw53_32
   
 build_script:
   - qmake ..\example\qhexedit.pro
