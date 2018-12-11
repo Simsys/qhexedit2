@@ -7,13 +7,7 @@
 
 int main()
 {
-    QDir dir("logs");
-    dir.setNameFilters(QStringList() << "*.*");
-    dir.setFilter(QDir::Files);
-    foreach(QString dirFile, dir.entryList())
-        dir.remove(dirFile);
-
-    QString logFilename = "logs/Summary.log";
+    QString logFilename = "Summary.log";
     QFile outFile(logFilename);
     outFile.open(QIODevice::WriteOnly | QIODevice::Text);
     QTextStream sumLog(&outFile);
