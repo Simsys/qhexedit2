@@ -28,6 +28,7 @@ FORMS += \
 OTHER_FILES += \
     ../doc/release.txt \
     ../doc/howtorelease.txt \
+    ../appveyor.yml \
     ../build-example.bat \
     ../build-python-bindings.bat \
     ../build-example.sh \
