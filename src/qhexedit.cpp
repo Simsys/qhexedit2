@@ -911,40 +911,38 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         painter.setPen(viewport()->palette().color(QPalette::WindowText));
     }
 
-    // paint cursor
 	// _cursorPosition counts in 2, _bPosFirst counts in 1
 	int hexPositionInShowData = _cursorPosition - 2 * _bPosFirst;
 
 	// due to scrolling the cursor can go out of the currently displayed data
 	if ((hexPositionInShowData >= 0) && (hexPositionInShowData < _hexDataShown.size()))
-	{
-		if (!_readOnly)
-		{
-			QColor color;
-
-			if (_blink && !_readOnly && hasFocus())
-				color = viewport()->palette().color(QPalette::WindowText);
-			else
-				color = viewport()->palette().color(QPalette::Base);
-			painter.fillRect(_cursorRect, color);
-		}
-		else
-		{
-			painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), viewport()->palette().dark().color());
-			if (_editAreaIsAscii)
+    {
+            // paint cursor
+            if (_readOnly)
             {
-				// every 2 hex there is 1 ascii
-				int asciiPositionInShowData = hexPositionInShowData / 2;
+                // make the background stick out
+                QColor color = viewport()->palette().dark().color();
+                painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), color);
+            }
+            else
+            {
+                if (_blink && hasFocus())
+                    painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
+            }
 
-				int ch = (uchar)_dataShown.at(asciiPositionInShowData);
-				if (ch < ' ')
-					ch = '.';
-
-				painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
-            } else {
+            if (_editAreaIsAscii)
+            {
+                // every 2 hex there is 1 ascii
+                int asciiPositionInShowData = hexPositionInShowData / 2;
+                int ch = (uchar)_dataShown.at(asciiPositionInShowData);
+                if ( ch < 0x20 )
+                    ch = '.';
+                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
+            }
+            else
+            {
                 painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(hexPositionInShowData, 1));
             }
-        }
     }
 
     // emit event, if size has changed
