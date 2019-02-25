@@ -243,6 +243,10 @@ public:
     */
     QString selectionToReadableString();
 
+    /*! Return the selected content of QHexEdit as QByteArray
+    */
+    QByteArray selectedData();
+
     /*! Set Font of QHexEdit
      * \param font
      */

@@ -38,6 +38,7 @@ public:
     bool highlighting();
     qint64 lastIndexOf(QByteArray &, qint64);
     QString selectionToReadableString();
+    QByteArray selectedData();
     void setFont(const QFont &);
     QString toReadableString();
 

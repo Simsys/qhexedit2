@@ -423,6 +423,12 @@ QString QHexEdit::selectionToReadableString()
     return toReadable(ba);
 }
 
+QByteArray QHexEdit::selectedData()
+{
+    QByteArray ba = _chunks->data(getSelectionBegin(), getSelectionEnd() - getSelectionBegin()).toHex();
+    return ba;
+}
+
 void QHexEdit::setFont(const QFont &font)
 {
     QWidget::setFont(font);
