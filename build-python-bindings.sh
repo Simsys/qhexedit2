@@ -5,10 +5,10 @@ fi
 cd build
 
 # for Qt4 use qt4-qmake
-# /usr/share/qt4/bin/qmake ../src/qhexedit.pro
+#qmake-qt4 ../src/qhexedit.pro
 
 # for Qt5 use qt5-qmake
-/usr/lib/x86_64-linux-gnu/qt5/bin/qmake ../src/qhexedit.pro
+qmake-qt5 ../src/qhexedit.pro
 
 sudo make
 cd ..
