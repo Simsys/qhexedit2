@@ -1,7 +1,3 @@
-if [ ! -d build ];then
-    mkdir build
-fi
-
 cd build
 
 # for Qt4 use qt4-qmake
