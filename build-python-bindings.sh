@@ -5,13 +5,7 @@ else
 fi
 
 cd build
-
-# for Qt4 use qt4-qmake
-#qmake-qt4 ../src/qhexedit.pro
-
-# for Qt5 use qt5-qmake
-qmake-qt5 ../src/qhexedit.pro
-
+qmake ../src/qhexedit.pro
 sudo make
 cd ..
 
