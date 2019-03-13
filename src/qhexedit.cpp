@@ -904,7 +904,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 if (_asciiArea)
                 {
                     int ch = (uchar)_dataShown.at(bPosLine + colIdx);
-                    if ( ch < 0x20 )
+                    if ( ch < ' ' || ch > '~' )
                         ch = '.';
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(r, c);
@@ -941,7 +941,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 // every 2 hex there is 1 ascii
                 int asciiPositionInShowData = hexPositionInShowData / 2;
                 int ch = (uchar)_dataShown.at(asciiPositionInShowData);
-                if ( ch < 0x20 )
+                if (ch < ' ' || ch > '~')
                     ch = '.';
                 painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
             }
