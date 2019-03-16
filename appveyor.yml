@@ -4,10 +4,10 @@ environment:
   matrix:
     - QT: C:\Qt\5.11\msvc2015
       GENERATOR: Visual Studio 14 2015
-      PLATFORM: x86
-    - QT: C:\Qt\5.12\msvc2015_64
+      PLATFORM: X86
+    - QT: C:\Qt\5.11\msvc2015_64
       GENERATOR: Visual Studio 14 2015 Win64
-      PLATFORM: x64
+      PLATFORM: X64
 
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
