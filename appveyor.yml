@@ -15,7 +15,6 @@ install:
   
 before_build:
     - dir "C:\Program Files (x86)"
-    - dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Community"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Community\VC"
