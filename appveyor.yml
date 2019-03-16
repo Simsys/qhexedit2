@@ -27,8 +27,9 @@ before_build:
     - cd c:\dev\qhexedit
     - md build
     - cd build
-    - if "%PLATFORM%" EQU "x64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
-    - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
+    - qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro
+#    - if "%PLATFORM%" EQU "x64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
+#    - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
   
 build_script:
   - nmake
