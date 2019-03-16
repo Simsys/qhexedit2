@@ -1,3 +1,9 @@
+Release 0.8.6, 2019-03-16
+-------------------------
+- Bug fix: select data above 2GB
+- add selectedData() method
+- minor changes
+
 Release 0.8.5, 2018-12-12
 -------------------------
 - Dynamic bytesPerLine property
