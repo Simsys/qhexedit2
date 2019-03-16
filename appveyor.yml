@@ -2,7 +2,7 @@ version: build{build}
 
 environment:
   matrix:
-    - QT: C:\Qt\5.12\msvc2017_64
+    - QT: C:\Qt\5.12\msvc2015_64
       GENERATOR: Visual Studio 15 2017 Win64
       PLATFORM: x64
     
@@ -20,8 +20,8 @@ before_build:
     - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
     - echo %path%
     - dir C:\Qt\5.12
-    - dir C:\Qt\5.12\msvc2017_64
-    - dir C:\Qt\5.12\msvc2017_64\bin
+    - dir C:\Qt\5.12\msvc2015_64
+    - dir C:\Qt\5.12\msvc2015_64\bin
     - qmake --version
     - echo %PLATFORM%
     - cd c:\dev\qhexedit
