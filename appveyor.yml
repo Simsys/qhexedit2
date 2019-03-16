@@ -18,6 +18,10 @@ before_build:
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC"
     - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
+    - echo %path%
+    - dir C:\Qt\5.12
+    - dir C:\Qt\5.12\msvc2017_64
+    - dir C:\Qt\5.12\msvc2017_64\bin
     - qmake --version
     - echo %PLATFORM%
     - cd c:\dev\qhexedit
