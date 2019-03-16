@@ -19,7 +19,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.8.5
+\version Version 0.8.6
 \image html qhexedit.png
 */
 
@@ -245,7 +245,7 @@ public:
 
     /*! Return the selected content of QHexEdit as QByteArray
     */
-    QByteArray selectedData();
+    QString selectedData();
 
     /*! Set Font of QHexEdit
      * \param font
