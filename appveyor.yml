@@ -4,7 +4,7 @@ environment:
   matrix:
     - QT: C:\Qt\5.12\msvc2015_64
       GENERATOR: Visual Studio 15 2017 Win64
-      PLATFORM: x64
+      PLATFORM: X64
     
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
@@ -27,9 +27,9 @@ before_build:
     - cd c:\dev\qhexedit
     - md build
     - cd build
-    - qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro
-#    - if "%PLATFORM%" EQU "x64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
-#    - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
+#    - qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro
+    - if "%PLATFORM%" EQU "X64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
+    - if "%PLATFORM%" EQU "X86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
   
 build_script:
   - nmake
