@@ -1,5 +1,4 @@
 #!define VERSION "0.0.1"
-!define QT "C:\Qt\5.5\mingw492_32\bin\"
 !define BUILD_DIR "C:\dev\qhexedit\build\release\"
 !define TRANS_DIR "C:\dev\qhexedit\example\translations\"
 !define OUTFILE_NAME "C:\dev\qhexedit\build\QHexEdit.exe"

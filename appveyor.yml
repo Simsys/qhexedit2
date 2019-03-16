@@ -2,25 +2,30 @@ version: build{build}
 
 environment:
   matrix:
-  - example: qhexedit
-    name: win32
-    platform: mingw
+    - QT: C:\Qt\5.12\msvc2017_64
+      GENERATOR: Visual Studio 15 2017 Win64
+      PLATFORM: x64
     
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
 
 install:
-  - set QTDIR=C:\Qt\5.11.3\mingw53_32
-  - set PATH=%QTDIR%\bin;C:\Qt\Tools\mingw530_32\bin;%PATH%;"C:\Program Files (x86)\NSIS";%PATH%
+    - dir C:\Qt
+    - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;%PATH%
   
 before_build:
-  - cd c:\dev\qhexedit
-  - md build
-  - cd build
+    - '%QT%\bin\qtenv2.bat'
+    - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %PLATFORM%
+    - qmake --version
+    - echo %PLATFORM%
+    - cd c:\dev\qhexedit
+    - md build
+    - cd build
+    - if "%PLATFORM%" EQU "x64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
+    - if "%PLATFORM%" EQU "x86" (qmake -r -spec win32-msvc CONFIG+=Win32 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
   
 build_script:
-  - qmake ..\example\qhexedit.pro
-  - mingw32-make
+  - nmake
   - windeployqt.exe release\qhexedit.exe
   - makensis ..\deploy.nsi
  
