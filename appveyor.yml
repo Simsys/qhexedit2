@@ -21,6 +21,7 @@ before_build:
     - qmake --version
     - echo %PLATFORM%
     - cd c:\dev\qhexedit
+    - IF EXIST build RMDIR /S /Q build
     - md build
     - cd build
     - if "%PLATFORM%" EQU "X64" (qmake -r -spec win32-msvc CONFIG+=x86_64 CONFIG-=debug CONFIG+=release ..\example\qhexedit.pro)
@@ -30,17 +31,16 @@ build_script:
     - nmake
     - windeployqt.exe release\qhexedit.exe
     - makensis ..\deploy.nsi
-    - copy QHexEdit.exe QHexEdit_%PLATFORM%.exe
+    - copy QHexEdit.exe ..\QHexEdit_%PLATFORM%.exe
  
 artifacts:
-    - path: build\QHexEdit_%PLATFORM%.exe
+    - path: QHexEdit_%PLATFORM%.exe
 
 deploy:
     description: 'Latest QHexEdit Release'
     provider: GitHub
     auth_token:
         secure: WEV9mRJC/pC2HFqJMXbLzEfBXAHu8aGDFIR8ARSip9n6jDJyCz3KstjSPM4VsgKc
-#    artifact: build\QHexEdit.exe
     draft: false
     prerelease: false
     force_update: true
