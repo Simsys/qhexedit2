@@ -3,9 +3,12 @@ version: build{build}
 environment:
   matrix:
     - QT: C:\Qt\5.12\msvc2015_64
-      GENERATOR: Visual Studio 15 2017 Win64
-      PLATFORM: X64
-    
+      GENERATOR: Visual Studio 14 2015 Win64
+      PLATFORM: x64
+    - QT: C:\Qt\5.12\msvc2015
+      GENERATOR: Visual Studio 14 2015
+      PLATFORM: x86
+
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
 
