@@ -16,11 +16,8 @@ install:
 before_build:
     - dir "C:\Program Files (x86)"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0"
-    - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Community"
     - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC"
-    - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\Auxiliary"
-    - dir "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\Auxiliary\Build"
-    - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %PLATFORM%
+    - call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
     - qmake --version
     - echo %PLATFORM%
     - cd c:\dev\qhexedit
