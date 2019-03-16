@@ -2,18 +2,19 @@ version: build{build}
 
 environment:
   matrix:
-    - QT: C:\Qt\5.12\msvc2015_64
-      GENERATOR: Visual Studio 14 2015 Win64
-      PLATFORM: x64
     - QT: C:\Qt\5.12\msvc2015
       GENERATOR: Visual Studio 14 2015
       PLATFORM: x86
+    - QT: C:\Qt\5.12\msvc2015_64
+      GENERATOR: Visual Studio 14 2015 Win64
+      PLATFORM: x64
 
 clone_folder: c:\dev\qhexedit
 clone_depth: 5
 
 install:
     - dir C:\Qt
+    - dir C:\Qt\5.12
     - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;%PATH%
   
 before_build:
