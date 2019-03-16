@@ -14,7 +14,6 @@ install:
     - set PATH=%QT%\bin\;C:\Qt\Tools\QtCreator\bin\;%PATH%
   
 before_build:
-    - '%QT%\bin\qtenv2.bat'
     - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %PLATFORM%
     - qmake --version
     - echo %PLATFORM%
