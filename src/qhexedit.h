@@ -66,7 +66,7 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
 
     /*! Property address area color sets (setAddressAreaColor()) the background
-    color of address areas. You can also read the color (addressaAreaColor()).
+    color of address areas. You can also read the color (addressAreaColor()).
     */
     Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
 
@@ -106,7 +106,7 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
 
-    /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget. 
+    /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget.
     set this property true to avoid horizontal scrollbars and show the maximal possible data. defalut value is false*/
     Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine)
 

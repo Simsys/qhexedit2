@@ -60,7 +60,7 @@ private:
     QString curFile;
     QFile file;
     bool isUntitled;
-    
+
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *helpMenu;

@@ -71,7 +71,7 @@ QString QHexEditPlugin::whatsThis() const
     return "";
 }
 
-QWidget * QHexEditPlugin::createWidget(QWidget *parent) 
+QWidget * QHexEditPlugin::createWidget(QWidget *parent)
 {
     return new QHexEdit(parent);
 }

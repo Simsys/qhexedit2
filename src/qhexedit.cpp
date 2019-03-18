@@ -917,11 +917,11 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         painter.setPen(viewport()->palette().color(QPalette::WindowText));
     }
 
-	// _cursorPosition counts in 2, _bPosFirst counts in 1
-	int hexPositionInShowData = _cursorPosition - 2 * _bPosFirst;
+    // _cursorPosition counts in 2, _bPosFirst counts in 1
+    int hexPositionInShowData = _cursorPosition - 2 * _bPosFirst;
 
-	// due to scrolling the cursor can go out of the currently displayed data
-	if ((hexPositionInShowData >= 0) && (hexPositionInShowData < _hexDataShown.size()))
+    // due to scrolling the cursor can go out of the currently displayed data
+    if ((hexPositionInShowData >= 0) && (hexPositionInShowData < _hexDataShown.size()))
     {
             // paint cursor
             if (_readOnly)
@@ -971,11 +971,11 @@ void QHexEdit::resizeEvent(QResizeEvent *)
             pxFixGaps += _pxGapHexAscii;
 
         // +1 because the last hex value do not have space. so it is effective one char more
-        int charWidth = (viewport()->width() - pxFixGaps ) / _pxCharWidth + 1; 
+        int charWidth = (viewport()->width() - pxFixGaps ) / _pxCharWidth + 1;
 
         // 2 hex alfa-digits 1 space 1 ascii per byte = 4; if ascii is disabled then 3
         // to prevent devision by zero use the min value 1
-        setBytesPerLine(std::max(charWidth / (_asciiArea ? 4 : 3),1));  
+        setBytesPerLine(std::max(charWidth / (_asciiArea ? 4 : 3),1));
     }
     adjust();
 }

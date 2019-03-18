@@ -20,21 +20,21 @@ HEADERS = \
     qhexedit.h \
     chunks.h \
     commands.h \
-	QHexEditPlugin.h
+    QHexEditPlugin.h
 
 
 SOURCES = \
     qhexedit.cpp \
     chunks.cpp \
     commands.cpp \
-	QHexEditPlugin.cpp
-	
+    QHexEditPlugin.cpp
+
 #! [3]
 
 # install
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 sources.files = $$SOURCES $$HEADERS *.pro
 sources.path = $$[QT_INSTALL_EXAMPLES]/designer/QHexEditPlugin
-INSTALLS += target 
+INSTALLS += target
 
 symbian: include($$QT_SOURCE_TREE/examples/symbianpkgrules.pri)
