@@ -431,9 +431,12 @@ QString QHexEdit::selectedData()
 
 void QHexEdit::setFont(const QFont &font)
 {
-    QWidget::setFont(font);
-    _pxCharWidth = fontMetrics().width(QLatin1Char('2'));
-    _pxCharHeight = fontMetrics().height();
+    QFont theFont(font);
+    theFont.setStyleHint(QFont::Monospace, QFont::NoAntialias);
+    QWidget::setFont(theFont);
+    QFontMetrics metrics = fontMetrics();
+    _pxCharWidth = metrics.horizontalAdvance(QLatin1Char('2'));
+    _pxCharHeight = metrics.height();
     _pxGapAdr = _pxCharWidth / 2;
     _pxGapAdrHex = _pxCharWidth;
     _pxGapHexAscii = 2 * _pxCharWidth;
