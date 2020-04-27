@@ -856,7 +856,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             for (int row=0, pxPosY = _pxCharHeight; row <= (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
             {
                 address = QString("%1").arg(_bPosFirst + row*_bytesPerLine + _addressOffset, _addrDigits, 16, QChar('0'));
-                painter.drawText(_pxPosAdrX - pxOfsX, pxPosY, address);
+                painter.drawText(_pxPosAdrX - pxOfsX, pxPosY, hexCaps() ? address.toUpper() : address);
             }
         }
 
@@ -950,7 +950,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             }
             else
             {
-                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, _hexDataShown.mid(hexPositionInShowData, 1));
+                painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, hexCaps() ? _hexDataShown.mid(hexPositionInShowData, 1).toUpper() : _hexDataShown.mid(hexPositionInShowData, 1));
             }
     }
 
