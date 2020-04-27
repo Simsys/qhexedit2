@@ -432,7 +432,7 @@ QString QHexEdit::selectedData()
 void QHexEdit::setFont(const QFont &font)
 {
     QFont theFont(font);
-    theFont.setStyleHint(QFont::Monospace, QFont::NoAntialias);
+    theFont.setStyleHint(QFont::Monospace);
     QWidget::setFont(theFont);
     QFontMetrics metrics = fontMetrics();
     _pxCharWidth = metrics.horizontalAdvance(QLatin1Char('2'));
