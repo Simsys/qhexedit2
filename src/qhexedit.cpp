@@ -435,7 +435,11 @@ void QHexEdit::setFont(const QFont &font)
     theFont.setStyleHint(QFont::Monospace);
     QWidget::setFont(theFont);
     QFontMetrics metrics = fontMetrics();
+#if QT_VERSION > QT_VERSION_CHECK(5, 11, 0)
     _pxCharWidth = metrics.horizontalAdvance(QLatin1Char('2'));
+#else
+    _pxCharWidth = metrics.width(QLatin1Char('2'));
+#endif
     _pxCharHeight = metrics.height();
     _pxGapAdr = _pxCharWidth / 2;
     _pxGapAdrHex = _pxCharWidth;
