@@ -1,3 +1,12 @@
+Release 0.8.7, 2020-06-24
+-------------------------
+- extend HexCaps check to address and edit text
+- use 'monospace' hint to improve font guess
+- fix build with qt < 5.11.0
+- add icon pics to source
+- forward key press events to parent widget
+- limit undo stack to 1000 entries
+
 Release 0.8.6, 2019-03-16
 -------------------------
 - Bug fix: select data above 2GB
