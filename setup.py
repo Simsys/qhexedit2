@@ -114,7 +114,7 @@ dirname = os.path.dirname(__file__)
 
 setup(
     name='QHexEdit',
-    version='0.8.8',
+    version='0.8.9',
     ext_modules=[
         Extension(
             "qhexedit",
