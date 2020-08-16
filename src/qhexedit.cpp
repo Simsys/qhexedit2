@@ -11,23 +11,22 @@
 // ********************************************************************** Constructor, destructor
 
 QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
+    , _addressArea(true)
+    , _addressWidth(4)
+    , _asciiArea(true)
+    , _bytesPerLine(16)
+    , _hexCharsInLine(47)
+    , _highlighting(true)
+    , _overwriteMode(true)
+    , _readOnly(false)
+    , _hexCaps(false)
+    , _dynamicBytesPerLine(false)
+    , _editAreaIsAscii(false)
+    , _chunks(new Chunks(this))
+    , _cursorPosition(0)
+    , _lastEventSize(0)
+    , _undoStack(new UndoStack(_chunks, this))
 {
-    _addressArea = true;
-    _addressWidth = 4;
-    _asciiArea = true;
-    _overwriteMode = true;
-    _highlighting = true;
-    _readOnly = false;
-    _cursorPosition = 0;
-    _lastEventSize = 0;
-    _hexCharsInLine = 47;
-    _bytesPerLine = 16;
-    _editAreaIsAscii = false;
-    _hexCaps = false;
-    _dynamicBytesPerLine = false;
-
-    _chunks = new Chunks(this);
-    _undoStack = new UndoStack(_chunks, this);
 #ifdef Q_OS_WIN32
     setFont(QFont("Courier", 10));
 #else
