@@ -44,13 +44,15 @@ private slots:
     void showOptionsDialog();
     void showSearchDialog();
 
+public:
+    void loadFile(const QString &fileName);
+
 private:
     void init();
     void createActions();
     void createMenus();
     void createStatusBar();
     void createToolBars();
-    void loadFile(const QString &fileName);
     void readSettings();
     bool saveFile(const QString &fileName);
     void setCurrentFile(const QString &fileName);
