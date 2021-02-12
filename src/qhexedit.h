@@ -161,6 +161,12 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor addressTextColor READ addressTextColor WRITE setAddressTextColor)
 
+    /*! Property selection color sets (setNullBytesColor()) the
+    color of NULL bytes text. You can also read the color
+    (nullBytesColor()).
+    */
+    Q_PROPERTY(QColor nullBytesColor READ nullBytesColor WRITE setNullBytesColor)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -360,6 +366,9 @@ public:
     QColor addressTextColor();
     void setAddressTextColor(const QColor &color);
 
+    QColor nullBytesColor();
+    void setNullBytesColor(const QColor &color);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -428,6 +437,7 @@ private:
     bool _dynamicBytesPerLine;
     QPen _asciiSeparatorColor;
     QPen _addressTextColor;
+    QPen _nullBytesColor;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited

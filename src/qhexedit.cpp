@@ -345,6 +345,17 @@ QColor QHexEdit::addressTextColor()
     return _addressTextColor.color();
 }
 
+void QHexEdit::setNullBytesColor(const QColor &color)
+{
+    _nullBytesColor = QPen(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::nullBytesColor()
+{
+    return _nullBytesColor.color();
+}
+
 // ********************************************************************** Access to data of qhexedit
 bool QHexEdit::setData(QIODevice &iODevice)
 {
@@ -939,6 +950,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     r.setRect(pxPosX - _pxCharWidth, pxPosY - _pxCharHeight + _pxSelectionSub, 3*_pxCharWidth, _pxCharHeight);
                 painter.fillRect(r, c);
                 hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2);
+                if ( hex == "00") painter.setPen(_nullBytesColor);
                 painter.drawText(pxPosX, pxPosY, hexCaps()?hex.toUpper():hex);
                 pxPosX += 3*_pxCharWidth;
 
