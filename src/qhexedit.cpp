@@ -269,13 +269,23 @@ bool QHexEdit::overwriteMode()
 void QHexEdit::setSelectionColor(const QColor &color)
 {
     _brushSelection = QBrush(color);
-    _penSelection = QPen(Qt::white);
     viewport()->update();
 }
 
 QColor QHexEdit::selectionColor()
 {
     return _brushSelection.color();
+}
+
+void QHexEdit::setSelectionTextColor(const QColor &color)
+{
+    _penSelection = QPen(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::selectionTextColor()
+{
+    return _penSelection.color();
 }
 
 bool QHexEdit::isReadOnly()

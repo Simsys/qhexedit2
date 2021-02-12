@@ -133,6 +133,12 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor)
 
+    /*! Property selection color sets (setSelectionTextColor()) the foreground
+    color of the selected text. You can also read the color
+    (selectionTextColor()).
+    */
+    Q_PROPERTY(QColor selectionTextColor READ selectionTextColor WRITE setSelectionTextColor)
+
     /*! Property readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
     in which the editor works. In readonly mode the the user can only navigate
     through the data and select data; modifying is not possible. This
@@ -148,6 +154,7 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     (asciiSeparatorColor()).
     */
     Q_PROPERTY(QColor asciiSeparatorColor READ asciiSeparatorColor WRITE setAsciiSeparatorColor)
+
 
 
 public:
@@ -342,6 +349,9 @@ public:
 
     QColor asciiSeparatorColor();
     void setAsciiSeparatorColor(const QColor &color);
+
+    QColor selectionTextColor();
+    void setSelectionTextColor(const QColor &color);
 
 protected:
     // Handle events
