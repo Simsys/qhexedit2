@@ -26,6 +26,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _hexCaps = false;
     _dynamicBytesPerLine = false;
     _asciiSeparatorColor = QColor(Qt::gray);
+    _cursorReadOnlyColor = QColor(Qt::green);
 
     _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
@@ -376,6 +377,17 @@ void QHexEdit::setCursorInsertOverwriteColor(const QColor &color)
 QColor QHexEdit::cursorInsertOverwriteColor()
 {
     return _cursorInsertOverwriteColor;
+}
+
+void QHexEdit::setCursorReadOnlyColor(const QColor &color)
+{
+    _cursorReadOnlyColor = QColor(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::cursorReadOnlyColor()
+{
+    return _cursorReadOnlyColor;
 }
 
 // ********************************************************************** Access to data of qhexedit
@@ -1005,9 +1017,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             // paint cursor
             if (_readOnly)
             {
-                // make the background stick out
-                QColor color = viewport()->palette().dark().color();
-                painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), color);
+                painter.fillRect(QRect(_pxCursorX - pxOfsX, _pxCursorY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight), QColor(_cursorReadOnlyColor));
             }
             else
             {
