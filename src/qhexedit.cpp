@@ -356,6 +356,17 @@ QColor QHexEdit::nullBytesColor()
     return _nullBytesColor.color();
 }
 
+void QHexEdit::setAlphaNumericAsciiColor(const QColor &color)
+{
+    _alphaNumericAsciiColor = QPen(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::alphaNumericAsciiColor()
+{
+    return _alphaNumericAsciiColor.color();
+}
+
 // ********************************************************************** Access to data of qhexedit
 bool QHexEdit::setData(QIODevice &iODevice)
 {
@@ -958,8 +969,11 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 if (_asciiArea)
                 {
                     int ch = (uchar)_dataShown.at(bPosLine + colIdx);
-                    if ( ch < ' ' || ch > '~' )
+                    if ( ch < ' ' || ch > '~' ) {
                         ch = '.';
+                    } else {
+                        painter.setPen(_alphaNumericAsciiColor);
+                    }
                     r.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(r, c);
                     painter.drawText(pxPosAsciiX2, pxPosY, QChar(ch));
