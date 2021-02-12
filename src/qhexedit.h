@@ -155,7 +155,11 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor asciiSeparatorColor READ asciiSeparatorColor WRITE setAsciiSeparatorColor)
 
-
+    /*! Property selection color sets (setAddressTextColor()) the
+    color of the Addresses Offset text. You can also read the color
+    (addressTextColor()).
+    */
+    Q_PROPERTY(QColor addressTextColor READ addressTextColor WRITE setAddressTextColor)
 
 public:
     /*! Creates an instance of QHexEdit.
@@ -353,6 +357,9 @@ public:
     QColor selectionTextColor();
     void setSelectionTextColor(const QColor &color);
 
+    QColor addressTextColor();
+    void setAddressTextColor(const QColor &color);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -420,6 +427,7 @@ private:
     bool _hexCaps;
     bool _dynamicBytesPerLine;
     QPen _asciiSeparatorColor;
+    QPen _addressTextColor;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited
