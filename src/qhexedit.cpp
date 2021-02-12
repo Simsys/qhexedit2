@@ -367,6 +367,17 @@ QColor QHexEdit::alphaNumericAsciiColor()
     return _alphaNumericAsciiColor.color();
 }
 
+void QHexEdit::setCursorInsertOverwriteColor(const QColor &color)
+{
+    _cursorInsertOverwriteColor = QColor(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::cursorInsertOverwriteColor()
+{
+    return _cursorInsertOverwriteColor;
+}
+
 // ********************************************************************** Access to data of qhexedit
 bool QHexEdit::setData(QIODevice &iODevice)
 {
@@ -1000,8 +1011,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             }
             else
             {
-                if (_blink && hasFocus())
-                    painter.fillRect(_cursorRect, this->palette().color(QPalette::WindowText));
+                if (_blink && hasFocus()) painter.fillRect(_cursorRect, QColor(_cursorInsertOverwriteColor));
             }
 
             if (_editAreaIsAscii)

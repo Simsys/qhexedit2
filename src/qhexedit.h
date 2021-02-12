@@ -167,11 +167,17 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor nullBytesColor READ nullBytesColor WRITE setNullBytesColor)
 
-    /*! Property selection color sets (alphaNumericAsciiColor()) the
+    /*! Property selection color sets (setAlphaNumericAsciiColor()) the
     color of Alphanumeric ASCII text in text area. You can also read the color
     (alphaNumericAsciiColor()).
     */
     Q_PROPERTY(QColor alphaNumericAsciiColor READ alphaNumericAsciiColor WRITE setAlphaNumericAsciiColor)
+
+    /*! Property selection color sets (setCursorInsertOverwriteColor()) the
+    color of the cursor when in insert or overwrite mode. You can also read the color
+    (cursorInsertOverwriteColor()).
+    */
+    Q_PROPERTY(QColor cursorInsertOverwriteColor READ cursorInsertOverwriteColor WRITE setCursorInsertOverwriteColor)
 
 public:
     /*! Creates an instance of QHexEdit.
@@ -378,6 +384,9 @@ public:
     QColor alphaNumericAsciiColor();
     void setAlphaNumericAsciiColor(const QColor &color);
 
+    QColor cursorInsertOverwriteColor();
+    void setCursorInsertOverwriteColor(const QColor &color);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -448,6 +457,7 @@ private:
     QPen _addressTextColor;
     QPen _nullBytesColor;
     QPen _alphaNumericAsciiColor;
+    QColor _cursorInsertOverwriteColor;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited
