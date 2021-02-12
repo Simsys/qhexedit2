@@ -143,6 +143,13 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
     Q_PROPERTY(QFont font READ font WRITE setFont)
 
+    /*! Property selection color sets (setAsciiSeparatorColor()) the
+    color of the ASCII text line separator. You can also read the color
+    (asciiSeparatorColor()).
+    */
+    Q_PROPERTY(QColor asciiSeparatorColor READ asciiSeparatorColor WRITE setAsciiSeparatorColor)
+
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -333,6 +340,9 @@ public:
     QColor selectionColor();
     void setSelectionColor(const QColor &color);
 
+    QColor asciiSeparatorColor();
+    void setAsciiSeparatorColor(const QColor &color);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -399,6 +409,7 @@ private:
     bool _readOnly;
     bool _hexCaps;
     bool _dynamicBytesPerLine;
+    QPen _asciiSeparatorColor;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited

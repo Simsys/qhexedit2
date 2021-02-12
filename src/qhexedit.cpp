@@ -25,6 +25,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     _editAreaIsAscii = false;
     _hexCaps = false;
     _dynamicBytesPerLine = false;
+    _asciiSeparatorColor = QColor(Qt::gray);
 
     _chunks = new Chunks(this);
     _undoStack = new UndoStack(_chunks, this);
@@ -310,6 +311,17 @@ void QHexEdit::setDynamicBytesPerLine(const bool isDynamic)
 bool QHexEdit::dynamicBytesPerLine()
 {
     return _dynamicBytesPerLine;
+}
+
+void QHexEdit::setAsciiSeparatorColor(const QColor &color)
+{
+    _asciiSeparatorColor = QPen(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::asciiSeparatorColor()
+{
+    return _asciiSeparatorColor.color();
 }
 
 // ********************************************************************** Access to data of qhexedit
@@ -848,7 +860,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         if (_asciiArea)
         {
             int linePos = _pxPosAsciiX - (_pxGapHexAscii / 2);
-            painter.setPen(Qt::gray);
+            painter.setPen(_asciiSeparatorColor);
             painter.drawLine(linePos - pxOfsX, event->rect().top(), linePos - pxOfsX, height());
         }
 
