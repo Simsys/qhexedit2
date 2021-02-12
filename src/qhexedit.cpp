@@ -390,6 +390,17 @@ QColor QHexEdit::cursorReadOnlyColor()
     return _cursorReadOnlyColor;
 }
 
+void QHexEdit::setCursorTextColor(const QColor &color)
+{
+    _cursorTextColor = QColor(color);
+    viewport()->update();
+}
+
+QColor QHexEdit::cursorTextColor()
+{
+    return _cursorTextColor;
+}
+
 // ********************************************************************** Access to data of qhexedit
 bool QHexEdit::setData(QIODevice &iODevice)
 {
@@ -1024,6 +1035,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                 if (_blink && hasFocus()) painter.fillRect(_cursorRect, QColor(_cursorInsertOverwriteColor));
             }
 
+            painter.setPen(_cursorTextColor);
             if (_editAreaIsAscii)
             {
                 // every 2 hex there is 1 ascii

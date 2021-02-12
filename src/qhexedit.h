@@ -185,6 +185,12 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor cursorReadOnlyColor READ cursorReadOnlyColor WRITE setCursorReadOnlyColor)
 
+    /*! Property selection color sets (setCursorTextColor()) the foreground
+    text color of the cursor. You can also read the color
+    (cursorTextColor()).
+    */
+    Q_PROPERTY(QColor cursorTextColor READ cursorTextColor WRITE setCursorTextColor)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -396,6 +402,9 @@ public:
     QColor cursorReadOnlyColor();
     void setCursorReadOnlyColor(const QColor &color);
 
+    QColor cursorTextColor();
+    void setCursorTextColor(const QColor &color);
+
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -468,6 +477,7 @@ private:
     QPen _alphaNumericAsciiColor;
     QColor _cursorInsertOverwriteColor;
     QColor _cursorReadOnlyColor;
+    QColor _cursorTextColor;
 
     // other variables
     bool _editAreaIsAscii;                      // flag about the ascii mode edited
