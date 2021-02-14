@@ -191,6 +191,14 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(QColor cursorTextColor READ cursorTextColor WRITE setCursorTextColor)
 
+    /*! Property can undo provides information if undo is available (canUndo()).
+    */
+    Q_PROPERTY(bool canUndo READ canUndo)
+
+    /*! Property can redo provides information if redo is available (canUndo()).
+    */
+    Q_PROPERTY(bool canRedo READ canRedo)
+
 public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
@@ -404,6 +412,12 @@ public:
 
     QColor cursorTextColor();
     void setCursorTextColor(const QColor &color);
+
+    bool canUndo();
+    void setUndo(bool canUndo);
+
+    bool canRedo();
+    void setRedo(bool canRedo);
 
 protected:
     // Handle events

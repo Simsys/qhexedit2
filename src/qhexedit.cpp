@@ -401,6 +401,16 @@ QColor QHexEdit::cursorTextColor()
     return _cursorTextColor;
 }
 
+bool QHexEdit::canUndo()
+{
+    return _undoStack->canUndo();
+}
+
+bool QHexEdit::canRedo()
+{
+    return _undoStack->canRedo();
+}
+
 // ********************************************************************** Access to data of qhexedit
 bool QHexEdit::setData(QIODevice &iODevice)
 {
