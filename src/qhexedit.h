@@ -63,36 +63,36 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! Property address area switch the address area on or off. Set addressArea true
     (show it), false (hide it).
     */
-    Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
+    Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea NOTIFY addressAreaChanged)
 
     /*! Property address area color sets (setAddressAreaColor()) the background
     color of address areas. You can also read the color (addressAreaColor()).
     */
-    Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
+    Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor NOTIFY addressAreaColorChanged)
 
     /*! Property addressOffset is added to the Numbers of the Address Area.
     A offset in the address area (left side) is sometimes useful, whe you show
     only a segment of a complete memory picture. With setAddressOffset() you set
     this property - with addressOffset() you get the current value.
     */
-    Q_PROPERTY(qint64 addressOffset READ addressOffset WRITE setAddressOffset)
+    Q_PROPERTY(qint64 addressOffset READ addressOffset WRITE setAddressOffset NOTIFY addressOffsetChanged)
 
     /*! Set and get the minimum width of the address area, width in characters.
     */
-    Q_PROPERTY(int addressWidth READ addressWidth WRITE setAddressWidth)
+    Q_PROPERTY(int addressWidth READ addressWidth WRITE setAddressWidth NOTIFY addressWidthChanged)
 
     /*! Switch the ascii area on (true, show it) or off (false, hide it).
     */
-    Q_PROPERTY(bool asciiArea READ asciiArea WRITE setAsciiArea)
+    Q_PROPERTY(bool asciiArea READ asciiArea WRITE setAsciiArea NOTIFY asciiAreaChanged)
 
     /*! Set and get bytes number per line.*/
-    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
+    Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine NOTIFY bytesPerLineChanged)
 
     /*! Property cursorPosition sets or gets the position of the editor cursor
     in QHexEdit. Every byte in data has two cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
     */
-    Q_PROPERTY(qint64 cursorPosition READ cursorPosition WRITE setCursorPosition)
+    Q_PROPERTY(qint64 cursorPosition READ cursorPosition WRITE setCursorPosition NOTIFY cursorPositionChanged)
 
     /*! Property data holds the content of QHexEdit. Call setData() to set the
     content of QHexEdit, data() returns the actual content. When calling setData()
@@ -104,44 +104,44 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! That property defines if the hex values looks as a-f if the value is false(default)
     or A-F if value is true.
     */
-    Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps)
+    Q_PROPERTY(bool hexCaps READ hexCaps WRITE setHexCaps NOTIFY hexCapsChanged)
 
     /*! Property defines the dynamic calculation of bytesPerLine parameter depends of width of widget.
     set this property true to avoid horizontal scrollbars and show the maximal possible data. defalut value is false*/
-    Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine)
+    Q_PROPERTY(bool dynamicBytesPerLine READ dynamicBytesPerLine WRITE setDynamicBytesPerLine NOTIFY dynamicBytesPerLineChanged)
 
     /*! Switch the highlighting feature on or of: true (show it), false (hide it).
     */
-    Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting)
+    Q_PROPERTY(bool highlighting READ highlighting WRITE setHighlighting NOTIFY highlightingChanged)
 
     /*! Property highlighting color sets (setHighlightingColor()) the background
     color of highlighted text areas. You can also read the color
     (highlightingColor()).
     */
-    Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor)
+    Q_PROPERTY(QColor highlightingColor READ highlightingColor WRITE setHighlightingColor NOTIFY highlightingColorChanged)
 
     /*! Property overwrite mode sets (setOverwriteMode()) or gets (overwriteMode()) the mode
     in which the editor works. In overwrite mode the user will overwrite existing data. The
     size of data will be constant. In insert mode the size will grow, when inserting
     new data.
     */
-    Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode)
+    Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode NOTIFY overwriteModeChanged)
 
     /*! Property selection color sets (setSelectionColor()) the background
     color of selected text areas. You can also read the color
     (selectionColor()).
     */
-    Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor)
+    Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor NOTIFY selectionColorChanged)
 
     /*! Property readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
     in which the editor works. In readonly mode the the user can only navigate
     through the data and select data; modifying is not possible. This
     property's default is false.
     */
-    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly)
+    Q_PROPERTY(bool readOnly READ isReadOnly WRITE setReadOnly NOTIFY readOnlyChanged)
 
     /*! Set the font of the widget. Please use fixed width fonts like Mono or Courier.*/
-    Q_PROPERTY(QFont font READ font WRITE setFont)
+    Q_PROPERTY(QFont font READ font WRITE setFont NOTIFY fontChanged)
 
 public:
     /*! Creates an instance of QHexEdit.
@@ -269,18 +269,59 @@ public slots:
     void undo();
 
 signals:
+    /*! The Address Area visibilty was changed. */
+    void addressAreaChanged(bool addressArea);
+
+    /*! The Address Area color has Changed */
+    void addressAreaColorChanged(QColor addressColor);
+
+    /*! The Address Area Offset has Changed */
+    void addressOffsetChanged(qint64 addressOffset);
+
+    /*! The Address Area Width has Changed */
+    void addressWidthChanged(int addressOffset);
+
+    /*! The Ascii area visibility was changed */
+    void asciiAreaChanged(bool asciiArea);
+
+    /*! The bytes per line has changed */
+    void bytesPerLineChanged(int bytesPerLine);
+
+    /*! The Curosr position has changed */
+    void cursorPositionChanged(qint64 cursorPosition);
+
+    /*! The signal is emitted every time, the data is changed. */
+    void dataChanged();
+
+    /*! The capitalization of the Hex chars has changed */
+    void hexCapsChanged(bool isCaps);
+
+    /*! dynamicBytesPerLine has changed */
+    void dynamicBytesPerLineChanged(bool isDynamic);
+
+    /*! Highlighting has been changed. */
+    void highlightingChanged(bool highlight);
+
+    /*! Highlighting Color has changed */
+    void highlightingColorChanged(QColor highlightColor);
+
+    /*! The signal is emitted every time, the overwrite mode is changed. */
+    void overwriteModeChanged(bool state);
+
+    /*! The selection color has changed */
+    void selectionColorChanged(QColor selectionColor);
+
+    /*! Read only mode changed */
+    void readOnlyChanged(bool readOnly);
+
+    /*! The font has changed */
+    void fontChanged(QFont font);
 
     /*! Contains the address, where the cursor is located. */
     void currentAddressChanged(qint64 address);
 
     /*! Contains the size of the data to edit. */
     void currentSizeChanged(qint64 size);
-
-    /*! The signal is emitted every time, the data is changed. */
-    void dataChanged();
-
-    /*! The signal is emitted every time, the overwrite mode is changed. */
-    void overwriteModeChanged(bool state);
 
 
 /*! \cond docNever */
