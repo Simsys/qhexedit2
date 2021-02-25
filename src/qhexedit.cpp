@@ -768,9 +768,9 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             /* Hex and ascii input */
             int key;
             if (_editAreaIsAscii)
-                key = (uchar)event->text()[0].toLatin1();
+                key = (uchar)event->text().at(0).toLatin1();
             else
-                key = int(event->text()[0].toLower().toLatin1());
+                key = int(event->text().at(0).toLower().toLatin1());
 
             if ((((key >= '0' && key <= '9') || (key >= 'a' && key <= 'f')) && _editAreaIsAscii == false)
                 || (key >= ' ' && _editAreaIsAscii))

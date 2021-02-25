@@ -255,7 +255,7 @@ bool Chunks::removeAt(qint64 pos)
 
 char Chunks::operator[](qint64 pos)
 {
-    return data(pos, 1)[0];
+    return data(pos, 1).at(0);
 }
 
 qint64 Chunks::pos()
