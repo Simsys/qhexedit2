@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     app.installTranslator(&translator);
 
     QCommandLineParser parser;
-    parser.addPositionalArgument("file", "File to open" "file1 file2 ...");
+    parser.addPositionalArgument("file", "File to open");
     parser.addHelpOption();
     parser.process(app);
     MainWindow *mainWin = new MainWindow;
