@@ -17,7 +17,13 @@ int main(int argc, char *argv[])
     translator.load(QString("qhexedit_") + locale);
     app.installTranslator(&translator);
 
+    QCommandLineParser parser;
+    parser.addPositionalArgument("file", "File to open" "file1 file2 ...");
+    parser.addHelpOption();
+    parser.process(app);
     MainWindow *mainWin = new MainWindow;
+    if(!parser.positionalArguments().isEmpty())
+        mainWin->loadFile(parser.positionalArguments().at(0));
     mainWin->show();
 
     return app.exec();
