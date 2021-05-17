@@ -1,3 +1,7 @@
+- initialize with initialization lists
+- open file from cli
+- add colors customization
+
 Release 0.8.9, 2020-07-03
 -------------------------
 - make appveyor upload assets
