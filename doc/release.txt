@@ -1,3 +1,4 @@
+- clang detach temporary
 - initialize with initialization lists
 - open file from cli
 - add colors customization
