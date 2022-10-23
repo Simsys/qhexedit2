@@ -766,11 +766,15 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
             (QApplication::keyboardModifiers() == Qt::GroupSwitchModifier))
         {
             /* Hex and ascii input */
-            int key;
-            if (_editAreaIsAscii)
-                key = (uchar)event->text().at(0).toLatin1();
-            else
-                key = int(event->text().at(0).toLower().toLatin1());
+            int key = 0;
+            QString text = event->text();
+            if (!text.isEmpty())
+            {
+                if (_editAreaIsAscii)
+                    key = (uchar)text.at(0).toLatin1();
+                else
+                    key = int(text.at(0).toLower().toLatin1());
+            }
 
             if ((((key >= '0' && key <= '9') || (key >= 'a' && key <= 'f')) && _editAreaIsAscii == false)
                 || (key >= ' ' && _editAreaIsAscii))
