@@ -60,6 +60,9 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
 
 QHexEdit::~QHexEdit()
 {
+    // prevent sending signal on undo stack clear
+    // when destruction in process
+    disconnect(_undoStack, NULL, this, NULL);
 }
 
 // ********************************************************************** Properties
