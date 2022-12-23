@@ -4,6 +4,8 @@
 #include <QAbstractScrollArea>
 #include <QPen>
 #include <QBrush>
+#include <QStaticText>
+#include <QPair>
 
 #include "chunks.h"
 #include "commands.h"
@@ -384,6 +386,10 @@ private:
     // Private utility functions
     void init();
     void readBuffers();
+    void prepareHexStrings();
+    void prepareAsciiStrings();
+    void prepareAddressStrings();
+    const QStaticText& charStringPrepared(int ch) const;
     QString toReadable(const QByteArray &ba);
 
 private slots:
@@ -405,6 +411,7 @@ private:
     int _pxSelectionSub;                        // offset selection rect
     int _pxCursorX;                             // current cursor pos
     int _pxCursorY;                             // current cursor pos
+    int _pxDescent;                             // distance from baseline to char bottom
 
     // Name convention: absolute byte positions in chunks start with _b
     qint64 _bSelectionBegin;                    // first position of Selection
@@ -447,7 +454,11 @@ private:
     QRect _cursorRect;                          // physical dimensions of cursor
     QByteArray _data;                           // QHexEdit's data, when setup with QByteArray
     QByteArray _dataShown;                      // data in the current View
-    QByteArray _hexDataShown;                   // data in view, transformed to hex
+    QStaticText _hexStringsPrepared[256];       // Cached hex strings prepared to draw
+    QStaticText _hexDigitStringsPrepared[16];   // Cached hex single digit strings prepared to draw
+    QStaticText _asciiStringsPrepared[0x61];    // Cached ascii strings prepared to draw
+    QVector<QStaticText> _addrStringsPrepared;  // Cached address strings prepared to draw
+    QPair<int, int> _addrCachedRows;            // Row number and count of cached rows
     qint64 _lastEventSize;                      // size, which was emitted last time
     QByteArray _markedShown;                    // marked data in view
     bool _modified;                             // Is any data in editor modified?
