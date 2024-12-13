@@ -908,7 +908,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         if (_addressArea)
         {
             QString address;
-            for (int row=0, pxPosY = _pxCharHeight; row <= (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
+            for (int row=0, pxPosY = _pxCharHeight; row < (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
             {
                 address = QString("%1").arg(_bPosFirst + row*_bytesPerLine + _addressOffset, _addrDigits, 16, QChar('0'));
                 painter.setPen(QPen(_addressFontColor));
