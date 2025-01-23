@@ -3,7 +3,7 @@ QHexEdit2
 ![Application QHexEdit2 in Action](http://simsys.github.io/qhexedit.png)
 
 
-QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python 2 and 3.
+QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5, Qt6) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python 2 and 3.
 
 QHexEdit takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via data().
 
@@ -16,7 +16,7 @@ QHexEdit comes with undo/redo functionality. All changes can be undone, by press
 QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of data. The size of edited data can be more then two gigabytes without any restrictions.
 
 ## Using QHexEdit
-You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how tu use the QHexedit widget. There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/python3_pyqt5) available.
+You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how tu use the QHexedit widget. There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/python3_pyqt6) available.
 
 ## Contributing to QHexEdit
 We love to receive contributions. You can submit bug reports [here](https://github.com/Simsys/qhexedit2/issues). If you are a developer, you can pick up a work item and start to realize super exciting features or fix bugs. We also like to receive enhancement proposals or translation support.
@@ -25,8 +25,8 @@ We love to receive contributions. You can submit bug reports [here](https://gith
 ```
 Copyright (C) 2015-2016 Winfried Simon
 
-This software may be used under the terms of the GNU Lesser General 
-Public License version 2.1 as published by the Free Software Foundation 
+This software may be used under the terms of the GNU Lesser General
+Public License version 2.1 as published by the Free Software Foundation
 and appearing in the file license.txt included in the packaging of this file.
 
 This program is distributed in the hope that it will be useful,

@@ -1,10 +1,10 @@
 [build-system]
-requires = ["sip >=5", "PyQt-builder", "PyQt5"]
+requires = ["sip >=5", "PyQt-builder", "PyQt6"]
 build-backend = "sipbuild.api"
 
 [tool.sip.metadata]
 name = "QHexEdit"
-version = "0.8.9"
+version = "0.8.10"
 
 [tools.sip]
 abi-version = "12.8"

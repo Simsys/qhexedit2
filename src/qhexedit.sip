@@ -3,6 +3,8 @@
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
 
+%Timeline {Qt_4_0_0 Qt_5_0_0 Qt_6_0_0}
+
 %If (Qt_5_0_0 -)
 %Import QtWidgets/QtWidgetsmod.sip
 %End
