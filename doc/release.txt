@@ -1,4 +1,9 @@
-- clang detach temporary
+Release 0.8.10, 2025-01-08
+-------------------------
+- Replace QPallete::Background with QPallete::Window (for Qt6)
+- Update main.cpp to add version option and future extensibility
+- Support the use of SIP5
+- Some small improvements- clang detach temporary
 - initialize with initialization lists
 - open file from cli
 - add colors customization
