@@ -4,8 +4,23 @@ import os
 from os.path import abspath, join
 from sipbuild import Option
 from pyqtbuild import PyQtBindings, PyQtProject
-import PyQt5
 
+try:
+    import PyQt6
+    PyQt_Version = 'PyQt6'
+except ImportError:
+    try:
+        import PyQt5
+        PyQt_Version = 'PyQt5'
+    except ImportError:
+        try:
+            import PyQt4
+            PyQt_Version = 'PyQt4'
+        except ImportError:
+            PyQt_Version = None
+
+if PyQt_Version is None:
+    raise ImportError("No compatible PyQt version (PyQt4, PyQt5, or PyQt6) found.")
 
 class QHexEditProject(PyQtProject):
     """The QHexEdit Project class."""
@@ -15,9 +30,15 @@ class QHexEditProject(PyQtProject):
         self.bindings_factories = [QHexEditBindings]
 
     def update(self, tool):
-        """Allows SIP to find PyQt5 .sip files."""
+        """Allows SIP to find PyQt .sip files."""
         super().update(tool)
-        self.sip_include_dirs.append(join(PyQt5.__path__[0], 'bindings'))
+        if PyQt_Version == 'PyQt6':
+            self.sip_include_dirs.append(join(PyQt6.__path__[0], 'bindings'))
+        elif PyQt_Version == 'PyQt5':
+            self.sip_include_dirs.append(join(PyQt5.__path__[0], 'bindings'))
+        else:
+            # unexpected and not supported here
+            raise ValueError(f"Unsupported PyQt version: {PyQt_Version}.")
 
 
 class QHexEditBindings(PyQtBindings):

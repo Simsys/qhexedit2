@@ -23,5 +23,11 @@ Release:TARGET = qhexedit
 Debug:TARGET = qhexeditd
 
 
-unix:DESTDIR = /usr/lib
+unix {
+    # Allows users to specify parameters when running qmake
+    QHEXEDIT_DESTDIR = $$(QHEXEDIT_DESTDIR)
+    isEmpty(QHEXEDIT_DESTDIR): QHEXEDIT_DESTDIR = $$[QT_INSTALL_LIBS]
+    target.path = $$QHEXEDIT_DESTDIR
+    INSTALLS += target
+}
 win32:DESTDIR = ../lib
