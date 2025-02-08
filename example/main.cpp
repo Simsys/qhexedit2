@@ -64,8 +64,8 @@ int main(int argc, char *argv[])
 
     QString locale = QLocale::system().name();
     QTranslator translator;
-    translator.load(QString("qhexedit_") + locale);
-    app.installTranslator(&translator);
+    if (translator.load(QString("qhexedit_") + locale))
+        app.installTranslator(&translator);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("QHexEdit", "A hex editor application"));
