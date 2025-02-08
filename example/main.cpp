@@ -88,20 +88,11 @@ int main(int argc, char *argv[])
 
         case Status::VersionRequested:
             parser.showVersion();
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-            Q_UNREACHABLE_RETURN(0);
-#else
-            Q_UNREACHABLE();
             return 0;
-#endif
+
         case Status::HelpRequested:
             parser.showHelp();
-#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
-            Q_UNREACHABLE_RETURN(0);
-#else
-            Q_UNREACHABLE();
             return 0;
-#endif
     }
 
     if (query.hasFile)
