@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtWidgets
-from qhexedit import QHexEdit
+from QHexEdit import QHexEdit
 
 
 class HexEdit(QHexEdit):

@@ -48,3 +48,13 @@ class QHexEditBindings(PyQtBindings):
         super().__init__(project, name='QHexEdit',
                          sip_file='qhexedit.sip',
                          qmake_QT=['widgets'])
+
+    def apply_user_defaults(self, tool):
+        self.headers.append("src/qhexedit.h")
+        self.headers.append("src/chunks.h")
+        self.headers.append("src/commands.h")
+
+        self.sources.append("src/qhexedit.cpp")
+        self.sources.append("src/chunks.cpp")
+        self.sources.append("src/commands.cpp")
+        super().apply_user_defaults(tool)
