@@ -6,7 +6,7 @@
 #if QT_VERSION < QT_VERSION_CHECK(5,0,0)
 #include <QtDesigner/QDesignerCustomWidgetInterface>
 #else
-#include <QDesignerCustomWidgetInterface>
+#include <QtUiPlugin/QDesignerCustomWidgetInterface>
 #endif
 
 class QHexEditPlugin : public QObject, public QDesignerCustomWidgetInterface
