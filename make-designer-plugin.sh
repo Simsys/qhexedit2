@@ -5,6 +5,6 @@ else
 fi
 
 cd build
-qmake ../example/qhexedit.pro
-make
+qmake ../designer/designer.pro
+make -j 12
 cd ..
