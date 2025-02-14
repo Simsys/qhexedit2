@@ -25,21 +25,11 @@ FORMS += \
     optionsdialog.ui \
     searchdialog.ui
 
-OTHER_FILES += \
-    ../build-example.bat \
-    ../build-python-bindings.bat \
-    ../build-example.sh \
-    ../build-python-bindings.sh \
-    ../deploy.nsi \
-    ../doc/release.txt \
-    ../doc/howtorelease.txt \
-    ../appveyor.yml \
-    ../readme.md \
-    ../setup.py \
-    ../src/qhexedit.sip
+CONFIG += lrelease embed_translations
 
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \
-    translations/qhexedit_de.ts
+    translations/qhexedit_de.ts \
+    translations/qhexedit_ru.ts
 
 DEFINES += QHEXEDIT_EXPORTS

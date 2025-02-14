@@ -62,10 +62,9 @@ int main(int argc, char *argv[])
     app.setOrganizationName("QHexEdit");
     app.setWindowIcon(QIcon(":images/qhexedit.ico"));
 
-    QString locale = QLocale::system().name();
     QTranslator translator;
-    if (translator.load(QString("qhexedit_") + locale))
-        app.installTranslator(&translator);
+    if (translator.load(QLocale(), QString("qhexedit"), QString("_"), QString(":/translations")))
+        QCoreApplication::installTranslator(&translator);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("QHexEdit", "A hex editor application"));

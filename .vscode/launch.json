@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/qhexedit",
-            "args": [],
+            "args": ["license.txt"],
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,

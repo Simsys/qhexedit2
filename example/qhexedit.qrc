@@ -6,5 +6,9 @@
         <file>images/redo.png</file>
         <file>images/find.png</file>
         <file>images/qhexedit.ico</file>
+
+        <file>translations/qhexedit_cs.qm</file>
+        <file>translations/qhexedit_de.qm</file>
+        <file>translations/qhexedit_ru.qm</file>
     </qresource>
 </RCC>
