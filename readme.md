@@ -15,8 +15,19 @@ QHexEdit comes with undo/redo functionality. All changes can be undone, by press
 
 QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of data. The size of edited data can be more then two gigabytes without any restrictions.
 
-## Using QHexEdit
-You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how tu use the QHexedit widget. There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/python3_pyqt6) available.
+## Using QHexEdit (C++)
+You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how tu use the QHexedit widget. 
+
+## Using QHexEdit (Python)
+To use QHexEdit with Python install it from PyPi:
+```
+$ # for PyQt5
+$ pip install PyQt5-QHexEdit
+$
+$ # for PyQt6
+$ pip install PyQt6-QHexEdit
+```
+There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/example) available. 
 
 ## Contributing to QHexEdit
 We love to receive contributions. You can submit bug reports [here](https://github.com/Simsys/qhexedit2/issues). If you are a developer, you can pick up a work item and start to realize super exciting features or fix bugs. We also like to receive enhancement proposals or translation support.
