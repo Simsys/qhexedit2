@@ -12,7 +12,7 @@
 class QHexEdit : QAbstractScrollArea
 {
 %TypeHeaderCode
-#include "../src/qhexedit.h"
+#include "qhexedit.h"
 %End
 
 public:

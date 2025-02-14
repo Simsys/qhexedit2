@@ -1,0 +1,51 @@
+[build-system]
+requires = ["sip >=5", "PyQt-builder", "PyQt5"]
+build-backend = "sipbuild.api"
+
+[project]
+name = "PyQt5-QHexEdit"
+classifiers = [
+    "Development Status :: 5 - Production/Stable", 
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Embedded Systems",
+    "Topic :: Utilities",
+]
+keywords = [
+    "Development",
+    "Binary",
+    "Editor",
+    "Hex Editor",
+    "Viewer",
+]
+version = "0.8.10"
+description = "Python bindings for the QHexEdit Widget"
+readme = "readme.md"
+urls.homepage = "https://github.com/Simsys/qhexedit2"
+dependencies = ["PyQt5 (>=5.2.0)"]
+license = { text = "LGPL-2.1-only" }
+requires-python = ">=3.8"
+authors = [{ name = "Winfried Simon", email = "winfried.simon@gmail.com" }]
+
+[tools.sip]
+project-factory = "pyqtbuild:PyQtProject"
+
+[tool.sip.project]
+name = "pyqt5-qhexedit"
+sip-include-dirs = ["bindings"]
+sip-files-dir = "."
+
+[tool.sip.bindings.QHexEdit]
+qmake-QT = ["widgets"]
+include-dirs = ["src"]
+sip-file = "QHexEdit.sip"
+headers = [
+    "src/chunks.h",
+    "src/commands.h",
+    "src/qhexedit.h",
+]
+sources = [
+    "src/chunks.cpp",
+    "src/commands.cpp",
+    "src/qhexedit.cpp",
+]
