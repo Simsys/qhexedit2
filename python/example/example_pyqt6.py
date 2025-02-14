@@ -1,13 +1,15 @@
 import sys
-from PyQt5 import QtWidgets
+
+from PyQt6 import QtWidgets
+    
 from QHexEdit import QHexEdit
 
 
 class HexEdit(QHexEdit):
 
-    def __init__(self, fileName=None):
+    def __init__(self):
         super(HexEdit, self).__init__()
-        file = open(fileName, 'rb')
+        file = open(__file__, 'rb')
         data = file.read()
         self.setData(data)
         self.setReadOnly(False)
@@ -15,9 +17,9 @@ class HexEdit(QHexEdit):
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    mainWin = HexEdit('mainwindow.py')
+    mainWin = HexEdit()
     mainWin.resize(600, 400)
     mainWin.move(300, 300)
     mainWin.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
