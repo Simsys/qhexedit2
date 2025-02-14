@@ -854,7 +854,6 @@ void QHexEdit::keyPressEvent(QKeyEvent *event)
     }
 
     refresh();
-    QAbstractScrollArea::keyPressEvent(event);
 }
 
 void QHexEdit::mouseMoveEvent(QMouseEvent * event)
