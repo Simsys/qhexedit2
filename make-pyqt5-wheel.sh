@@ -3,9 +3,15 @@
 # break on error
 set -e
 
-# make build directory clean and copy needed data
+# make build directory clean
+if [ ! -d build ];then
+    mkdir build
+else
+    rm -rf build/* build/.*
+fi
+
+# copy needed data
 cd build
-rm -r -f *
 cp -r ../src .
 cp ../license.txt .
 cp ../readme.md .

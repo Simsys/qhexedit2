@@ -25,11 +25,4 @@ FORMS += \
     optionsdialog.ui \
     searchdialog.ui
 
-CONFIG += lrelease embed_translations
-
-TRANSLATIONS += \
-    translations/qhexedit_cs.ts \
-    translations/qhexedit_de.ts \
-    translations/qhexedit_ru.ts
-
 DEFINES += QHEXEDIT_EXPORTS

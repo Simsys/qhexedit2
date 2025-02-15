@@ -1,7 +1,7 @@
 if [ ! -d build ];then
     mkdir build
 else
-    rm -rf build/*
+    rm -rf build/* build/.*
 fi
 
 cd build

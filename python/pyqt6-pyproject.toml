@@ -30,9 +30,6 @@ authors = [{ name = "Winfried Simon", email = "winfried.simon@gmail.com" }]
 [tools.sip]
 project-factory = "pyqtbuild:PyQtProject"
 
-[tool.sip.builder]
-qmake = "/usr/bin/qmake6"
-
 [tool.sip.project]
 name = "pyqt6-qhexedit"
 sip-include-dirs = ["bindings"]
