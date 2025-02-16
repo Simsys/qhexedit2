@@ -29,13 +29,17 @@ jobs:
           dir:          ${{ runner.temp }}
           setup-python: false
 
-      - name: (8) Build
-        working-directory: D:\a\qhexedit2\qhexedit2
+      - name: list files
+        run: |
+          dir ${{ github.workspace }}
+
+      - name: (3) Build
+        working-directory: ${{ runner.temp }}
         run:  |
-              cd build
-              qmake ..\qhexedit.pro
-              ${{ runner.temp }}\jom\jom -j2
-              cd release
+              cd ${{ runner.temp }}\build
+              qmake ..\example\qhexedit.pro
+              nmake
+              dir
               windeployqt --qmldir ${{ env.SOURCE_DIR }} example.exe --pdb --release --compiler-runtime
               copy C:\Windows\System32\concrt140.dll . 
               copy C:\Windows\System32\vccorlib140.dll .
