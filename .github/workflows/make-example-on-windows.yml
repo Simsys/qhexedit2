@@ -31,31 +31,34 @@ jobs:
 
       - name: (3) list files
         run: |
-          dir ${{ github.workspace }}
           dir ${{ env.SOURCE_DIR }}
+          dir D:\a\_temp\Qt\5.15.2\msvc2019_64
+          dir D:\a\_temp\Qt\5.15.2\msvc2019_64\lib
 
-      - name: (4) Create build directory
-        run:  mkdir ${{ runner.temp }}\build
-
-      - name: (5) Set up Visual Studio shell
+      - name: (4) Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
         with:
           arch: x64
         
-      - name: (6) Build
-        working-directory: ${{ runner.temp }}\build
+      - name: (5) Build
+        working-directory: ${{ runner.temp }}
         run:  |
+          mkdir build
+          cd build
           qmake ${{ env.SOURCE_DIR }}\example\qhexedit.pro
           nmake release
           dir
           cd release 
           dir
-          cd..
             
-      - name: (9) Zip build
+      - name: (6) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
-              7z a qhexedit.zip ${{ runner.temp }}\build\* -r
+              mkdir artifact
+              cd artifact
+              copy ${{ runner.temp }}\build\release\qhexedit.exe .
+
+              7z a qhexedit.zip ${{ runner.temp }}\release\* -r
               
       - name: (10) Save build artifact
         uses: actions/upload-artifact@master
