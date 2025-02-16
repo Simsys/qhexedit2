@@ -1,0 +1,67 @@
+name: Windows Release
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'continuous-integration'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+    - 'master'
+    - 'continuous-integration'
+
+defaults:
+  run:
+    shell: cmd
+
+env:
+  SOURCE_DIR:   ${{ github.workspace }}
+  QT_VERSION:   5.15.2
+  ARTIFACT:     example.exe
+
+jobs:
+  build:
+    runs-on:  windows-2019
+
+    steps:
+      - name: (1) Checkout repo
+        uses: actions/checkout@v4
+
+      - name: (2) Get all tags for correct version determination
+        working-directory:  ${{ github.workspace }}
+        run: |
+          git fetch --all --tags -f
+      - name: (3) Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version:      ${{ env.QT_VERSION }}
+          host:         windows
+          target:       desktop
+          arch:         win64_msvc2019_64
+          dir:          ${{ runner.temp }}
+          setup-python: false
+
+      - name: (8) Build
+        working-directory: ${{ runner.temp }}\build
+        run:  |
+              qmake ..\qhexedit.pro
+              ${{ runner.temp }}\jom\jom -j2
+              cd release
+              windeployqt --qmldir ${{ env.SOURCE_DIR }} example.exe --pdb --release --compiler-runtime
+              copy C:\Windows\System32\concrt140.dll . 
+              copy C:\Windows\System32\vccorlib140.dll .
+              copy C:\Windows\System32\msvcp140.dll .
+              copy C:\Windows\System32\vcruntime140.dll .
+              
+      - name: (9) Zip build
+        working-directory: ${{ runner.temp }}
+        run:  |
+              7z a qhexedit.zip ${{ runner.temp }}\build\* -r
+              
+      - name: (10) Save build artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ env.ARTIFACT }}
+          path: ${{ runner.temp }}\${{ env.ARTIFACT }}
