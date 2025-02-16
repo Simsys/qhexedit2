@@ -18,6 +18,9 @@ jobs:
     steps:
       - name: (1) Checkout repo
         uses: actions/checkout@v4
+      - name: (1a) list files
+        run: |
+          dir c:\windows
 
       - name: (2) Install Qt
         uses: jurplel/install-qt-action@v2
