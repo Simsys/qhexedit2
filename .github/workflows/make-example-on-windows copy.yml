@@ -14,8 +14,18 @@ env:
 jobs:
   build:
     runs-on:  windows-2019
-
+    
     steps:
+      - name: (2) Install Qt
+        uses: jurplel/install-qt-action@v2
+        with:
+          version:      ${{ env.QT_VERSION }}
+          host:         windows
+          target:       desktop
+          arch:         win64_msvc2019_64
+          dir:          ${{ runner.temp }}
+          setup-python: false
+
       - name: (1a) list files
         run: |
           dir D:\a\_temp\Qt\5.15.2\msvc2019_64
