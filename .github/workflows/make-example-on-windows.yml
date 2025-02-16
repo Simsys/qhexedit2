@@ -1,16 +1,6 @@
 name: Windows Release
 
-on:
-  push:
-    branches:
-      - 'master'
-      - 'continuous-integration'
-    tags:
-      - 'v*'
-  pull_request:
-    branches:
-    - 'master'
-    - 'continuous-integration'
+on: [push]
 
 defaults:
   run:
