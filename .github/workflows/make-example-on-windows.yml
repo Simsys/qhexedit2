@@ -36,7 +36,9 @@ jobs:
       - name: (3) Build
         working-directory: ${{ runner.temp }}
         run:  |
-              cd ${{ runner.temp }}\build
+              cd ${{ runner.temp }}
+              mkdir build
+              cd build
               qmake ..\example\qhexedit.pro
               nmake
               dir
