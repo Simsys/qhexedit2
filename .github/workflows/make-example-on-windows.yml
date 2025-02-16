@@ -22,6 +22,7 @@ jobs:
         run: |
           dir c:\windows\system32
           dir c:\windows\system
+          path
 
       - name: (2) Install Qt
         uses: jurplel/install-qt-action@v2
@@ -61,8 +62,10 @@ jobs:
               mkdir artifact
               cd artifact
               copy ${{ runner.temp }}\build\release\qhexedit.exe .
-
-              7z a qhexedit.zip ${{ runner.temp }}\release\* -r
+              copy C:\Windows\System32\vccorlib140.dll .
+              copy C:\Windows\System32\msvcp140.dll .
+              copy C:\Windows\System32\vcruntime140.dll .
+              7z a qhexedit.zip ${{ runner.temp }}\artifact\* -r
               
       - name: (10) Save build artifact
         uses: actions/upload-artifact@master
