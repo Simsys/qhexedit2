@@ -907,13 +907,11 @@ void QHexEdit::paintEvent(QPaintEvent *event)
         if (_addressArea)
         {
             QString address;
-            for (int row=0, pxPosY = _pxCharHeight; row <= (_dataShown.size()/_bytesPerLine); row++, pxPosY +=_pxCharHeight)
+            for (int row=0, pxPosY = _pxCharHeight; (row * _bytesPerLine) < _dataShown.size(); row++, pxPosY +=_pxCharHeight)
             {
-                if (_dataShown.size() > (row * _bytesPerLine)) {
-                    address = QString("%1").arg(_bPosFirst + row*_bytesPerLine + _addressOffset, _addrDigits, 16, QChar('0'));
-                    painter.setPen(QPen(_addressFontColor));
-                    painter.drawText(_pxPosAdrX - pxOfsX, pxPosY, hexCaps() ? address.toUpper() : address);
-                }
+                address = QString("%1").arg(_bPosFirst + row*_bytesPerLine + _addressOffset, _addrDigits, 16, QChar('0'));
+                painter.setPen(QPen(_addressFontColor));
+                painter.drawText(_pxPosAdrX - pxOfsX, pxPosY, hexCaps() ? address.toUpper() : address);
             }
         }
 
