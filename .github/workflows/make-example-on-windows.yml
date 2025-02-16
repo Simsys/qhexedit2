@@ -34,12 +34,15 @@ jobs:
           dir ${{ github.workspace }}
           dir ${{ env.SOURCE_DIR }}
 
-      - name: (4) Set up Visual Studio shell
+      - name: (4) Create build directory
+        run:  mkdir ${{ runner.temp }}\build
+
+      - name: (5) Set up Visual Studio shell
         uses: egor-tensin/vs-shell@v2
         with:
           arch: x64
         
-      - name: (8) Build
+      - name: (6) Build
         working-directory: ${{ runner.temp }}\build
         run:  |
           qmake ${{ env.SOURCE_DIR }}\example\qhexedit.pro
