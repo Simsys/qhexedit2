@@ -20,7 +20,8 @@ jobs:
         uses: actions/checkout@v4
       - name: (1a) list files
         run: |
-          dir c:\windows
+          dir c:\windows\system32
+          dir c:\windows\system
 
       - name: (2) Install Qt
         uses: jurplel/install-qt-action@v2
