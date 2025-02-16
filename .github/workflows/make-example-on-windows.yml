@@ -33,21 +33,35 @@ jobs:
         run: |
           dir ${{ github.workspace }}
 
-      - name: (3) Build
+      - name: (3) Create build directory
         working-directory: ${{ runner.temp }}
         run:  |
               cd D:\a\qhexedit2\qhexedit2
               mkdir build
               cd build
-              qmake ..\example\qhexedit.pro
-              nmake
-              dir
-              windeployqt --qmldir ${{ env.SOURCE_DIR }} example.exe --pdb --release --compiler-runtime
-              copy C:\Windows\System32\concrt140.dll . 
-              copy C:\Windows\System32\vccorlib140.dll .
-              copy C:\Windows\System32\msvcp140.dll .
-              copy C:\Windows\System32\vcruntime140.dll .
-              
+
+              - name: (7) Set up Visual Studio shell
+              uses: egor-tensin/vs-shell@v2
+              with:
+                arch: x64
+      
+      - name: (7) Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+        
+      - name: (8) Build
+        working-directory: ${{ runner.temp }}\build
+        run:  |
+          qmake ${{ env.SOURCE_DIR }}\example\qhexedit.pro
+          ${{ runner.temp }}\jom\jom -j2
+          cd release
+          windeployqt --qmldir ${{ env.SOURCE_DIR }} example.exe --pdb --release --compiler-runtime
+          copy C:\Windows\System32\concrt140.dll . 
+          copy C:\Windows\System32\vccorlib140.dll .
+          copy C:\Windows\System32\msvcp140.dll .
+          copy C:\Windows\System32\vcruntime140.dll .
+            
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
         run:  |
