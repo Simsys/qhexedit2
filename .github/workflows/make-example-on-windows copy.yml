@@ -1,0 +1,22 @@
+name: Windows Release
+
+on: [push]
+
+defaults:
+  run:
+    shell: cmd
+
+env:
+  SOURCE_DIR:   ${{ github.workspace }}
+  QT_VERSION:   5.15.2
+  ARTIFACT:     qhexedit.zip
+
+jobs:
+  build:
+    runs-on:  windows-2019
+
+    steps:
+      - name: (1a) list files
+        run: |
+          dir D:\a\_temp\Qt\5.15.2\msvc2019_64
+
