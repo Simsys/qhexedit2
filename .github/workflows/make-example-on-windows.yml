@@ -46,13 +46,12 @@ jobs:
         working-directory: ${{ runner.temp }}\build
         run:  |
           qmake ${{ env.SOURCE_DIR }}\example\qhexedit.pro
-          ${{ runner.temp }}\jom\jom -j2
-          cd release
-          windeployqt --qmldir ${{ env.SOURCE_DIR }} example.exe --pdb --release --compiler-runtime
-          copy C:\Windows\System32\concrt140.dll . 
-          copy C:\Windows\System32\vccorlib140.dll .
-          copy C:\Windows\System32\msvcp140.dll .
-          copy C:\Windows\System32\vcruntime140.dll .
+          nmake release
+          dir
+          mt.exe -manifest qhexedit.exe.manifest -outputresource:QHexEdit.exe
+          # copy C:\Windows\System32\vccorlib140.dll .
+          # copy C:\Windows\System32\msvcp140.dll .
+          # copy C:\Windows\System32\vcruntime140.dll .
             
       - name: (9) Zip build
         working-directory: ${{ runner.temp }}
