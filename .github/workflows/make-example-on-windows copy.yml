@@ -29,4 +29,5 @@ jobs:
       - name: (1a) list files
         run: |
           dir D:\a\_temp\Qt\5.15.2\msvc2019_64
+          dir D:\a\_temp\Qt\5.15.2\msvc2019_64\bin
 
