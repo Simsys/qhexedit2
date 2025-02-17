@@ -1,0 +1,66 @@
+name: Windows Qt6 QHexEdit Binaries
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+defaults:
+  run:
+    shell: cmd
+
+jobs:
+  build:
+    runs-on:  windows-2022
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion: '==3.1.*'
+          version:      6.8.2
+          host:         windows
+          target:       desktop
+          arch:         win64_msvc2022_64
+          dir:          ${{ runner.temp }}
+
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+        
+      - name: Make qhexedit.exe
+        working-directory: ${{ runner.temp }}
+        run:  |
+          mkdir build
+          cd build
+          qmake ${{ github.workspace }}\example\qhexedit.pro
+          nmake release
+            
+      - name: Collect qhexedit.exe and dlls
+        working-directory: ${{ runner.temp }}
+        run:  |
+          mkdir qt6-qhexedit
+          cd qt6-qhexedit
+          copy ${{ runner.temp }}\build\release\qhexedit.exe .
+          copy C:\Windows\System32\msvcp140.dll .
+          copy C:\Windows\System32\vcruntime140.dll .
+
+          copy ${{ runner.temp }}\Qt\6.8.2\msvc2022_64\bin\Qt6Gui.dll .
+          copy ${{ runner.temp }}\Qt\6.8.2\msvc2022_64\bin\Qt6Core.dll .
+          copy ${{ runner.temp }}\Qt\6.8.2\msvc2022_64\bin\Qt6Widgets.dll .
+
+          mkdir platforms
+          copy ${{ runner.temp }}\Qt\6.8.2\msvc2022_64\plugins\platforms\qwindows.dll platforms
+
+          mkdir styles
+          copy ${{ runner.temp }}\Qt\6.8.2\msvc2022_64\plugins\styles\qmodernwindowsstyle.dll styles
+              
+      - name: Save qhexedit.exe and dlls
+        uses: actions/upload-artifact@master
+        with:
+          name: windows-qt6-qhexedit
+          path: ${{ runner.temp }}\qt6-qhexedit

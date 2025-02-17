@@ -1,0 +1,28 @@
+name: Designer Plugin Badge
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on:  ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion:   '==3.1.*'
+          version:      6.8.2
+          host:         linux
+          target:       desktop
+          arch:         linux_gcc_64
+
+      - name: Make Designer Plugin
+        working-directory: ${{ runner.temp }}
+        run:  |
+          qmake ${{ github.workspace }}/designer/designer.pro
+          make -j12

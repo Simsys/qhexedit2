@@ -1,0 +1,52 @@
+name: Windows Qt6 PyQt Wheel
+
+on:
+  workflow_call:
+
+defaults:
+  run:
+    shell: cmd
+
+jobs:
+  build:
+    runs-on:  windows-2022
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          aqtversion: '==3.1.*'
+          version:      6.8.2
+          host:         windows
+          target:       desktop
+          arch:         win64_msvc2022_64
+          dir:          ${{ runner.temp }}
+
+      - name: Set up Visual Studio shell
+        uses: egor-tensin/vs-shell@v2
+        with:
+          arch: x64
+        
+      - name: Make Python Wheel
+        working-directory: ${{ runner.temp }}
+        run: |
+          python -m pip install build
+          mkdir python
+          cd python
+          xcopy ${{ github.workspace }}\src src\
+          copy ${{ github.workspace }}\license.txt .
+          copy ${{ github.workspace }}\readme.md .
+          copy ${{ github.workspace }}\python\project.py .
+          copy ${{ github.workspace }}\python\pyqt6-pyproject.toml pyproject.toml
+          copy ${{ github.workspace }}\python\QHexEdit.sip .
+
+          python -m build --verbose
+
+      - name: Save Python Wheel
+        uses: actions/upload-artifact@master
+        with:
+          name: wheel-qt6-windows
+          path: ${{ runner.temp }}\python\dist\*.whl
