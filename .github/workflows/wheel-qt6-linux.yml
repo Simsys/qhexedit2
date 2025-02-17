@@ -48,4 +48,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: wheel-qt6-linux
-          path: ${{ runner.temp }}/python/dist/*.whl
+          path: ${{ runner.temp }}/python/dist

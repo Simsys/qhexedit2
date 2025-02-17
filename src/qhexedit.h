@@ -19,7 +19,7 @@
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
 
-\version Version 0.8.9
+\version Version 0.8.11
 \image html qhexedit.png
 */
 

@@ -1,3 +1,14 @@
+Release 0.8.11, 2025-02-17
+-------------------------
+- Upload PyQt5 and PyQt6 bindings to PyPi
+- Migrate from AppVeyor to GitHub actions
+- Migrate from Distutlis to PyQt-builder for PyQt Bindings
+- Cleanup structure and build scripts
+- Fix strange behavior of the cursor #161
+- Fix translation of the example doesn't work #160
+- Fix address display of last Line #159
+- Fix Q_UNREACHABLE_RETURN not available on Ubuntu 24.04 #157
+
 Release 0.8.10, 2025-01-08
 -------------------------
 - Replace QPallete::Background with QPallete::Window (for Qt6)
