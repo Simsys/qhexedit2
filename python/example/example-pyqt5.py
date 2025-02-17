@@ -1,12 +1,6 @@
-#!/usr/bin/env python
-
 import sys
 
-try:
-    from PyQt5 import QtWidgets, QtCore, QtGui
-except:
-    from PyQt5 import QtWidgets, QtCore, QtGui
-
+from PyQt5 import QtWidgets, QtCore, QtGui
 from QHexEdit import QHexEdit
 
 import qhexedit_rc
