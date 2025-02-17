@@ -32,10 +32,10 @@ $ # for PyQt5
 $ pip install PyQt5 PyQt5-QHexEdit
 $
 $ # for PyQt6
-$ pip install PyQt5 PyQt5-QHexEdit
+$ pip install PyQt6 PyQt6-QHexEdit
 ```
 
-The sources and binaries for Windows 64 bit and Linux 64 bit are stored on PyPi. For all other targets, the widget must be compiled locally. For this, the corresponding Qt version including the developer packages must be installed. It makes sense to compile the C++ project first. If this is possible with qmake, it is also possible to compile the PyQt bindings. This requires [python build](https://pypi.org/project/build/). 
+The sources and binaries for Windows 64 bit and Linux 64 bit are stored [on PyPi](https://pypi.org/search/?q=QHexEdit). For all other targets, the widget must be compiled locally. For this, the corresponding Qt version including the developer packages must be installed. It makes sense to compile the C++ project first. If this is possible with qmake, it is also possible to compile the PyQt bindings. This requires [python build](https://pypi.org/project/build/). 
 
 There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/example) available. 
 
