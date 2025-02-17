@@ -18,7 +18,7 @@ keywords = [
     "Hex Editor",
     "Viewer",
 ]
-version = "0.8.10"
+version = "0.8.11"
 description = "Python bindings for the QHexEdit Widget"
 readme = "readme.md"
 urls.homepage = "https://github.com/Simsys/qhexedit2"
