@@ -1,9 +1,15 @@
 QHexEdit2
 =========
+
+[![.github/workflows/badge-library.yml](https://github.com/Simsys/qhexedit2/actions/workflows/badge-library.yml/badge.svg)](https://github.com/Simsys/qhexedit2/actions/workflows/badge-library.yml)
+[![.github/workflows/badge-binary.yml](https://github.com/Simsys/qhexedit2/actions/workflows/badge-binary.yml/badge.svg)](https://github.com/Simsys/qhexedit2/actions/workflows/badge-binary.yml)
+[![.github/workflows/badge-designer-plugin.yml](https://github.com/Simsys/qhexedit2/actions/workflows/badge-designer-plugin.yml/badge.svg)](https://github.com/Simsys/qhexedit2/actions/workflows/badge-designer-plugin.yml)
+
+
 ![Application QHexEdit2 in Action](http://simsys.github.io/qhexedit.png)
 
 
-QHexEdit is a hex editor widget written in C++ for the Qt (Qt4, Qt5, Qt6) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python 2 and 3.
+QHexEdit is a hex editor widget written in C++ for the Qt (Qt5, Qt6) framework. It is a simple editor for binary data, just like QPlainTextEdit is for text data. There are sip configuration files included, so it is easy to create bindings for PyQt and you can use this widget also in python.
 
 QHexEdit takes the data of a QByteArray (setData()) and shows it. You can use the mouse or the keyboard to navigate inside the widget. If you hit the keys (0..9, a..f) you will change the data. Changed data is highlighted and can be accessed via data().
 
@@ -16,17 +22,21 @@ QHexEdit comes with undo/redo functionality. All changes can be undone, by press
 QHexEdit is based on QIODevice, that's why QHexEdit can handle big amounts of data. The size of edited data can be more then two gigabytes without any restrictions.
 
 ## Using QHexEdit (C++)
-You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how tu use the QHexedit widget. 
+You can read the documentation of the project [here](http://simsys.github.io/). You find in the sources a [C++ example](https://github.com/Simsys/qhexedit2/tree/master/example), that shows how to use the QHexedit widget. The binaries for the example for the Windows platform are stored with the respective [release](https://github.com/Simsys/qhexedit2/releases).
 
 ## Using QHexEdit (Python)
 To use QHexEdit with Python install it from PyPi:
+
 ```
 $ # for PyQt5
-$ pip install PyQt5-QHexEdit
+$ pip install PyQt5 PyQt5-QHexEdit
 $
 $ # for PyQt6
-$ pip install PyQt6-QHexEdit
+$ pip install PyQt5 PyQt5-QHexEdit
 ```
+
+The sources and binaries for Windows 64 bit and Linux 64 bit are stored on PyPi. For all other targets, the widget must be compiled locally. For this, the corresponding Qt version including the developer packages must be installed. It makes sense to compile the C++ project first. If this is possible with qmake, it is also possible to compile the PyQt bindings. This requires [python build](https://pypi.org/project/build/). 
+
 There is also a [python example](https://github.com/Simsys/qhexedit2/tree/master/python/example) available. 
 
 ## Contributing to QHexEdit
