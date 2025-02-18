@@ -1,18 +1,18 @@
-How to make a release
+How to Make a Release
 =====================
 1. Make changes, test them
-2. Edit qhexedit.h, version number
-3. Edit pyqt5-pyproject.toml, version number
-4. Edit pyqt6-pyproject.toml, version number
-5. Edit changelog.md
-6. Make doxygen documentation and check it
-7. Commit changes
-8. Create version tag
+2. Edit src/qhexedit.h, version number
+3. Edit src/qhexedit.pro, version number
+4. Edit python/pyqt5-pyproject.toml, version number
+5. Edit python/pyqt6-pyproject.toml, version number
+6. Edit changelog.md
+7. Make doxygen documentation and check it
+8. Commit changes
+9. Create release and version tag (Github Webinterface)
 
-How to update docs
+How to Update Docs
 ==================
-1. Copy doxygen html to ...github.io
+1. Copy doc/html/* to "git clone" https://github.com/Simsys/simsys.github.io
 2. $ git add *
 3. $ git commit -m "v0.x.y"
 4. $ git push origin master
-5. Create new release on github webpage
