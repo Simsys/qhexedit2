@@ -1,19 +1,23 @@
 QT += widgets
 CONFIG += c++17
 
-include(../src/qhexedit.pro)
-
 HEADERS = \
     mainwindow.h \
     optionsdialog.h \
-    searchdialog.h
+    searchdialog.h \
+    ../src/qhexedit.h \
+    ../src/chunks.h \
+    ../src/commands.h
 
 
 SOURCES = \
     main.cpp \
     mainwindow.cpp \
     optionsdialog.cpp \
-    searchdialog.cpp
+    searchdialog.cpp \
+    ../src/qhexedit.cpp \
+    ../src/chunks.cpp \
+    ../src/commands.cpp
 
 RESOURCES = \
     qhexedit.qrc

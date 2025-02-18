@@ -2,7 +2,6 @@ CONFIG      += plugin
 TEMPLATE    = lib
 QT          += designer
 
-include(../src/qhexedit.pro)
 INCLUDEPATH = ../src
 
 HEADERS = \
