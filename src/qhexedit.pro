@@ -1,10 +1,8 @@
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-QT += core gui
+QT += core gui widgets
 TEMPLATE = lib
 
-VERSION = 4.2.0
+VERSION = 0.8.11
 
 DEFINES += QHEXEDIT_EXPORTS
 
