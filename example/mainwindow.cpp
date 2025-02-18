@@ -26,9 +26,32 @@ MainWindow::MainWindow()
 /*****************************************************************************/
 /* Protected methods */
 /*****************************************************************************/
-void MainWindow::closeEvent(QCloseEvent *)
+void MainWindow::closeEvent(QCloseEvent *event)
 {
     writeSettings();
+
+    if (isModified)
+    {
+        QMessageBox msgBox;
+        msgBox.setText(tr("The file has been modified."));
+        msgBox.setInformativeText(tr("Do you want to save your changes?"));
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        switch (msgBox.exec()) {
+            case QMessageBox::Save:
+                save();
+                event->accept();
+                break;
+            case QMessageBox::Discard:
+                event->accept();
+                break;
+            default:
+                event->ignore();
+                break;
+        }
+    } else {
+        event->accept();
+    }
 }
 
 
@@ -61,7 +84,8 @@ void MainWindow::about()
 
 void MainWindow::dataChanged()
 {
-    setWindowModified(hexEdit->isModified());
+    isModified = true;
+    setWindowModified(isModified);
 }
 
 void MainWindow::open()
@@ -185,6 +209,7 @@ void MainWindow::init()
     optionsDialog = new OptionsDialog(this);
     connect(optionsDialog, SIGNAL(accepted()), this, SLOT(optionsAccepted()));
     isUntitled = true;
+    isModified = false;
 
     hexEdit = new QHexEdit;
     setCentralWidget(hexEdit);
@@ -392,8 +417,11 @@ bool MainWindow::saveFile(const QString &fileName)
     {
         file.setFileName(tmpFileName);
         ok = file.copy(fileName);
-        if (ok)
+        if (ok) {
             ok = QFile::remove(tmpFileName);
+            isModified = false;
+            setWindowModified(false);
+        }
     }
     QApplication::restoreOverrideCursor();
 

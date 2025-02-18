@@ -62,6 +62,7 @@ private:
     QString curFile;
     QFile file;
     bool isUntitled;
+    bool isModified;
 
     QMenu *fileMenu;
     QMenu *editMenu;

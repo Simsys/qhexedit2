@@ -1,3 +1,7 @@
+Release 0.8.12, ?
+--------------------------
+- Warn before losing user data #63
+
 Release 0.8.11, 2025-02-17
 -------------------------
 - Upload PyQt5 and PyQt6 bindings to PyPi
