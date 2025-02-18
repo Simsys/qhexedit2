@@ -1,10 +1,8 @@
-import sys
+import sys, os
 
 from PyQt6 import QtWidgets, QtCore, QtGui
 from QHexEdit import QHexEdit
-
 import qhexedit_rc
-
 
 class MainWindow(QtWidgets.QMainWindow):
 
@@ -53,15 +51,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.aboutAct = QtGui.QAction("&About", self,
                 statusTip="Show the application's About box", triggered=self.about)
                 
-        self.findAct = QtGui.QAction("&Find/Replace", self, shortcut=QtGui.QKeySequence.StandardKey.Find,
-                statusTip="Show the Dialog for finding and replacing", triggered=self.showSearchDialog)
-
-        self.findNextAct = QtGui.QAction("Find &next", self, shortcut=QtGui.QKeySequence.StandardKey.FindNext, 
-                statusTip="Find next occurrence of the searched pattern", triggered=self.findNext)
-
-        self.optionsAct = QtGui.QAction("&Options", self,
-                statusTip="Show the options dialog", triggered=self.showOptionsDialog)
-
     def createMenus(self):
         self.fileMenu = self.menuBar().addMenu("&File")
         self.fileMenu.addAction(self.openAct)
@@ -141,60 +130,35 @@ class MainWindow(QtWidgets.QMainWindow):
         QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         with open(fileName, 'rb') as f:
             self.hexEdit.setData(f.read())
+        QtWidgets.QApplication.restoreOverrideCursor()
+
         self.setCurrentFile(fileName)
         self.statusBar().showMessage("File loaded", 2000)
-        QtWidgets.QApplication.restoreOverrideCursor()
 
     def open(self):
         fileName, _filter = QtWidgets.QFileDialog.getOpenFileName(self)
         if fileName:
             self.loadFile(fileName)
 
-    def optionsAccepted(self):
-        self.writeSettings()
-        self.readSettings()
-        
-    def findNext(self):
-        self.searchDialog.findNext()
-
     def readSettings(self):
         settings = QtCore.QSettings()
 
         pos = settings.value('pos', QtCore.QPoint(200, 200))
         size = settings.value('size', QtCore.QSize(610, 460))
-        self.hexEdit.setAddressArea(settings.value("AddressArea")=='true')
-        self.hexEdit.setAsciiArea(settings.value("AsciiArea")=='true')
-        self.hexEdit.setHighlighting(settings.value("Highlighting")=='true')
-        self.hexEdit.setOverwriteMode(settings.value("OverwriteMode")=='true')
-        self.hexEdit.setReadOnly(settings.value("ReadOnly")=='true')
-
-        self.hexEdit.setHighlightingColor(QtGui.QColor(settings.value("HighlightingColor")))
-        self.hexEdit.setAddressAreaColor(QtGui.QColor(settings.value("AddressAreaColor")))
-        self.hexEdit.setSelectionColor(QtGui.QColor(settings.value("SelectionColor")))
-        self.hexEdit.setFont(QtGui.QFont(settings.value("WidgetFont", QtGui.QFont(QtGui.QFont("Courier New", 10)))))
-
-        self.hexEdit.setAddressWidth(int(settings.value("AddressAreaWidth")));
         self.move(pos)
         self.resize(size)
 
     def save(self):
         if self.isUntitled:
-            return self.saveAs()
+            self.saveAs()
         else:
-            return self.saveFile(self.curFile)
+            self.saveFile(self.curFile)
 
     def saveAs(self):
         fileName, _filter = QtWidgets.QFileDialog.getSaveFileName(self, "Save As", self.curFile)
-        if not fileName:
-            return False
-        return self.saveFile(fileName)
+        if fileName != "":
+            self.saveFile(fileName)
 
-    def showOptionsDialog(self):
-        self.optionsDialog.show()
-        
-    def showSearchDialog(self):
-        self.searchDialog.show()
-        
     def setAddress(self, address):
         self.lbAddress.setText('%x' % address)
         
@@ -210,34 +174,38 @@ class MainWindow(QtWidgets.QMainWindow):
         self.lbSize.setText('%d' % size)
             
     def saveFile(self, fileName):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
         with open(fileName, 'wb') as f:
             f.write(self.hexEdit.data())
+        QtWidgets.QApplication.restoreOverrideCursor()
+
         self.setCurrentFile(fileName)
         self.statusBar().showMessage("File saved", 2000)
-        return True
     
     def saveToReadableFile(self):
         fileName, _filter = QtWidgets.QFileDialog.getSaveFileName(self, "Save To Readable File")
         if fileName != "":
-            file = open(str(fileName), "w")
-            file.write(str(self.hexEdit.toReadableString()))
+            QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
+            with open(fileName, "w") as f:
+                f.write(self.hexEdit.toReadableString())
+            QtWidgets.QApplication.restoreOverrideCursor()
             self.statusBar().showMessage("File saved", 2000);
 
     def saveSelectionToReadableFile(self):
         fileName, _filter = QtWidgets.QFileDialog.getSaveFileName(self, "Save To Readable File")
         if fileName != "":
-            file = open(str(fileName), "w")
-            file.write(str(self.hexEdit.selectionToReadableString()))
+            QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.CursorShape.WaitCursor)
+            with open(fileName, 'w') as f:
+                f.write(self.hexEdit.selectionToReadableString())
+            QtWidgets.QApplication.restoreOverrideCursor()
             self.statusBar().showMessage("File saved", 2000);
 
     def setCurrentFile(self, fileName):
         self.curFile = fileName
         self.isUntitled = (fileName == "")
         self.setWindowModified(False)
-        self.setWindowTitle("%s[*] - QHexEdit" % self.strippedName(self.curFile))
-
-    def strippedName(self, fullFileName):
-        return QtCore.QFileInfo(fullFileName).fileName()
+        basename = os.path.basename(self.curFile)
+        self.setWindowTitle("%s[*] - QHexEdit" % basename)
 
     def writeSettings(self):
         settings = QtCore.QSettings()
