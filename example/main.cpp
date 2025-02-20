@@ -68,7 +68,13 @@ int main(int argc, char *argv[])
         QCoreApplication::installTranslator(&translator_app);
 
     QTranslator translator_qt;
+
+    #if QT_VERSION < 0x060000
+    QString path = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+    #else
     QString path = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+    #endif
+
     if (translator_qt.load(QLocale(), "qt", "_", path))
         QCoreApplication::installTranslator(&translator_qt);
 
