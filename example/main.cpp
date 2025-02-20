@@ -5,6 +5,7 @@
 #include <QIcon>
 #include <QLocale>
 #include <QTranslator>
+#include <QLibraryInfo>
 
 #include "mainwindow.h"
 
@@ -62,9 +63,14 @@ int main(int argc, char *argv[])
     app.setOrganizationName("QHexEdit");
     app.setWindowIcon(QIcon(":images/qhexedit.ico"));
 
-    QTranslator translator;
-    if (translator.load(QLocale(), QString("qhexedit"), QString("_"), QString(":/translations")))
-        QCoreApplication::installTranslator(&translator);
+    QTranslator translator_app;
+    if (translator_app.load(QLocale(), "qhexedit", "_", ":/translations"))
+        QCoreApplication::installTranslator(&translator_app);
+
+    QTranslator translator_qt;
+    QString path = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
+    if (translator_qt.load(QLocale(), "qt", "_", path))
+        QCoreApplication::installTranslator(&translator_qt);
 
     QCommandLineParser parser;
     parser.setApplicationDescription(QCoreApplication::translate("QHexEdit", "A hex editor application"));
