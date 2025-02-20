@@ -39,7 +39,6 @@ jobs:
           xcopy ${{ github.workspace }}\src src\
           copy ${{ github.workspace }}\license.txt .
           copy ${{ github.workspace }}\readme.md .
-          copy ${{ github.workspace }}\python\project.py .
           copy ${{ github.workspace }}\python\pyqt6-pyproject.toml pyproject.toml
           copy ${{ github.workspace }}\python\QHexEdit.sip .
 

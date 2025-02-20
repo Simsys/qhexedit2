@@ -38,7 +38,6 @@ jobs:
           cp -r ${{ github.workspace }}/src .
           cp ${{ github.workspace }}/license.txt .
           cp ${{ github.workspace }}/readme.md .
-          cp ${{ github.workspace }}/python/project.py .
           cp ${{ github.workspace }}/python/pyqt6-pyproject.toml pyproject.toml
           cp ${{ github.workspace }}/python/QHexEdit.sip .
 

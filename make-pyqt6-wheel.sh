@@ -15,7 +15,6 @@ cd build
 cp -r ../src .
 cp ../license.txt .
 cp ../readme.md .
-cp ../python/project.py .
 cp ../python/pyqt6-pyproject.toml pyproject.toml
 cp ../python/QHexEdit.sip .
 
