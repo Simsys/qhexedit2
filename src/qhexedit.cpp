@@ -363,7 +363,6 @@ bool QHexEdit::setData(QIODevice &iODevice)
 {
     bool ok = _chunks->setIODevice(iODevice);
     init();
-    dataChangedPrivate();
     return ok;
 }
 
