@@ -205,16 +205,18 @@ void MainWindow::showSearchDialog()
 /*****************************************************************************/
 void MainWindow::init()
 {
+    hexEdit = new QHexEdit;
+    setCentralWidget(hexEdit);
+    readSettings();
+    writeSettings(); // Write the settings for the optionsdialog
+
     setAttribute(Qt::WA_DeleteOnClose);
-    optionsDialog = new OptionsDialog(this);
-    connect(optionsDialog, SIGNAL(accepted()), this, SLOT(optionsAccepted()));
     isUntitled = true;
     isModified = false;
 
-    hexEdit = new QHexEdit;
-    setCentralWidget(hexEdit);
-    connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), this, SLOT(setOverwriteMode(bool)));
-    connect(hexEdit, SIGNAL(dataChanged()), this, SLOT(dataChanged()));
+    optionsDialog = new OptionsDialog(this);
+    connect(optionsDialog, SIGNAL(accepted()), this, SLOT(optionsAccepted()));
+
     searchDialog = new SearchDialog(hexEdit, this);
 
     createActions();
@@ -222,9 +224,10 @@ void MainWindow::init()
     createToolBars();
     createStatusBar();
 
-    readSettings();
-
     setUnifiedTitleAndToolBarOnMac(true);
+
+    connect(hexEdit, SIGNAL(overwriteModeChanged(bool)), this, SLOT(setOverwriteMode(bool)));
+    connect(hexEdit, SIGNAL(dataChanged()), this, SLOT(dataChanged()));
 }
 
 void MainWindow::createActions()
@@ -384,24 +387,56 @@ void MainWindow::readSettings()
     move(pos);
     resize(size);
 
-    hexEdit->setAddressArea(settings.value("AddressArea").toBool());
-    hexEdit->setAsciiArea(settings.value("AsciiArea").toBool());
-    hexEdit->setHighlighting(settings.value("Highlighting").toBool());
-    hexEdit->setOverwriteMode(settings.value("OverwriteMode").toBool());
-    hexEdit->setReadOnly(settings.value("ReadOnly").toBool());
+    hexEdit->setAddressArea(
+        settings.value("AddressArea", hexEdit->addressArea()).toBool()
+    );
+    hexEdit->setAsciiArea(
+        settings.value("AsciiArea", hexEdit->asciiArea()).toBool()
+    );
+    hexEdit->setHighlighting(
+        settings.value("Highlighting", hexEdit->highlighting()).toBool()
+    );
+    hexEdit->setOverwriteMode(
+        settings.value("OverwriteMode", hexEdit->overwriteMode()).toBool()
+    );
+    hexEdit->setReadOnly(
+        settings.value("ReadOnly", hexEdit->isReadOnly()).toBool()
+    );
 
-    hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
-    hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
-    hexEdit->setSelectionColor(settings.value("SelectionColor").value<QColor>());
-    hexEdit->setFont(settings.value("WidgetFont").value<QFont>());
-    hexEdit->setAddressFontColor(settings.value("AddressFontColor").value<QColor>());
-    hexEdit->setAsciiAreaColor(settings.value("AsciiAreaColor").value<QColor>());
-    hexEdit->setAsciiFontColor(settings.value("AsciiFontColor").value<QColor>());
-    hexEdit->setHexFontColor(settings.value("HexFontColor").value<QColor>());
+    hexEdit->setHighlightingColor(
+        settings.value("HighlightingColor", hexEdit->highlightingColor()).value<QColor>()
+    );
+    hexEdit->setAddressAreaColor(
+        settings.value("AddressAreaColor", hexEdit->addressAreaColor()).value<QColor>()
+    );
+    hexEdit->setSelectionColor(
+        settings.value("SelectionColor", hexEdit->selectionColor()).value<QColor>()
+    );
+    hexEdit->setFont(
+        settings.value("WidgetFont", hexEdit->font()).value<QFont>()
+    );
+    hexEdit->setAddressFontColor(
+        settings.value("AddressFontColor", hexEdit->addressFontColor()).value<QColor>()
+    );
+    hexEdit->setAsciiAreaColor(
+        settings.value("AsciiAreaColor", hexEdit->asciiAreaColor()).value<QColor>()
+    );
+    hexEdit->setAsciiFontColor(
+        settings.value("AsciiFontColor", hexEdit->asciiFontColor()).value<QColor>()
+    );
+    hexEdit->setHexFontColor(
+        settings.value("HexFontColor", hexEdit->hexFontColor()).value<QColor>()
+    );
 
-    hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
-    hexEdit->setBytesPerLine(settings.value("BytesPerLine").toInt());
-    hexEdit->setHexCaps(settings.value("HexCaps", true).toBool());
+    hexEdit->setAddressWidth(
+        settings.value("AddressAreaWidth", hexEdit->addressWidth()).toInt()
+    );
+    hexEdit->setBytesPerLine(
+        settings.value("BytesPerLine", hexEdit->bytesPerLine()).toInt()
+    );
+    hexEdit->setHexCaps(
+        settings.value("HexCaps", hexEdit->hexCaps()
+    ).toBool());
 }
 
 bool MainWindow::saveFile(const QString &fileName)

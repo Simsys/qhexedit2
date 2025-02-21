@@ -11,7 +11,6 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     readSettings();
-    writeSettings();
 }
 
 OptionsDialog::~OptionsDialog()
@@ -36,27 +35,27 @@ void OptionsDialog::readSettings()
 {
     QSettings settings;
 
-    ui->cbAddressArea->setChecked(settings.value("AddressArea", true).toBool());
-    ui->cbAsciiArea->setChecked(settings.value("AsciiArea", true).toBool());
-    ui->cbHighlighting->setChecked(settings.value("Highlighting", true).toBool());
-    ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode", true).toBool());
+    ui->cbAddressArea->setChecked(settings.value("AddressArea").toBool());
+    ui->cbAsciiArea->setChecked(settings.value("AsciiArea").toBool());
+    ui->cbHighlighting->setChecked(settings.value("Highlighting").toBool());
+    ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode").toBool());
     ui->cbReadOnly->setChecked(settings.value("ReadOnly").toBool());
 
-    setColor(ui->lbHighlightingColor, settings.value("HighlightingColor", QColor(0xff, 0xff, 0x99, 0xff)).value<QColor>());
-    setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor", this->palette().alternateBase().color()).value<QColor>());
-    setColor(ui->lbSelectionColor, settings.value("SelectionColor", this->palette().highlight().color()).value<QColor>());
-    setColor(ui->lbAddressFontColor, settings.value("AddressFontColor", QPalette::WindowText).value<QColor>());
-    setColor(ui->lbAsciiAreaColor, settings.value("AsciiAreaColor", this->palette().alternateBase().color()).value<QColor>());
-    setColor(ui->lbAsciiFontColor, settings.value("AsciiFontColor", QPalette::WindowText).value<QColor>());
-    setColor(ui->lbHexFontColor, settings.value("HexFontColor", QPalette::WindowText).value<QColor>());
+    setColor(ui->lbHighlightingColor, settings.value("HighlightingColor").value<QColor>());
+    setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor").value<QColor>());
+    setColor(ui->lbSelectionColor, settings.value("SelectionColor").value<QColor>());
+    setColor(ui->lbAddressFontColor, settings.value("AddressFontColor").value<QColor>());
+    setColor(ui->lbAsciiAreaColor, settings.value("AsciiAreaColor").value<QColor>());
+    setColor(ui->lbAsciiFontColor, settings.value("AsciiFontColor").value<QColor>());
+    setColor(ui->lbHexFontColor, settings.value("HexFontColor").value<QColor>());
 #ifdef Q_OS_WIN32
-    ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Courier", 10)).value<QFont>());
+    ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Consolas", 10)).value<QFont>());
 #else
     ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Monospace", 10)).value<QFont>());
 #endif
 
-    ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth", 4).toInt());
-    ui->sbBytesPerLine->setValue(settings.value("BytesPerLine", 16).toInt());
+    ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth").toInt());
+    ui->sbBytesPerLine->setValue(settings.value("BytesPerLine").toInt());
 }
 
 void OptionsDialog::writeSettings()
