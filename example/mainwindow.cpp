@@ -208,7 +208,7 @@ void MainWindow::init()
     hexEdit = new QHexEdit;
     setCentralWidget(hexEdit);
     readSettings();
-    writeSettings(); // Write the settings for the optionsdialog
+    writeSettings(); // Write settings during first run
 
     setAttribute(Qt::WA_DeleteOnClose);
     isUntitled = true;
