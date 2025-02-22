@@ -7,7 +7,8 @@ HEADERS = \
     searchdialog.h \
     ../src/qhexedit.h \
     ../src/chunks.h \
-    ../src/commands.h
+    ../src/commands.h \
+    ../src/color_manager.h
 
 
 SOURCES = \
@@ -17,7 +18,8 @@ SOURCES = \
     searchdialog.cpp \
     ../src/qhexedit.cpp \
     ../src/chunks.cpp \
-    ../src/commands.cpp
+    ../src/commands.cpp \
+    ../src/color_manager.cpp \
 
 RESOURCES = \
     qhexedit.qrc

@@ -7,6 +7,7 @@
 
 #include "chunks.h"
 #include "commands.h"
+#include "color_manager.h"
 
 #ifdef QHEXEDIT_EXPORTS
 #define QHEXEDIT_API Q_DECL_EXPORT
@@ -229,7 +230,25 @@ public:
     void replace(qint64 pos, qint64 len, const QByteArray &ba);
 
 
+    // User marking areas
+    
+    /*! Adds a user defined marking area
+    \param posStart Index position, where the area starts (including)
+    \param posEnd Index position where the area ends (exluding)
+    \param fontColor Color of the font used in user marking area
+    \param areaColor Color of the background in user marking area
+    There is no limit to the number of user areas. The areas are 
+    prioritized in the event of overlaps. The areas defined first 
+    have priority over areas that follow later.
+    */
+    void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QColor areaColor);
+
+    /*! Delets all user defined areas
+    */
+    void clearUserAreas();
+
     // Utility functions
+
     /*! Calc cursor position from graphics position
      * \param point from where the cursor position should be calculated
      * \return Cursor position
@@ -409,18 +428,12 @@ private:
     // Name convention: absolute byte positions in chunks start with _b
     qint64 _bSelectionBegin;                    // first position of Selection
     qint64 _bSelectionEnd;                      // end of Selection
-    qint64 _bSelectionInit;                     // memory position of Selection
     qint64 _bPosFirst;                          // position of first byte shown
     qint64 _bPosLast;                           // position of last byte shown
     qint64 _bPosCurrent;                        // current position
 
     // variables to store the property values
     bool _addressArea;                          // left area of QHexEdit
-    QColor _addressAreaColor;
-    QColor _asciiAreaColor;
-    QColor _addressFontColor;
-    QColor _asciiFontColor;
-    QColor _hexFontColor;
     int _addressWidth;
     bool _asciiArea;
     qint64 _addressOffset;
@@ -428,10 +441,6 @@ private:
     int _hexCharsInLine;
     bool _highlighting;
     bool _overwriteMode;
-    QBrush _brushSelection;
-    QPen _penSelection;
-    QBrush _brushHighlighted;
-    QPen _penHighlighted;
     bool _readOnly;
     bool _hexCaps;
     bool _dynamicBytesPerLine;
@@ -452,7 +461,8 @@ private:
     QByteArray _markedShown;                    // marked data in view
     bool _modified;                             // Is any data in editor modified?
     int _rowsShown;                             // lines of text shown
-    UndoStack * _undoStack;                     // Stack to store edit actions for undo/redo
+    UndoStack * _undoStack;                     // stack to store edit actions for undo/redo
+    ColorManager * _colorManager;               // holds highlighting, selection and other area colors
     /*! \endcond docNever */
 };
 

@@ -9,13 +9,15 @@ DEFINES += QHEXEDIT_EXPORTS
 HEADERS = \
     qhexedit.h \
     chunks.h \
-    commands.h
+    commands.h \
+    color_manager.h
 
 
 SOURCES = \
     qhexedit.cpp \
     chunks.cpp \
-    commands.cpp
+    commands.cpp \
+    color_manager.cpp
 
 Release:TARGET = qhexedit
 Debug:TARGET = qhexeditd
