@@ -160,9 +160,14 @@ void Chunks::setDataChanged(qint64 pos, bool dataChanged)
 
 bool Chunks::dataChanged(qint64 pos)
 {
-    QByteArray highlighted;
-    data(pos, 1, &highlighted);
-    return bool(highlighted.at(0));
+    foreach (Chunk chunk, _chunks)
+    {
+        if (pos >= chunk.absPos && pos < (chunk.absPos + chunk.dataChanged.size()))
+        {
+            return bool(chunk.dataChanged.at(pos - chunk.absPos));
+        }
+    }
+    return false;
 }
 
 
