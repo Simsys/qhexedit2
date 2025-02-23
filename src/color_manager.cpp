@@ -79,13 +79,14 @@ void ColoredArea::clear()
 
 ColorManager::ColorManager(QPalette palette)
 {
-    _selection = ColoredArea(QColor::fromRgb(255, 255, 255), palette.highlight().color());
-    _highlighting = ColoredArea(QColor::fromRgb(0, 0, 0), QColor(0xff, 0xff, 0x99, 0xff));
+    _selection = ColoredArea(QColor::fromRgb(255, 255, 255), QColor::fromRgb(0x00, 0xaa, 0xff));
+    _highlighting = ColoredArea(QColor::fromRgb(0, 0, 0), QColor(0xff, 0xff, 0x99));
     _address = ColoredArea(QColor(QPalette::WindowText), palette.alternateBase().color());
     _hex = ColoredArea(QColor::fromRgb(0, 0, 0), palette.base().color());
     _ascii = ColoredArea(QColor(QPalette::WindowText), palette.alternateBase().color());
 };
 
+// read only, copy of relevant ColoredArea is returned: you can't change anything
 ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks)
 {
     // prio 1 selection
@@ -110,7 +111,7 @@ ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks)
     return this->notMarked(area);
 };
 
-ColoredArea ColorManager::notMarked(Area area)
+ColoredArea& ColorManager::notMarked(Area area)
 {
     switch (area) {
         case Area::Address:
@@ -126,12 +127,12 @@ ColoredArea ColorManager::notMarked(Area area)
     return _hex; // should never happen
 }
 
-ColoredArea ColorManager::selection()
+ColoredArea& ColorManager::selection()
 {
     return _selection;
 };
 
-ColoredArea ColorManager::highlighting()
+ColoredArea& ColorManager::highlighting()
 {
     return _highlighting;
 };

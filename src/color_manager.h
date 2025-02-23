@@ -67,13 +67,13 @@ public:
     ColoredArea markedArea(qint64 pos, Area area, Chunks *chunks);
 
     // Method returns standard collors (without marking)
-    ColoredArea notMarked(Area);
+    ColoredArea& notMarked(Area);
 
     // Get the selection color definitions
-    ColoredArea selection();
+    ColoredArea& selection();
 
     // Get the highlighting color definitions
-    ColoredArea highlighting();
+    ColoredArea& highlighting();
 
     // Add a user defined area
     void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QColor areaColor);
