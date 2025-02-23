@@ -4,6 +4,8 @@
 #include <QtCore>
 #include <QDialog>
 
+#include "../src/qhexedit.h"
+
 namespace Ui {
     class OptionsDialog;
 }
@@ -13,10 +15,10 @@ class OptionsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit OptionsDialog(QWidget *parent = 0);
-    ~OptionsDialog();
+    OptionsDialog(QWidget *parent = 0);
     Ui::OptionsDialog *ui;
-    void show();
+    void load(QHexEdit *hexedit);
+    void save(QHexEdit *hexedit);
 
 public slots:
     virtual void accept();
@@ -32,8 +34,6 @@ private slots:
     void on_pbWidgetFont_clicked();
 
 private:
-    void readSettings();
-    void writeSettings();
     void setColor(QWidget *widget, QColor color);
 };
 

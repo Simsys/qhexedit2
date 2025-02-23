@@ -10,74 +10,56 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     ui(new Ui::OptionsDialog)
 {
     ui->setupUi(this);
-    readSettings();
-}
-
-OptionsDialog::~OptionsDialog()
-{
-    delete ui;
-}
-
-void OptionsDialog::show()
-{
-    readSettings();
-    QWidget::show();
 }
 
 void OptionsDialog::accept()
 {
-    writeSettings();
     emit accepted();
     QDialog::hide();
 }
 
-void OptionsDialog::readSettings()
+void OptionsDialog::load(QHexEdit *hexedit)
 {
-    QSettings settings;
+    ui->cbAddressArea->setChecked(hexedit->addressArea());
+    ui->cbAsciiArea->setChecked(hexedit->asciiArea());
+    ui->cbHighlighting->setChecked(hexedit->highlighting());
+    ui->cbOverwriteMode->setChecked(hexedit->overwriteMode());
+    ui->cbReadOnly->setChecked(hexedit->isReadOnly());
+    ui->cbDynamicBytesPerLine->setChecked(hexedit->dynamicBytesPerLine());
 
-    ui->cbAddressArea->setChecked(settings.value("AddressArea").toBool());
-    ui->cbAsciiArea->setChecked(settings.value("AsciiArea").toBool());
-    ui->cbHighlighting->setChecked(settings.value("Highlighting").toBool());
-    ui->cbOverwriteMode->setChecked(settings.value("OverwriteMode").toBool());
-    ui->cbReadOnly->setChecked(settings.value("ReadOnly").toBool());
+    setColor(ui->lbHighlightingColor, hexedit->highlightingColor());
+    setColor(ui->lbAddressAreaColor, hexedit->addressAreaColor());
+    setColor(ui->lbSelectionColor, hexedit->selectionColor());
+    setColor(ui->lbAddressFontColor, hexedit->addressFontColor());
+    setColor(ui->lbAsciiAreaColor, hexedit->asciiAreaColor());
+    setColor(ui->lbAsciiFontColor, hexedit->asciiFontColor());
+    setColor(ui->lbHexFontColor, hexedit->hexFontColor());
 
-    setColor(ui->lbHighlightingColor, settings.value("HighlightingColor").value<QColor>());
-    setColor(ui->lbAddressAreaColor, settings.value("AddressAreaColor").value<QColor>());
-    setColor(ui->lbSelectionColor, settings.value("SelectionColor").value<QColor>());
-    setColor(ui->lbAddressFontColor, settings.value("AddressFontColor").value<QColor>());
-    setColor(ui->lbAsciiAreaColor, settings.value("AsciiAreaColor").value<QColor>());
-    setColor(ui->lbAsciiFontColor, settings.value("AsciiFontColor").value<QColor>());
-    setColor(ui->lbHexFontColor, settings.value("HexFontColor").value<QColor>());
-#ifdef Q_OS_WIN32
-    ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Consolas", 10)).value<QFont>());
-#else
-    ui->leWidgetFont->setFont(settings.value("WidgetFont", QFont("Monospace", 10)).value<QFont>());
-#endif
-
-    ui->sbAddressAreaWidth->setValue(settings.value("AddressAreaWidth").toInt());
-    ui->sbBytesPerLine->setValue(settings.value("BytesPerLine").toInt());
+    ui->leWidgetFont->setFont(hexedit->font());
+    ui->sbAddressAreaWidth->setValue(hexedit->addressWidth());
+    ui->sbBytesPerLine->setValue(hexedit->bytesPerLine());
 }
 
-void OptionsDialog::writeSettings()
+void OptionsDialog::save(QHexEdit *hexedit)
 {
-    QSettings settings;
-    settings.setValue("AddressArea", ui->cbAddressArea->isChecked());
-    settings.setValue("AsciiArea", ui->cbAsciiArea->isChecked());
-    settings.setValue("Highlighting", ui->cbHighlighting->isChecked());
-    settings.setValue("OverwriteMode", ui->cbOverwriteMode->isChecked());
-    settings.setValue("ReadOnly", ui->cbReadOnly->isChecked());
+    hexedit->setAddressArea(ui->cbAddressArea->isChecked());
+    hexedit->setAsciiArea(ui->cbAsciiArea->isChecked());
+    hexedit->setHighlighting(ui->cbHighlighting->isChecked());
+    hexedit->setOverwriteMode(ui->cbOverwriteMode->isChecked());
+    hexedit->setReadOnly(ui->cbReadOnly->isChecked());
+    hexedit->setDynamicBytesPerLine(ui->cbDynamicBytesPerLine->isChecked());
 
-    settings.setValue("HighlightingColor", ui->lbHighlightingColor->palette().color(QPalette::Window));
-    settings.setValue("AddressAreaColor", ui->lbAddressAreaColor->palette().color(QPalette::Window));
-    settings.setValue("SelectionColor", ui->lbSelectionColor->palette().color(QPalette::Window));
-    settings.setValue("AddressFontColor", ui->lbAddressFontColor->palette().color(QPalette::Window));
-    settings.setValue("AsciiAreaColor", ui->lbAsciiAreaColor->palette().color(QPalette::Window));
-    settings.setValue("AsciiFontColor", ui->lbAsciiFontColor->palette().color(QPalette::Window));
-    settings.setValue("HexFontColor", ui->lbHexFontColor->palette().color(QPalette::Window));
-    settings.setValue("WidgetFont",ui->leWidgetFont->font());
+    hexedit->setHighlightingColor(ui->lbHighlightingColor->palette().color(QPalette::Window));
+    hexedit->setAddressAreaColor(ui->lbAddressAreaColor->palette().color(QPalette::Window));
+    hexedit->setSelectionColor(ui->lbSelectionColor->palette().color(QPalette::Window));
+    hexedit->setAddressFontColor(ui->lbAddressFontColor->palette().color(QPalette::Window));
+    hexedit->setAsciiAreaColor(ui->lbAsciiAreaColor->palette().color(QPalette::Window));
+    hexedit->setAsciiFontColor(ui->lbAsciiFontColor->palette().color(QPalette::Window));
+    hexedit->setHexFontColor(ui->lbHexFontColor->palette().color(QPalette::Window));
+    hexedit->setFont(ui->leWidgetFont->font());
 
-    settings.setValue("AddressAreaWidth", ui->sbAddressAreaWidth->value());
-    settings.setValue("BytesPerLine", ui->sbBytesPerLine->value());
+    hexedit->setAddressWidth(ui->sbAddressAreaWidth->value());
+    hexedit->setBytesPerLine(ui->sbBytesPerLine->value());
 }
 
 void OptionsDialog::setColor(QWidget *widget, QColor color)

@@ -55,6 +55,13 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="cbDynamicBytesPerLine">
+        <property name="text">
+         <string>DynamicBytesPerLine</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
