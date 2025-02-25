@@ -1,5 +1,7 @@
 #include "color_manager.h"
 
+#include <QApplication>
+#include <QStyleFactory>
 #include <QtGui>
 #include <QtCore>
 
@@ -77,14 +79,20 @@ void ColoredArea::clear()
 
 /********************************************* */
 
-ColorManager::ColorManager(QPalette palette)
+ColorManager::ColorManager()
 {
-    _selection = ColoredArea(QColor::fromRgb(255, 255, 255), QColor::fromRgb(0x00, 0xaa, 0xff));
-    _highlighting = ColoredArea(QColor::fromRgb(0, 0, 0), QColor(0xff, 0xff, 0x99));
-    _address = ColoredArea(QColor(QPalette::WindowText), palette.alternateBase().color());
-    _hex = ColoredArea(QColor::fromRgb(0, 0, 0), palette.base().color());
-    _ascii = ColoredArea(QColor(QPalette::WindowText), palette.alternateBase().color());
+    QPalette palette = qApp->palette();
+    setPalette(palette);
 };
+
+void ColorManager::setPalette(const QPalette &palette)
+{
+    _selection = ColoredArea(palette.highlightedText().color(), palette.highlight().color());
+    _highlighting = ColoredArea(QColor::fromRgb(0, 0, 0), QColor(0xff, 0xff, 0x99));
+    _address = ColoredArea(palette.windowText().color(), palette.alternateBase().color());
+    _hex = ColoredArea(palette.windowText().color(), palette.base().color());
+    _ascii = ColoredArea(palette.windowText().color(), palette.alternateBase().color());
+}
 
 // read only, copy of relevant ColoredArea is returned: you can't change anything
 ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks)

@@ -61,7 +61,10 @@ class ColorManager
 {
 public:
     // Constructor including the definition of standard colors
-    ColorManager(QPalette palette);
+    ColorManager();
+
+    // reload the palette and adapt the apeareance
+    void setPalette(const QPalette &palette);
 
     // Method returns color definitions for data at position pos in area area
     ColoredArea markedArea(qint64 pos, Area area, Chunks *chunks);
@@ -82,6 +85,9 @@ public:
     void clearUserAreas();
 
 private:
+    QPalette _darkPalette;
+    QPalette _brightPalette;
+
     ColoredArea _highlighting;
     ColoredArea _selection;
     ColoredArea _address;

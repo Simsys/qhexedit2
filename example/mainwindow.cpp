@@ -206,7 +206,7 @@ void MainWindow::showSearchDialog()
 /*****************************************************************************/
 void MainWindow::init()
 {
-    hexEdit = new QHexEdit;
+    hexEdit = new QHexEdit(this);
     setCentralWidget(hexEdit);
     readSettings();
     writeSettings(); // Write settings during first run
@@ -402,18 +402,6 @@ void MainWindow::readSettings()
         hexEdit->setDynamicBytesPerLine(settings.value("DynamicBytesPerLine").toBool());
     if (settings.contains("HighlightingColor"))
         hexEdit->setHighlightingColor(settings.value("HighlightingColor").value<QColor>());
-    if (settings.contains("AddressAreaColor"))
-        hexEdit->setAddressAreaColor(settings.value("AddressAreaColor").value<QColor>());
-    if (settings.contains("SelectionColor"))
-        hexEdit->setSelectionColor(settings.value("SelectionColor").value<QColor>());
-    if (settings.contains("AddressFontColor"))
-        hexEdit->setAddressFontColor(settings.value("AddressFontColor").value<QColor>());
-    if (settings.contains("AsciiAreaColor"))
-        hexEdit->setAsciiAreaColor(settings.value("AsciiAreaColor").value<QColor>());
-    if (settings.contains("AsciiFontColor"))
-        hexEdit->setAsciiFontColor(settings.value("AsciiFontColor").value<QColor>());
-    if (settings.contains("HexFontColor"))
-        hexEdit->setHexFontColor(settings.value("HexFontColor").value<QColor>());
     if (settings.contains("AddressAreaWidth"))
         hexEdit->setAddressWidth(settings.value("AddressAreaWidth").toInt());
     if (settings.contains("BytesPerLine"))
@@ -487,13 +475,6 @@ void MainWindow::writeSettings()
     settings.setValue("DynamicBytesPerLine", hexEdit->dynamicBytesPerLine());
 
     settings.setValue("HighlightingColor", hexEdit->highlightingColor());
-    settings.setValue("AddressAreaColor", hexEdit->addressAreaColor());
-    settings.setValue("SelectionColor", hexEdit->selectionColor());
-    settings.setValue("WidgetFont", hexEdit->font());
-    settings.setValue("AddressFontColor", hexEdit->addressFontColor());
-    settings.setValue("AsciiAreaColor", hexEdit->asciiAreaColor());
-    settings.setValue("AsciiFontColor", hexEdit->asciiFontColor());
-    settings.setValue("HexFontColor", hexEdit->hexFontColor());
 
     settings.setValue("AddressAreaWidth", hexEdit->addressWidth());
     settings.setValue("BytesPerLine", hexEdit->bytesPerLine());

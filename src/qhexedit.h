@@ -66,31 +66,6 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool addressArea READ addressArea WRITE setAddressArea)
 
-    /*! Property address area color sets (setAddressAreaColor()) the background
-    color of address areas. You can also read the color (addressAreaColor()).
-    */
-    Q_PROPERTY(QColor addressAreaColor READ addressAreaColor WRITE setAddressAreaColor)
-
-    /*! Property address font color sets (setAddressFontColor()) the text
-    color of address areas. You can also read the color (addressFontColor()).
-    */
-    Q_PROPERTY(QColor addressFontColor READ addressFontColor WRITE setAddressFontColor)
-
-    /*! Property ascii area color sets (setAsciiAreaColor()) the backgorund
-    color of ascii areas. You can also read the color (asciiAreaColor()).
-    */
-    Q_PROPERTY(QColor asciiAreaColor READ asciiAreaColor WRITE setAsciiAreaColor)
-
-    /*! Property ascii font color sets (setAsciiFontColor()) the text
-    color of ascii areas. You can also read the color (asciiFontColor()).
-    */
-    Q_PROPERTY(QColor asciiFontColor READ asciiFontColor WRITE setAsciiFontColor)
-
-    /*! Property hex font color sets (setHexFontColor()) the text
-    color of hex areas. You can also read the color (hexFontColor()).
-    */
-    Q_PROPERTY(QColor hexFontColor READ hexFontColor WRITE setHexFontColor)
-
     /*! Property addressOffset is added to the Numbers of the Address Area.
     A offset in the address area (left side) is sometimes useful, whe you show
     only a segment of a complete memory picture. With setAddressOffset() you set
@@ -148,12 +123,6 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     */
     Q_PROPERTY(bool overwriteMode READ overwriteMode WRITE setOverwriteMode)
 
-    /*! Property selection color sets (setSelectionColor()) the background
-    color of selected text areas. You can also read the color
-    (selectionColor()).
-    */
-    Q_PROPERTY(QColor selectionColor READ selectionColor WRITE setSelectionColor)
-
     /*! Property readOnly sets (setReadOnly()) or gets (isReadOnly) the mode
     in which the editor works. In readonly mode the the user can only navigate
     through the data and select data; modifying is not possible. This
@@ -168,7 +137,7 @@ public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
     */
-    QHexEdit(QWidget *parent=0);
+    QHexEdit(QWidget *parent=NULL);
 
     // Access to data of qhexedit
 
@@ -295,7 +264,6 @@ public:
     */
     QString toReadableString();
 
-
 public slots:
     /*! Redoes the last operation. If there is no operation to redo, i.e.
       there is no redo step in the undo/redo history, nothing happens.
@@ -329,21 +297,6 @@ public:
     // Properties
     bool addressArea();
     void setAddressArea(bool addressArea);
-
-    QColor addressAreaColor();
-    void setAddressAreaColor(const QColor &color);
-
-    QColor addressFontColor();
-    void setAddressFontColor(const QColor &color);
-
-    QColor asciiAreaColor();
-    void setAsciiAreaColor(const QColor &color);
-
-    QColor asciiFontColor();
-    void setAsciiFontColor(const QColor &color);
-
-    QColor hexFontColor();
-    void setHexFontColor(const QColor &color);
 
     qint64 addressOffset();
     void setAddressOffset(qint64 addressArea);
@@ -381,9 +334,6 @@ public:
     bool isReadOnly();
     void setReadOnly(bool readOnly);
 
-    QColor selectionColor();
-    void setSelectionColor(const QColor &color);
-
 protected:
     // Handle events
     void keyPressEvent(QKeyEvent *event);
@@ -401,6 +351,7 @@ private:
     qint64 getSelectionEnd();
 
     // Private utility functions
+    bool event(QEvent *event);
     void init();
     void readBuffers();
     QString toReadable(const QByteArray &ba);

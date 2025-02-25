@@ -1,4 +1,5 @@
 
+#include <QApplication>
 #include <QColorDialog>
 #include <QFontDialog>
 
@@ -10,6 +11,36 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     ui(new Ui::OptionsDialog)
 {
     ui->setupUi(this);
+
+    QPalette palette;
+    QColor darkGray(53, 53, 53);
+    QColor gray(128, 128, 128);
+    QColor black(25, 25, 25);
+    QColor blue(42, 130, 218);
+
+    palette.setColor(QPalette::Window, darkGray);
+    palette.setColor(QPalette::WindowText, Qt::white);
+    palette.setColor(QPalette::Base, black);
+    palette.setColor(QPalette::AlternateBase, darkGray);
+    palette.setColor(QPalette::ToolTipBase, blue);
+    palette.setColor(QPalette::ToolTipText, Qt::white);
+    palette.setColor(QPalette::Text, Qt::white);
+    palette.setColor(QPalette::Button, darkGray);
+    palette.setColor(QPalette::ButtonText, Qt::white);
+    palette.setColor(QPalette::Link, blue);
+    palette.setColor(QPalette::Highlight, blue);
+    palette.setColor(QPalette::HighlightedText, Qt::black);
+
+    palette.setColor(QPalette::Active, QPalette::Button, gray.darker());
+    palette.setColor(QPalette::Disabled, QPalette::ButtonText, gray);
+    palette.setColor(QPalette::Disabled, QPalette::WindowText, gray);
+    palette.setColor(QPalette::Disabled, QPalette::Text, gray);
+    palette.setColor(QPalette::Disabled, QPalette::Light, darkGray);
+    palette.setColor(QPalette::Light, darkGray);
+
+    _darkMode = palette;
+    _defaultMode = QApplication::palette();
+
 }
 
 void OptionsDialog::accept()
@@ -28,13 +59,6 @@ void OptionsDialog::load(QHexEdit *hexedit)
     ui->cbDynamicBytesPerLine->setChecked(hexedit->dynamicBytesPerLine());
 
     setColor(ui->lbHighlightingColor, hexedit->highlightingColor());
-    setColor(ui->lbAddressAreaColor, hexedit->addressAreaColor());
-    setColor(ui->lbSelectionColor, hexedit->selectionColor());
-    setColor(ui->lbAddressFontColor, hexedit->addressFontColor());
-    setColor(ui->lbAsciiAreaColor, hexedit->asciiAreaColor());
-    setColor(ui->lbAsciiFontColor, hexedit->asciiFontColor());
-    setColor(ui->lbHexFontColor, hexedit->hexFontColor());
-
     ui->leWidgetFont->setFont(hexedit->font());
     ui->sbAddressAreaWidth->setValue(hexedit->addressWidth());
     ui->sbBytesPerLine->setValue(hexedit->bytesPerLine());
@@ -50,12 +74,6 @@ void OptionsDialog::save(QHexEdit *hexedit)
     hexedit->setDynamicBytesPerLine(ui->cbDynamicBytesPerLine->isChecked());
 
     hexedit->setHighlightingColor(ui->lbHighlightingColor->palette().color(QPalette::Window));
-    hexedit->setAddressAreaColor(ui->lbAddressAreaColor->palette().color(QPalette::Window));
-    hexedit->setSelectionColor(ui->lbSelectionColor->palette().color(QPalette::Window));
-    hexedit->setAddressFontColor(ui->lbAddressFontColor->palette().color(QPalette::Window));
-    hexedit->setAsciiAreaColor(ui->lbAsciiAreaColor->palette().color(QPalette::Window));
-    hexedit->setAsciiFontColor(ui->lbAsciiFontColor->palette().color(QPalette::Window));
-    hexedit->setHexFontColor(ui->lbHexFontColor->palette().color(QPalette::Window));
     hexedit->setFont(ui->leWidgetFont->font());
 
     hexedit->setAddressWidth(ui->sbAddressAreaWidth->value());
@@ -77,52 +95,23 @@ void OptionsDialog::on_pbHighlightingColor_clicked()
         setColor(ui->lbHighlightingColor, color);
 }
 
-void OptionsDialog::on_pbAddressAreaColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbAddressAreaColor->palette().color(QPalette::Window), this);
-    if (color.isValid())
-        setColor(ui->lbAddressAreaColor, color);
-}
-
-void OptionsDialog::on_pbAddressFontColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbAddressFontColor->palette().color(QPalette::WindowText), this);
-    if (color.isValid())
-        setColor(ui->lbAddressFontColor, color);
-}
-
-void OptionsDialog::on_pbAsciiAreaColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbAsciiAreaColor->palette().color(QPalette::Window), this);
-    if (color.isValid())
-        setColor(ui->lbAsciiAreaColor, color);
-}
-
-void OptionsDialog::on_pbAsciiFontColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbAsciiFontColor->palette().color(QPalette::WindowText), this);
-    if (color.isValid())
-        setColor(ui->lbAsciiFontColor, color);
-}
-
-void OptionsDialog::on_pbHexFontColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbHexFontColor->palette().color(QPalette::WindowText), this);
-    if (color.isValid())
-        setColor(ui->lbHexFontColor, color);
-}
-
-void OptionsDialog::on_pbSelectionColor_clicked()
-{
-    QColor color = QColorDialog::getColor(ui->lbSelectionColor->palette().color(QPalette::Window), this);
-    if (color.isValid())
-        setColor(ui->lbSelectionColor, color);
-}
-
 void OptionsDialog::on_pbWidgetFont_clicked()
 {
     bool ok;
     QFont font = QFontDialog::getFont(&ok, ui->leWidgetFont->font(), this);
     if (ok)
         ui->leWidgetFont->setFont(font);
+}
+
+void OptionsDialog::on_cbPalette_currentIndexChanged(int index)
+{
+    switch (index)
+    {
+        case 1:
+            qApp->setPalette(_darkMode);
+            break;
+        default:
+            qApp->setPalette(_defaultMode);
+            break;
+    }
 }
