@@ -41,6 +41,9 @@ OptionsDialog::OptionsDialog(QWidget *parent) :
     _darkMode = palette;
     _defaultMode = QApplication::palette();
 
+    QSettings settings;
+    if (settings.contains("Theme"))
+        this->ui->cbPalette->setCurrentIndex(settings.value("Theme").toInt());
 }
 
 void OptionsDialog::accept()
@@ -105,6 +108,9 @@ void OptionsDialog::on_pbWidgetFont_clicked()
 
 void OptionsDialog::on_cbPalette_currentIndexChanged(int index)
 {
+    QSettings settings;
+    settings.setValue("Theme", index);
+    
     switch (index)
     {
         case 1:

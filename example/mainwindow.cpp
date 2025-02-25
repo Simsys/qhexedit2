@@ -10,6 +10,7 @@
 #include <QFontDialog>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QStyleFactory>
 
 #include "mainwindow.h"
 
@@ -206,6 +207,7 @@ void MainWindow::showSearchDialog()
 /*****************************************************************************/
 void MainWindow::init()
 {
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
     hexEdit = new QHexEdit(this);
     setCentralWidget(hexEdit);
     readSettings();
@@ -388,6 +390,8 @@ void MainWindow::readSettings()
     move(pos);
     resize(size);
 
+    // Note: theme settings is not stored in hexedit, Optionsdialog handles this directly
+
     if (settings.contains("AddressArea"))
         hexEdit->setAddressArea(settings.value("AddressArea").toBool());
     if (settings.contains("AsciiArea"))
@@ -463,6 +467,8 @@ QString MainWindow::strippedName(const QString &fullFileName)
 
 void MainWindow::writeSettings()
 {
+    // Note: theme settings is not stored in hexedit, Optionsdialog handles this directly
+
     QSettings settings;
     settings.setValue("pos", pos());
     settings.setValue("size", size());
