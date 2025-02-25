@@ -210,7 +210,7 @@ public:
     prioritized in the event of overlaps. The areas defined first 
     have priority over areas that follow later.
     */
-    void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QColor areaColor);
+    void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle);
 
     /*! Delets all user defined areas
     */

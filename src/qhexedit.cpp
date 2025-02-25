@@ -350,9 +350,9 @@ void QHexEdit::replace(qint64 pos, qint64 len, const QByteArray &ba)
 }
 
 // ********************************************************************** User marking areas
-void QHexEdit::addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QColor areaColor)
+void QHexEdit::addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle)
 {
-    _colorManager->addUserArea(posStart, posEnd, fontColor, areaColor);
+    _colorManager->addUserArea(posStart, posEnd, fontColor, areaStyle);
 }
 
 void QHexEdit::clearUserAreas()
@@ -855,7 +855,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     _pxCharWidth * (_addrDigits + 1), 
                     height()
                 ), 
-                _colorManager->notMarked(Area::Address).areaColor()
+                _colorManager->notMarked(Area::Address).areaStyle()
             );
         if (_asciiArea)
         {
@@ -866,7 +866,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     _pxCharWidth * _bytesPerLine, 
                     height()
                 ),
-                _colorManager->notMarked(Area::Ascii).areaColor()
+                _colorManager->notMarked(Area::Ascii).areaStyle()
             );
         }
 
@@ -910,7 +910,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                         3*_pxCharWidth, 
                         _pxCharHeight
                     );
-                painter.fillRect(rect, hexArea.areaColor());
+                painter.fillRect(rect, hexArea.areaStyle());
                 hex = _hexDataShown.mid((bPosLine + colIdx) * 2, 2);
                 painter.drawText(pxPosX, pxPosY, hexCaps()?hex.toUpper():hex);
                 pxPosX += 3*_pxCharWidth;
@@ -925,7 +925,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
                     if ( ch < ' ' || ch > '~' )
                         ch = '.';
                     rect.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
-                    painter.fillRect(rect, asciiArea.areaColor());
+                    painter.fillRect(rect, asciiArea.areaStyle());
                     painter.drawText(pxPosAsciiX2, pxPosY, QChar(ch));
                     pxPosAsciiX2 += _pxCharWidth;
                 }

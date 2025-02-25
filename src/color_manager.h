@@ -31,16 +31,18 @@ class ColoredArea
 public:
     // Cunstructors
     ColoredArea();
-    ColoredArea(QPen pen, QColor background);
-    ColoredArea(qint64 posStart, qint64 posEnd, QPen pen, QColor background);
+    ColoredArea(QPen pen, QBrush background);
+    ColoredArea(qint64 posStart, qint64 posEnd, QPen pen, QBrush background);
 
     // Property to set/get font color
     QColor fontColor();
     void setFontColor(QColor color);
 
-    // Property to set/get area color
+    // Property to set/get area style
     QColor areaColor();
+    QBrush areaStyle();
     void setAreaColor(QColor color);
+    void setAreaStyle(QBrush background);
 
     // other Methods to acces and set internal data
     QPen fontPen();
@@ -53,7 +55,7 @@ private:
     qint64 _posStart;
     qint64 _posEnd;
     QPen _fontColor;
-    QColor _areaColor;
+    QBrush _areaStyle;
 };
 
 
@@ -79,15 +81,12 @@ public:
     ColoredArea& highlighting();
 
     // Add a user defined area
-    void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QColor areaColor);
+    void addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle);
 
     // Clear all user defined areas
     void clearUserAreas();
 
 private:
-    QPalette _darkPalette;
-    QPalette _brightPalette;
-
     ColoredArea _highlighting;
     ColoredArea _selection;
     ColoredArea _address;
