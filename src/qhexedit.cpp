@@ -935,7 +935,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
     int hexPos = _cursorPosition - 2 * _bPosFirst;
 
     // due to scrolling the cursor can go out of the currently displayed data
-    if ((hexPos >= 0) && (hexPos < _hexDataShown.size()))
+    if ((hexPos >= 0) && (hexPos <= _hexDataShown.size()))
     {
         ColoredArea curArea;
         if (_editAreaIsAscii)
