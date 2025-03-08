@@ -181,7 +181,7 @@ void QHexEdit::setCursorPosition(qint64 position)
         else
             _cursorRect = QRect(
                 _pxCursorX - pxOfsX, 
-                _pxCursorY - _pxCharHeight + 4, 
+                _pxCursorY - _pxCharHeight + _pxSelectionSub, 
                 _pxCursorWidth, 
                 _pxCharHeight
             );
