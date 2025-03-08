@@ -368,9 +368,7 @@ private:
     int _pxPosHexX;                             // X-Pos of HeaxArea
     int _pxPosAdrX;                             // X-Pos of Address Area
     int _pxPosAsciiX;                           // X-Pos of Ascii Area
-    int _pxGapAdr;                              // gap left from AddressArea
-    int _pxGapAdrHex;                           // gap between AddressArea and HexAerea
-    int _pxGapHexAscii;                         // gap between HexArea and AsciiArea
+    int _pxAreaMargin;                          // gap left and right from areas
     int _pxCursorWidth;                         // cursor width
     int _pxSelectionSub;                        // offset selection rect
     int _pxCursorX;                             // current cursor pos
