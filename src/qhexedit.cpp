@@ -353,11 +353,13 @@ void QHexEdit::replace(qint64 pos, qint64 len, const QByteArray &ba)
 void QHexEdit::addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle)
 {
     _colorManager->addUserArea(posStart, posEnd, fontColor, areaStyle);
+    refresh();
 }
 
 void QHexEdit::clearUserAreas()
 {
     _colorManager->clearUserAreas();
+    refresh();
 }
 
 // ********************************************************************** Utility functions
