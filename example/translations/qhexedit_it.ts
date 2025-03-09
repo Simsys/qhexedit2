@@ -4,248 +4,248 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../mainwindow.cpp" line="36"/>
+        <location filename="../mainwindow.cpp" line="37"/>
         <source>The file has been modified.</source>
         <translation>Il file è stato modificato.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="37"/>
+        <location filename="../mainwindow.cpp" line="38"/>
         <source>Do you want to save your changes?</source>
         <translation>Vuoi salvare le tue modifiche?</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="81"/>
+        <location filename="../mainwindow.cpp" line="82"/>
         <source>About QHexEdit</source>
         <translation>A proposito di Qhexedit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="82"/>
+        <location filename="../mainwindow.cpp" line="83"/>
         <source>The QHexEdit example is a short Demo of the QHexEdit Widget.</source>
-        <translation>L'esempio QhexEdit è una breve demo del widget Qhexedit.</translation>
+        <translation>L&apos;esempio QhexEdit è una breve demo del widget Qhexedit.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="121"/>
+        <location filename="../mainwindow.cpp" line="122"/>
         <source>Save As</source>
         <translation>Salva come</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="131"/>
-        <location filename="../mainwindow.cpp" line="153"/>
+        <location filename="../mainwindow.cpp" line="132"/>
+        <location filename="../mainwindow.cpp" line="154"/>
         <source>Save To Readable File</source>
         <translation>Salva in file leggibile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="136"/>
-        <location filename="../mainwindow.cpp" line="158"/>
-        <location filename="../mainwindow.cpp" line="369"/>
-        <location filename="../mainwindow.cpp" line="429"/>
+        <location filename="../mainwindow.cpp" line="137"/>
+        <location filename="../mainwindow.cpp" line="159"/>
+        <location filename="../mainwindow.cpp" line="375"/>
+        <location filename="../mainwindow.cpp" line="441"/>
         <source>QHexEdit</source>
         <translation>Qhexedit</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="137"/>
-        <location filename="../mainwindow.cpp" line="159"/>
+        <location filename="../mainwindow.cpp" line="138"/>
+        <location filename="../mainwindow.cpp" line="160"/>
         <source>Cannot write file %1:
 %2.</source>
         <translation>Impossibile scrivere file %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="147"/>
-        <location filename="../mainwindow.cpp" line="169"/>
-        <location filename="../mainwindow.cpp" line="436"/>
+        <location filename="../mainwindow.cpp" line="148"/>
+        <location filename="../mainwindow.cpp" line="170"/>
+        <location filename="../mainwindow.cpp" line="448"/>
         <source>File saved</source>
         <translation>File salvato</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="183"/>
+        <location filename="../mainwindow.cpp" line="184"/>
         <source>Overwrite</source>
         <translation>Sovrascrivi</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="185"/>
+        <location filename="../mainwindow.cpp" line="186"/>
         <source>Insert</source>
         <translation>Inserire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="232"/>
+        <location filename="../mainwindow.cpp" line="238"/>
         <source>&amp;Open...</source>
         <translation>\Aprire...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="234"/>
+        <location filename="../mainwindow.cpp" line="240"/>
         <source>Open an existing file</source>
         <translation>Apri un file esistente</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="237"/>
+        <location filename="../mainwindow.cpp" line="243"/>
         <source>&amp;Save</source>
         <translation>\Salva</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="239"/>
+        <location filename="../mainwindow.cpp" line="245"/>
         <source>Save the document to disk</source>
         <translation>Salva il documento su disco</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="242"/>
+        <location filename="../mainwindow.cpp" line="248"/>
         <source>Save &amp;As...</source>
         <translation>Salva \ come ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="244"/>
+        <location filename="../mainwindow.cpp" line="250"/>
         <source>Save the document under a new name</source>
         <translation>Salva il documento con un nuovo nome</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="247"/>
+        <location filename="../mainwindow.cpp" line="253"/>
         <source>Save &amp;Readable...</source>
         <translation>Salva \ leggibile ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="248"/>
+        <location filename="../mainwindow.cpp" line="254"/>
         <source>Save document in readable form</source>
         <translation>Salva documento in forma leggibile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="251"/>
+        <location filename="../mainwindow.cpp" line="257"/>
         <source>E&amp;xit</source>
         <translation>Uscita</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="253"/>
+        <location filename="../mainwindow.cpp" line="259"/>
         <source>Exit the application</source>
-        <translation>Esci dall'applicazione</translation>
+        <translation>Esci dall&apos;applicazione</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="256"/>
+        <location filename="../mainwindow.cpp" line="262"/>
         <source>&amp;Undo</source>
         <translation>\Disfare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="260"/>
+        <location filename="../mainwindow.cpp" line="266"/>
         <source>&amp;Redo</source>
         <translation>\Rifare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="264"/>
+        <location filename="../mainwindow.cpp" line="270"/>
         <source>&amp;Save Selection Readable...</source>
         <translation>\ Salva la selezione leggibile ...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="265"/>
+        <location filename="../mainwindow.cpp" line="271"/>
         <source>Save selection in readable form</source>
         <translation>Salva la selezione in forma leggibile</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="268"/>
+        <location filename="../mainwindow.cpp" line="274"/>
         <source>&amp;About</source>
         <translation>\Di</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="269"/>
+        <location filename="../mainwindow.cpp" line="275"/>
         <source>Show the application&apos;s About box</source>
-        <translation>Mostra l'applicazione su Box</translation>
+        <translation>Mostra l&apos;applicazione su Box</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="272"/>
+        <location filename="../mainwindow.cpp" line="278"/>
         <source>About &amp;Qt</source>
         <translation>Informazioni su \ qt</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="273"/>
+        <location filename="../mainwindow.cpp" line="279"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Mostra la libreria QT su Box</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="276"/>
+        <location filename="../mainwindow.cpp" line="282"/>
         <source>&amp;Find/Replace</source>
         <translation>\ Trova/Sostituisci</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="278"/>
+        <location filename="../mainwindow.cpp" line="284"/>
         <source>Show the Dialog for finding and replacing</source>
         <translation>Mostra il dialogo per trovare e sostituire</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="281"/>
+        <location filename="../mainwindow.cpp" line="287"/>
         <source>Find &amp;next</source>
         <translation>Trova \ Next</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="283"/>
+        <location filename="../mainwindow.cpp" line="289"/>
         <source>Find next occurrence of the searched pattern</source>
         <translation>Trova la prossima occorrenza del modello cercato</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="286"/>
+        <location filename="../mainwindow.cpp" line="292"/>
         <source>&amp;Options</source>
         <translation>\ Opzioni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="287"/>
+        <location filename="../mainwindow.cpp" line="293"/>
         <source>Show the Dialog to select applications options</source>
         <translation>Mostra la finestra di dialogo per selezionare le opzioni delle applicazioni</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="293"/>
+        <location filename="../mainwindow.cpp" line="299"/>
         <source>&amp;File</source>
         <translation>\File</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="301"/>
+        <location filename="../mainwindow.cpp" line="307"/>
         <source>&amp;Edit</source>
         <translation>\Modificare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="311"/>
+        <location filename="../mainwindow.cpp" line="317"/>
         <source>&amp;Help</source>
         <translation>\Aiuto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="320"/>
+        <location filename="../mainwindow.cpp" line="326"/>
         <source>Address:</source>
         <translation>Indirizzo:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="331"/>
+        <location filename="../mainwindow.cpp" line="337"/>
         <source>Size:</source>
         <translation>Misurare:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="342"/>
+        <location filename="../mainwindow.cpp" line="348"/>
         <source>Mode:</source>
         <translation>Modalità:</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="351"/>
+        <location filename="../mainwindow.cpp" line="357"/>
         <source>Ready</source>
         <translation>Pronto</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="356"/>
+        <location filename="../mainwindow.cpp" line="362"/>
         <source>File</source>
         <translation>File</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="359"/>
+        <location filename="../mainwindow.cpp" line="365"/>
         <source>Edit</source>
         <translation>Modificare</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="370"/>
+        <location filename="../mainwindow.cpp" line="376"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation>Impossibile leggere il file %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="376"/>
+        <location filename="../mainwindow.cpp" line="382"/>
         <source>File loaded</source>
         <translation>File caricato</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="430"/>
+        <location filename="../mainwindow.cpp" line="442"/>
         <source>Cannot write file %1.</source>
         <translation>Impossibile scrivere il file %1.</translation>
     </message>
@@ -264,92 +264,110 @@
     </message>
     <message>
         <location filename="../optionsdialog.ui" line="26"/>
-        <location filename="../optionsdialog.ui" line="329"/>
+        <source>Damic Bytes per Line</source>
+        <translation>Byte damic per riga</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.ui" line="47"/>
+        <source>Read only</source>
+        <translation>Solo lettura</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.ui" line="54"/>
+        <location filename="../optionsdialog.ui" line="165"/>
         <source>Address Area</source>
         <translation>Area di indirizzo</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="33"/>
+        <location filename="../optionsdialog.ui" line="40"/>
         <source>Overwrite Mode</source>
         <translation>Modalità sovrascrivi</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="40"/>
+        <location filename="../optionsdialog.ui" line="33"/>
         <source>Higlighting</source>
         <translation>Evidenziazione</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="47"/>
+        <location filename="../optionsdialog.ui" line="61"/>
         <source>Ascii Area</source>
         <translation>Area ASCII</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="54"/>
         <source>ReadOnly</source>
-        <translation>Readonly</translation>
+        <translation type="vanished">Readonly</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="70"/>
+        <location filename="../optionsdialog.ui" line="77"/>
         <source>Colors and Fonts</source>
         <translation>Colori e caratteri</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="76"/>
+        <location filename="../optionsdialog.ui" line="108"/>
         <source>Highlighting Color</source>
         <translation>Evidenziazione del colore</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="108"/>
         <source>Selection Color</source>
-        <translation>Colore di selezione</translation>
+        <translation type="vanished">Colore di selezione</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="140"/>
         <source>Address Area Color</source>
-        <translation>Colore dell'area dell'indirizzo</translation>
+        <translation type="vanished">Colore dell&apos;area dell&apos;indirizzo</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="172"/>
         <source>Address Font Color</source>
-        <translation>Indirizzo Colore del carattere</translation>
+        <translation type="vanished">Indirizzo Colore del carattere</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="204"/>
         <source>ASCII Area Color</source>
-        <translation>ASCII Area Colore</translation>
+        <translation type="vanished">ASCII Area Colore</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="236"/>
         <source>ASCII Font Color</source>
-        <translation>Colore del carattere ASCII</translation>
+        <translation type="vanished">Colore del carattere ASCII</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="268"/>
         <source>Hex Font Color</source>
-        <translation>Colore del carattere esagonale</translation>
+        <translation type="vanished">Colore del carattere esagonale</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="300"/>
+        <location filename="../optionsdialog.ui" line="115"/>
         <source>Widget Font</source>
         <translation>Font widget</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="319"/>
+        <location filename="../optionsdialog.ui" line="134"/>
         <source>01 23 45 67 89 ab cd ef</source>
         <translation>01 23 45 67 89 AB CD EF</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="335"/>
-        <source>Address Area Width</source>
-        <translation>Larghezza dell'area dell'indirizzo</translation>
+        <location filename="../optionsdialog.ui" line="142"/>
+        <source>Default Mode</source>
+        <translation>Modalità predefinita</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="358"/>
+        <location filename="../optionsdialog.ui" line="147"/>
+        <source>Dark Mode</source>
+        <translation>Modalità oscura</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.ui" line="155"/>
+        <source>Palette</source>
+        <translation>Tavolozza</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.ui" line="171"/>
+        <source>Address Area Width</source>
+        <translation>Larghezza dell&apos;area dell&apos;indirizzo</translation>
+    </message>
+    <message>
+        <location filename="../optionsdialog.ui" line="194"/>
         <source>Hex Area</source>
         <translation>Area esagonale</translation>
     </message>
     <message>
-        <location filename="../optionsdialog.ui" line="364"/>
+        <location filename="../optionsdialog.ui" line="200"/>
         <source>Bytes per Line</source>
         <translation>Byte per riga</translation>
     </message>
@@ -357,7 +375,7 @@
 <context>
     <name>QHexEdit</name>
     <message>
-        <location filename="../main.cpp" line="70"/>
+        <location filename="../main.cpp" line="82"/>
         <source>A hex editor application</source>
         <translation>Una domanda di editor esadecimale</translation>
     </message>

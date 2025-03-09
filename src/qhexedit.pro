@@ -2,7 +2,7 @@
 QT += core gui widgets
 TEMPLATE = lib
 
-VERSION = 0.8.11
+VERSION = 0.9.0
 
 DEFINES += QHEXEDIT_EXPORTS
 

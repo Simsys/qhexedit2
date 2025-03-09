@@ -1,6 +1,12 @@
-Release 0.8.12, ?
+Release 0.9.0, 2025-03-09
 --------------------------
 - Warn before losing user data #63
+- Use QPalette for Widget Colors #162
+- Programatically highlight/select some regions #146
+- Blinking Read-Only cursor flag option #129
+- dynamic bytesPerLine property depends on the widget size #72
+
+Please note: This release is not backwards compatible to the 0.8.x series. The widget is and remains available with the previous API on git branch 0.8.xx.
 
 Release 0.8.11, 2025-02-17
 -------------------------
