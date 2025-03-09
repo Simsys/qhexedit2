@@ -336,6 +336,7 @@ public:
 
 protected:
     // Handle events
+    bool event(QEvent *event);
     void keyPressEvent(QKeyEvent *event);
     void mouseMoveEvent(QMouseEvent * event);
     void mousePressEvent(QMouseEvent * event);
@@ -351,7 +352,6 @@ private:
     qint64 getSelectionEnd();
 
     // Private utility functions
-    bool event(QEvent *event);
     void init();
     void readBuffers();
     QString toReadable(const QByteArray &ba);

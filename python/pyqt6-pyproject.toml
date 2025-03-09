@@ -44,9 +44,11 @@ headers = [
     "src/chunks.h",
     "src/commands.h",
     "src/qhexedit.h",
+    "src/color_manager.h",
 ]
 sources = [
     "src/chunks.cpp",
     "src/commands.cpp",
     "src/qhexedit.cpp",
+    "src/color_manager.cpp",
 ]

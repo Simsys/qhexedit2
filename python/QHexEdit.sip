@@ -30,34 +30,24 @@ public:
     void insert(qint64, QByteArray &);
     void replace(qint64, qint64, QByteArray &);
 
-    bool addressArea();
-    bool addressWidth();
-    bool asciiArea();
+    void addUserArea(qint64, qint64, QColor, QBrush);
+    void clearUserAreas();
+
     qint64 cursorPosition(QPoint);
     void ensureVisible();
     qint64 indexOf(QByteArray &, qint64);
     bool isModified();
-    bool highlighting();
+
     qint64 lastIndexOf(QByteArray &, qint64);
     QString selectionToReadableString();
     QString selectedData();
     void setFont(const QFont &);
     QString toReadableString();
 
-    QColor addressAreaColor();
-    void setAddressAreaColor(const QColor &);
-
-    QColor addressFontColor();
-    void setAddressFontColor(const QColor &);
-
-    QColor asciiAreaColor();
-    void setAsciiAreaColor(const QColor &);
-
-    QColor asciiFontColor();
-    void setAsciiFontColor(const QColor &);
-
-    QColor hexFontColor();
-    void setHexFontColor(const QColor &);
+    bool addressArea();
+    bool addressWidth();
+    bool asciiArea();
+    bool highlighting();
 
     qint64 addressOffset();
     void setAddressOffset(qint64);
@@ -76,9 +66,6 @@ public:
 
     bool isReadOnly();
     void setReadOnly(bool);
-
-    QColor selectionColor();
-    void setSelectionColor(const QColor &);
 
 public slots:
     void redo();
