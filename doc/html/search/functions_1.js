@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['dataat_0',['dataAt',['../class_q_hex_edit.html#a83c0c585108cc204852ff2e30214253a',1,'QHexEdit']]],
-  ['datachanged_1',['dataChanged',['../class_q_hex_edit.html#a4ea1551815031057e6b3297406f93a5d',1,'QHexEdit']]]
+  ['clearuserareas_0',['clearUserAreas',['../class_q_hex_edit.html#a11c51815041142a4895135e8eac8b84c',1,'QHexEdit']]],
+  ['currentaddresschanged_1',['currentAddressChanged',['../class_q_hex_edit.html#a1cd8ece4fd9ea4aef38a9844184ae9bc',1,'QHexEdit']]],
+  ['currentsizechanged_2',['currentSizeChanged',['../class_q_hex_edit.html#a4b3f87d1c50bc1570f191d93b7051359',1,'QHexEdit']]],
+  ['cursorposition_3',['cursorPosition',['../class_q_hex_edit.html#a1d833c6a3957317f4daacc54e0c99919',1,'QHexEdit']]]
 ];

@@ -96,4 +96,6 @@ private:
     QList<ColoredArea> _userAreas;
 };
 
+/** \endcond docNever */
+
 #endif // COLOR_MANAGER_H

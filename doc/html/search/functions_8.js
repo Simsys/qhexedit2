@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['selecteddata_0',['selectedData',['../class_q_hex_edit.html#ac1f9ac4d3ec5bedabd3aeedda3191b20',1,'QHexEdit']]],
-  ['selectiontoreadablestring_1',['selectionToReadableString',['../class_q_hex_edit.html#a2ada1230ace92da4e1f006b88ab3b503',1,'QHexEdit']]],
-  ['setdata_2',['setData',['../class_q_hex_edit.html#ab5221718179da17cbcd9db3bf6574df7',1,'QHexEdit']]],
-  ['setfont_3',['setFont',['../class_q_hex_edit.html#a57221461a9c9e1b2c0e1882788ac9911',1,'QHexEdit']]]
+  ['redo_0',['redo',['../class_q_hex_edit.html#a9c9650f363859e42a0ebf4ed6a1c4ae0',1,'QHexEdit']]],
+  ['remove_1',['remove',['../class_q_hex_edit.html#a6fee4dba9a2eaeeccccbd84111f8bf2c',1,'QHexEdit']]],
+  ['replace_2',['replace',['../class_q_hex_edit.html#a386bff35c7453caaf547d203026fb462',1,'QHexEdit::replace(qint64 pos, char ch)'],['../class_q_hex_edit.html#a79dbbeaf7ddbb358730bed763d05a959',1,'QHexEdit::replace(qint64 pos, qint64 len, const QByteArray &amp;ba)']]]
 ];

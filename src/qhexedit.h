@@ -190,7 +190,7 @@ public:
     */
     void insert(qint64 pos, const QByteArray &ba);
 
-    /*! Replaces \param len bytes with a byte array \param ba
+    /*! Replaces len bytes with a byte array ba
     \param pos Index position, where to overwrite
     \param ba QByteArray, which is inserted
     \param len count of bytes to overwrite
@@ -205,7 +205,7 @@ public:
     \param posStart Index position, where the area starts (including)
     \param posEnd Index position where the area ends (exluding)
     \param fontColor Color of the font used in user marking area
-    \param areaColor Color of the background in user marking area
+    \param areaStyle Color of the background in user marking area
     There is no limit to the number of user areas. The areas are 
     prioritized in the event of overlaps. The areas defined first 
     have priority over areas that follow later.

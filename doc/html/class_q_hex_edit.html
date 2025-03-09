@@ -107,8 +107,8 @@ Signals</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aec1f1e5b7652e7e39a8ca5e73ed63373" id="r_aec1f1e5b7652e7e39a8ca5e73ed63373"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aec1f1e5b7652e7e39a8ca5e73ed63373">QHexEdit</a> (QWidget *parent=0)</td></tr>
-<tr class="separator:aec1f1e5b7652e7e39a8ca5e73ed63373"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a480dce51150abaf08ddeea25fc702513" id="r_a480dce51150abaf08ddeea25fc702513"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a480dce51150abaf08ddeea25fc702513">QHexEdit</a> (QWidget *parent=NULL)</td></tr>
+<tr class="separator:a480dce51150abaf08ddeea25fc702513"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5221718179da17cbcd9db3bf6574df7" id="r_ab5221718179da17cbcd9db3bf6574df7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#ab5221718179da17cbcd9db3bf6574df7">setData</a> (QIODevice &amp;iODevice)</td></tr>
 <tr class="separator:ab5221718179da17cbcd9db3bf6574df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83c0c585108cc204852ff2e30214253a" id="r_a83c0c585108cc204852ff2e30214253a"><td class="memItemLeft" align="right" valign="top">QByteArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a83c0c585108cc204852ff2e30214253a">dataAt</a> (qint64 pos, qint64 count=-1)</td></tr>
@@ -125,6 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad118039ab31828956c7ecf034f4496cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79dbbeaf7ddbb358730bed763d05a959" id="r_a79dbbeaf7ddbb358730bed763d05a959"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a79dbbeaf7ddbb358730bed763d05a959">replace</a> (qint64 pos, qint64 len, const QByteArray &amp;ba)</td></tr>
 <tr class="separator:a79dbbeaf7ddbb358730bed763d05a959"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70bb864a3be52bf31bbc63a1519a3b8c" id="r_a70bb864a3be52bf31bbc63a1519a3b8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a70bb864a3be52bf31bbc63a1519a3b8c">addUserArea</a> (qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle)</td></tr>
+<tr class="separator:a70bb864a3be52bf31bbc63a1519a3b8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c51815041142a4895135e8eac8b84c" id="r_a11c51815041142a4895135e8eac8b84c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a11c51815041142a4895135e8eac8b84c">clearUserAreas</a> ()</td></tr>
+<tr class="separator:a11c51815041142a4895135e8eac8b84c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d833c6a3957317f4daacc54e0c99919" id="r_a1d833c6a3957317f4daacc54e0c99919"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a1d833c6a3957317f4daacc54e0c99919">cursorPosition</a> (QPoint point)</td></tr>
 <tr class="separator:a1d833c6a3957317f4daacc54e0c99919"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43b1af42e25e3beb48932f38aa4af46e" id="r_a43b1af42e25e3beb48932f38aa4af46e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a43b1af42e25e3beb48932f38aa4af46e">ensureVisible</a> ()</td></tr>
@@ -148,16 +152,6 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:aeaa9f3751f53b91df51cfd2863bf48ee" id="r_aeaa9f3751f53b91df51cfd2863bf48ee"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#aeaa9f3751f53b91df51cfd2863bf48ee">addressArea</a></td></tr>
 <tr class="separator:aeaa9f3751f53b91df51cfd2863bf48ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e27b73514e243c0b8b2a3efafbb5e32" id="r_a6e27b73514e243c0b8b2a3efafbb5e32"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a6e27b73514e243c0b8b2a3efafbb5e32">addressAreaColor</a></td></tr>
-<tr class="separator:a6e27b73514e243c0b8b2a3efafbb5e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae2aeb2644e14ebfe63f1cb50484238e6" id="r_ae2aeb2644e14ebfe63f1cb50484238e6"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#ae2aeb2644e14ebfe63f1cb50484238e6">addressFontColor</a></td></tr>
-<tr class="separator:ae2aeb2644e14ebfe63f1cb50484238e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9a5439eb9d7081207f960c878ee0ad7" id="r_af9a5439eb9d7081207f960c878ee0ad7"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#af9a5439eb9d7081207f960c878ee0ad7">asciiAreaColor</a></td></tr>
-<tr class="separator:af9a5439eb9d7081207f960c878ee0ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a763f0ddfe7c8246fb8d623d8dbb3306a" id="r_a763f0ddfe7c8246fb8d623d8dbb3306a"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a763f0ddfe7c8246fb8d623d8dbb3306a">asciiFontColor</a></td></tr>
-<tr class="separator:a763f0ddfe7c8246fb8d623d8dbb3306a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab56bf70efb0966e82cf708080521fd69" id="r_ab56bf70efb0966e82cf708080521fd69"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#ab56bf70efb0966e82cf708080521fd69">hexFontColor</a></td></tr>
-<tr class="separator:ab56bf70efb0966e82cf708080521fd69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe1e80827cacce84505f8b0ef6421a0a" id="r_afe1e80827cacce84505f8b0ef6421a0a"><td class="memItemLeft" align="right" valign="top">qint64&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#afe1e80827cacce84505f8b0ef6421a0a">addressOffset</a></td></tr>
 <tr class="separator:afe1e80827cacce84505f8b0ef6421a0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11b672fd38a7c48949ccce3228474b2f" id="r_a11b672fd38a7c48949ccce3228474b2f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a11b672fd38a7c48949ccce3228474b2f">addressWidth</a></td></tr>
@@ -180,8 +174,6 @@ Properties</h2></td></tr>
 <tr class="separator:a9e8ed54e47fec94cfd64b14ea1f7cee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a941a91c36eb8429c41096bfcd45f38c1" id="r_a941a91c36eb8429c41096bfcd45f38c1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a941a91c36eb8429c41096bfcd45f38c1">overwriteMode</a></td></tr>
 <tr class="separator:a941a91c36eb8429c41096bfcd45f38c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0b628f34316aff9e18fc73a738250d7" id="r_ac0b628f34316aff9e18fc73a738250d7"><td class="memItemLeft" align="right" valign="top">QColor&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#ac0b628f34316aff9e18fc73a738250d7">selectionColor</a></td></tr>
-<tr class="separator:ac0b628f34316aff9e18fc73a738250d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb3044d1bb0c99876ddfa33772e91209" id="r_acb3044d1bb0c99876ddfa33772e91209"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#acb3044d1bb0c99876ddfa33772e91209">readOnly</a></td></tr>
 <tr class="separator:acb3044d1bb0c99876ddfa33772e91209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9579dc7273c48b89c9e4f26adda78671" id="r_a9579dc7273c48b89c9e4f26adda78671"><td class="memItemLeft" align="right" valign="top">QFont&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_q_hex_edit.html#a9579dc7273c48b89c9e4f26adda78671">font</a></td></tr>
@@ -195,8 +187,8 @@ Properties</h2></td></tr>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> comes with undo/redo functionality. All changes can be undone, by pressing the undo-key (usually ctr-z). They can also be redone afterwards. The undo/redo framework is cleared, when <a class="el" href="class_q_hex_edit.html#ab5221718179da17cbcd9db3bf6574df7">setData()</a> sets up a new content for the editor. You can search data inside the content with <a class="el" href="class_q_hex_edit.html#a183ec73d5ef567770dc4860e9d33e239">indexOf()</a> and <a class="el" href="class_q_hex_edit.html#aac57ef2e0e73af21e33413a166a94e7a">lastIndexOf()</a>. The <a class="el" href="class_q_hex_edit.html#a386bff35c7453caaf547d203026fb462">replace()</a> function is to change located subdata. This 'replaced' data can also be undone by the undo/redo framework.</p>
 <p><a class="el" href="class_q_hex_edit.html">QHexEdit</a> is based on QIODevice, that's why <a class="el" href="class_q_hex_edit.html">QHexEdit</a> can handle big amounts of data. The size of edited data can be more then two gigabytes without any restrictions. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aec1f1e5b7652e7e39a8ca5e73ed63373" name="aec1f1e5b7652e7e39a8ca5e73ed63373"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec1f1e5b7652e7e39a8ca5e73ed63373">&#9670;&#160;</a></span>QHexEdit()</h2>
+<a id="a480dce51150abaf08ddeea25fc702513" name="a480dce51150abaf08ddeea25fc702513"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a480dce51150abaf08ddeea25fc702513">&#9670;&#160;</a></span>QHexEdit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -205,7 +197,7 @@ Properties</h2></td></tr>
           <td class="memname">QHexEdit::QHexEdit </td>
           <td>(</td>
           <td class="paramtype">QWidget *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td class="paramname"><em>parent</em> = <code>NULL</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -220,6 +212,73 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a70bb864a3be52bf31bbc63a1519a3b8c" name="a70bb864a3be52bf31bbc63a1519a3b8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70bb864a3be52bf31bbc63a1519a3b8c">&#9670;&#160;</a></span>addUserArea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::addUserArea </td>
+          <td>(</td>
+          <td class="paramtype">qint64&#160;</td>
+          <td class="paramname"><em>posStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">qint64&#160;</td>
+          <td class="paramname"><em>posEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QColor&#160;</td>
+          <td class="paramname"><em>fontColor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QBrush&#160;</td>
+          <td class="paramname"><em>areaStyle</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a user defined marking area </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">posStart</td><td>Index position, where the area starts (including) </td></tr>
+    <tr><td class="paramname">posEnd</td><td>Index position where the area ends (exluding) </td></tr>
+    <tr><td class="paramname">fontColor</td><td>Color of the font used in user marking area </td></tr>
+    <tr><td class="paramname">areaStyle</td><td>Color of the background in user marking area There is no limit to the number of user areas. The areas are prioritized in the event of overlaps. The areas defined first have priority over areas that follow later. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a11c51815041142a4895135e8eac8b84c" name="a11c51815041142a4895135e8eac8b84c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11c51815041142a4895135e8eac8b84c">&#9670;&#160;</a></span>clearUserAreas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void QHexEdit::clearUserAreas </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Delets all user defined areas </p>
+
+</div>
+</div>
 <a id="a1cd8ece4fd9ea4aef38a9844184ae9bc" name="a1cd8ece4fd9ea4aef38a9844184ae9bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1cd8ece4fd9ea4aef38a9844184ae9bc">&#9670;&#160;</a></span>currentAddressChanged</h2>
 
@@ -692,10 +751,8 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Replaces</p><dl class="params"><dt>Parameters</dt><dd>
+<p>Replaces len bytes with a byte array ba </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">len</td><td>bytes with a byte array</td></tr>
-    <tr><td class="paramname">ba</td><td></td></tr>
     <tr><td class="paramname">pos</td><td>Index position, where to overwrite </td></tr>
     <tr><td class="paramname">ba</td><td>QByteArray, which is inserted </td></tr>
     <tr><td class="paramname">len</td><td>count of bytes to overwrite The data is overwritten and size of data may change. </td></tr>
@@ -894,52 +951,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="a6e27b73514e243c0b8b2a3efafbb5e32" name="a6e27b73514e243c0b8b2a3efafbb5e32"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6e27b73514e243c0b8b2a3efafbb5e32">&#9670;&#160;</a></span>addressAreaColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::addressAreaColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property address area color sets (setAddressAreaColor()) the background color of address areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#a6e27b73514e243c0b8b2a3efafbb5e32">addressAreaColor()</a>). </p>
-
-</div>
-</div>
-<a id="ae2aeb2644e14ebfe63f1cb50484238e6" name="ae2aeb2644e14ebfe63f1cb50484238e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2aeb2644e14ebfe63f1cb50484238e6">&#9670;&#160;</a></span>addressFontColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::addressFontColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property address font color sets (setAddressFontColor()) the text color of address areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#ae2aeb2644e14ebfe63f1cb50484238e6">addressFontColor()</a>). </p>
-
-</div>
-</div>
 <a id="afe1e80827cacce84505f8b0ef6421a0a" name="afe1e80827cacce84505f8b0ef6421a0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe1e80827cacce84505f8b0ef6421a0a">&#9670;&#160;</a></span>addressOffset</h2>
 
@@ -1006,52 +1017,6 @@ Properties</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Switch the ascii area on (true, show it) or off (false, hide it). </p>
-
-</div>
-</div>
-<a id="af9a5439eb9d7081207f960c878ee0ad7" name="af9a5439eb9d7081207f960c878ee0ad7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af9a5439eb9d7081207f960c878ee0ad7">&#9670;&#160;</a></span>asciiAreaColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::asciiAreaColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property ascii area color sets (setAsciiAreaColor()) the backgorund color of ascii areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#af9a5439eb9d7081207f960c878ee0ad7">asciiAreaColor()</a>). </p>
-
-</div>
-</div>
-<a id="a763f0ddfe7c8246fb8d623d8dbb3306a" name="a763f0ddfe7c8246fb8d623d8dbb3306a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a763f0ddfe7c8246fb8d623d8dbb3306a">&#9670;&#160;</a></span>asciiFontColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::asciiFontColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property ascii font color sets (setAsciiFontColor()) the text color of ascii areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#a763f0ddfe7c8246fb8d623d8dbb3306a">asciiFontColor()</a>). </p>
 
 </div>
 </div>
@@ -1193,29 +1158,6 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="ab56bf70efb0966e82cf708080521fd69" name="ab56bf70efb0966e82cf708080521fd69"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab56bf70efb0966e82cf708080521fd69">&#9670;&#160;</a></span>hexFontColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::hexFontColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property hex font color sets (setHexFontColor()) the text color of hex areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#ab56bf70efb0966e82cf708080521fd69">hexFontColor()</a>). </p>
-
-</div>
-</div>
 <a id="ae3669260a4d5c2fad5651893a17258fd" name="ae3669260a4d5c2fad5651893a17258fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae3669260a4d5c2fad5651893a17258fd">&#9670;&#160;</a></span>highlighting</h2>
 
@@ -1308,36 +1250,13 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="ac0b628f34316aff9e18fc73a738250d7" name="ac0b628f34316aff9e18fc73a738250d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0b628f34316aff9e18fc73a738250d7">&#9670;&#160;</a></span>selectionColor</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QColor QHexEdit::selectionColor</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">read</span><span class="mlabel">write</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Property selection color sets (setSelectionColor()) the background color of selected text areas. You can also read the color (<a class="el" href="class_q_hex_edit.html#ac0b628f34316aff9e18fc73a738250d7">selectionColor()</a>). </p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>/media/winni/1p4/Werkstatt/qt/qhexedit2/src/<a class="el" href="qhexedit_8h_source.html">qhexedit.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Feb 17 2025 16:37:43 for QHexEdit by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
+Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8
 </small></address>
 </body>
 </html>
