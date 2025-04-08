@@ -1,3 +1,15 @@
+/*
+ * Copyright (C) 2015-2016 Winfried Simon
+ *
+ * This software may be used under the terms of the GNU Lesser General 
+ * Public License version 2.1 as published by the Free Software Foundation 
+ * and appearing in the file license.txt included in the packaging of this file.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
 #include "searchdialog.h"
 #include "ui_searchdialog.h"
 
