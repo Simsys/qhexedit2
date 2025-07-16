@@ -74,6 +74,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
 
 QHexEdit::~QHexEdit()
 {
+    delete _colorManager;
 }
 
 // ********************************************************************** Properties
