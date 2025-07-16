@@ -16,15 +16,18 @@
 * License along with this library; if not, see
 * https://www.gnu.org/licenses/
 */
+#include <algorithm>
+
 #include <QApplication>
 #include <QClipboard>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QScrollBar>
 
+#include "chunks.h"
+#include "commands.h"
+#include "color_manager.h"
 #include "qhexedit.h"
-#include <algorithm>
-
 
 // ********************************************************************** Constructor, destructor
 

@@ -20,12 +20,14 @@
 #define QHEXEDIT_H
 
 #include <QAbstractScrollArea>
-#include <QPen>
+#include <QBuffer>
 #include <QBrush>
+#include <QPen>
+#include <QTimer>
 
-#include "chunks.h"
-#include "commands.h"
-#include "color_manager.h"
+class Chunks;
+class UndoStack;
+class ColorManager;
 
 #ifdef QHEXEDIT_EXPORTS
 #define QHEXEDIT_API Q_DECL_EXPORT
