@@ -36,6 +36,7 @@ QHexEdit::QHexEdit(QWidget *parent) : QAbstractScrollArea(parent)
     , _addressWidth(4)
     , _asciiArea(true)
     , _bytesPerLine(16)
+    , _defaultChar('.')
     , _hexCharsInLine(47)
     , _highlighting(true)
     , _overwriteMode(true)
@@ -156,6 +157,20 @@ void QHexEdit::setBytesPerLine(int count)
 int QHexEdit::bytesPerLine()
 {
     return _bytesPerLine;
+}
+
+char QHexEdit::defaultChar()
+{
+    return _defaultChar;
+}
+
+void QHexEdit::setDefaultChar(char defaultChar)
+{
+    _defaultChar = defaultChar;
+
+    adjust();
+    setCursorPosition(_cursorPosition);
+    viewport()->update();
 }
 
 void QHexEdit::setCursorPosition(qint64 position)
@@ -945,7 +960,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
 
                     int ch = (uchar)_dataShown.at(bPosLine + colIdx);
                     if ( ch < ' ' || ch > '~' )
-                        ch = '.';
+                        ch = _defaultChar;
                     rect.setRect(pxPosAsciiX2, pxPosY - _pxCharHeight + _pxSelectionSub, _pxCharWidth, _pxCharHeight);
                     painter.fillRect(rect, asciiArea.areaStyle());
                     painter.drawText(pxPosAsciiX2, pxPosY, QChar(ch));
@@ -982,7 +997,7 @@ void QHexEdit::paintEvent(QPaintEvent *event)
             // every 2 hex there is 1 ascii
             int ch = (uchar)_dataShown.at(hexPos / 2);
             if (ch < ' ' || ch > '~')
-                ch = '.';
+                ch = _defaultChar;
 
             painter.drawText(_pxCursorX - pxOfsX, _pxCursorY, QChar(ch));
         }
@@ -1180,7 +1195,7 @@ QString QHexEdit::toReadable(const QByteArray &ba)
                 hexStr.append(" ").append(ba.mid(i+j, 1).toHex());
                 char ch = ba[i + j];
                 if ((ch < 0x20) || (ch > 0x7e))
-                        ch = '.';
+                        ch = _defaultChar;
                 ascStr.append(QChar(ch));
             }
         }

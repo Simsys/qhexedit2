@@ -104,6 +104,10 @@ class QHEXEDIT_API QHexEdit : public QAbstractScrollArea
     /*! Set and get bytes number per line.*/
     Q_PROPERTY(int bytesPerLine READ bytesPerLine WRITE setBytesPerLine)
 
+    /*! Set and get character to display when outside the printable range.
+    */
+    Q_PROPERTY(int defaultChar READ defaultChar WRITE setDefaultChar)
+
     /*! Property cursorPosition sets or gets the position of the editor cursor
     in QHexEdit. Every byte in data has two cursor positions: the lower and upper
     Nibble. Maximum cursor position is factor two of data.size().
@@ -330,6 +334,9 @@ public:
     int bytesPerLine();
     void setBytesPerLine(int count);
 
+    char defaultChar();
+    void setDefaultChar(char defaultChar);
+
     qint64 cursorPosition();
     void setCursorPosition(qint64 position);
 
@@ -407,6 +414,7 @@ private:
     bool _asciiArea;
     qint64 _addressOffset;
     int _bytesPerLine;
+    char _defaultChar;
     int _hexCharsInLine;
     bool _highlighting;
     bool _overwriteMode;
