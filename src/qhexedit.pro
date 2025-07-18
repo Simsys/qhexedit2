@@ -19,9 +19,12 @@ SOURCES = \
     commands.cpp \
     color_manager.cpp
 
-Release:TARGET = qhexedit
-Debug:TARGET = qhexeditd
-
+CONFIG += debug_and_release
+CONFIG(debug, debug|release) {
+    TARGET = qhexeditd
+} else {
+    TARGET = qhexedit
+}
 
 unix {
     # Allows users to specify parameters when running qmake
