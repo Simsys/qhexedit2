@@ -54,16 +54,16 @@ public:
     bool setIODevice(QIODevice &ioDevice);
 
     // Getting data out of Chunks
-    QByteArray data(qint64 pos=0, qint64 count=-1, QByteArray *highlighted=0);
-    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
+    QByteArray data(qint64 pos=0, qint64 count=-1, QByteArray *highlighted=0) const;
+    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1) const;
 
     // Set and get highlighting infos
     void setDataChanged(qint64 pos, bool dataChanged);
-    bool dataChanged(qint64 pos);
+    bool dataChanged(qint64 pos) const;
 
     // Search API
-    qint64 indexOf(const QByteArray &ba, qint64 from);
-    qint64 lastIndexOf(const QByteArray &ba, qint64 from);
+    qint64 indexOf(const QByteArray &ba, qint64 from) const;
+    qint64 lastIndexOf(const QByteArray &ba, qint64 from) const;
 
     // Char manipulations
     bool insert(qint64 pos, char b);
@@ -71,18 +71,18 @@ public:
     bool removeAt(qint64 pos);
 
     // Utility functions
-    char operator[](qint64 pos);
-    qint64 pos();
-    qint64 size();
+    char operator[](qint64 pos) const;
+    qint64 pos() const;
+    qint64 size() const;
 
 
 private:
-    int getChunkIndex(qint64 absPos);
+    int getChunkIndex(qint64 absPos) const;
 
     QIODevice * _ioDevice;
     qint64 _pos;
     qint64 _size;
-    QList<Chunk> _chunks;
+    mutable QList<Chunk> _chunks;
 
 #ifdef MODUL_TEST
 public:

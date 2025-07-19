@@ -62,7 +62,7 @@ bool Chunks::setIODevice(QIODevice &ioDevice)
 
 // ***************************************** Getting data out of Chunks
 
-QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
+QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted) const
 {
     qint64 ioDelta = 0;
     int chunkIdx = 0;
@@ -147,7 +147,7 @@ QByteArray Chunks::data(qint64 pos, qint64 maxSize, QByteArray *highlighted)
     return buffer;
 }
 
-bool Chunks::write(QIODevice &iODevice, qint64 pos, qint64 count)
+bool Chunks::write(QIODevice &iODevice, qint64 pos, qint64 count) const
 {
     if (count == -1)
         count = _size;
@@ -176,7 +176,7 @@ void Chunks::setDataChanged(qint64 pos, bool dataChanged)
     _chunks[chunkIdx].dataChanged[(int)posInBa] = char(dataChanged);
 }
 
-bool Chunks::dataChanged(qint64 pos)
+bool Chunks::dataChanged(qint64 pos) const
 {
     foreach (Chunk chunk, _chunks)
     {
@@ -191,7 +191,7 @@ bool Chunks::dataChanged(qint64 pos)
 
 // ***************************************** Search API
 
-qint64 Chunks::indexOf(const QByteArray &ba, qint64 from)
+qint64 Chunks::indexOf(const QByteArray &ba, qint64 from) const
 {
     qint64 result = -1;
     QByteArray buffer;
@@ -206,7 +206,7 @@ qint64 Chunks::indexOf(const QByteArray &ba, qint64 from)
     return result;
 }
 
-qint64 Chunks::lastIndexOf(const QByteArray &ba, qint64 from)
+qint64 Chunks::lastIndexOf(const QByteArray &ba, qint64 from) const
 {
     qint64 result = -1;
     QByteArray buffer;
@@ -276,22 +276,22 @@ bool Chunks::removeAt(qint64 pos)
 
 // ***************************************** Utility functions
 
-char Chunks::operator[](qint64 pos)
+char Chunks::operator[](qint64 pos) const
 {
     return data(pos, 1).at(0);
 }
 
-qint64 Chunks::pos()
+qint64 Chunks::pos() const
 {
     return _pos;
 }
 
-qint64 Chunks::size()
+qint64 Chunks::size() const
 {
     return _size;
 }
 
-int Chunks::getChunkIndex(qint64 absPos)
+int Chunks::getChunkIndex(qint64 absPos) const
 {
     // This routine checks, if there is already a copied chunk available. If os, it
     // returns a reference to it. If there is no copied chunk available, original
