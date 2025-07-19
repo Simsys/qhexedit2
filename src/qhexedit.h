@@ -174,12 +174,12 @@ public:
     /*! Gives back the data as a QByteArray starting at position \param pos and
     delivering \param count bytes.
     */
-    QByteArray dataAt(qint64 pos, qint64 count=-1);
+    QByteArray dataAt(qint64 pos, qint64 count=-1) const;
 
     /*! Gives back the data into a \param iODevice starting at position \param pos
     and delivering \param count bytes.
     */
-    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1);
+    bool write(QIODevice &iODevice, qint64 pos=0, qint64 count=-1) const;
 
 
     // Char handling
@@ -262,18 +262,18 @@ public:
     /*! Returns if any changes where done on document
      * \return true when document is modified else false
      */
-    bool isModified();
+    bool isModified() const;
 
     /*! Find last occurrence of ba in QHexEdit data
      * \param ba Data to find
      * \param from Point where the search starts
-     * \return pos if fond, else -1
+     * \return pos if found, else -1
      */
     qint64 lastIndexOf(const QByteArray &ba, qint64 from);
 
     /*! Gives back a formatted image of the selected content of QHexEdit
     */
-    QString selectionToReadableString();
+    QString selectionToReadableString() const;
 
     /*! Return the selected content of QHexEdit as QByteArray
     */
@@ -319,46 +319,46 @@ public:
     ~QHexEdit();
 
     // Properties
-    bool addressArea();
+    bool addressArea() const;
     void setAddressArea(bool addressArea);
 
-    qint64 addressOffset();
+    qint64 addressOffset() const;
     void setAddressOffset(qint64 addressArea);
 
-    int addressWidth();
+    int addressWidth() const;
     void setAddressWidth(int addressWidth);
 
-    bool asciiArea();
+    bool asciiArea() const;
     void setAsciiArea(bool asciiArea);
 
-    int bytesPerLine();
+    int bytesPerLine() const;
     void setBytesPerLine(int count);
 
-    char defaultChar();
+    char defaultChar() const;
     void setDefaultChar(char defaultChar);
 
-    qint64 cursorPosition();
+    qint64 cursorPosition() const;
     void setCursorPosition(qint64 position);
 
     QByteArray data();
     void setData(const QByteArray &ba);
 
     void setHexCaps(const bool isCaps);
-    bool hexCaps();
+    bool hexCaps() const;
 
     void setDynamicBytesPerLine(const bool isDynamic);
-    bool dynamicBytesPerLine();
+    bool dynamicBytesPerLine() const;
 
-    bool highlighting();
+    bool highlighting() const;
     void setHighlighting(bool mode);
 
-    QColor highlightingColor();
+    QColor highlightingColor() const;
     void setHighlightingColor(const QColor &color);
 
-    bool overwriteMode();
+    bool overwriteMode() const;
     void setOverwriteMode(bool overwriteMode);
 
-    bool isReadOnly();
+    bool isReadOnly() const;
     void setReadOnly(bool readOnly);
 
 protected:
@@ -375,13 +375,13 @@ private:
     void resetSelection(qint64 pos);            // set selectionStart and selectionEnd to pos
     void resetSelection();                      // set selectionEnd to selectionStart
     void setSelection(qint64 pos);              // set min (if below init) or max (if greater init)
-    qint64 getSelectionBegin();
-    qint64 getSelectionEnd();
+    qint64 getSelectionBegin() const;
+    qint64 getSelectionEnd() const;
 
     // Private utility functions
     void init();
     void readBuffers();
-    QString toReadable(const QByteArray &ba);
+    QString toReadable(const QByteArray &ba) const;
 
 private slots:
     void adjust();                              // recalc pixel positions

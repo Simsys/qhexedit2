@@ -113,7 +113,6 @@ UndoStack::UndoStack(Chunks * chunks, QObject * parent)
     : QUndoStack(parent)
 {
     _chunks = chunks;
-    _parent = parent;
     this->setUndoLimit(1000);
 }
 

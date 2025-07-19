@@ -47,12 +47,12 @@ ColoredArea::ColoredArea(qint64 posStart, qint64 posEnd, QPen pen, QBrush backgr
     _areaStyle = background;
 }
 
-QPen ColoredArea::fontPen()
+QPen ColoredArea::fontPen() const
 {
     return _fontColor;
 }
 
-QColor ColoredArea::fontColor()
+QColor ColoredArea::fontColor() const
 {
     return _fontColor.color();
 }
@@ -62,12 +62,12 @@ void ColoredArea::setFontColor(QColor color)
     _fontColor = QPen(color);
 }
 
-QColor ColoredArea::areaColor()
+QColor ColoredArea::areaColor() const
 {
     return _areaStyle.color();
 }
 
-QBrush ColoredArea::areaStyle()
+QBrush ColoredArea::areaStyle() const
 {
     return _areaStyle;
 }
@@ -82,21 +82,21 @@ void ColoredArea::setAreaStyle(QBrush backround)
     _areaStyle = backround;
 }
 
-qint64 ColoredArea::posStart()
+qint64 ColoredArea::posStart() const
 {
     return _posStart;
-};
+}
 
-qint64 ColoredArea::posEnd()
+qint64 ColoredArea::posEnd() const
 {
     return _posEnd;
-};
+}
 
 void ColoredArea::setRange(qint64 posStart, qint64 posEnd)
 {
     _posStart = posStart;
     _posEnd = posEnd;
-};
+}
 
 void ColoredArea::clear() 
 {
@@ -111,7 +111,7 @@ ColorManager::ColorManager()
 {
     QPalette palette = qApp->palette();
     setPalette(palette);
-};
+}
 
 void ColorManager::setPalette(const QPalette &palette)
 {
@@ -123,7 +123,7 @@ void ColorManager::setPalette(const QPalette &palette)
 }
 
 // read only, copy of relevant ColoredArea is returned: you can't change anything
-ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks)
+ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks) const
 {
     // prio 1 selection
     if (pos >= _selection.posStart() && pos < _selection.posEnd())
@@ -145,9 +145,9 @@ ColoredArea ColorManager::markedArea(qint64 pos, Area area, Chunks *chunks)
     }
     // nothing found -> standard colors
     return this->notMarked(area);
-};
+}
 
-ColoredArea& ColorManager::notMarked(Area area)
+const ColoredArea &ColorManager::notMarked(Area area) const
 {
     switch (area) {
         case Area::Address:
@@ -163,15 +163,25 @@ ColoredArea& ColorManager::notMarked(Area area)
     return _hex; // should never happen
 }
 
-ColoredArea& ColorManager::selection()
+const ColoredArea &ColorManager::selection() const
 {
     return _selection;
-};
+}
+
+ColoredArea &ColorManager::selection()
+{
+    return _selection;
+}
+
+const ColoredArea& ColorManager::highlighting() const
+{
+    return _highlighting;
+}
 
 ColoredArea& ColorManager::highlighting()
 {
     return _highlighting;
-};
+}
 
 void ColorManager::addUserArea(qint64 posStart, qint64 posEnd, QColor fontColor, QBrush areaStyle)
 {
