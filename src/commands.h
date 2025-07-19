@@ -48,7 +48,7 @@ class UndoStack : public QUndoStack
     Q_OBJECT
 
 public:
-    UndoStack(Chunks *chunks, QObject * parent=0);
+    UndoStack(Chunks *chunks, QObject * );
     void insert(qint64 pos, char c);
     void insert(qint64 pos, const QByteArray &ba);
     void removeAt(qint64 pos, qint64 len=1);

@@ -27,7 +27,7 @@ public:
     enum CCmd {insert, removeAt, overwrite};
 
     CharCommand(Chunks * chunks, CCmd cmd, qint64 charPos, char newChar,
-                       QUndoCommand *parent=0);
+                       QUndoCommand *parent=nullptr);
 
     void undo();
     void redo();

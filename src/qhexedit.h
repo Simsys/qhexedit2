@@ -161,7 +161,7 @@ public:
     /*! Creates an instance of QHexEdit.
     \param parent Parent widget of QHexEdit.
     */
-    QHexEdit(QWidget *parent=NULL);
+    explicit QHexEdit(QWidget *parent=nullptr);
 
     // Access to data of qhexedit
 

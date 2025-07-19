@@ -328,7 +328,7 @@ bool QHexEdit::hexCaps()
 void QHexEdit::setDynamicBytesPerLine(const bool isDynamic)
 {
     _dynamicBytesPerLine = isDynamic;
-    resizeEvent(NULL);
+    resizeEvent(nullptr);
 }
 
 bool QHexEdit::dynamicBytesPerLine()

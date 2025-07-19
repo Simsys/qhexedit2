@@ -49,7 +49,7 @@ class Chunks: public QObject
 Q_OBJECT
 public:
     // Constructors and file settings
-    Chunks(QObject *parent);
+    explicit Chunks(QObject *parent);
     Chunks(QIODevice &ioDevice, QObject *parent);
     bool setIODevice(QIODevice &ioDevice);
 
