@@ -47,25 +47,25 @@ enum Area {
 class ColoredArea
 {
 public:
-    // Cunstructors
+    // Constructors
     ColoredArea();
     ColoredArea(QPen pen, QBrush background);
     ColoredArea(qint64 posStart, qint64 posEnd, QPen pen, QBrush background);
 
     // Property to set/get font color
-    QColor fontColor();
+    QColor fontColor() const;
     void setFontColor(QColor color);
 
     // Property to set/get area style
-    QColor areaColor();
-    QBrush areaStyle();
+    QColor areaColor() const;
+    QBrush areaStyle() const;
     void setAreaColor(QColor color);
     void setAreaStyle(QBrush background);
 
     // other Methods to acces and set internal data
-    QPen fontPen();
-    qint64 posStart();
-    qint64 posEnd();
+    QPen fontPen() const;
+    qint64 posStart() const;
+    qint64 posEnd() const;
     void setRange(qint64 posStart, qint64 posEnd);
     void clear();
 
@@ -87,15 +87,17 @@ public:
     void setPalette(const QPalette &palette);
 
     // Method returns color definitions for data at position pos in area area
-    ColoredArea markedArea(qint64 pos, Area area, Chunks *chunks);
+    ColoredArea markedArea(qint64 pos, Area area, Chunks *chunks) const;
 
     // Method returns standard collors (without marking)
-    ColoredArea& notMarked(Area);
+    const ColoredArea& notMarked(Area) const;
 
     // Get the selection color definitions
+    const ColoredArea& selection() const;
     ColoredArea& selection();
 
     // Get the highlighting color definitions
+    const ColoredArea& highlighting() const;
     ColoredArea& highlighting();
 
     // Add a user defined area

@@ -57,7 +57,6 @@ public:
 
 private:
     Chunks * _chunks;
-    QObject * _parent;
 };
 
 /** \endcond docNever */
